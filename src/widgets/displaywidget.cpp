@@ -1,0 +1,843 @@
+// Copyright (C) 2023 zhuvoy
+// 
+// This file is part of ClassicImageViewer.
+// 
+// ClassicImageViewer is free software: you can redistribute it and/or modify it under the terms of the
+// GNU General Public License as published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+// 
+// ClassicImageViewer is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License along with ClassicImageViewer.
+// If not, see <https://www.gnu.org/licenses/>.
+
+
+#include "displaywidget.h"
+#include "globals.h"
+#include <QDebug>
+#include <QPainter>
+#include <QScrollBar>
+#include <QGraphicsSceneMouseEvent>
+#include <QWheelEvent>
+
+int DisplaySurface::objCntr = 0;
+int DisplayCanvas::objCntr = 0;
+
+
+DisplayWidget::DisplayWidget(QWidget *parent) : QGraphicsView(parent)
+{
+	setBackgroundBrush(QBrush(Qt::black));
+	setSizePolicy(QSizePolicy::Expanding , QSizePolicy::Expanding);
+	emptyScene = new QGraphicsScene(this);
+	surface = NULL;
+	selectionEnabled = true;
+	zoom = 1.0;
+	image = QImage();
+	setScene(emptyScene);	// dummy
+	setMouseTracking(true);
+	setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
+	this->parent = (MainWindow*)parent;
+	this->installEventFilter(this);
+}
+
+DisplayWidget::~DisplayWidget()
+{
+	setScene(NULL);
+	if (surface)
+	{
+		disconnect(surface, SIGNAL(zoomChanged()), NULL, NULL);
+		disconnect(surface, SIGNAL(selectionChanged()), NULL, NULL);
+		delete surface;
+	}
+	delete emptyScene;
+}
+
+void DisplayWidget::setBackgroundShade(int shade)
+{
+	// shade 0 .. 100
+	shade *= 255;
+	shade /= 100;
+	setBackgroundBrush(QBrush(QColor(shade, shade, shade)));
+}
+
+void DisplayWidget::newImage(const QImage &image)
+{
+	if (surface)
+	{
+		setScene(NULL);
+		disconnect(surface, SIGNAL(zoomChanged()), NULL, NULL);
+		disconnect(surface, SIGNAL(selectionChanged()), NULL, NULL);
+		disconnect(surface, SIGNAL(pixelInfo()), NULL, NULL);
+		delete surface;
+		surface = NULL;
+	}
+	this->image = image.copy();
+	if (image.isNull())
+	{
+		emit zoomChanged();
+		emit selectionChanged();
+		setScene(emptyScene);
+		return;
+	}
+	surface = new DisplaySurface(this);
+	connect(surface, SIGNAL(zoomChanged()), this, SIGNAL(zoomChanged())); // redirect signals
+	connect(surface, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
+	connect(surface, SIGNAL(pixelInfo()), this, SIGNAL(pixelInfo()));
+	surface->enableSelection(selectionEnabled);
+	setScene(surface);
+	surface->setImage(this->image);
+	surface->setZoom(zoom);
+	emit selectionChanged();
+}
+
+void DisplayWidget::updateImage(const QImage &image)
+{
+	if (!surface) return newImage(image);
+	if (this->image.size() != image.size()) return newImage(image);
+	
+	this->image = image.copy();
+	surface->setImage(this->image);
+}
+
+void DisplayWidget::insertIntoSelection(const QImage &image)
+{
+	if (!surface) return;
+	QRect selection = surface->getSelection();
+	if (selection.isNull()) return;
+	QImage scaledImage = image.scaled(selection.size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+	QPainter painter(&this->image);
+	painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+	painter.drawImage(selection.topLeft(), scaledImage);
+	painter.end();
+	surface->setImage(this->image);
+}
+
+QSize DisplayWidget::getImageSize()
+{
+	if (!surface) return QSize(0,0);
+	return image.size();
+}
+
+QImage DisplayWidget::getImage()
+{
+	if (!surface) return QImage();
+	return image;
+}
+
+QImage DisplayWidget::getFromSelection()
+{
+	if (!surface) return QImage();
+	QRect selection = surface->getSelection();
+	if (selection.isNull()) return image;
+	return image.copy(selection);
+}
+
+QRect DisplayWidget::getSelection()
+{
+	if (!surface) return QRect();
+	return surface->getSelection();
+}
+
+QSize DisplayWidget::getViewportSize()
+{
+	return (viewport()->size() * Globals::scalingFactor);
+}
+
+void DisplayWidget::enableSelection(bool enable)
+{
+	selectionEnabled = enable;
+	if (surface)
+	{
+		surface->enableSelection(selectionEnabled);
+	}
+}
+
+void DisplayWidget::setZoom(double zoom)
+{
+	if (!surface) return;
+	if (zoom <= 0) return;
+	if (zoom > 1000.0) zoom = 1000.0;
+	if (zoom < 0.001) zoom = 0.001;
+	this->zoom = zoom;
+	resetTransform();
+	scale(zoom, zoom);
+	surface->setZoom(zoom);
+}
+
+double DisplayWidget::getZoom()
+{
+	if (!surface) return 1.0;
+	return surface->getZoom();
+}
+
+QColor DisplayWidget::getPixelInfoColor()
+{
+	if (!surface) return QColor();
+	return QColor(image.pixel(surface->getPixelInfoPos()));
+}
+
+bool DisplayWidget::getPixelInfoHasAlpha()
+{
+	return image.hasAlphaChannel();
+}
+
+QPoint DisplayWidget::getPixelInfoPos()
+{
+	if (!surface) return QPoint();
+	return surface->getPixelInfoPos();
+}
+
+bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
+{
+	QKeyEvent * keyEvent = (QKeyEvent*)event;
+	if (event->type() == QEvent::KeyPress)
+	{
+		//if (keyEvent->key() == Qt::Key_Return)
+		if (verticalScrollBar()->isVisible())
+		{
+			if ((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_Home))
+			{
+				verticalScrollBar()->setValue(0);
+				return true;
+			}
+			if ((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_End))
+			{
+				verticalScrollBar()->setValue(verticalScrollBar()->maximum());
+				return true;
+			}
+		}
+		if (horizontalScrollBar()->isVisible())
+		{
+			if ((keyEvent->modifiers() == Qt::AltModifier) && (keyEvent->key() == Qt::Key_Home))
+			{
+				horizontalScrollBar()->setValue(0);
+				return true;
+			}
+			if ((keyEvent->modifiers() == Qt::AltModifier) && (keyEvent->key() == Qt::Key_End))
+			{
+				horizontalScrollBar()->setValue(horizontalScrollBar()->maximum());
+				return true;
+			}
+		}
+		if (!verticalScrollBar()->isVisible())
+		{
+			if ((keyEvent->key() == Qt::Key_Down) || (keyEvent->key() == Qt::Key_PageDown))
+			{
+				emit needNextImage();
+				return true;
+			}
+			if ((keyEvent->key() == Qt::Key_Up) || (keyEvent->key() == Qt::Key_PageUp))
+			{
+				emit needPrevImage();
+				return true;
+			}
+			if (keyEvent->key() == Qt::Key_Home)
+			{
+				emit needFirstImage();
+				return true;
+			}
+			if (keyEvent->key() == Qt::Key_End)
+			{
+				emit needLastImage();
+				return true;
+			}
+		}
+		if (!horizontalScrollBar()->isVisible())
+		{
+			if (keyEvent->key() == Qt::Key_Right)
+			{
+				emit needNextImage();
+				return true;
+			}
+			if (keyEvent->key() == Qt::Key_Left)
+			{
+				emit needPrevImage();
+				return true;
+			}
+		}
+	}
+	return QObject::eventFilter(watched, event);
+}
+
+void DisplayWidget::wheelEvent(QWheelEvent *event)
+{
+	int direction = ((event->angleDelta().y() > 0) ? 1:-1);
+	if (Globals::prefs->getReverseWheel())
+	{
+		direction *= -1;
+	}
+	
+	if (event->modifiers() == Qt::ControlModifier)
+	{
+		double zoomDelta = Globals::prefs->getZoomDelta();
+		zoomDelta = (zoomDelta/100.0) + 1.0;
+#if QT_VERSION < QT_VERSION_CHECK(5,14,0)
+		QPoint mousePos = event->pos();
+#else
+		QPoint mousePos = event->position().toPoint();
+#endif
+		QPointF posBeforeScale = mapToScene(mousePos);
+		if (direction > 0)
+		{
+			setZoom(getZoom() * zoomDelta);
+		}
+		else
+		{
+			setZoom(getZoom() / zoomDelta);
+		}
+		QPointF posAfterScale = mapFromScene(posBeforeScale);
+		QPointF delta = posAfterScale - mousePos;
+		horizontalScrollBar()->setValue(horizontalScrollBar()->value() + delta.x());
+		verticalScrollBar()->setValue(verticalScrollBar()->value() + delta.y());
+	}
+	else
+	if ((event->modifiers() == Qt::NoModifier) && (!verticalScrollBar()->isVisible()))
+	{
+		if (direction > 0)
+		{
+			emit needNextImage();
+		}
+		else
+		{
+			emit needPrevImage();
+		}
+	}
+	else
+	{
+		QGraphicsView::wheelEvent(event);
+	}
+}
+
+void DisplayWidget::dragEnterEvent(QDragEnterEvent* event)
+{
+	parent->dragEnterEvent(event);
+}
+
+void DisplayWidget::dragMoveEvent(QDragMoveEvent* event)
+{
+	parent->dragMoveEvent(event);
+}
+
+void DisplayWidget::dragLeaveEvent(QDragLeaveEvent* event)
+{
+	parent->dragLeaveEvent(event);
+}
+
+void DisplayWidget::dropEvent(QDropEvent* event)
+{
+	parent->dropEvent(event);
+}
+
+
+
+
+
+DisplaySurface::DisplaySurface(DisplayWidget * parent) : QGraphicsScene(parent)
+{
+	this->parent = parent;
+	imageRect = QRect();
+	image = QImage();
+	canvas = NULL;
+	selectionEnabled = false;
+	selectionVisible = false;
+	selection = QRect();
+	zoom = 1.0;
+	mouseInteraction = NONE;
+	selectScrollX = selectScrollY = 0;
+	drawnWithoutSelection = false;
+	connect(&scrollTimer, SIGNAL(timeout()), this, SLOT(onScrollTimeout()));
+	scrollTimer.start(33);
+	if (objCntr) qDebug() << "DisplaySurface::objCntr != 0";
+	objCntr++;
+}
+
+DisplaySurface::~DisplaySurface()
+{
+	scrollTimer.stop();
+	delete canvas;
+	objCntr--;
+}
+
+void DisplaySurface::onScrollTimeout()
+{
+	int speedUp = 2;
+	int maxSpeed = 64;
+	if (selectScrollX)
+	{
+		int amount = selectScrollX * speedUp;
+		if (amount > maxSpeed) amount = maxSpeed;
+		if (amount < maxSpeed*-1) amount = maxSpeed*-1;
+		parent->horizontalScrollBar()->setValue(parent->horizontalScrollBar()->value() + amount);
+	}
+	if (selectScrollY)
+	{
+		int amount = selectScrollY * speedUp;
+		if (amount > maxSpeed) amount = maxSpeed;
+		if (amount < maxSpeed*-1) amount = maxSpeed*-1;
+		parent->verticalScrollBar()->setValue(parent->verticalScrollBar()->value() + amount);
+	}
+}
+
+void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+	mouseInteraction = NONE;
+	if(event->button() == Qt::LeftButton)
+	{
+		if (selectionEnabled)
+		{
+			int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
+			int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+			QPoint pos = QPoint(x, y);
+			mouseStartPoint = pos;
+			mouseEndPoint = pos;
+			mouseInteraction = SELECT;
+			if (selectionVisible)
+			{
+				if (sensorTL.contains(pos))
+				{
+					mouseInteraction = RESIZE_TL;
+				} else
+				if (sensorTR.contains(pos))
+				{
+					mouseInteraction = RESIZE_TR;
+				} else
+				if (sensorBR.contains(pos))
+				{
+					mouseInteraction = RESIZE_BR;
+				} else
+				if (sensorBL.contains(pos))
+				{
+					mouseInteraction = RESIZE_BL;
+				} else
+				if (sensorT.contains(pos))
+				{
+					mouseInteraction = RESIZE_T;
+				} else
+				if (sensorR.contains(pos))
+				{
+					mouseInteraction = RESIZE_R;
+				} else
+				if (sensorB.contains(pos))
+				{
+					mouseInteraction = RESIZE_B;
+				} else
+				if (sensorL.contains(pos))
+				{
+					mouseInteraction = RESIZE_L;
+				} else
+				if (sensorC.contains(pos))
+				{
+					mouseInteraction = MOVE;
+					selectionCopyForMove = selection;
+				}
+			}
+			selectionVisible = true;
+			if (mouseInteraction == SELECT)
+			{
+				parent->setCursor(Qt::CrossCursor);
+			}
+			
+			if (image.rect().contains(pos))
+			{
+				pixelInfoPos = pos;
+				emit pixelInfo();
+			}
+		}
+	}
+	else
+	if(event->button() == Qt::RightButton)
+	{
+		QPoint pos = parent->mapFromScene(event->scenePos());
+		mouseStartPoint = pos;
+		mouseEndPoint = pos;
+		mouseInteraction = DRAG;
+	}
+	selectScrollX = selectScrollY = 0;
+	QGraphicsScene::mousePressEvent(event);
+}
+
+void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
+{
+	if((event->buttons() & Qt::LeftButton) || (event->buttons() & Qt::RightButton))
+	{
+		int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
+		int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+		QPoint pos = QPoint(x, y);
+		mouseEndPoint = pos;
+		QRect selectionCopy = selection;
+		if (mouseInteraction == DRAG)
+		{
+			mouseEndPoint = parent->mapFromScene(event->scenePos());
+			QPoint delta = mouseEndPoint - mouseStartPoint;
+			mouseStartPoint = mouseEndPoint;
+			parent->horizontalScrollBar()->setValue(parent->horizontalScrollBar()->value() - delta.x());
+			parent->verticalScrollBar()->setValue(parent->verticalScrollBar()->value() - delta.y());
+		} else
+		if (mouseInteraction == SELECT)
+		{
+			changeSelection(QRect(mouseStartPoint, mouseEndPoint));
+			
+			selectScrollX = selectScrollY = 0;
+			QPoint cursorPos = parent->mapFromScene(event->scenePos());
+			int scrollCaptureRange = 8*Globals::scalingFactor;	// TODO configurable?
+			if(cursorPos.x() < scrollCaptureRange) {
+				selectScrollX = cursorPos.x() - scrollCaptureRange;
+			}
+			else if(parent->width()-cursorPos.x() < scrollCaptureRange) {
+				selectScrollX = cursorPos.x() - parent->width() + scrollCaptureRange;
+			}
+			if(cursorPos.y() < scrollCaptureRange) {
+				selectScrollY = cursorPos.y() - scrollCaptureRange;
+			}
+			else if(parent->height()-cursorPos.y() < scrollCaptureRange) {
+				selectScrollY = cursorPos.y() - parent->height() + scrollCaptureRange;
+			}
+		} else
+		if (mouseInteraction >= RESIZE)
+		{
+			switch(mouseInteraction)
+			{
+				case RESIZE_TL: selectionCopy.setTopLeft(mouseEndPoint);     break;
+				case RESIZE_T : selectionCopy.setTop(mouseEndPoint.y());     break;
+				case RESIZE_TR: selectionCopy.setTopRight(mouseEndPoint);    break;
+				case RESIZE_R : selectionCopy.setRight(mouseEndPoint.x());   break;
+				case RESIZE_BR: selectionCopy.setBottomRight(mouseEndPoint); break;
+				case RESIZE_B : selectionCopy.setBottom(mouseEndPoint.y());  break;
+				case RESIZE_BL: selectionCopy.setBottomLeft(mouseEndPoint);  break;
+				case RESIZE_L : selectionCopy.setLeft(mouseEndPoint.x());    break;
+				//case MOVE:      selectionCopy.moveCenter(mouseEndPoint);     break;
+				default: break;
+			}
+			if (mouseInteraction == MOVE)
+			{
+				selectionCopy = selectionCopyForMove;
+				selectionCopy.moveCenter(mouseEndPoint);
+			}
+			changeSelection(selectionCopy);
+		}
+	}
+	QGraphicsScene::mouseMoveEvent(event);
+}
+
+void DisplaySurface::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
+{
+	if (mouseInteraction == SELECT)
+	{
+		QRect finalSelection = QRect(mouseStartPoint, mouseEndPoint).normalized();
+		if ((mouseStartPoint == mouseEndPoint) || (finalSelection.width() == 0) || (finalSelection.height() == 0))
+		{
+			changeSelection(QRect());
+		}
+		else
+		{
+			changeSelection(finalSelection);
+		}
+	} else
+	if (mouseInteraction >= RESIZE)
+	{
+		QRect finalSelection = selection.normalized();
+		if ((finalSelection.width() == 0) || (finalSelection.height() == 0))
+		{
+			changeSelection(QRect());
+		}
+		else
+		{
+			changeSelection(finalSelection);
+		}
+	}
+	parent->unsetCursor();
+	mouseInteraction = NONE;
+	selectScrollX = selectScrollY = 0;
+	QGraphicsScene::mouseReleaseEvent(event);
+}
+
+void DisplaySurface::hoverAction(QPoint pos)
+{
+	if (!selectionEnabled) return;
+	if (!selectionVisible) return;
+	if (mouseInteraction == NONE)
+	{
+		if (sensorTL.contains(pos))
+		{
+			parent->setCursor(Qt::SizeFDiagCursor);
+		} else
+		if (sensorTR.contains(pos))
+		{
+			parent->setCursor(Qt::SizeBDiagCursor);
+		} else
+		if (sensorBR.contains(pos))
+		{
+			parent->setCursor(Qt::SizeFDiagCursor);
+		} else
+		if (sensorBL.contains(pos))
+		{
+			parent->setCursor(Qt::SizeBDiagCursor);
+		} else
+		if (sensorT.contains(pos))
+		{
+			parent->setCursor(Qt::SizeVerCursor);
+		} else
+		if (sensorR.contains(pos))
+		{
+			parent->setCursor(Qt::SizeHorCursor);
+		} else
+		if (sensorB.contains(pos))
+		{
+			parent->setCursor(Qt::SizeVerCursor);
+		} else
+		if (sensorL.contains(pos))
+		{
+			parent->setCursor(Qt::SizeHorCursor);
+		} else
+		if (sensorC.contains(pos))
+		{
+			parent->setCursor(Qt::SizeAllCursor);
+		} else
+		{
+			parent->unsetCursor();
+		}
+	}
+}
+
+void DisplaySurface::hoverLeaveAction(QPoint pos)
+{
+	Q_UNUSED(pos);
+	if (mouseInteraction == NONE)
+	{
+		parent->unsetCursor();
+	}
+}
+
+void DisplaySurface::changeSelection(QRect selection)
+{
+	selection = selection.normalized();
+	if (selection.isNull() && (selection.x() == 0) && (selection.y() == 0))
+	{
+		this->selection = selection;
+		selectionVisible = false;
+		sensorC = sensorTL = sensorT = sensorTR = sensorR = sensorBR = sensorB = sensorBL = sensorL = QRect();
+	}
+	else
+	{
+		this->selection = (selection & imageRect);	// intersection
+		// set sensors
+		int minSize = selection.width();
+		if (selection.height() < minSize) minSize = selection.height();
+		int sensorRange = 16 * Globals::scalingFactor;
+		if (zoom < 1.0)
+		{
+			sensorRange /= zoom;
+		}
+		
+		if (sensorRange >= (minSize/3-1))
+		{
+			sensorRange = minSize/3-1;
+		}
+
+		sensorC = sensorTL = sensorT = sensorTR = sensorR = sensorBR = sensorB = sensorBL = sensorL = QRect();
+
+		if (sensorRange >= 3)
+		{
+			sensorRange = (sensorRange/2)*2 + 1;
+			
+			sensorTL = QRect(selection.topLeft(), QSize(sensorRange, sensorRange));
+			sensorTL.moveCenter(selection.topLeft());
+			sensorTR = QRect(selection.topRight(), QSize(sensorRange, sensorRange));
+			sensorTR.moveCenter(selection.topRight());
+			sensorBR = QRect(selection.bottomRight(), QSize(sensorRange, sensorRange));
+			sensorBR.moveCenter(selection.bottomRight());
+			sensorBL = QRect(selection.bottomLeft(), QSize(sensorRange, sensorRange));
+			sensorBL.moveCenter(selection.bottomLeft());
+			if (minSize/3 > 3)
+			{
+				sensorC = QRect(selection.center(), QSize(minSize/3, minSize/3));
+				sensorC.moveCenter(selection.center());
+			}
+			
+			sensorT = QRect(0,0, selection.width() - sensorRange, sensorRange);
+			sensorT.moveCenter(QPoint(selection.center().x(), selection.y()));
+			
+			sensorR = QRect(0,0, sensorRange, selection.height() - sensorRange);
+			sensorR.moveCenter(QPoint(selection.x()+selection.width(), selection.center().y()));
+			
+			sensorB = QRect(0,0, selection.width() - sensorRange, sensorRange);
+			sensorB.moveCenter(QPoint(selection.center().x(), selection.y()+selection.height()));
+			
+			sensorL = QRect(0,0, sensorRange, selection.height() - sensorRange);
+			sensorL.moveCenter(QPoint(selection.x(), selection.center().y()));
+		}
+	}
+	redraw();
+	emit selectionChanged();
+}
+
+
+void DisplaySurface::setImage(const QImage &image)
+{
+	imageRect = image.rect();
+	
+	if (image.hasAlphaChannel())
+	{
+		this->image = QImage(image.size(), QImage::Format_ARGB32_Premultiplied);
+		QPainter painter(&this->image);
+		
+		painter.setCompositionMode(QPainter::CompositionMode_Source);
+		QBrush brush;
+		brush.setTextureImage(QImage(":/pixmaps/pixmaps/chesspatt.png"));
+		painter.setBrush(brush);
+		painter.fillRect(image.rect(), brush);
+		
+		painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+		painter.drawImage(0, 0, image);
+		
+		painter.end();
+		this->image = this->image.convertToFormat(QImage::Format_RGB32);
+	}
+	else
+	{
+		this->image = image.convertToFormat(QImage::Format_RGB32).copy();
+	}
+	this->image.setDevicePixelRatio(Globals::scalingFactor);
+	canvasImage = this->image.copy();
+	if (!canvas)
+	{
+		canvas = new DisplayCanvas(QPixmap::fromImage(this->image), this);
+		addItem(canvas);
+	}
+	drawnWithoutSelection = false;
+	redraw();
+}
+
+void DisplaySurface::redraw()
+{
+	if (!(selectionVisible && selectionEnabled)) // only draw when necessary
+	{
+		if (drawnWithoutSelection) return;
+		drawnWithoutSelection = true;
+	}
+	else
+	{
+		drawnWithoutSelection = false;
+	}
+	
+	canvasImage = image.copy();
+	if (selectionVisible && selectionEnabled)
+	{
+		QPainter painter(&canvasImage);
+		painter.setCompositionMode(QPainter::RasterOp_SourceXorDestination);
+		
+		double width = 1.0;
+		if (zoom < 1)
+		{
+			width = 1.0+1.0/zoom;
+		}
+		if (zoom >= Globals::scalingFactor)
+		{
+			width = 1.0/Globals::scalingFactor;
+		}
+		
+		QPen pen = QPen(QBrush(), width, Qt::SolidLine);
+		pen.setColor(Qt::white);
+		painter.setPen(pen);
+		painter.setBrush(QBrush());
+		painter.drawRect(QRectF(QPointF(selection.topLeft())/Globals::scalingFactor, QPointF(selection.bottomRight())/Globals::scalingFactor));
+		painter.end();
+	}
+	
+	if ((zoom < 1.0) || !selectionVisible || !selectionEnabled)
+		canvas->setTransformationMode(Qt::SmoothTransformation);
+	else
+		canvas->setTransformationMode(Qt::FastTransformation);
+	QPixmap pixmap = QPixmap::fromImage(canvasImage);
+	canvas->setPixmap(pixmap);
+	canvas->pixmap().setDevicePixelRatio(Globals::scalingFactor);
+}
+
+QRect DisplaySurface::getSelection()
+{
+	if (!selectionEnabled) return QRect();
+	return selection;
+}
+
+void DisplaySurface::setZoom(double zoom)
+{
+	if (zoom > 0)
+	{
+		this->zoom = zoom;
+		redraw();
+		emit zoomChanged();
+	}
+}
+
+double DisplaySurface::getZoom()
+{
+	return zoom;
+}
+
+void DisplaySurface::enableSelection(bool enable)
+{
+	selectionEnabled = enable;
+	if (!selectionEnabled && selectionVisible)
+	{
+		selectionVisible = false;
+		redraw();
+	}
+	emit selectionChanged();
+}
+
+QPoint DisplaySurface::getPixelInfoPos()
+{
+	return pixelInfoPos;
+}
+
+
+
+
+DisplayCanvas::DisplayCanvas(const QPixmap &pixmap, DisplaySurface * surface, QGraphicsItem *parent) : QGraphicsPixmapItem(pixmap, parent)
+{
+	setAcceptHoverEvents(true);
+	this->surface = surface;
+	if (objCntr) qDebug() << "DisplayCanvas::objCntr != 0";
+	objCntr++;
+}
+
+DisplayCanvas::~DisplayCanvas()
+{
+	objCntr--;
+}
+
+void DisplayCanvas::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
+	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+	QPoint pos = QPoint(x, y);
+	surface->hoverAction(pos);
+	QGraphicsItem::hoverEnterEvent(event);
+}
+
+void DisplayCanvas::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
+	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+	QPoint pos = QPoint(x, y);
+	surface->hoverLeaveAction(pos);
+	QGraphicsItem::hoverLeaveEvent(event);
+}
+
+void DisplayCanvas::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
+{
+	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
+	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+	QPoint pos = QPoint(x, y);
+	surface->hoverAction(pos);
+	QGraphicsItem::hoverMoveEvent(event);
+}
+
+void DisplayCanvas::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+	//TODO at least bicubic painting
+	QGraphicsPixmapItem::paint(painter, option, widget);
+}
+
