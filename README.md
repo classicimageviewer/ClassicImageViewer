@@ -36,7 +36,7 @@ sudo dnf install vips-devel GraphicsMagick-c++-devel perl-Image-ExifTool
 # Get the source
 If you have git installed:
 ```
-git clone https://github.com/zhuvoy/ClassicImageViewer.git
+git clone https://github.com/classicimageviewer/ClassicImageViewer.git
 ```
 Otherwise download as ZIP and extract the content.
 
