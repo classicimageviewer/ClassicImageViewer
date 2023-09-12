@@ -1584,7 +1584,7 @@ void MainWindow::doSimpleFilter(SimpleFilter f)
 			dst = src.transformed(QTransform().rotate(90.0), Qt::SmoothTransformation);
 			break;
 		case ROT_L:
-			dst = src.transformed(QTransform().rotate(+90.0), Qt::SmoothTransformation);
+			dst = src.transformed(QTransform().rotate(-90.0), Qt::SmoothTransformation);
 			break;
 		case MIRROR_V:
 			dst = src.mirrored(false, true);
