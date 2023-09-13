@@ -39,12 +39,18 @@ IOmoduleQt::~IOmoduleQt()
 QImage IOmoduleQt::loadFile(QString path)
 {
 	QImageReader reader(path);
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	reader.setAllocationLimit(0);
+#endif
 	return reader.read();
 }
 
 QImage IOmoduleQt::loadThumbnail(QString path, QSize thumbnailSize)
 {
 	QImageReader reader(path);
+#if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
+	reader.setAllocationLimit(0);
+#endif
 	if ((reader.format() == "jpg") || (reader.format() == "jpeg"))	// only jpg is faster
 	{
 		QSize size = reader.size();
