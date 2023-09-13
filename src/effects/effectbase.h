@@ -43,6 +43,7 @@ public:
 	} ParameterCluster;
 	
 	virtual QList<EffectBase::ParameterCluster> getListOfParameterClusters() = 0;
+	virtual void saveEffectParameters(QList<EffectBase::ParameterCluster> parameters) = 0;
 	virtual QImage applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters) = 0;
 };
 

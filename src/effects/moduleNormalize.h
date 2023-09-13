@@ -37,6 +37,7 @@ public:
 	bool previewModeIsZoom() override  {return false;};
 	
 	QList<EffectBase::ParameterCluster> getListOfParameterClusters() override;
+	void saveEffectParameters(QList<EffectBase::ParameterCluster> parameters) override;
 	QImage applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters) override;
 };
 

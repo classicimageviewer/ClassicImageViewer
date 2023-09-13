@@ -38,6 +38,7 @@ public:
 	
 	bool previewModeIsZoom(int effectId);
 	QList<EffectBase::ParameterCluster> getListOfParameterClusters(int effectId);
+	void saveEffectParameters(int effectId, QList<EffectBase::ParameterCluster> parameters);
 	QImage applyEffect(int effectId, QImage image, QList<EffectBase::ParameterCluster> parameters);
 };
 

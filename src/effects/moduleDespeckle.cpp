@@ -44,6 +44,11 @@ QList<EffectBase::ParameterCluster> EffectModuleDespeckle::getListOfParameterClu
 	return QList<EffectBase::ParameterCluster>();
 }
 
+void EffectModuleDespeckle::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	Q_UNUSED(parameters);
+}
+
 QImage EffectModuleDespeckle::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	Q_UNUSED(parameters);

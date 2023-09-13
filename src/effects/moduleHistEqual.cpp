@@ -45,6 +45,11 @@ QList<EffectBase::ParameterCluster> EffectModuleHistEqual::getListOfParameterClu
 	return QList<EffectBase::ParameterCluster>();
 }
 
+void EffectModuleHistEqual::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	Q_UNUSED(parameters);
+}
+
 QImage EffectModuleHistEqual::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	Q_UNUSED(parameters);

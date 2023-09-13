@@ -55,13 +55,19 @@ QList<EffectBase::ParameterCluster> EffectModuleSpread::getListOfParameterCluste
 	return cluster;
 }
 
+void EffectModuleSpread::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		Globals::prefs->storeSpecificParameter("EffectModuleSpread", elem.parameterName, elem.parameterValue);
+	}
+}
+
 QImage EffectModuleSpread::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	int spread = 0;
-	for (EffectBase::ParameterCluster elem : parameters)
+	for (const EffectBase::ParameterCluster & elem : parameters)
 	{
-		Globals::prefs->storeSpecificParameter("EffectModuleSpread", elem.parameterName, elem.parameterValue);
-		
 		if (elem.parameterName == "Spread")
 		{
 			spread = elem.parameterValue.toInt();

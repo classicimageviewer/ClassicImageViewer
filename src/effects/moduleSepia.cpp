@@ -34,6 +34,11 @@ QList<EffectBase::ParameterCluster> EffectModuleSepia::getListOfParameterCluster
 	return QList<EffectBase::ParameterCluster>();
 }
 
+void EffectModuleSepia::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	Q_UNUSED(parameters);
+}
+
 QImage EffectModuleSepia::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	Q_UNUSED(parameters);

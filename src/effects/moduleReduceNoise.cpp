@@ -44,6 +44,11 @@ QList<EffectBase::ParameterCluster> EffectModuleReduceNoise::getListOfParameterC
 	return QList<EffectBase::ParameterCluster>();
 }
 
+void EffectModuleReduceNoise::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	Q_UNUSED(parameters);
+}
+
 QImage EffectModuleReduceNoise::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	Q_UNUSED(parameters);

@@ -98,6 +98,12 @@ QList<EffectBase::ParameterCluster> EffectHub::getListOfParameterClusters(int ef
 	return modules.at(effectId)->getListOfParameterClusters();
 }
 
+void EffectHub::saveEffectParameters(int effectId, QList<EffectBase::ParameterCluster> parameters)
+{
+	if (!checkId(effectId)) return;
+	modules.at(effectId)->saveEffectParameters(parameters);
+}
+
 QImage EffectHub::applyEffect(int effectId, QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	if (!checkId(effectId)) return image;

@@ -385,10 +385,13 @@ void EffectsDialog::doubleValueChanged(double v)
 	redrawDst();
 }
 
-QImage EffectsDialog::applyEffectsOn(QImage image)
+void EffectsDialog::getSelectedEffect(QString & name, int & effectId, QList<EffectBase::ParameterCluster> & parameterList)
 {
-	QList<EffectBase::ParameterCluster> parameterList = effectHub->getListOfParameterClusters(effectId);
-	QList<EffectBase::ParameterCluster> parameterList2 = QList<EffectBase::ParameterCluster>();
+	name = effectHub->getEffects().at(this->effectId);
+	effectId = this->effectId;
+	
+	QList<EffectBase::ParameterCluster> parameterListOriginal = effectHub->getListOfParameterClusters(this->effectId);
+	parameterList = QList<EffectBase::ParameterCluster>();
 	for (int i = 0; i < ui.guestLayout->count(); i++)
 	{
 		QLayoutItem * child = ui.guestLayout->itemAt(i);
@@ -397,7 +400,7 @@ QImage EffectsDialog::applyEffectsOn(QImage image)
 			QWidget * widget = child->widget();
 			if (widget != NULL)
 			{
-				for (EffectBase::ParameterCluster elem : parameterList)
+				for (EffectBase::ParameterCluster elem : parameterListOriginal)
 				{
 					if ((elem.parameterName.length() > 0) && (elem.parameterName == widget->objectName()))
 					{
@@ -424,7 +427,7 @@ QImage EffectsDialog::applyEffectsOn(QImage image)
 							break;
 						}
 						
-						parameterList2.append(cluster);
+						parameterList.append(cluster);
 						break;
 					}
 				}
@@ -432,7 +435,16 @@ QImage EffectsDialog::applyEffectsOn(QImage image)
 		}
 	}
 
-	return effectHub->applyEffect(effectId, image, parameterList2);
+}
+
+QImage EffectsDialog::applyEffectsOn(QImage image)
+{
+	QString name;
+	int id;
+	QList<EffectBase::ParameterCluster> parameterList;
+	getSelectedEffect(name, id, parameterList);
+	effectHub->saveEffectParameters(id, parameterList);
+	return effectHub->applyEffect(id, image, parameterList);
 }
 
 QImage EffectsDialog::applyEffects()

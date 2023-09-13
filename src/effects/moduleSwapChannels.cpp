@@ -50,13 +50,19 @@ QList<EffectBase::ParameterCluster> EffectModuleSwapChannels::getListOfParameter
 	return cluster;
 }
 
+void EffectModuleSwapChannels::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		Globals::prefs->storeSpecificParameter("EffectModuleSwapChannels", elem.parameterName, elem.parameterValue);
+	}
+}
+
 QImage EffectModuleSwapChannels::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	int rgbto = 0;
-	for (EffectBase::ParameterCluster elem : parameters)
+	for (const EffectBase::ParameterCluster & elem : parameters)
 	{
-		Globals::prefs->storeSpecificParameter("EffectModuleSwapChannels", elem.parameterName, elem.parameterValue);
-		
 		if (elem.parameterName == "RGBto")
 		{
 			rgbto = elem.parameterValue.toInt();

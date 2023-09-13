@@ -65,6 +65,8 @@ public:
 	EffectsDialog(QImage image, QWidget * parent = NULL);
 	~EffectsDialog();
 	QImage applyEffects();
+	void getSelectedEffect(QString & name, int & effectId, QList<EffectBase::ParameterCluster> & parameterList);
+	
 
 };
 

@@ -45,13 +45,19 @@ QList<EffectBase::ParameterCluster> EffectModuleBlur::getListOfParameterClusters
 	return cluster;
 }
 
+void EffectModuleBlur::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		Globals::prefs->storeSpecificParameter("EffectModuleBlur", elem.parameterName, elem.parameterValue);
+	}
+}
+
 QImage EffectModuleBlur::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	double radius = 0;
-	for (EffectBase::ParameterCluster elem : parameters)
+	for (const EffectBase::ParameterCluster & elem : parameters)
 	{
-		Globals::prefs->storeSpecificParameter("EffectModuleBlur", elem.parameterName, elem.parameterValue);
-		
 		if (elem.parameterName == "Radius")
 		{
 			radius = elem.parameterValue.toDouble();

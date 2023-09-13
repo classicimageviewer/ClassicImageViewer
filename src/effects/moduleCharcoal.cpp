@@ -44,6 +44,11 @@ QList<EffectBase::ParameterCluster> EffectModuleCharcoal::getListOfParameterClus
 	return QList<EffectBase::ParameterCluster>();
 }
 
+void EffectModuleCharcoal::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	Q_UNUSED(parameters);
+}
+
 QImage EffectModuleCharcoal::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	Q_UNUSED(parameters);

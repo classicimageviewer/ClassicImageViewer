@@ -54,6 +54,7 @@
 #include "dialogs/effectsdialog.h"
 #include "dialogs/shortcutsdialog.h"
 #include "dialogs/pastetosidedialog.h"
+#include "dialogs/batchdialog.h"
 
 #include "modules/resizer.h"
 #include "modules/autocolor.h"
@@ -244,7 +245,7 @@ void MainWindow::createMenu()
 	menuAddSeparator(ui.menuFile);
 	menuAddAction(ui.menuFile, tr("&Thumbnails"), ACT_THUMBNAILS, "T",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuFile, tr("Slidesho&w"), ACT_SLIDESHOW, "W",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(ui.menuFile, tr("&Batch conversion"), ACT_BATCH, "B",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuFile, tr("&Batch conversion"), ACT_BATCH, "B",  ACTDISABLE_FULLSCREEN);
 	menuAddSeparator(ui.menuFile);
 	menuAddAction(ui.menuFile, tr("Re&name file"), ACT_FILE_RENAME, "F2",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuFile, tr("Select target directory"), ACT_SELECT_TARGET_DIR, NULL, 0);
@@ -462,7 +463,11 @@ void MainWindow::actionSlot(Action a)
 			}
 			break;
 		case ACT_BATCH:
-			QMessageBox::warning(this, "", tr("This function is not implemented yet."));
+			{
+				BatchDialog * d = new BatchDialog(indexedDirPath, indexedFiles, imageIO);
+				d->exec();
+				delete d;
+			}
 			break;
 		case ACT_FILE_RENAME:
 			{

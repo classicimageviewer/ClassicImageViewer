@@ -34,5 +34,9 @@
 		<file>pixmaps/loader@2x.png</file>
 		<file>pixmaps/loadfailed.png</file>
 		<file>pixmaps/loadfailed@2x.png</file>
+		<file>pixmaps/batch_error@2x.png</file>
+		<file>pixmaps/batch_error.png</file>
+		<file>pixmaps/batch_success@2x.png</file>
+		<file>pixmaps/batch_success.png</file>
 	</qresource>
 </RCC>

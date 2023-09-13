@@ -45,6 +45,11 @@ QList<EffectBase::ParameterCluster> EffectModuleSobel::getListOfParameterCluster
 	return QList<EffectBase::ParameterCluster>();
 }
 
+void EffectModuleSobel::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	Q_UNUSED(parameters);
+}
+
 QImage EffectModuleSobel::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	Q_UNUSED(parameters);

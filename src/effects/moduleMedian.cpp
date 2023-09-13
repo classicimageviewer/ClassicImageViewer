@@ -56,13 +56,19 @@ QList<EffectBase::ParameterCluster> EffectModuleMedian::getListOfParameterCluste
 	return cluster;
 }
 
+void EffectModuleMedian::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		Globals::prefs->storeSpecificParameter("EffectModuleMedian", elem.parameterName, elem.parameterValue);
+	}
+}
+
 QImage EffectModuleMedian::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	int size = 0;
-	for (EffectBase::ParameterCluster elem : parameters)
+	for (const EffectBase::ParameterCluster & elem : parameters)
 	{
-		Globals::prefs->storeSpecificParameter("EffectModuleMedian", elem.parameterName, elem.parameterValue);
-		
 		if (elem.parameterName == "Size")
 		{
 			size = elem.parameterValue.toInt();

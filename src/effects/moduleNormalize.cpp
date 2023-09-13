@@ -44,6 +44,11 @@ QList<EffectBase::ParameterCluster> EffectModuleNormalize::getListOfParameterClu
 	return QList<EffectBase::ParameterCluster>();
 }
 
+void EffectModuleNormalize::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	Q_UNUSED(parameters);
+}
+
 QImage EffectModuleNormalize::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	Q_UNUSED(parameters);

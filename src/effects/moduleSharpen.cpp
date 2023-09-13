@@ -46,13 +46,19 @@ QList<EffectBase::ParameterCluster> EffectModuleSharpen::getListOfParameterClust
 	return cluster;
 }
 
+void EffectModuleSharpen::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		Globals::prefs->storeSpecificParameter("EffectModuleSharpen", elem.parameterName, elem.parameterValue);
+	}
+}
+
 QImage EffectModuleSharpen::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	double strength = 0;
-	for (EffectBase::ParameterCluster elem : parameters)
+	for (const EffectBase::ParameterCluster & elem : parameters)
 	{
-		Globals::prefs->storeSpecificParameter("EffectModuleSharpen", elem.parameterName, elem.parameterValue);
-		
 		if (elem.parameterName == "Strength")
 		{
 			strength = elem.parameterValue.toInt() / 100.0; // 0.01 .. 1.0

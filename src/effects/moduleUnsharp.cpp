@@ -53,14 +53,20 @@ QList<EffectBase::ParameterCluster> EffectModuleUnsharp::getListOfParameterClust
 	return cluster;
 }
 
+void EffectModuleUnsharp::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		Globals::prefs->storeSpecificParameter("EffectModuleUnsharp", elem.parameterName, elem.parameterValue);
+	}
+}
+
 QImage EffectModuleUnsharp::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	double radius = 0;
 	double amount = 0;
-	for (EffectBase::ParameterCluster elem : parameters)
+	for (const EffectBase::ParameterCluster & elem : parameters)
 	{
-		Globals::prefs->storeSpecificParameter("EffectModuleUnsharp", elem.parameterName, elem.parameterValue);
-		
 		if (elem.parameterName == "Radius")
 		{
 			radius = elem.parameterValue.toDouble();
