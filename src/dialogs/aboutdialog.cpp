@@ -22,8 +22,9 @@
 AboutDialog::AboutDialog(QWidget * parent) : QDialog(parent)
 {
 	ui.setupUi(this);
-	setFixedSize(size());
-	ui.labelVersion->setText(QString(tr("Version: %1")).arg(CIV_VERSION));
+	QString versionText = QString(tr("Version: %1")).arg(CIV_VERSION);
+	versionText += QString("\nQt %1").arg(qVersion());
+	ui.labelVersion->setText(versionText);
 	QImage img;
 	if (Globals::scalingFactor >= 2)
 	{
@@ -37,6 +38,7 @@ AboutDialog::AboutDialog(QWidget * parent) : QDialog(parent)
 	QPixmap pix = QPixmap::fromImage(img);
 	pix.setDevicePixelRatio(Globals::scalingFactor);
 	ui.labelLogo->setPixmap(pix);
+	setFixedSize(size());
 }
 
 AboutDialog::~AboutDialog()
