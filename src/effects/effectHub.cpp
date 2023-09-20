@@ -29,6 +29,7 @@
 #include "effects/moduleReduceNoise.h"
 #include "effects/moduleSpread.h"
 #include "effects/moduleSwapChannels.h"
+#include "effects/moduleColorAdjust.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -49,6 +50,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleReduceNoise());
 	list.append(new EffectModuleSpread());
 	list.append(new EffectModuleSwapChannels());
+	list.append(new EffectModuleColorAdjust());
 	
 	
 	
