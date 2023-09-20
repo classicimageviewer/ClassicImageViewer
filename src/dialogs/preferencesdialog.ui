@@ -29,7 +29,7 @@
       <enum>Qt::Horizontal</enum>
      </property>
      <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>
      </property>
     </widget>
    </item>
@@ -45,8 +45,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>645</width>
-          <height>839</height>
+          <width>644</width>
+          <height>869</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">

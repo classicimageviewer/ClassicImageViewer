@@ -93,6 +93,9 @@ MainWindow::MainWindow() : QMainWindow()
 	createMenu();
 	setupToolBar();
 	setupStatusBar();
+	ui.menuBar->setVisible(Globals::prefs->getMenubarVisible());
+	ui.toolBar->setVisible(Globals::prefs->getToolbarVisible());
+	ui.statusBar->setVisible(Globals::prefs->getStatusbarVisible());
 	
 	connect(&startupTimer, SIGNAL(timeout()), this, SLOT(startup()));
 	startupTimer.setSingleShot(true);
@@ -1034,12 +1037,15 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_TOGGLE_STATUSBAR:
 			ui.statusBar->setVisible(! ui.statusBar->isVisible());
+			Globals::prefs->setStatusbarVisible(ui.statusBar->isVisible());
 			break;
 		case ACT_TOGGLE_TOOLBAR:
 			ui.toolBar->setVisible(! ui.toolBar->isVisible());
+			Globals::prefs->setToolbarVisible(ui.toolBar->isVisible());
 			break;
 		case ACT_TOGGLE_MENUBAR:
 			ui.menuBar->setVisible(! ui.menuBar->isVisible());
+			Globals::prefs->setMenubarVisible(ui.menuBar->isVisible());
 			break;
 		case ACT_TOGGLE_FULLSCREEN:
 			slideshowDirection = 0;
@@ -1659,9 +1665,9 @@ void MainWindow::setFullscreen(bool fs)
 	if (!(fs ^ isFullscreen)) return;
 	if (fs && currentImageSize.isEmpty()) return;
 	isFullscreen = fs;
-	ui.menuBar->setVisible(!isFullscreen);
-	ui.toolBar->setVisible(!isFullscreen);
-	ui.statusBar->setVisible(!isFullscreen);
+	ui.menuBar->setVisible(!isFullscreen && Globals::prefs->getMenubarVisible());
+	ui.toolBar->setVisible(!isFullscreen && Globals::prefs->getToolbarVisible());
+	ui.statusBar->setVisible(!isFullscreen && Globals::prefs->getStatusbarVisible());
 	display->enableSelection(!isFullscreen);
 	if (isFullscreen)
 	{

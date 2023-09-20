@@ -46,6 +46,16 @@ Prefs::~Prefs()
 	}
 }
 
+void Prefs::restoreDefaults()
+{
+	if (settings)
+	{
+		settings->clear();
+	}
+	setDefault();
+	writePrefs();
+}
+
 void Prefs::setDefault()
 {
 	#define X(xCVT,xType,xName,xDefault) valueOf ## xName = xDefault;

@@ -17,6 +17,7 @@
 #include "preferencesdialog.h"
 #include "globals.h"
 #include <QDebug>
+#include <QMessageBox>
 
 PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
 {
@@ -68,11 +69,24 @@ PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
 	ui.checkBoxThPreloading->setChecked(Globals::prefs->getThumbnailsPreloading());
 	ui.comboBoxThMultithreading->setCurrentIndex(Globals::prefs->getThumbnailsThreads());
 	ui.spinBoxThScrollSpeed->setValue(Globals::prefs->getThumbnailsScrollSpeed());
+	
+	restoreDefaultButton = ui.buttonBox->button(QDialogButtonBox::RestoreDefaults);
+	connect(restoreDefaultButton, SIGNAL(clicked(bool)), this, SLOT(restoreDefaults(bool)));
 }
 
 PreferencesDialog::~PreferencesDialog()
 {
 	
+}
+
+void PreferencesDialog::restoreDefaults(bool b)
+{
+	Q_UNUSED(b);
+	if (QMessageBox::Yes == QMessageBox::question(this, tr("Restore defaults"), tr("Do you really want to clear and restore all settings to the default?\nThese includes previous files, effect parameter and more...\nThe application will exit.")))
+	{
+		Globals::prefs->restoreDefaults();
+		qApp->quit();
+	}
 }
 
 void PreferencesDialog::displayModeChanged(int i)

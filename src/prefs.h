@@ -29,6 +29,9 @@
 	X(toString, QString, UserLocale, "") \
 	X(toBool, bool, MaximizedWindow, false) \
 	X(toPoint, QPoint, WindowPosition, QPoint(0,0)) \
+	X(toBool, bool, MenubarVisible, true) \
+	X(toBool, bool, ToolbarVisible, true) \
+	X(toBool, bool, StatusbarVisible, true) \
 	X(toString, QString, LastOpenedDir, "") \
 	X(toString, QString, LastSaveAsDir, "") \
 	X(toStringList, QStringList, RecentFiles, QStringList()) \
@@ -71,6 +74,7 @@ private:
 public:
 	Prefs(QSettings * settings, QObject *parent = NULL);
 	~Prefs();
+	void restoreDefaults();
 
 	// prefs getters
 	#define X(xCVT,xType,xName,xDefault) xType get ## xName() {return valueOf ## xName;}

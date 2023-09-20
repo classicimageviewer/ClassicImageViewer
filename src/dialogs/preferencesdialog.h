@@ -18,6 +18,7 @@
 #define PREFERENCESDIALOG_H
 
 #include <QDialog>
+#include <QPushButton>
 #include "ui_preferencesdialog.h"
 
 class PreferencesDialog : public QDialog
@@ -25,8 +26,10 @@ class PreferencesDialog : public QDialog
 	Q_OBJECT
 private:
 	Ui_PreferencesDialog ui;
+	QPushButton * restoreDefaultButton;
 private slots:
 	void displayModeChanged(int i);
+	void restoreDefaults(bool b);
 public:
 	PreferencesDialog(QWidget * parent = NULL);
 	~PreferencesDialog();
