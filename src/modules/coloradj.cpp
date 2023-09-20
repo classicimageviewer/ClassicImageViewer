@@ -25,22 +25,20 @@ QImage ColorAdjust::AdjustColor(const QImage src, double valueOfBrightness, doub
 	QImage dst = src.convertToFormat(QImage::Format_RGB32).copy();
 
 	// HSL: H must be in the range of 0..359; S & L must be in the range of 0..255
-	int hLUT[360];
-	int sLUT[256];
-	int lLUT[256];
+	int hueLUT[360];
+	int satLUT[256];
+	int bcgLUT[256];	// brightness, contrast, gamma
 	int rgbLUT[3][256];
-	int rgbSH[3];
-	rgbSH[0] = std::round(valueOfRed * 255.0);
-	rgbSH[1] = std::round(valueOfGreen * 255.0);
-	rgbSH[2] = std::round(valueOfBlue * 255.0);
-	for (int c=0; c<3; c++)
-	{
-		for (int i=0; i<256; i++)
-		{
-			int val = i + rgbSH[c];
-			rgbLUT[c][i] = qBound(0, val, 255);
-		}
-	}
+	int rgbShift[3];
+	rgbShift[0] = std::round(valueOfRed * 255.0);
+	rgbShift[1] = std::round(valueOfGreen * 255.0);
+	rgbShift[2] = std::round(valueOfBlue * 255.0);
+	
+	bool needHSL = ((valueOfHue != 0) || (valueOfSaturation != 0));
+	
+	valueOfContrast += 1.0;
+	valueOfSaturation += 1.0;
+
 	for (int i=0; i<360; i++)
 	{
 		int shift = std::round(valueOfHue * 180);
@@ -48,21 +46,36 @@ QImage ColorAdjust::AdjustColor(const QImage src, double valueOfBrightness, doub
 		val += shift;
 		if (val < 0) val += 360;
 		val %= 360;
-		hLUT[i] = val;
+		hueLUT[i] = val;
 	}
 	for (int i=0; i<256; i++)
 	{
+		for (int c=0; c<3; c++)
+		{
+			int val = i + rgbShift[c];
+			rgbLUT[c][i] = qBound(0, val, 255);
+		}
 		
-		sLUT[i] = std::round(qBound(0.0, i*valueOfSaturation, 255.0));
+		satLUT[i] = std::round(qBound(0.0, i*valueOfSaturation, 255.0));
+		
 		double val = i / 255.0;
-		val *= valueOfBrightness;
+		if (valueOfBrightness <= 0)
+		{
+			val *= (valueOfBrightness + 1.0);
+		}
+		else
+		{
+			val -= 1.0;
+			val *= (1.0 - valueOfBrightness);
+			val += 1.0;
+		}
 		val -= 0.5;
 		val *= valueOfContrast;
 		val += 0.5;
 		if (val < 0) val = 0;
 		val = std::pow(val, 1.0/valueOfGamma);
 		val *= 255.0;
-		lLUT[i] = std::round(qBound(0.0, val, 255.0));
+		bcgLUT[i] = std::round(qBound(0.0, val, 255.0));
 	}
 	
 	#pragma omp parallel for schedule(dynamic, 1)
@@ -71,17 +84,19 @@ QImage ColorAdjust::AdjustColor(const QImage src, double valueOfBrightness, doub
 		QRgb* row = reinterpret_cast<QRgb *>(dst.scanLine(y));
 		for (int x=0; x<dst.width(); x++)
 		{
-			QColor rgbC = QColor(row[x]);	//dst.pixel(x,y));
-			QColor hslC = rgbC.toHsl();
-			int h,s,l;
-			hslC.getHsl(&h, &s, &l);
-			h = hLUT[h];
-			s = sLUT[s];
-			l = lLUT[l];
-			hslC.setHsl(h, s, l);
-			QRgb pC = hslC.toRgb().rgb();
-			row[x] = qRgb(rgbLUT[0][qRed(pC)], rgbLUT[1][qGreen(pC)], rgbLUT[2][qBlue(pC)]);
-			//dst.setPixel(x, y, qRgb(rgbLUT[0][qRed(pC)], rgbLUT[1][qGreen(pC)], rgbLUT[2][qBlue(pC)]));
+			QRgb rgbQ = row[x];
+			rgbQ = qRgb(bcgLUT[qRed(rgbQ)], bcgLUT[qGreen(rgbQ)], bcgLUT[qBlue(rgbQ)]);
+			if (needHSL)
+			{
+				QColor hslC = QColor(rgbQ).toHsl();
+				int h,s,l;
+				hslC.getHsl(&h, &s, &l);
+				h = hueLUT[h];
+				s = satLUT[s];
+				hslC.setHsl(h, s, l);
+				rgbQ = hslC.toRgb().rgb();
+			}
+			row[x] = qRgb(rgbLUT[0][qRed(rgbQ)], rgbLUT[1][qGreen(rgbQ)], rgbLUT[2][qBlue(rgbQ)]);
 		}
 	}
 

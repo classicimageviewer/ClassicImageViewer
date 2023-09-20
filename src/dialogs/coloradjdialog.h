@@ -19,6 +19,7 @@
 
 #include <QDialog>
 #include <QImage>
+#include <QPushButton>
 #include "ui_coloradjdialog.h"
 
 class ColorAdjDialog : public QDialog
@@ -27,6 +28,7 @@ class ColorAdjDialog : public QDialog
 private:
 	Ui_ColorAdjDialog ui;
 	QImage srcImg;
+	QPushButton * restoreDefaultButton;
 	void displayAdjusted();
 	double valueOfBrightness;
 	double valueOfContrast;
@@ -39,6 +41,7 @@ private:
 private slots:
 	void spinBoxChanged(double value);
 	void sliderChanged(int value);
+	void restoreDefaults(bool b);
 public:
 	ColorAdjDialog(QImage image, QWidget * parent = NULL);
 	~ColorAdjDialog();

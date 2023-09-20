@@ -26,15 +26,15 @@ ColorAdjDialog::ColorAdjDialog(QImage image, QWidget * parent) : QDialog(parent)
 	setFixedSize(size());
 	
 	//apply preferences
-	#define GETPREF(X, DV)	valueOf ## X = Globals::prefs->fetchSpecificParameter("ColorAdjDialog", #X, DV).toDouble();	ui.doubleSpinBox ## X->setValue(valueOf ## X);	ui.horizontalSlider ## X->setValue(valueOf ## X*100);
-	GETPREF(Brightness, 1.0);
-	GETPREF(Contrast, 1.0);
-	GETPREF(Gamma, 1.0);
-	GETPREF(Saturation, 1.0);
-	GETPREF(Hue, 0.0);
-	GETPREF(Red, 0.0);
-	GETPREF(Green, 0.0);
-	GETPREF(Blue, 0.0);
+	#define GETPREF(X, DV, SC)	valueOf ## X = Globals::prefs->fetchSpecificParameter("ColorAdjDialog", #X, DV).toDouble();	ui.doubleSpinBox ## X->setValue(valueOf ## X);	ui.horizontalSlider ## X->setValue(valueOf ## X*SC);
+	GETPREF(Brightness, 0, 1);
+	GETPREF(Contrast, 0, 1);
+	GETPREF(Gamma, 1.0, 100.0);
+	GETPREF(Saturation, 0, 1);
+	GETPREF(Hue, 0, 1);
+	GETPREF(Red, 0, 1);
+	GETPREF(Green, 0, 1);
+	GETPREF(Blue, 0, 1);
 	#undef GETPREF
 	
 	srcImg = image.scaled(320*Globals::scalingFactor, 320*Globals::scalingFactor, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -54,6 +54,9 @@ ColorAdjDialog::ColorAdjDialog(QImage image, QWidget * parent) : QDialog(parent)
 	CONNECTC(Green);
 	CONNECTC(Blue);
 	#undef CONNECTC
+	
+	restoreDefaultButton = ui.buttonBox->button(QDialogButtonBox::RestoreDefaults);
+	connect(restoreDefaultButton, SIGNAL(clicked(bool)), this, SLOT(restoreDefaults(bool)));
 
 	displayAdjusted();
 }
@@ -63,18 +66,34 @@ ColorAdjDialog::~ColorAdjDialog()
 	
 }
 
+void ColorAdjDialog::restoreDefaults(bool b)
+{
+	Q_UNUSED(b);
+	#define SETVAL(X, DV, SC)	valueOf ## X = DV;	ui.doubleSpinBox ## X->blockSignals(true);	ui.horizontalSlider ## X->blockSignals(true);	ui.doubleSpinBox ## X->setValue(valueOf ## X);	ui.horizontalSlider ## X->setValue(valueOf ## X*SC);	ui.horizontalSlider ## X->blockSignals(false);	ui.doubleSpinBox ## X->blockSignals(false);
+	SETVAL(Brightness, 0, 1);
+	SETVAL(Contrast, 0, 1);
+	SETVAL(Gamma, 1.0, 100.0);
+	SETVAL(Saturation, 0, 1);
+	SETVAL(Hue, 0, 1);
+	SETVAL(Red, 0, 1);
+	SETVAL(Green, 0, 1);
+	SETVAL(Blue, 0, 1);
+	#undef SETVAL
+	displayAdjusted();
+}
+
 void ColorAdjDialog::spinBoxChanged(double value)
 {
 	Q_UNUSED(value);
-	#define COPYVAL(X)	valueOf ## X = ui.doubleSpinBox ## X->value();	ui.horizontalSlider ## X->blockSignals(true);	ui.horizontalSlider ## X->setValue(valueOf ## X*100);	ui.horizontalSlider ## X->blockSignals(false);
-	COPYVAL(Brightness);
-	COPYVAL(Contrast);
-	COPYVAL(Gamma);
-	COPYVAL(Saturation);
-	COPYVAL(Hue);
-	COPYVAL(Red);
-	COPYVAL(Green);
-	COPYVAL(Blue);
+	#define COPYVAL(X, SC)	valueOf ## X = ui.doubleSpinBox ## X->value();	ui.horizontalSlider ## X->blockSignals(true);	ui.horizontalSlider ## X->setValue(valueOf ## X*SC);	ui.horizontalSlider ## X->blockSignals(false);
+	COPYVAL(Brightness, 1);
+	COPYVAL(Contrast, 1);
+	COPYVAL(Gamma, 100);
+	COPYVAL(Saturation, 1);
+	COPYVAL(Hue, 1);
+	COPYVAL(Red, 1);
+	COPYVAL(Green, 1);
+	COPYVAL(Blue, 1);
 	#undef COPYVAL
 	displayAdjusted();
 }
@@ -82,15 +101,15 @@ void ColorAdjDialog::spinBoxChanged(double value)
 void ColorAdjDialog::sliderChanged(int value)
 {
 	Q_UNUSED(value);
-	#define COPYVAL(X)	valueOf ## X = ui.horizontalSlider ## X->value()/100.0;	ui.doubleSpinBox ## X->blockSignals(true);	ui.doubleSpinBox ## X->setValue(valueOf ## X);	ui.doubleSpinBox ## X->blockSignals(false);
-	COPYVAL(Brightness);
-	COPYVAL(Contrast);
-	COPYVAL(Gamma);
-	COPYVAL(Saturation);
-	COPYVAL(Hue);
-	COPYVAL(Red);
-	COPYVAL(Green);
-	COPYVAL(Blue);
+	#define COPYVAL(X, SC)	valueOf ## X = ui.horizontalSlider ## X->value();	valueOf ## X /= SC;	ui.doubleSpinBox ## X->blockSignals(true);	ui.doubleSpinBox ## X->setValue(valueOf ## X);	ui.doubleSpinBox ## X->blockSignals(false);
+	COPYVAL(Brightness, 1);
+	COPYVAL(Contrast, 1);
+	COPYVAL(Gamma, 100);
+	COPYVAL(Saturation, 1);
+	COPYVAL(Hue, 1);
+	COPYVAL(Red, 1);
+	COPYVAL(Green, 1);
+	COPYVAL(Blue, 1);
 	#undef COPYVAL
 	displayAdjusted();
 }
@@ -105,7 +124,7 @@ void ColorAdjDialog::displayAdjusted()
 
 QImage ColorAdjDialog::adjustColor(QImage i)
 {
-	return ColorAdjust::AdjustColor(i, valueOfBrightness, valueOfContrast, valueOfGamma, valueOfSaturation, valueOfHue, valueOfRed, valueOfGreen, valueOfBlue);
+	return ColorAdjust::AdjustColor(i, valueOfBrightness/100.0, valueOfContrast/100.0, valueOfGamma, valueOfSaturation/100.0, valueOfHue/180.0, valueOfRed/100.0, valueOfGreen/100.0, valueOfBlue/100.0);
 }
 
 void ColorAdjDialog::savePreferences()
