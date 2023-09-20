@@ -34,10 +34,12 @@ ThumbnailDialog::ThumbnailDialog(QString indexedDirPath, QStringList indexedFile
 	connect(ui.listView->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(scrolled(int)));
 	connect(ui.listView, SIGNAL(doubleClicked(const QModelIndex &)), this, SLOT(clicked(const QModelIndex &)));
 	ui.listView->verticalScrollBar()->setSingleStep(Globals::prefs->getThumbnailsScrollSpeed());
+	restoreGeometry(Globals::prefs->fetchSpecificParameter("ThumbnailDialog", "geometry", QByteArray()).toByteArray());
 }
 
 ThumbnailDialog::~ThumbnailDialog()
 {
+	Globals::prefs->storeSpecificParameter("ThumbnailDialog", "geometry", saveGeometry());
 	delete model;
 }
 
