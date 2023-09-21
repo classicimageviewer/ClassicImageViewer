@@ -686,6 +686,7 @@ void DisplaySurface::setImage(const QImage &image)
 		painter.setCompositionMode(QPainter::CompositionMode_Source);
 		QBrush brush;
 		brush.setTextureImage(QImage(":/pixmaps/pixmaps/chesspatt.png"));
+		brush.setTransform(QTransform::fromScale(Globals::scalingFactor, Globals::scalingFactor));
 		painter.setBrush(brush);
 		painter.fillRect(image.rect(), brush);
 		
