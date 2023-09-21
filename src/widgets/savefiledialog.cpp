@@ -94,6 +94,19 @@ void SaveFileDialog::filterChanged(const QString &filter)
 	QRegularExpressionMatch match = regex.match(selectedNameFilter());
 	if (match.hasMatch())
 	{
+		QStringList enteredPath = selectedFiles();
+		if (enteredPath.length() > 0)
+		{
+			if (directory() != enteredPath.at(0))
+			{
+				QFileInfo info = QFileInfo(enteredPath.at(0));
+				QString changedBaseName = info.completeBaseName();
+				if (!changedBaseName.isEmpty())
+				{
+					baseName = changedBaseName;
+				}
+			}
+		}
 		setDefaultSuffix(match.captured(1));
 		selectFile(baseName + "." + match.captured(1));
 		QList<IObase::ParameterCluster> parameterList = imageIO->getListOfParameterClusters(match.captured(1));
