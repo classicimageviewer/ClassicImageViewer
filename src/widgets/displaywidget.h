@@ -65,7 +65,6 @@ private: // variables
 	QTimer scrollTimer;
 	QImage image;
 	QRect imageRect;
-	QImage canvasImage;
 	DisplayCanvas * canvas;
 	double zoom;
 	bool selectionEnabled;

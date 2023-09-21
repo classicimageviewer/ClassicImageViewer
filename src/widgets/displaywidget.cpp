@@ -698,10 +698,9 @@ void DisplaySurface::setImage(const QImage &image)
 	}
 	else
 	{
-		this->image = image.convertToFormat(QImage::Format_RGB32).copy();
+		this->image = image.convertToFormat(QImage::Format_RGB32);
 	}
 	this->image.setDevicePixelRatio(Globals::scalingFactor);
-	canvasImage = this->image.copy();
 	if (!canvas)
 	{
 		canvas = new DisplayCanvas(QPixmap::fromImage(this->image), this);
@@ -723,7 +722,7 @@ void DisplaySurface::redraw()
 		drawnWithoutSelection = false;
 	}
 	
-	canvasImage = image.copy();
+	QImage canvasImage = image;	// let Qt handle data sharing / copy
 	if (selectionVisible && selectionEnabled)
 	{
 		QPainter painter(&canvasImage);
