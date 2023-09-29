@@ -71,7 +71,7 @@ IOmoduleVips::IOmoduleVips(QObject * parent) : QObject(parent)
 	TEST_VIPS(formatsOfFits, fits, "fits", "fit", "fts");
 	TEST_VIPS(formatsOfHeif, heif, "heif", "heifs", "heic", "heics", "avci", "avcs", "avif", "hif");
 	TEST_VIPS(formatsOfNifti, nifti, "nii");
-	#if ((VIPS_MAJOR_VERSION >= 8) && (VIPS_MINOR_VERSION >= 11))
+	#if ((VIPS_MAJOR_VERSION > 8) || ((VIPS_MAJOR_VERSION == 8) && (VIPS_MINOR_VERSION >= 11)))
 	TEST_VIPS(formatsOfJp2k, jp2k, "jp2", "j2k", "jpf", "jpm", "jpg2", "j2c", "jpc", "jpx", "mj2");
 	TEST_VIPS(formatsOfJxl, jxl, "jxl");
 	#endif
@@ -105,7 +105,7 @@ QImage IOmoduleVips::loadFile(QString path)
 		LOAD_VIPS(formatsOfFits, fits);
 		LOAD_VIPS(formatsOfHeif, heif);
 		LOAD_VIPS(formatsOfNifti, nifti);
-		#if ((VIPS_MAJOR_VERSION >= 8) && (VIPS_MINOR_VERSION >= 11))
+		#if ((VIPS_MAJOR_VERSION > 8) || ((VIPS_MAJOR_VERSION == 8) && (VIPS_MINOR_VERSION >= 11)))
 		LOAD_VIPS(formatsOfJp2k, jp2k);
 		LOAD_VIPS(formatsOfJxl, jxl);
 		#endif
@@ -272,7 +272,7 @@ bool IOmoduleVips::saveFile(QString path, QString format, QImage image, QList<IO
 		}
 		catch (vips::VError const&) {}
 	} else
-	#if ((VIPS_MAJOR_VERSION >= 8) && (VIPS_MINOR_VERSION >= 11))
+	#if ((VIPS_MAJOR_VERSION > 8) || ((VIPS_MAJOR_VERSION == 8) && (VIPS_MINOR_VERSION >= 11)))
 	if (formatsOfJp2k.contains(format))
 	{
 		try {
