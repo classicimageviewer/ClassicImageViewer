@@ -34,6 +34,7 @@ private:
 	QStringList formatsOfNifti;
 	QStringList formatsOfJp2k;
 	QStringList formatsOfJxl;
+	QStringList formatsOfGif;
 public:
 	IOmoduleVips(QObject * parent = NULL);
 	~IOmoduleVips() override;

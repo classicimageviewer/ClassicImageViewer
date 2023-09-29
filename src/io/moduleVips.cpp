@@ -36,6 +36,7 @@ IOmoduleVips::IOmoduleVips(QObject * parent) : QObject(parent)
 	formatsOfNifti = QStringList();
 	formatsOfJp2k = QStringList();
 	formatsOfJxl = QStringList();
+	formatsOfGif = QStringList();
 #if defined(HAS_VIPS)
 	QString testFileBasePath = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QString("/test_%1.").arg(time(NULL));
 	QString testFilePath;
@@ -74,6 +75,9 @@ IOmoduleVips::IOmoduleVips(QObject * parent) : QObject(parent)
 	#if ((VIPS_MAJOR_VERSION > 8) || ((VIPS_MAJOR_VERSION == 8) && (VIPS_MINOR_VERSION >= 11)))
 	TEST_VIPS(formatsOfJp2k, jp2k, "jp2", "j2k", "jpf", "jpm", "jpg2", "j2c", "jpc", "jpx", "mj2");
 	TEST_VIPS(formatsOfJxl, jxl, "jxl");
+	#endif
+	#if ((VIPS_MAJOR_VERSION > 8) || ((VIPS_MAJOR_VERSION == 8) && (VIPS_MINOR_VERSION >= 12)))
+	TEST_VIPS(formatsOfGif, gif, "gif");
 	#endif
 	
 	#undef TEST_VIPS
@@ -192,6 +196,25 @@ QList<IObase::ParameterCluster> IOmoduleVips::getListOfParameterClusters(QString
 		elem.parameterMinValue = QVariant(list);
 		cluster.append(elem);
 	}
+	if (formatsOfGif.contains(format))
+	{
+		IObase::ParameterCluster elem;
+		elem.displayName = QString(tr("Dithering"));
+		elem.controlType = QString("doublespinbox");
+		elem.parameterName = QString("GifDithering");
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips/"+format, "GifDithering", QVariant(1.0));
+		elem.parameterMinValue = QVariant(0.0);
+		elem.parameterMaxValue = QVariant(1.0);
+		cluster.append(elem);
+
+		elem.displayName = QString(tr("Quantisation effort"));
+		elem.controlType = QString("spinbox");
+		elem.parameterName = QString("GifEffort");
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips/"+format, "GifEffort", QVariant(7));
+		elem.parameterMinValue = QVariant(1);
+		elem.parameterMaxValue = QVariant(10);
+		cluster.append(elem);
+	}
 	return cluster;
 }
 
@@ -216,6 +239,10 @@ bool IOmoduleVips::saveFile(QString path, QString format, QImage image, QList<IO
 	bool lossless = false;
 	int compression = 0;
 	bool saveParameters = false;
+	#if ((VIPS_MAJOR_VERSION > 8) || ((VIPS_MAJOR_VERSION == 8) && (VIPS_MINOR_VERSION >= 12)))
+	double dithering = 1.0;
+	int effort = 7;
+	#endif
 	for (IObase::ParameterCluster elem : parameters)
 	{
 		if (elem.parameterName == "SaveFileDialogSaveParameters")	// this should be the first element in the list
@@ -240,6 +267,16 @@ bool IOmoduleVips::saveFile(QString path, QString format, QImage image, QList<IO
 		{
 			compression = elem.parameterValue.toInt();
 		} else
+		#if ((VIPS_MAJOR_VERSION > 8) || ((VIPS_MAJOR_VERSION == 8) && (VIPS_MINOR_VERSION >= 12)))
+		if (elem.parameterName == "GifDithering")
+		{
+			dithering = elem.parameterValue.toDouble();
+		} else
+		if (elem.parameterName == "GifEffort")
+		{
+			effort = elem.parameterValue.toInt();
+		} else
+		#endif
 		{
 			qDebug() << "Invalid parameter" << elem.parameterName;
 		}
@@ -289,6 +326,18 @@ bool IOmoduleVips::saveFile(QString path, QString format, QImage image, QList<IO
 			vImg.jxlsave(path.toUtf8().data(), VImage::option()
 								->set("Q", quality)
 								->set("lossless", lossless)  );
+			success = true;
+		}
+		catch (vips::VError const&) {}
+	} else
+	#endif
+	#if ((VIPS_MAJOR_VERSION > 8) || ((VIPS_MAJOR_VERSION == 8) && (VIPS_MINOR_VERSION >= 12)))
+	if (formatsOfGif.contains(format))
+	{
+		try {
+			vImg.gifsave(path.toUtf8().data(), VImage::option()
+								->set("dither", dithering)
+								->set("effort", effort)  );
 			success = true;
 		}
 		catch (vips::VError const&) {}
