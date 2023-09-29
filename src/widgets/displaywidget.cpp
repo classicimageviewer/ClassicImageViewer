@@ -333,6 +333,63 @@ void DisplayWidget::dropEvent(QDropEvent* event)
 
 
 
+FastSelector::FastSelector(DisplaySurface * surface)
+{
+	mask = new QGraphicsPathItem();
+	frameBase = new QGraphicsRectItem();
+	frameDecor = new QGraphicsRectItem();
+	mask->setVisible(false);
+	frameBase->setVisible(false);
+	frameDecor->setVisible(false);
+	surface->addItem(mask);
+	surface->addItem(frameBase);
+	surface->addItem(frameDecor);
+}
+
+FastSelector::~FastSelector()
+{
+	// items are deleted by the surface
+}
+
+void FastSelector::setVisible(bool visible)
+{
+	mask->setVisible(visible);
+	frameBase->setVisible(visible);
+	frameDecor->setVisible(visible);
+}
+
+void FastSelector::drawSelection(QRect imageRect, QRect selection, double width)
+{
+	QPainterPath path, path2;
+	path.addRect(QRectF(QPointF(0, 0), (imageRect.size() / Globals::scalingFactor)));
+	QRectF adjustedRect = QRectF((QPointF(selection.topLeft()) + QPointF(0.5, 0.5)) / Globals::scalingFactor, (QPointF(selection.bottomRight()) + QPointF(0.5, 0.5)) / Globals::scalingFactor);
+	path2.addRect(adjustedRect);
+
+	mask->setPath(path.subtracted(path2));
+	frameBase->setRect(adjustedRect);
+	frameDecor->setRect(adjustedRect);
+	
+	mask->setPen(Qt::NoPen);
+	mask->setBrush(QBrush(QColor(128,128,128,128)));
+	
+	QPen penBase = QPen(QBrush(), width, Qt::SolidLine);
+	penBase.setColor(QColor(0,0,0,128));
+	frameBase->setPen(penBase);
+	
+	QPen penDecor = QPen(QBrush(), width, Qt::CustomDashLine);
+	penDecor.setColor(Qt::white);
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+	QVector<qreal> dashes;
+#else
+	QList<qreal> dashes;
+#endif
+	dashes << 5 << 6;
+	penDecor.setDashPattern(dashes);
+	frameDecor->setPen(penDecor);
+}
+
+
+
 
 DisplaySurface::DisplaySurface(DisplayWidget * parent) : QGraphicsScene(parent)
 {
@@ -340,6 +397,8 @@ DisplaySurface::DisplaySurface(DisplayWidget * parent) : QGraphicsScene(parent)
 	imageRect = QRect();
 	image = QImage();
 	canvas = NULL;
+	useFastSelector = Globals::prefs->getUseFastSelector();
+	fastSelector = NULL;
 	selectionEnabled = false;
 	selectionVisible = false;
 	selection = QRect();
@@ -357,6 +416,7 @@ DisplaySurface::~DisplaySurface()
 {
 	scrollTimer.stop();
 	delete canvas;
+	delete fastSelector;
 	objCntr--;
 }
 
@@ -705,6 +765,17 @@ void DisplaySurface::setImage(const QImage &image)
 	{
 		canvas = new DisplayCanvas(QPixmap::fromImage(this->image), this);
 		addItem(canvas);
+		if (useFastSelector)
+		{
+			fastSelector = new FastSelector(this);
+		}
+	}
+	else
+	{
+		if (useFastSelector)
+		{
+			canvas->setPixmap(QPixmap::fromImage(this->image));
+		}
 	}
 	drawnWithoutSelection = false;
 	redraw();
@@ -722,36 +793,59 @@ void DisplaySurface::redraw()
 		drawnWithoutSelection = false;
 	}
 	
-	QImage canvasImage = image;	// let Qt handle data sharing / copy
-	if (selectionVisible && selectionEnabled)
+	double width = 1.0;
+	if (zoom < 1)
 	{
-		QPainter painter(&canvasImage);
-		painter.setCompositionMode(QPainter::RasterOp_SourceXorDestination);
-		
-		double width = 1.0;
-		if (zoom < 1)
-		{
-			width = 1.0+1.0/zoom;
-		}
-		if (zoom >= Globals::scalingFactor)
-		{
-			width = 1.0/Globals::scalingFactor;
-		}
-		
-		QPen pen = QPen(QBrush(), width, Qt::SolidLine);
-		pen.setColor(Qt::white);
-		painter.setPen(pen);
-		painter.setBrush(QBrush());
-		painter.drawRect(QRectF(QPointF(selection.topLeft())/Globals::scalingFactor, QPointF(selection.bottomRight())/Globals::scalingFactor));
-		painter.end();
+		width = 1.0+1.0/zoom;
+	}
+	if (zoom >= Globals::scalingFactor)
+	{
+		width = 1.0/Globals::scalingFactor;
 	}
 	
 	if ((zoom < 1.0) || !selectionVisible || !selectionEnabled)
 		canvas->setTransformationMode(Qt::SmoothTransformation);
 	else
 		canvas->setTransformationMode(Qt::FastTransformation);
-	QPixmap pixmap = QPixmap::fromImage(canvasImage);
-	canvas->setPixmap(pixmap);
+	
+	if (useFastSelector && fastSelector)
+	{
+		fastSelector->setVisible(selectionVisible && selectionEnabled);
+		if (selectionVisible && selectionEnabled)
+		{
+			fastSelector->drawSelection(image.rect(), selection, width);
+		}
+	}
+	else
+	{
+		QImage canvasImage = image;	// let Qt handle data sharing / copy
+		if (selectionVisible && selectionEnabled)
+		{
+			QPainter painter(&canvasImage);
+			painter.setCompositionMode(QPainter::RasterOp_SourceXorDestination);
+			
+			double width = 1.0;
+			if (zoom < 1)
+			{
+				width = 1.0+1.0/zoom;
+			}
+			if (zoom >= Globals::scalingFactor)
+			{
+				width = 1.0/Globals::scalingFactor;
+			}
+			
+			QPen pen = QPen(QBrush(), width, Qt::SolidLine);
+			pen.setColor(Qt::white);
+			painter.setPen(pen);
+			painter.setBrush(QBrush());
+			painter.drawRect(QRectF(QPointF(selection.topLeft())/Globals::scalingFactor, QPointF(selection.bottomRight())/Globals::scalingFactor));
+			painter.end();
+		}
+		
+		QPixmap pixmap = QPixmap::fromImage(canvasImage);
+		canvas->setPixmap(pixmap);
+	}
+	
 	canvas->pixmap().setDevicePixelRatio(Globals::scalingFactor);
 }
 

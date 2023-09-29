@@ -39,6 +39,7 @@ PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
 	ui.spinBoxZoomDelta->setValue(Globals::prefs->getZoomDelta());
 	ui.checkBoxReverseMouseWheel->setChecked(Globals::prefs->getReverseWheel());
 	ui.checkBoxClearClipboard->setChecked(Globals::prefs->getClearClipboardOnExit());
+	ui.comboBoxSelector->setCurrentIndex(Globals::prefs->getUseFastSelector() ? 1:0);
 	
 	ui.checkBoxFsHideCursor->setChecked(Globals::prefs->getFullscreenHideCursor());
 	ui.comboBoxFsDisplayMode->setCurrentIndex(Globals::prefs->getFullscreenDisplayMode());
@@ -117,6 +118,7 @@ void PreferencesDialog::savePreferences()
 	Globals::prefs->setZoomDelta(ui.spinBoxZoomDelta->value());
 	Globals::prefs->setReverseWheel(ui.checkBoxReverseMouseWheel->isChecked());
 	Globals::prefs->setClearClipboardOnExit(ui.checkBoxClearClipboard->isChecked());
+	Globals::prefs->setUseFastSelector(ui.comboBoxSelector->currentIndex() != 0);
 	
 	Globals::prefs->setFullscreenHideCursor(ui.checkBoxFsHideCursor->isChecked());
 	Globals::prefs->setFullscreenDisplayMode(ui.comboBoxFsDisplayMode->currentIndex());

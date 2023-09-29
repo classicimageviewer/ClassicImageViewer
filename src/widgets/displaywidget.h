@@ -22,7 +22,10 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsPixmapItem>
 #include <QTimer>
+#include <QGraphicsRectItem>
+#include <QGraphicsPathItem>
 
+class FastSelector;
 class DisplayCanvas;
 class DisplaySurface;
 class DisplayWidget;
@@ -52,6 +55,22 @@ public:
 
 
 
+class FastSelector : public QObject
+{
+	Q_OBJECT
+private: // variables
+	QGraphicsPathItem * mask;
+	QGraphicsRectItem * frameBase, * frameDecor;
+public:
+	FastSelector(DisplaySurface * surface);
+	~FastSelector();
+	void setVisible(bool visible);
+	void drawSelection(QRect imageRect, QRect selection, double width);
+};
+
+
+
+
 class DisplaySurface : public QGraphicsScene
 {
 	Q_OBJECT
@@ -66,6 +85,8 @@ private: // variables
 	QImage image;
 	QRect imageRect;
 	DisplayCanvas * canvas;
+	bool useFastSelector;
+	FastSelector * fastSelector;
 	double zoom;
 	bool selectionEnabled;
 	bool selectionVisible;

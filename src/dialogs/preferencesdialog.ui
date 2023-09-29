@@ -46,7 +46,7 @@
           <x>0</x>
           <y>0</y>
           <width>644</width>
-          <height>869</height>
+          <height>899</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -62,6 +62,62 @@
             <string>General</string>
            </property>
            <layout class="QGridLayout" name="gridLayout">
+            <item row="6" column="1">
+             <widget class="QSpinBox" name="spinBoxDisplayBackground">
+              <property name="maximum">
+               <number>100</number>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QCheckBox" name="checkBoxLoopDir">
+              <property name="text">
+               <string>Loop directory</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="labelFileOrder">
+              <property name="text">
+               <string>File order:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="0" colspan="2">
+             <widget class="QCheckBox" name="checkBoxReverseMouseWheel">
+              <property name="text">
+               <string>Reverse mouse wheel</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="0" colspan="2">
+             <widget class="QCheckBox" name="checkBoxClearClipboard">
+              <property name="text">
+               <string>Clear Clipboard on exit</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0" colspan="2">
+             <widget class="QCheckBox" name="checkBoxStartMaximized">
+              <property name="text">
+               <string>Start maximized</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="3">
+             <widget class="QLabel" name="labelClearClipboardExplain">
+              <property name="text">
+               <string>(if disabled, the exit could take a long time)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="labelDisplayMode">
+              <property name="text">
+               <string>Display mode:</string>
+              </property>
+             </widget>
+            </item>
             <item row="2" column="1">
              <widget class="QComboBox" name="comboBoxFileOrder">
               <item>
@@ -86,34 +142,38 @@
               </item>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QComboBox" name="comboBoxLocale">
+            <item row="7" column="2">
+             <widget class="QLabel" name="labelSuffixPercent2">
+              <property name="text">
+               <string>%</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelLocale">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <item>
-               <property name="text">
-                <string>System</string>
-               </property>
-              </item>
-             </widget>
-            </item>
-            <item row="1" column="0" colspan="2">
-             <widget class="QCheckBox" name="checkBoxStartMaximized">
               <property name="text">
-               <string>Start maximized</string>
+               <string>Locale:</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="labelDisplayMode">
-              <property name="text">
-               <string>Display mode:</string>
+            <item row="0" column="3">
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
               </property>
-             </widget>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item row="4" column="1">
              <widget class="QComboBox" name="comboBoxDisplayMode">
@@ -134,99 +194,17 @@
               </item>
              </widget>
             </item>
-            <item row="7" column="0">
-             <widget class="QLabel" name="labelZoomDelta">
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="checkBoxFitWindowWhenZoomed">
               <property name="text">
-               <string>Zoom delta:</string>
+               <string>Fit window to images when zoomed</string>
               </property>
              </widget>
             </item>
-            <item row="6" column="1">
-             <widget class="QSpinBox" name="spinBoxDisplayBackground">
-              <property name="maximum">
-               <number>100</number>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="labelLocale">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
+            <item row="6" column="3">
+             <widget class="QLabel" name="labelDisplayBackgroundExplain">
               <property name="text">
-               <string>Locale:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="0" colspan="2">
-             <widget class="QCheckBox" name="checkBoxClearClipboard">
-              <property name="text">
-               <string>Clear Clipboard on exit</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item row="7" column="2">
-             <widget class="QLabel" name="labelSuffixPercent2">
-              <property name="text">
-               <string>%</string>
-              </property>
-             </widget>
-            </item>
-            <item row="9" column="3">
-             <widget class="QLabel" name="labelClearClipboardExplain">
-              <property name="text">
-               <string>(if disabled, the exit could take a long time)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="labelFileOrder">
-              <property name="text">
-               <string>File order:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0" colspan="2">
-             <widget class="QCheckBox" name="checkBoxLoopDir">
-              <property name="text">
-               <string>Loop directory</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="0">
-             <widget class="QLabel" name="labelDisplayBackground">
-              <property name="text">
-               <string>Display background:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="8" column="0" colspan="2">
-             <widget class="QCheckBox" name="checkBoxReverseMouseWheel">
-              <property name="text">
-               <string>Reverse mouse wheel</string>
-              </property>
-             </widget>
-            </item>
-            <item row="6" column="2">
-             <widget class="QLabel" name="labelSuffixPercent1">
-              <property name="text">
-               <string>%</string>
+               <string>(of white)</string>
               </property>
              </widget>
             </item>
@@ -240,17 +218,67 @@
               </property>
              </widget>
             </item>
-            <item row="6" column="3">
-             <widget class="QLabel" name="labelDisplayBackgroundExplain">
+            <item row="7" column="0">
+             <widget class="QLabel" name="labelZoomDelta">
               <property name="text">
-               <string>(of white)</string>
+               <string>Zoom delta:</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="0" colspan="2">
-             <widget class="QCheckBox" name="checkBoxFitWindowWhenZoomed">
+            <item row="6" column="0">
+             <widget class="QLabel" name="labelDisplayBackground">
               <property name="text">
-               <string>Fit window to images when zoomed</string>
+               <string>Display background:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="2">
+             <widget class="QLabel" name="labelSuffixPercent1">
+              <property name="text">
+               <string>%</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QComboBox" name="comboBoxLocale">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <item>
+               <property name="text">
+                <string>System</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="10" column="0">
+             <widget class="QLabel" name="labelSelector">
+              <property name="text">
+               <string>Selection tool:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="1">
+             <widget class="QComboBox" name="comboBoxSelector">
+              <item>
+               <property name="text">
+                <string>XOR frame</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Highlight (fast)</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item row="10" column="3">
+             <widget class="QLabel" name="labelSelectorExplain">
+              <property name="text">
+               <string>(not applied on the current image)</string>
               </property>
              </widget>
             </item>
