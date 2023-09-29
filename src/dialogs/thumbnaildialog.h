@@ -97,6 +97,8 @@ private slots:
 	void scrollTimeout();
 	void scrolled(int i);
 	void clicked(const QModelIndex & index);
+private: // functions
+	bool eventFilter(QObject* watched, QEvent* event);
 public:
 	ThumbnailDialog(QString indexedDirPath, QStringList indexedFiles, QWidget * parent = NULL);
 	~ThumbnailDialog();

@@ -20,12 +20,14 @@
 #include <QStandardItemModel>
 #include <QScrollBar>
 #include <QPainter>
+#include <QKeyEvent>
 
 
 ThumbnailDialog::ThumbnailDialog(QString indexedDirPath, QStringList indexedFiles, QWidget * parent) : QDialog(parent, Qt::Window)
 {
 	ui.setupUi(this);
 	setModal(false);
+	setAttribute(Qt::WA_AlwaysShowToolTips);
 	ui.listView->setGridSize(QSize(160,160));
 	model = new ThumbnailModel(indexedDirPath, indexedFiles);
 	ui.listView->setModel(model);
@@ -35,6 +37,7 @@ ThumbnailDialog::ThumbnailDialog(QString indexedDirPath, QStringList indexedFile
 	connect(ui.listView, SIGNAL(doubleClicked(const QModelIndex &)), this, SLOT(clicked(const QModelIndex &)));
 	ui.listView->verticalScrollBar()->setSingleStep(Globals::prefs->getThumbnailsScrollSpeed());
 	restoreGeometry(Globals::prefs->fetchSpecificParameter("ThumbnailDialog", "geometry", QByteArray()).toByteArray());
+	this->installEventFilter(this);
 }
 
 ThumbnailDialog::~ThumbnailDialog()
@@ -65,6 +68,26 @@ void ThumbnailDialog::clicked(const QModelIndex & index)
 void ThumbnailDialog::selectItem(int index)
 {
 	ui.listView->setCurrentIndex(model->index(index));
+}
+
+bool ThumbnailDialog::eventFilter(QObject* watched, QEvent* event)
+{
+
+	if (event->type() == QEvent::KeyPress)
+	{
+		QKeyEvent * keyEvent = (QKeyEvent*)event;
+		if ((keyEvent->key() == Qt::Key_Return) || (keyEvent->key() == Qt::Key_Enter))
+		{
+			QModelIndex index = ui.listView->currentIndex();
+			if (index.isValid())
+			{
+				emit itemSelected(index.row());
+				return true;
+			}
+		}
+	}
+	
+	return QObject::eventFilter(watched, event);
 }
 
 void ThumbnailDialog::updateFileList(QString indexedDirPath, QStringList indexedFiles)
