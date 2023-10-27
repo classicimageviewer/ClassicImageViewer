@@ -118,6 +118,7 @@ public:
 	double getZoom();
 	void enableSelection(bool enable);
 	QPoint getPixelInfoPos();
+	QPointF getMousePositionCorrection();
 signals:
 	void zoomChanged();
 	void selectionChanged();
@@ -139,6 +140,7 @@ private: // variables
 	double zoom;
 	QImage image;
 	bool selectionEnabled;
+	QPointF mousePositionCorrection;
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);
 	void wheelEvent(QWheelEvent *event) override;
@@ -146,6 +148,7 @@ private: // functions
 	void dragMoveEvent(QDragMoveEvent* event) override;
 	void dragLeaveEvent(QDragLeaveEvent* event) override;
 	void dropEvent(QDropEvent* event) override;
+	void mouseMoveEvent(QMouseEvent *event) override;
 public:
 	DisplayWidget(QWidget *parent = NULL);
 	~DisplayWidget();
@@ -165,6 +168,7 @@ public:
 	QColor getPixelInfoColor();
 	bool getPixelInfoHasAlpha();
 	QPoint getPixelInfoPos();
+	QPointF getMousePositionCorrection();
 signals:
 	void needNextImage();
 	void needPrevImage();

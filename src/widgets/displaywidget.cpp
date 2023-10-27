@@ -16,6 +16,7 @@
 
 #include "displaywidget.h"
 #include "globals.h"
+#include <cmath>
 #include <QDebug>
 #include <QPainter>
 #include <QScrollBar>
@@ -35,6 +36,7 @@ DisplayWidget::DisplayWidget(QWidget *parent) : QGraphicsView(parent)
 	selectionEnabled = true;
 	zoom = 1.0;
 	image = QImage();
+	mousePositionCorrection = QPointF(0, 0);
 	setScene(emptyScene);	// dummy
 	setMouseTracking(true);
 	setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
@@ -189,6 +191,11 @@ QPoint DisplayWidget::getPixelInfoPos()
 	return surface->getPixelInfoPos();
 }
 
+QPointF DisplayWidget::getMousePositionCorrection()
+{
+	return mousePositionCorrection;
+}
+
 bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 {
 	QKeyEvent * keyEvent = (QKeyEvent*)event;
@@ -330,6 +337,16 @@ void DisplayWidget::dropEvent(QDropEvent* event)
 	parent->dropEvent(event);
 }
 
+void DisplayWidget::mouseMoveEvent(QMouseEvent *event)
+{
+	double tmp;
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+	mousePositionCorrection = QPointF(std::modf(event->windowPos().x(), &tmp), std::modf(event->windowPos().y(), &tmp)) * -1.0;
+#else
+	mousePositionCorrection = QPointF(std::modf(event->scenePosition().x(), &tmp), std::modf(event->scenePosition().y(), &tmp)) * -1.0;
+#endif
+	QGraphicsView::mouseMoveEvent(event);
+}
 
 
 
@@ -447,8 +464,8 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	{
 		if (selectionEnabled)
 		{
-			int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
-			int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+			int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().x();
+			int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().y();
 			QPoint pos = QPoint(x, y);
 			mouseStartPoint = pos;
 			mouseEndPoint = pos;
@@ -522,8 +539,8 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	if((event->buttons() & Qt::LeftButton) || (event->buttons() & Qt::RightButton))
 	{
-		int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
-		int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+		int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().x();
+		int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().y();
 		QPoint pos = QPoint(x, y);
 		mouseEndPoint = pos;
 		QRect selectionCopy = selection;
@@ -886,6 +903,11 @@ QPoint DisplaySurface::getPixelInfoPos()
 	return pixelInfoPos;
 }
 
+QPointF DisplaySurface::getMousePositionCorrection()
+{
+	return parent->getMousePositionCorrection();
+}
+
 
 
 
@@ -904,8 +926,8 @@ DisplayCanvas::~DisplayCanvas()
 
 void DisplayCanvas::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
-	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + surface->getMousePositionCorrection().x();
+	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + surface->getMousePositionCorrection().y();
 	QPoint pos = QPoint(x, y);
 	surface->hoverAction(pos);
 	QGraphicsItem::hoverEnterEvent(event);
@@ -913,8 +935,8 @@ void DisplayCanvas::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 
 void DisplayCanvas::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
-	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + surface->getMousePositionCorrection().x();
+	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + surface->getMousePositionCorrection().y();
 	QPoint pos = QPoint(x, y);
 	surface->hoverLeaveAction(pos);
 	QGraphicsItem::hoverLeaveEvent(event);
@@ -922,8 +944,8 @@ void DisplayCanvas::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 
 void DisplayCanvas::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 {
-	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999;
-	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999;
+	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + surface->getMousePositionCorrection().x();
+	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + surface->getMousePositionCorrection().y();
 	QPoint pos = QPoint(x, y);
 	surface->hoverAction(pos);
 	QGraphicsItem::hoverMoveEvent(event);
