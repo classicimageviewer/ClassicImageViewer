@@ -46,6 +46,7 @@
 #include "dialogs/slideshowdialog.h"
 #include "dialogs/rotatedialog.h"
 #include "dialogs/addborderdialog.h"
+#include "dialogs/padtosizedialog.h"
 #include "dialogs/coloradjdialog.h"
 #include "dialogs/licensedialog.h"
 #include "dialogs/aboutdialog.h"
@@ -286,6 +287,7 @@ void MainWindow::createMenu()
 	menuAddSeparator(ui.menuImage);
 	menuAddAction(ui.menuImage, tr("Re&size"), ACT_RESIZE, "Ctrl+R",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuImage, tr("Add &border"), ACT_ADD_BORDER, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuImage, tr("&Pad to size"), ACT_PAD_TO_SIZE, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddSeparator(ui.menuImage);
 	menuAddAction(ui.menuImage, tr("&Grayscale"), ACT_GRAYSCALE, NULL,  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuImage, tr("Nega&tive"), ACT_NEGATIVE, NULL,  ACTDISABLE_UNLOADED);
@@ -956,6 +958,24 @@ void MainWindow::actionSlot(Action a)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
 					QImage i = d->addBorder(display->getImage());
+					QApplication::restoreOverrideCursor();
+					saveToUndoStack();
+					display->newImage(i);
+					currentImageSize = i.size();
+					setImageSize();
+					setWindowSize();
+					d->savePreferences();
+				}
+				delete d;
+			}
+			break;
+		case ACT_PAD_TO_SIZE:
+			{
+				PadToSizeDialog * d = new PadToSizeDialog();
+				if (d->exec() == QDialog::Accepted)
+				{
+					QApplication::setOverrideCursor(Qt::WaitCursor);
+					QImage i = d->padToSize(display->getImage());
 					QApplication::restoreOverrideCursor();
 					saveToUndoStack();
 					display->newImage(i);
