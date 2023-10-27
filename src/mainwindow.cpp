@@ -781,6 +781,10 @@ void MainWindow::actionSlot(Action a)
 						clearPastedUndoStack();
 						display->newImage(i);
 						currentImageSize = i.size();
+						if (Globals::prefs->getDisplayMode() == 0)
+						{
+							display->setZoom(1.0);
+						}
 						setImageSize();
 						setWindowSize();
 					}
