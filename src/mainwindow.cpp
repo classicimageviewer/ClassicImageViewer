@@ -192,6 +192,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 				indexDisplay->setValue(indexDisplay->value());
 				indexDisplay->blockSignals(oldState);
 				indexDisplay->clearFocus();
+				display->setFocus();
 				return true;
 			}
 		}
@@ -1361,6 +1362,7 @@ void MainWindow::indexDisplayChanged(int i)
 	indexDisplay->clearFocus();
 	// lose focus:
 	indexDisplay->clearFocus();
+	display->setFocus();
 }
 
 void MainWindow::slideshowTimeout()
