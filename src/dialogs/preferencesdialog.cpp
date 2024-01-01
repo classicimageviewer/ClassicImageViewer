@@ -40,6 +40,7 @@ PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
 	ui.checkBoxReverseMouseWheel->setChecked(Globals::prefs->getReverseWheel());
 	ui.checkBoxClearClipboard->setChecked(Globals::prefs->getClearClipboardOnExit());
 	ui.comboBoxSelector->setCurrentIndex(Globals::prefs->getUseFastSelector() ? 1:0);
+	ui.checkBoxEnableToolbarShrinking->setChecked(Globals::prefs->getEnableToolbarShrinking());
 	
 	ui.checkBoxFsHideCursor->setChecked(Globals::prefs->getFullscreenHideCursor());
 	ui.comboBoxFsDisplayMode->setCurrentIndex(Globals::prefs->getFullscreenDisplayMode());
@@ -119,6 +120,7 @@ void PreferencesDialog::savePreferences()
 	Globals::prefs->setReverseWheel(ui.checkBoxReverseMouseWheel->isChecked());
 	Globals::prefs->setClearClipboardOnExit(ui.checkBoxClearClipboard->isChecked());
 	Globals::prefs->setUseFastSelector(ui.comboBoxSelector->currentIndex() != 0);
+	Globals::prefs->setEnableToolbarShrinking(ui.checkBoxEnableToolbarShrinking->isChecked());
 	
 	Globals::prefs->setFullscreenHideCursor(ui.checkBoxFsHideCursor->isChecked());
 	Globals::prefs->setFullscreenDisplayMode(ui.comboBoxFsDisplayMode->currentIndex());

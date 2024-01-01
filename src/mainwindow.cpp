@@ -97,6 +97,7 @@ MainWindow::MainWindow() : QMainWindow()
 	ui.menuBar->setVisible(Globals::prefs->getMenubarVisible());
 	ui.toolBar->setVisible(Globals::prefs->getToolbarVisible());
 	ui.statusBar->setVisible(Globals::prefs->getStatusbarVisible());
+	ui.toolBar->setSizePolicy((Globals::prefs->getEnableToolbarShrinking() ? (QSizePolicy::Expanding) : (QSizePolicy::MinimumExpanding)), QSizePolicy::Minimum);
 	
 	connect(&startupTimer, SIGNAL(timeout()), this, SLOT(startup()));
 	startupTimer.setSingleShot(true);
@@ -1052,6 +1053,7 @@ void MainWindow::actionSlot(Action a)
 					d->savePreferences();
 					indexDisplay->setWrapping(Globals::prefs->getLoopDir());
 					display->setBackgroundShade(Globals::prefs->getDisplayBackground());
+					ui.toolBar->setSizePolicy((Globals::prefs->getEnableToolbarShrinking() ? (QSizePolicy::Expanding) : (QSizePolicy::MinimumExpanding)), QSizePolicy::Minimum);
 				}
 				delete d;
 			}
