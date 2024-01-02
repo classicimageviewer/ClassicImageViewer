@@ -108,10 +108,13 @@ qmfiles.path = $${PREFIX}/share/$${TARGET}/languages/
 qmfiles.files = $${TRANSLATIONS_FILES}
 desktop.path = $${PREFIX}/share/applications
 desktop.files = install/usr/share/applications/classicimageviewer.desktop
+appstream.path = $${PREFIX}/share/metainfo/
+appstream.files = install/usr/share/metainfo/io.github.classicimageviewer.ClassicImageViewer.appdata.xml
 INSTALLS += 	target \
 		qmfiles \
 		icons \
 		pixmaps \
-		desktop
+		desktop \
+		appstream
 
 
