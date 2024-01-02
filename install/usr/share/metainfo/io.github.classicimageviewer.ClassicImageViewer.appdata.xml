@@ -37,6 +37,13 @@
     <binary>civ</binary>
   </provides>
   <releases>
+    <release version="1.1.1" date="2024-01-02">
+        <description>
+          <ul>
+            <li>efforts towards compatibility with appimage.github.io</li>
+          </ul>
+        </description>
+    </release>
     <release version="1.1.0" date="2024-01-01">
         <description>
           <ul>
