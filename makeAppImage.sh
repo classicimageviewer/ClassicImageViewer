@@ -7,6 +7,7 @@ cp build/civ AppRun/usr/bin
 cp install/usr/share/icons/hicolor/256x256/civ.png Apprun
 cp -r install/usr/share AppRun/usr
 mkdir -p AppImage
+chmod -R 0755 *
 cd AppImage
 wget https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage
 chmod +x linuxdeployqt-continuous-x86_64.AppImage
