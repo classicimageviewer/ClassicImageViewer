@@ -18,6 +18,7 @@
 #include "globals.h"
 #include <QDebug>
 #include <QColorDialog>
+#include <cmath>
 
 PadToSizeDialog::PadToSizeDialog(QWidget * parent) : QDialog(parent)
 {
@@ -27,6 +28,8 @@ PadToSizeDialog::PadToSizeDialog(QWidget * parent) : QDialog(parent)
 	backgroundColor = Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "backgroundColor", QColor(Qt::black)).value<QColor>();
 	ui.spinBoxWidth->setValue(Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "width", 0).toInt());
 	ui.spinBoxHeight->setValue(Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "height", 0).toInt());
+	ui.doubleSpinBoxWidthRatio->setValue(Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "widthRatio", 1.0).toDouble());
+	ui.doubleSpinBoxHeightRatio->setValue(Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "heightRatio", 1.0).toDouble());
 	switch (Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "mode", 0).toInt())
 	{
 		default:
@@ -47,7 +50,22 @@ PadToSizeDialog::PadToSizeDialog(QWidget * parent) : QDialog(parent)
 			break;
 	}
 	
+	switch (Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "method", 0).toInt())
+	{
+		default:
+		case 0:
+			ui.radioButtonNewSize->setChecked(true);
+			selectSize(true);
+			break;
+		case 1:
+			ui.radioButtonAR->setChecked(true);
+			selectAR(true);
+			break;
+	}
+	
 	connect(ui.pushButtonColor, SIGNAL(clicked(bool)), this, SLOT(changeBackgroundColor(bool)));
+	connect(ui.radioButtonNewSize, SIGNAL(clicked(bool)), this, SLOT(selectSize(bool)));
+	connect(ui.radioButtonAR, SIGNAL(clicked(bool)), this, SLOT(selectAR(bool)));
 }
 
 PadToSizeDialog::~PadToSizeDialog()
@@ -66,10 +84,47 @@ void PadToSizeDialog::changeBackgroundColor(bool b)
 	delete d;
 }
 
+void PadToSizeDialog::selectSize(bool b)
+{
+	Q_UNUSED(b);
+	ui.spinBoxWidth->setEnabled(true);
+	ui.spinBoxHeight->setEnabled(true);
+	ui.doubleSpinBoxWidthRatio->setEnabled(false);
+	ui.doubleSpinBoxHeightRatio->setEnabled(false);
+	ui.radioButtonAR->setChecked(false);
+}
+
+void PadToSizeDialog::selectAR(bool b)
+{
+	Q_UNUSED(b);
+	ui.spinBoxWidth->setEnabled(false);
+	ui.spinBoxHeight->setEnabled(false);
+	ui.doubleSpinBoxWidthRatio->setEnabled(true);
+	ui.doubleSpinBoxHeightRatio->setEnabled(true);
+	ui.radioButtonNewSize->setChecked(false);
+}
+
 QImage PadToSizeDialog::padToSize(QImage i)
 {
 	int w = ui.spinBoxWidth->value();
 	int h = ui.spinBoxHeight->value();
+	if (ui.radioButtonAR->isChecked())
+	{
+		w = i.width();
+		h = i.height();
+		if ((w == 0) && (h == 0)) return i;
+		double sourceAR = (double)w / (double)h;
+		double destinationAR = ui.doubleSpinBoxWidthRatio->value() / ui.doubleSpinBoxHeightRatio->value();
+		if (destinationAR > sourceAR)
+		{
+			w = std::round(h * destinationAR);
+		}
+		else
+		{
+			h = std::round(w / destinationAR);
+		}
+	}
+	
 	if ((w == 0) && (h == 0)) return i;
 	
 	int mode = 0;
@@ -109,10 +164,13 @@ void PadToSizeDialog::savePreferences()
 	Globals::prefs->storeSpecificParameter("PadToSizeDialog", "backgroundColor", backgroundColor);
 	Globals::prefs->storeSpecificParameter("PadToSizeDialog", "width", ui.spinBoxWidth->value());
 	Globals::prefs->storeSpecificParameter("PadToSizeDialog", "height", ui.spinBoxHeight->value());
+	Globals::prefs->storeSpecificParameter("PadToSizeDialog", "widthRatio", ui.doubleSpinBoxWidthRatio->value());
+	Globals::prefs->storeSpecificParameter("PadToSizeDialog", "heightRatio", ui.doubleSpinBoxHeightRatio->value());
 	Globals::prefs->storeSpecificParameter("PadToSizeDialog", "mode", 0);
 	if (ui.radioButtonLU->isChecked()) Globals::prefs->storeSpecificParameter("PadToSizeDialog", "mode", 1);
 	if (ui.radioButtonRU->isChecked()) Globals::prefs->storeSpecificParameter("PadToSizeDialog", "mode", 2);
 	if (ui.radioButtonLD->isChecked()) Globals::prefs->storeSpecificParameter("PadToSizeDialog", "mode", 3);
 	if (ui.radioButtonRD->isChecked()) Globals::prefs->storeSpecificParameter("PadToSizeDialog", "mode", 4);
+	Globals::prefs->storeSpecificParameter("PadToSizeDialog", "method", (ui.radioButtonAR->isChecked() ? 1:0));
 }
 

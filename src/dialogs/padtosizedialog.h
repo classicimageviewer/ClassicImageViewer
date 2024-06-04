@@ -29,6 +29,8 @@ private:
 	QColor backgroundColor;
 private slots:
 	void changeBackgroundColor(bool b);
+	void selectSize(bool b);
+	void selectAR(bool b);
 public:
 	PadToSizeDialog(QWidget * parent = NULL);
 	~PadToSizeDialog();
