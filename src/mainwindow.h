@@ -48,6 +48,7 @@ private: // variables
 	QList<ActionLookUp_t> ActionLookUpTable;
 	InternalState internalState;
 	QMenu * recentFilesMenu;
+	QMenu * zoomLevelMenu;
 	int actionLock;
 	ImageIO * imageIO;
 	QSize currentImageSize;

@@ -198,6 +198,34 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 		}
 		return false;
 	}
+	if (watched == zoomDisplay)
+	{
+		if (event->type() == QEvent::MouseButtonPress)
+		{
+			if (internalState != UNLOADED)
+			{
+				QMenu *menu = new QMenu(this);
+				menu->addAction(searchQAction(ACT_ZOOM_10));
+				menu->addAction(searchQAction(ACT_ZOOM_15));
+				menu->addAction(searchQAction(ACT_ZOOM_20));
+				menu->addAction(searchQAction(ACT_ZOOM_25));
+				menu->addAction(searchQAction(ACT_ZOOM_33));
+				menu->addAction(searchQAction(ACT_ZOOM_50));
+				menu->addAction(searchQAction(ACT_ZOOM_66));
+				menu->addAction(searchQAction(ACT_ZOOM_100));
+				menu->addAction(searchQAction(ACT_ZOOM_125));
+				menu->addAction(searchQAction(ACT_ZOOM_150));
+				menu->addAction(searchQAction(ACT_ZOOM_175));
+				menu->addAction(searchQAction(ACT_ZOOM_200));
+				menu->addAction(searchQAction(ACT_ZOOM_300));
+				menu->addAction(searchQAction(ACT_ZOOM_400));
+				connect(menu, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
+				menu->popup(zoomDisplay->mapToGlobal(QPoint(0,0+zoomDisplay->height())));
+				return true;
+			}
+		}
+		return false;
+	}
 	/*if (event->type() == QEvent::KeyPress) <-- not needed anymore; QActions are added to the display widget
 	{
 		if (keyEvent->key() == Qt::Key_Return) sendAction(ACT_TOGGLE_FULLSCREEN);
@@ -318,6 +346,22 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuView, tr("Zoom &in"), ACT_ZOOM_IN, "+",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuView, tr("Zoom &out"), ACT_ZOOM_OUT, "-",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuView, tr("Zoom 1:1"), ACT_ZOOM_1, "Ctrl+H",  ACTDISABLE_UNLOADED);
+	zoomLevelMenu = new QMenu(tr("&Zoom levels"));
+	ui.menuView->addMenu(zoomLevelMenu);
+	menuAddAction(zoomLevelMenu, tr("10%"), ACT_ZOOM_10, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("15%"), ACT_ZOOM_15, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("20%"), ACT_ZOOM_20, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("25%"), ACT_ZOOM_25, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("33%"), ACT_ZOOM_33, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("50%"), ACT_ZOOM_50, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("66%"), ACT_ZOOM_66, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("100%"), ACT_ZOOM_100, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("125%"), ACT_ZOOM_125, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("150%"), ACT_ZOOM_150, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("175%"), ACT_ZOOM_175, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("200%"), ACT_ZOOM_200, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("300%"), ACT_ZOOM_300, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(zoomLevelMenu, tr("400%"), ACT_ZOOM_400, NULL,  ACTDISABLE_UNLOADED);
 	connect(ui.menuView, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	menuAddAction(ui.menuHelp, tr("&License"), ACT_LICENSE, NULL,  0);
@@ -1164,6 +1208,51 @@ void MainWindow::actionSlot(Action a)
 		case ACT_ZOOM_1:
 			display->setZoom(1.0);
 			break;
+		case ACT_ZOOM_5:
+			display->setZoom(0.05);
+			break;
+		case ACT_ZOOM_10:
+			display->setZoom(0.1);
+			break;
+		case ACT_ZOOM_15:
+			display->setZoom(0.15);
+			break;
+		case ACT_ZOOM_20:
+			display->setZoom(0.2);
+			break;
+		case ACT_ZOOM_25:
+			display->setZoom(0.25);
+			break;
+		case ACT_ZOOM_33:
+			display->setZoom(0.33);
+			break;
+		case ACT_ZOOM_50:
+			display->setZoom(0.5);
+			break;
+		case ACT_ZOOM_66:
+			display->setZoom(0.66);
+			break;
+		case ACT_ZOOM_100:
+			display->setZoom(1.0);
+			break;
+		case ACT_ZOOM_125:
+			display->setZoom(1.25);
+			break;
+		case ACT_ZOOM_150:
+			display->setZoom(1.5);
+			break;
+		case ACT_ZOOM_175:
+			display->setZoom(1.75);
+			break;
+		case ACT_ZOOM_200:
+			display->setZoom(2.0);
+			break;
+		case ACT_ZOOM_300:
+			display->setZoom(3.0);
+			break;
+		case ACT_ZOOM_400:
+			display->setZoom(4.0);
+			break;
 		case ACT_LICENSE:
 			{
 				LicenseDialog * d = new LicenseDialog();
@@ -1438,6 +1527,7 @@ void MainWindow::setupToolBar()
 	enabledPalette.setColor(QPalette::Base, baseColor);
 	enabledPalette.setColor(QPalette::Text, textColor);
 	zoomDisplay->setPalette(enabledPalette);
+	zoomDisplay->installEventFilter(this);
 	ui.toolBar->addWidget(zoomDisplay);
 	
 	ui.toolBar->addSeparator();
