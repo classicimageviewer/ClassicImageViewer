@@ -90,6 +90,7 @@ private: // variables
 	double zoom;
 	bool selectionEnabled;
 	bool selectionVisible;
+	bool selectionAgain;
 	QRect selection;
 	MouseInteractionMode mouseInteraction;
 	QPoint mouseStartPoint, mouseEndPoint;

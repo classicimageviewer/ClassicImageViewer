@@ -418,6 +418,7 @@ DisplaySurface::DisplaySurface(DisplayWidget * parent) : QGraphicsScene(parent)
 	fastSelector = NULL;
 	selectionEnabled = false;
 	selectionVisible = false;
+	selectionAgain = false;
 	selection = QRect();
 	zoom = 1.0;
 	mouseInteraction = NONE;
@@ -510,6 +511,7 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 					selectionCopyForMove = selection;
 				}
 			}
+			selectionAgain = (mouseInteraction == SELECT) && selectionVisible;
 			selectionVisible = true;
 			if (mouseInteraction == SELECT)
 			{
@@ -603,6 +605,11 @@ void DisplaySurface::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	if (mouseInteraction == SELECT)
 	{
 		QRect finalSelection = QRect(mouseStartPoint, mouseEndPoint).normalized();
+		double slippedCursorRange = (2*Globals::scalingFactor);
+		if (selectionAgain && (finalSelection.width() <= slippedCursorRange) && (finalSelection.height() <= slippedCursorRange))
+		{
+			changeSelection(QRect());
+		} else
 		if ((mouseStartPoint == mouseEndPoint) || (finalSelection.width() == 0) || (finalSelection.height() == 0))
 		{
 			changeSelection(QRect());
@@ -627,6 +634,7 @@ void DisplaySurface::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 	parent->unsetCursor();
 	mouseInteraction = NONE;
 	selectScrollX = selectScrollY = 0;
+	selectionAgain = false;
 	QGraphicsScene::mouseReleaseEvent(event);
 }
 
