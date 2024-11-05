@@ -22,6 +22,11 @@
 #include <cmath>
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctime>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <limits.h>
 
 #include <QDebug>
 #include <QWindow>
@@ -39,6 +44,8 @@
 #include <QDateTime>
 #include <QScrollBar>
 #include <QProcess>
+#include <QCollator>
+#include <QElapsedTimer>
 
 #include "dialogs/preferencesdialog.h"
 #include "dialogs/resizedialog.h"
@@ -1578,13 +1585,94 @@ void MainWindow::setupStatusBar()
 	statusBarSelection->setMinimumWidth(1);
 }
 
+QStringList MainWindow::fastIndexer(QString dirPath, QStringList extensions, int ordering)
+{
+	std::string dirPathS = dirPath.toUtf8().constData();
+	DIR * dirp = opendir(dirPathS.c_str());
+	if (dirp == NULL) return QStringList();
+	
+	std::string fullPath = dirPathS + "/";
+	size_t fullPathLen = fullPath.length();
+	fullPath.reserve(fullPathLen*2 + NAME_MAX*2);
+	struct dirent * dp;
+	QStringList filters;
+	for (QString & ext : extensions)
+	{
+		filters.append(QString(".%1").arg(ext));
+	}
+	QStringList fileList = QStringList();
+	std::vector<std::pair<double, QString>> mTimeNameVector;
+	
+	while ((dp = readdir(dirp)) != NULL)
+	{
+		if (dp->d_type & DT_DIR) continue;
+		if (!((dp->d_type & DT_REG) || (dp->d_type & DT_LNK))) continue;
+		if (fullPath.length() > fullPathLen)
+		{
+			fullPath.resize(fullPathLen);
+		}
+		fullPath.append(dp->d_name);
+		if (access(fullPath.c_str(), R_OK) != 0) continue;
+		
+		QString qDName = QString(dp->d_name);
+		bool extensionMatch = false;
+		for (QString & ext : filters)
+		{
+			if (qDName.endsWith(ext, Qt::CaseInsensitive))
+			{
+				extensionMatch = true;
+				break;
+			}
+		}
+		if (!extensionMatch) continue;
+		
+		if (ordering >= 2)
+		{
+			struct stat attr;
+			stat(fullPath.c_str(), &attr);
+			double t = attr.st_mtim.tv_sec + attr.st_mtim.tv_nsec * 1.0e-9;
+			mTimeNameVector.push_back(std::make_pair(t, qDName));
+		}
+		else
+		{
+			fileList.append(qDName);
+		}
+	}
+	closedir(dirp);
+	
+	if (ordering >= 2)
+	{
+		std::sort(mTimeNameVector.begin(), mTimeNameVector.end());
+		for (auto &tn : mTimeNameVector)
+		{
+			fileList.append(tn.second);
+		}
+	}
+	else
+	{
+		QCollator order;
+		order.setNumericMode(true);
+		std::sort(fileList.begin(), fileList.end(), order);
+	}
+	
+	if ((ordering == 1) || (ordering == 2))
+	{
+		std::reverse(std::begin(fileList), std::end(fileList));
+	}
+	
+	return fileList;
+}
+
 void MainWindow::reIndexCurrentDir(bool forced)
 {
 	if ((!forced) && (indexedDir.length() > 0) && (indexedDirPath == currentDirPath)) return; // already indexed
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 	ui.statusBar->showMessage(tr("Indexing the current directory..."));
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+	QElapsedTimer indexingTime;
+	indexingTime.start();
 	indexedDirPath = currentDirPath;
+#if 0
 	QDir dir(indexedDirPath);
 	QStringList filters;
 	for (const QString &ext : imageIO->getInputFormats())
@@ -1607,11 +1695,14 @@ void MainWindow::reIndexCurrentDir(bool forced)
 	{
 		indexedFiles.append(fi.fileName());
 	}
-	qDebug() << "Found " << indexedDir.length() << " image files in " << indexedDirPath;
-	dirCountDisplay->setText(QString("%1").arg(indexedDir.length()));
+#else
+	indexedFiles = fastIndexer(indexedDirPath, imageIO->getInputFormats(), Globals::prefs->getFileOrder());
+#endif
+	qDebug() << "Found " << indexedFiles.length() << " image files in " << indexedDirPath << " within " << indexingTime.elapsed() << "ms";
+	dirCountDisplay->setText(QString("%1").arg(indexedFiles.length()));
 	bool oldState = indexDisplay->blockSignals(true);
 	indexDisplay->setMinimum(1);
-	indexDisplay->setMaximum(indexedDir.length());
+	indexDisplay->setMaximum(indexedFiles.length());
 	indexDisplay->setValue(indexedFiles.indexOf(currentFilePath)+1);
 	indexDisplay->blockSignals(oldState);
 	ui.statusBar->clearMessage();

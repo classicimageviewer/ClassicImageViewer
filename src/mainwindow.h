@@ -96,6 +96,7 @@ private: // functions
 	void clearClipboard(bool forced = false);
 	bool clipboardHasImage();
 	QImage getFromClipboard();
+	QStringList fastIndexer(QString dirPath, QStringList extensions, int ordering);
 	void reIndexCurrentDir(bool forced = false);
 	void loadCurrentFile();
 	void doSimpleFilter(SimpleFilter f);
