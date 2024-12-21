@@ -1605,13 +1605,22 @@ QStringList MainWindow::fastIndexer(QString dirPath, QStringList extensions, int
 	
 	while ((dp = readdir(dirp)) != NULL)
 	{
-		if (dp->d_type & DT_DIR) continue;
-		if (!((dp->d_type & DT_REG) || (dp->d_type & DT_LNK))) continue;
+		if (dp->d_type != DT_UNKNOWN)
+		{
+			if (dp->d_type & DT_DIR) continue;
+			if (!((dp->d_type & DT_REG) || (dp->d_type & DT_LNK))) continue;
+		}
 		if (fullPath.length() > fullPathLen)
 		{
 			fullPath.resize(fullPathLen);
 		}
 		fullPath.append(dp->d_name);
+		if (dp->d_type == DT_UNKNOWN)
+		{
+			struct stat attr;
+			stat(fullPath.c_str(), &attr);
+			if (!(S_ISREG(attr.st_mode))) continue;
+		}
 		if (access(fullPath.c_str(), R_OK) != 0) continue;
 		
 		QString qDName = QString(dp->d_name);
