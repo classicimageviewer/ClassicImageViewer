@@ -1,6 +1,6 @@
 # ClassicImageViewer
 
-ClassicImageViewer is a simple image viewer for Linux with some editing features.
+ClassicImageViewer is a simple and fast image viewer for Linux with some editing features.
 
 ![ClassicImageViewer](./misc/screenshot.png?raw=true "ClassicImageViewer") 
 
