@@ -22,6 +22,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QSpinBox>
+#include <vector>
 #include "ui_mainwindow.h"
 #include "actions.h"
 #include "widgets/displaywidget.h"
@@ -45,7 +46,7 @@ private: // typedefs
 private: // variables
 	QString fileToBeOpenedOnStartup;
 	QTimer startupTimer;
-	QList<ActionLookUp_t> ActionLookUpTable;
+	std::vector<ActionLookUp_t> ActionLookUpTable;
 	InternalState internalState;
 	QMenu * recentFilesMenu;
 	QMenu * zoomLevelMenu;

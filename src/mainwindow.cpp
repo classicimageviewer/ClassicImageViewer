@@ -77,7 +77,7 @@ MainWindow::MainWindow() : QMainWindow()
 	
 	fileToBeOpenedOnStartup = QString();
 	actionLock = 0;
-	ActionLookUpTable = QList<ActionLookUp_t>();
+	ActionLookUpTable = std::vector<ActionLookUp_t>();
 	currentImageName = QString();
 	currentFilePath = QString();
 	currentDirPath = QString();
@@ -266,7 +266,7 @@ QAction * MainWindow::menuAddAction(QMenu * menu, QString text, Action event, co
 	e.actionRef = a;
 	e.event = event;
 	e.flags = flags;
-	ActionLookUpTable.append(e);
+	ActionLookUpTable.push_back(e);
 	display->addAction(a);	// make shortcuts available in fullscreen mode
 	return a;
 }
@@ -1313,13 +1313,14 @@ QAction * MainWindow::searchQAction(Action a)
 
 void MainWindow::removeAction(Action a)
 {
-	QList<ActionLookUp_t> oldTable = ActionLookUpTable;
+	std::vector<ActionLookUp_t> oldTable = ActionLookUpTable;
 	ActionLookUpTable.clear();
+	ActionLookUpTable.reserve(oldTable.size());
 	for (const ActionLookUp_t & element : oldTable)
 	{
 		if (element.event != a)
 		{
-			ActionLookUpTable.append(element);
+			ActionLookUpTable.push_back(element);
 		}
 	}
 }
