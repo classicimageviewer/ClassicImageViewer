@@ -75,7 +75,7 @@ void DisplayWidget::newImage(const QImage &image)
 		delete surface;
 		surface = NULL;
 	}
-	this->image = image.copy();
+	this->image = image;
 	if (image.isNull())
 	{
 		emit zoomChanged();
