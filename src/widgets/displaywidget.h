@@ -41,6 +41,9 @@ private: // typedefs
 private: // variables
 	static int objCntr;
 	DisplaySurface * surface;
+	QPixmap paintPixmap;
+	bool validPaintPixmap;
+	double zoom;
 private: // functions
 	void hoverEnterEvent(QGraphicsSceneHoverEvent *event) override;
 	void hoverLeaveEvent(QGraphicsSceneHoverEvent *event) override;
@@ -50,6 +53,8 @@ private: // functions
 public:
 	DisplayCanvas(const QPixmap &pixmap, DisplaySurface * surface, QGraphicsItem *parent = NULL);
 	~DisplayCanvas();
+	void setCanvasPixmap(const QPixmap &pixmap);
+	void setZoom(double zoom);
 };
 
 

@@ -789,6 +789,7 @@ void DisplaySurface::setImage(const QImage &image)
 	if (!canvas)
 	{
 		canvas = new DisplayCanvas(QPixmap::fromImage(this->image), this);
+		canvas->setZoom(zoom);
 		addItem(canvas);
 		if (useFastSelector)
 		{
@@ -799,7 +800,7 @@ void DisplaySurface::setImage(const QImage &image)
 	{
 		if (useFastSelector)
 		{
-			canvas->setPixmap(QPixmap::fromImage(this->image));
+			canvas->setCanvasPixmap(QPixmap::fromImage(this->image));
 		}
 	}
 	drawnWithoutSelection = false;
@@ -868,7 +869,7 @@ void DisplaySurface::redraw()
 		}
 		
 		QPixmap pixmap = QPixmap::fromImage(canvasImage);
-		canvas->setPixmap(pixmap);
+		canvas->setCanvasPixmap(pixmap);
 	}
 	
 	canvas->pixmap().setDevicePixelRatio(Globals::scalingFactor);
@@ -885,6 +886,10 @@ void DisplaySurface::setZoom(double zoom)
 	if (zoom > 0)
 	{
 		this->zoom = zoom;
+		if (canvas)
+		{
+			canvas->setZoom(zoom);
+		}
 		redraw();
 		emit zoomChanged();
 	}
@@ -924,6 +929,7 @@ DisplayCanvas::DisplayCanvas(const QPixmap &pixmap, DisplaySurface * surface, QG
 	setAcceptHoverEvents(true);
 	this->surface = surface;
 	if (objCntr) qDebug() << "DisplayCanvas::objCntr != 0";
+	validPaintPixmap = false;
 	objCntr++;
 }
 
@@ -959,9 +965,50 @@ void DisplayCanvas::hoverMoveEvent(QGraphicsSceneHoverEvent *event)
 	QGraphicsItem::hoverMoveEvent(event);
 }
 
+void DisplayCanvas::setCanvasPixmap(const QPixmap &pixmap)
+{
+	if (validPaintPixmap)
+	{
+		validPaintPixmap = false;
+		paintPixmap = QPixmap();
+	}
+	setPixmap(pixmap);
+}
+
+void DisplayCanvas::setZoom(double zoom)
+{
+	if (validPaintPixmap)
+	{
+		validPaintPixmap = false;
+		paintPixmap = QPixmap();
+	}
+	this->zoom = zoom;
+}
+
 void DisplayCanvas::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-	//TODO at least bicubic painting
-	QGraphicsPixmapItem::paint(painter, option, widget);
+	if (zoom < 1.0)
+	{
+		if (!validPaintPixmap)
+		{
+			if (Globals::prefs->getDisplayHigherQuality())
+			{
+				paintPixmap = pixmap().scaled( pixmap().size()*zoom, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+				validPaintPixmap = true;
+			}
+		}
+	}
+	else
+	{
+		validPaintPixmap = false;
+	}
+	if (validPaintPixmap)
+	{
+		painter->drawPixmap(boundingRect(), paintPixmap, paintPixmap.rect());
+	}
+	else
+	{
+		QGraphicsPixmapItem::paint(painter, option, widget);
+	}
 }
 

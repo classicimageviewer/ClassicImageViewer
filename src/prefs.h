@@ -45,6 +45,7 @@
 	X(toBool, bool, ClearClipboardOnExit, true) \
 	X(toBool, bool, UseFastSelector, false) \
 	X(toBool, bool, EnableToolbarShrinking, false) \
+	X(toBool, bool, DisplayHigherQuality, false) \
 	X(toBool, bool, FullscreenHideCursor, true) \
 	X(toInt, int, FullscreenDisplayMode, 0) \
 	X(toBool, bool, FullscreenFileIndexIndicator, true) \
