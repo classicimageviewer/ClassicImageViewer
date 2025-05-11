@@ -2049,12 +2049,12 @@ SOFTWARE.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1679"/>
+        <location filename="../src/mainwindow.cpp" line="1680"/>
         <source>Indexing the current directory...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2223"/>
+        <location filename="../src/mainwindow.cpp" line="2224"/>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2132,7 +2132,7 @@ SOFTWARE.
         <location filename="../src/mainwindow.cpp" line="766"/>
         <location filename="../src/mainwindow.cpp" line="827"/>
         <location filename="../src/mainwindow.cpp" line="862"/>
-        <location filename="../src/mainwindow.cpp" line="1734"/>
+        <location filename="../src/mainwindow.cpp" line="1735"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2193,59 +2193,59 @@ Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation suppor
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1356"/>
         <location filename="../src/mainwindow.cpp" line="1357"/>
+        <location filename="../src/mainwindow.cpp" line="1358"/>
         <source>Trying to hack the clipboard...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1402"/>
+        <location filename="../src/mainwindow.cpp" line="1403"/>
         <source>No file loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1420"/>
+        <location filename="../src/mainwindow.cpp" line="1421"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1424"/>
+        <location filename="../src/mainwindow.cpp" line="1425"/>
         <source>Selection: %1x%2 at (%3,%4)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1448"/>
+        <location filename="../src/mainwindow.cpp" line="1449"/>
         <source>Pixel: %1 at (%2,%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1734"/>
+        <location filename="../src/mainwindow.cpp" line="1735"/>
         <source>Can not open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2102"/>
-        <location filename="../src/mainwindow.cpp" line="2112"/>
+        <location filename="../src/mainwindow.cpp" line="2103"/>
+        <location filename="../src/mainwindow.cpp" line="2113"/>
         <source>yyyy.MM.dd. hh:mm:ss</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2151"/>
+        <location filename="../src/mainwindow.cpp" line="2152"/>
         <source>&amp;Clear recent files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2166"/>
+        <location filename="../src/mainwindow.cpp" line="2167"/>
         <source>All supported images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2179"/>
+        <location filename="../src/mainwindow.cpp" line="2180"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2182"/>
+        <location filename="../src/mainwindow.cpp" line="2183"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2314,329 +2314,349 @@ Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation suppor
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="265"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="269"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="270"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="274"/>
         <source>Name (reversed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="275"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="279"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="280"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="284"/>
         <source>Time (reversed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="198"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="240"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="243"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="145"/>
         <source>Start maximized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="250"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="378"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="75"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="406"/>
         <source>Display mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="83"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="160"/>
         <source>Fit window to images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="88"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="165"/>
         <source>Fit all images to window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="93"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="170"/>
         <source>Fit large images to window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="68"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="82"/>
         <source>Zoom delta:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="128"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="261"/>
         <source>Locale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="101"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="103"/>
         <source>Clear Clipboard on exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="75"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="257"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="68"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="248"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="156"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="205"/>
         <source>(if disabled, the exit could take a long time)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="170"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="110"/>
         <source>File order:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="177"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="198"/>
         <source>Loop directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="236"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="212"/>
         <source>Display background:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="135"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="152"/>
         <source>Reverse mouse wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="109"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="220"/>
         <source>XOR frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="114"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="225"/>
         <source>Highlight (fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="149"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="96"/>
         <source>(not applied on the current image)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="163"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="131"/>
         <source>(of white)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="184"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="89"/>
         <source>Selection tool:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="219"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="124"/>
+        <source>Display quality:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="138"/>
         <source>Fit window to images when zoomed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="288"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="191"/>
         <source>Enable Toolbar shrinking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="304"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="303"/>
+        <source>Fast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="308"/>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="316"/>
+        <source>(reduces downscaling aliasing effects)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="332"/>
         <source>Fullscreen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="310"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="338"/>
         <source>Indicator font size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="317"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="345"/>
         <source>Enable file index indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="325"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="353"/>
         <source>Dark gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="330"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="358"/>
         <source>Gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="335"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="363"/>
         <source>Light gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="340"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="368"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="345"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="373"/>
         <source>Dark red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="350"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="378"/>
         <source>Red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="355"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="383"/>
         <source>Dark green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="360"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="388"/>
         <source>Green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="365"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="393"/>
         <source>Dark Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="370"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="398"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="386"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="414"/>
         <source>Fit all images to display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="391"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="419"/>
         <source>Fit large images to display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="399"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="427"/>
         <source>Enable file name indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="406"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="434"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="426"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="454"/>
         <source>Hide cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="443"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="471"/>
         <source>Indicator color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="453"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="481"/>
         <source>Indicator font:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="469"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="497"/>
         <source>Undo stack</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="485"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="513"/>
         <source>Memory limit:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="492"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="520"/>
         <source>Minimum number of steps:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="522"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="550"/>
         <source>MB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="532"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="560"/>
         <source>Thumbnails</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="565"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="593"/>
         <source>Cache size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="572"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="600"/>
         <source>Multithreading:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="580"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="608"/>
         <source>Auto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="585"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="613"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="590"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="618"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="595"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="623"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="600"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="628"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="605"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="633"/>
         <source>16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="610"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="638"/>
         <source>32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="615"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="643"/>
         <source>64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="636"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="664"/>
         <source>Preloading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="558"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="586"/>
         <source>Scroll speed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="87"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="88"/>
         <source>Restore defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="87"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="88"/>
         <source>Do you really want to clear and restore all settings to the default?
 These includes previous files, effect parameter and more...
 The application will exit.</source>
