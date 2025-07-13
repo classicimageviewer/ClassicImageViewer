@@ -76,6 +76,8 @@ private: // variables
 	int slideshowDirection;
 	QTimer slideshowTimer;
 	QLabel * statusBarResolution;
+	QLabel * statusBarIndex;
+	QLabel * statusBarZoom;
 	QLabel * statusBarLastModified;
 	QLabel * statusBarSelection;
 	ThumbnailDialog * thumbnailDialog;
@@ -117,6 +119,7 @@ private: // functions
 	void clearFileModificationTime();
 	void addPathToRecentFiles(QString path);
 	void updateRecentFilesMenu();
+	void setIndexDisplayNoSignals(int value, int maximum = 0);
 private slots:
 	void sendAction(Action a);
 	void actionSlot(Action a);

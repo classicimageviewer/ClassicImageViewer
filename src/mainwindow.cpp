@@ -195,9 +195,7 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 			if (keyEvent->key() == Qt::Key_Escape)	// lose focus
 			{
 				event->accept();
-				bool oldState = indexDisplay->blockSignals(true);
-				indexDisplay->setValue(indexDisplay->value());
-				indexDisplay->blockSignals(oldState);
+				setIndexDisplayNoSignals(indexDisplay->value());
 				indexDisplay->clearFocus();
 				display->setFocus();
 				return true;
@@ -600,11 +598,7 @@ void MainWindow::actionSlot(Action a)
 								thumbnailDialog->updateFileList(indexedDirPath, indexedFiles);
 							}
 							dirCountDisplay->setText(QString("%1").arg(indexedDir.length()));
-							bool oldState = indexDisplay->blockSignals(true);
-							indexDisplay->setMinimum(1);
-							indexDisplay->setMaximum(indexedDir.length());
-							indexDisplay->setValue(index+1);
-							indexDisplay->blockSignals(oldState);
+							setIndexDisplayNoSignals(index+1, indexedDir.length());
 							loadCurrentFile();
 						}
 					}
@@ -695,11 +689,7 @@ void MainWindow::actionSlot(Action a)
 							thumbnailDialog->updateFileList(indexedDirPath, indexedFiles);
 						}
 						dirCountDisplay->setText(QString("%1").arg(indexedDir.length()));
-						bool oldState = indexDisplay->blockSignals(true);
-						indexDisplay->setMinimum(1);
-						indexDisplay->setMaximum(indexedDir.length());
-						indexDisplay->setValue(index+1);
-						indexDisplay->blockSignals(oldState);
+						setIndexDisplayNoSignals(index+1, indexedDir.length());
 						loadCurrentFile();
 					}
 				}
@@ -1402,10 +1392,13 @@ void MainWindow::displayZoomChanged()
 	{
 		statusBarResolution->setText(QString(tr("No file loaded")));
 		clearFileModificationTime();
+		statusBarIndex->setText("-");
+		statusBarZoom->setText("");
 	}
 	else
 	{
 		statusBarResolution->setText(QString("%1 x %2").arg(imageSize.width()).arg(imageSize.height()));
+		statusBarZoom->setText(QString("%1%").arg(display->getZoom()*100.0, 0, 'f', 0));
 	}
 	if (Globals::prefs->getFitWindowWhenZoomed())
 	{
@@ -1460,6 +1453,18 @@ void MainWindow::indexDisplayChanged(int i)
 	// lose focus:
 	indexDisplay->clearFocus();
 	display->setFocus();
+}
+
+void MainWindow::setIndexDisplayNoSignals(int value, int maximum)
+{
+	bool oldState = indexDisplay->blockSignals(true);
+	indexDisplay->setMinimum(1);
+	if (maximum > 0)
+	{
+		indexDisplay->setMaximum(maximum);
+	}
+	indexDisplay->setValue(value);
+	indexDisplay->blockSignals(oldState);
 }
 
 void MainWindow::slideshowTimeout()
@@ -1571,19 +1576,31 @@ void MainWindow::setupToolBar()
 void MainWindow::setupStatusBar()
 {
 	statusBarResolution = new QLabel("");
+	statusBarIndex = new QLabel("");
+	statusBarZoom = new QLabel("");
 	statusBarLastModified = new QLabel("");
 	statusBarSelection = new QLabel("");
 	QFrame * separator;
 	#define ADD_STATUSBAR_SEPARATOR()		separator = new QFrame(); separator->setFrameStyle(QFrame::VLine | QFrame::Sunken); ui.statusBar->addWidget(separator);	// due to fusion style
 	ui.statusBar->addWidget(statusBarResolution);
 	ADD_STATUSBAR_SEPARATOR();
+	ui.statusBar->addWidget(statusBarIndex);
+	ADD_STATUSBAR_SEPARATOR();
+	ui.statusBar->addWidget(statusBarZoom);
+	ADD_STATUSBAR_SEPARATOR();
 	ui.statusBar->addWidget(statusBarLastModified);
 	ADD_STATUSBAR_SEPARATOR();
 	ui.statusBar->addWidget(statusBarSelection);
 	#undef ADD_STATUSBAR_SEPARATOR
 	statusBarResolution->setMinimumWidth(1);	// make QLabel elastic
+	statusBarIndex->setMinimumWidth(1);
+	statusBarZoom->setMinimumWidth(1);
 	statusBarLastModified->setMinimumWidth(1);
 	statusBarSelection->setMinimumWidth(1);
+	
+	statusBarIndex->setText("-");
+	statusBarResolution->setText(QString(tr("No file loaded")));
+	statusBarSelection->setText(QString(tr("No selection")));
 }
 
 QStringList MainWindow::fastIndexer(QString dirPath, QStringList extensions, int ordering)
@@ -1710,13 +1727,10 @@ void MainWindow::reIndexCurrentDir(bool forced)
 #endif
 	qDebug() << "Found " << indexedFiles.length() << " image files in " << indexedDirPath << " within " << indexingTime.elapsed() << "ms";
 	dirCountDisplay->setText(QString("%1").arg(indexedFiles.length()));
-	bool oldState = indexDisplay->blockSignals(true);
-	indexDisplay->setMinimum(1);
-	indexDisplay->setMaximum(indexedFiles.length());
-	indexDisplay->setValue(indexedFiles.indexOf(currentFilePath)+1);
-	indexDisplay->blockSignals(oldState);
+	setIndexDisplayNoSignals(indexedFiles.indexOf(currentFilePath)+1, indexedFiles.length());
 	ui.statusBar->clearMessage();
 	QApplication::restoreOverrideCursor();
+	statusBarIndex->setText(QString("%1/%2").arg(indexDisplay->value()).arg(dirCountDisplay->text()));
 }
 
 void MainWindow::loadCurrentFile()
@@ -1741,13 +1755,12 @@ void MainWindow::loadCurrentFile()
 		thumbnailDialog->selectItem(index);
 	}
 	showFileModificationTime();
-	bool oldState = indexDisplay->blockSignals(true);
-	indexDisplay->setValue(index+1);
-	indexDisplay->blockSignals(oldState);
+	setIndexDisplayNoSignals(index+1);
 	setInternalState(IMAGE_FROM_FILE);
 	updateDisplayOverlayIndicator();
 	currentImageName = currentFilePath;
 	clearUndoStack();
+	statusBarIndex->setText(QString("%1/%2").arg(indexDisplay->value()).arg(dirCountDisplay->text()));
 }
 
 void MainWindow::dragEnterEvent(QDragEnterEvent* event)
