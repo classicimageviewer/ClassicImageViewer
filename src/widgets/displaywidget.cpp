@@ -432,6 +432,7 @@ DisplaySurface::DisplaySurface(DisplayWidget * parent) : QGraphicsScene(parent)
 
 DisplaySurface::~DisplaySurface()
 {
+	parent->unsetCursor();
 	scrollTimer.stop();
 	delete canvas;
 	delete fastSelector;
@@ -532,6 +533,7 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 		mouseStartPoint = pos;
 		mouseEndPoint = pos;
 		mouseInteraction = DRAG;
+		parent->setCursor(Qt::ClosedHandCursor);
 	}
 	selectScrollX = selectScrollY = 0;
 	QGraphicsScene::mousePressEvent(event);
