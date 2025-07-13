@@ -294,6 +294,7 @@ void MainWindow::createMenu()
 	menuAddSeparator(ui.menuFile);
 	menuAddAction(ui.menuFile, tr("Sa&ve"), ACT_SAVE, "Ctrl+S",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuFile, tr("&Save as"), ACT_SAVE_AS, "S",  ACTDISABLE_UNLOADED);
+	menuAddAction(ui.menuFile, tr("Save selection as"), ACT_SAVE_SELECTION_AS, "Ctrl+Shift+S",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuFile, tr("&Print"), ACT_PRINT, "Ctrl+P",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuFile);
 	menuAddAction(ui.menuFile, tr("E&xit"), ACT_EXIT, "Esc",  0);
@@ -711,6 +712,7 @@ void MainWindow::actionSlot(Action a)
 			}
 			break;
 		case ACT_SAVE_AS:
+		case ACT_SAVE_SELECTION_AS:
 			{
 				SaveFileDialog::ReturnCluster cluster = fileDialogSave(QString(), currentImageName, true);
 				if (!cluster.filePath.isEmpty())
@@ -718,7 +720,16 @@ void MainWindow::actionSlot(Action a)
 					QFileInfo file(cluster.filePath);
 					Globals::prefs->setLastSaveAsDir(file.absolutePath());
 					QApplication::setOverrideCursor(Qt::WaitCursor);
-					bool success = imageIO->saveFile(cluster.filePath, cluster.selectedFormat, display->getImage(), cluster.parameters);
+					QImage image;
+					if (a == ACT_SAVE_SELECTION_AS)
+					{
+						image = display->getFromSelection();
+					}
+					else
+					{
+						image = display->getImage();
+					}
+					bool success = imageIO->saveFile(cluster.filePath, cluster.selectedFormat, image, cluster.parameters);
 					QApplication::restoreOverrideCursor();
 					if (!success)
 					{
