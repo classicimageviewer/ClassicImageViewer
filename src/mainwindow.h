@@ -67,7 +67,9 @@ private: // variables
 	QSpinBox * indexDisplay;
 	QLineEdit * dirCountDisplay;
 	QAction * undoAction;
+	QAction * redoAction;
 	QList<QImage> undoHistory;
+	int undoStackPosition;
 	int undoIndex;
 #if QT_VERSION < QT_VERSION_CHECK(5,15,0)
 	bool moveToTrashWithGIO;
@@ -113,6 +115,7 @@ private: // functions
 	void clearPastedUndoStack();
 	void saveToUndoStack();
 	void undoFromUndoStack();
+	void redoFromUndoStack();
 	void updateWindowTitle();
 	void deleteThumbnailDialog();
 	void showFileModificationTime();

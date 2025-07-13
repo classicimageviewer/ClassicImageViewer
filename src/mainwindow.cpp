@@ -301,6 +301,7 @@ void MainWindow::createMenu()
 	connect(ui.menuFile, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 
 	undoAction = menuAddAction(ui.menuEdit, tr("&Undo"), ACT_UNDO, "Ctrl+Z",  0);
+	redoAction = menuAddAction(ui.menuEdit, tr("R&edo"), ACT_REDO, "Ctrl+J",  0);
 	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("Cut &selection"), ACT_CUT_SELECTION, "Ctrl+X",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuEdit, tr("C&rop selection"), ACT_CROP_SELECTION, "Ctrl+Y",  ACTDISABLE_UNLOADED);
@@ -793,6 +794,9 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_UNDO:
 			undoFromUndoStack();
+			break;
+		case ACT_REDO:
+			redoFromUndoStack();
 			break;
 		case ACT_CUT_SELECTION:
 			if (!display->getSelection().isNull())
@@ -1532,6 +1536,7 @@ void MainWindow::setupToolBar()
 	ADD_ACTION(ACT_COPY, ":/icons/icons/copy.png");
 	ADD_ACTION(ACT_PASTE, ":/icons/icons/paste.png");
 	ADD_ACTION(ACT_UNDO, ":/icons/icons/undo.png");
+	ADD_ACTION(ACT_REDO, ":/icons/icons/redo.png");
 	ui.toolBar->addSeparator();
 	ADD_ACTION(ACT_INFO, ":/icons/icons/info.png");
 	ADD_ACTION(ACT_ZOOM_IN, ":/icons/icons/zoom-in.png");
@@ -2052,22 +2057,30 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::clearUndoStack()
 {
 	undoHistory = QList<QImage>();
+	undoStackPosition = 0;
 	undoIndex = 0;
 	undoAction->setEnabled(false);
+	redoAction->setEnabled(false);
 	updateWindowTitle();
 }
 
 void MainWindow::clearPastedUndoStack()
 {
 	undoHistory = QList<QImage>();
+	undoStackPosition = 0;
 	undoIndex = 1;
 	undoAction->setEnabled(false);
+	redoAction->setEnabled(false);
 	updateWindowTitle();
 }
 
 void MainWindow::saveToUndoStack()
 {
 	QImage i = display->getImage();
+	while (undoStackPosition < undoHistory.length())	// clear redo steps
+	{
+		undoHistory.removeLast();
+	}
 	undoHistory.append(i);
 	int minSteps = Globals::prefs->getUndoStackMinimumSteps();
 	long long int memLimit = Globals::prefs->getUndoStackMemoryLimit();
@@ -2084,22 +2097,48 @@ void MainWindow::saveToUndoStack()
 		undoHistory.removeFirst();
 	}
 	undoIndex += 1;
-	undoAction->setEnabled(undoHistory.length() > 0);
+	undoStackPosition = undoHistory.length();
+	undoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition > 0));
+	redoAction->setEnabled(false);
 	updateWindowTitle();
 }
 
 void MainWindow::undoFromUndoStack()
 {
-	if (undoHistory.length() > 0)
+	if ((undoHistory.length() > 0) && (undoStackPosition > 0))
 	{
-		QImage i = undoHistory.takeLast();
+		if (undoHistory.length() == undoStackPosition)	// first undo, save current image for redo
+		{
+			QImage i = display->getImage();
+			undoHistory.append(i);
+		}
+		undoStackPosition -= 1;
+		QImage i = undoHistory.at(undoStackPosition);
 		display->updateImage(i);
 		currentImageSize = i.size();
 		setImageSize();
 		setWindowSize();
 		undoIndex -= 1;
 	}
-	undoAction->setEnabled(undoHistory.length() > 0);
+	undoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition > 0));
+	redoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition < (undoHistory.length() - 1)));
+	updateWindowTitle();
+}
+
+void MainWindow::redoFromUndoStack()
+{
+	if ((undoHistory.length() > 0) && (undoStackPosition < (undoHistory.length() - 1)))
+	{
+		undoStackPosition += 1;
+		QImage i = undoHistory.at(undoStackPosition);
+		display->updateImage(i);
+		currentImageSize = i.size();
+		setImageSize();
+		setWindowSize();
+		undoIndex += 1;
+	}
+	undoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition > 0));
+	redoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition < (undoHistory.length() - 1)));
 	updateWindowTitle();
 }
 
