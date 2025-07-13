@@ -377,14 +377,15 @@ void MainWindow::createMenu()
 	connect(ui.menuHelp, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	//"hidden" shortucts
-	shortCutInfo.append(QKeySequence("Home").toString() + "&" + "First file in directory");
-	shortCutInfo.append(QKeySequence("End").toString() + "&" + "Last file in directory");
-	shortCutInfo.append(QKeySequence("Left").toString() + "&" + "Previous file in directory");
-	shortCutInfo.append(QKeySequence("Right").toString() + "&" + "Next file in directory");
-	shortCutInfo.append(QKeySequence("Up").toString() + "&" + "Previous file in directory");
-	shortCutInfo.append(QKeySequence("Down").toString() + "&" + "Next file in directory");
-	shortCutInfo.append(QKeySequence("PgUp").toString() + "&" + "Previous file in directory");
-	shortCutInfo.append(QKeySequence("PgDown").toString() + "&" + "Next file in directory");
+	shortCutInfo.append(QKeySequence("Home").toString() + "&" + tr("First file in directory"));
+	shortCutInfo.append(QKeySequence("End").toString() + "&" + tr("Last file in directory"));
+	shortCutInfo.append(QKeySequence("Left").toString() + "&" + tr("Previous file in directory"));
+	shortCutInfo.append(QKeySequence("Right").toString() + "&" + tr("Next file in directory"));
+	shortCutInfo.append(QKeySequence("Up").toString() + "&" + tr("Previous file in directory"));
+	shortCutInfo.append(QKeySequence("Down").toString() + "&" + tr("Next file in directory"));
+	shortCutInfo.append(QKeySequence("PgUp").toString() + "&" + tr("Previous file in directory"));
+	shortCutInfo.append(QKeySequence("PgDown").toString() + "&" + tr("Next file in directory"));
+	shortCutInfo.append(QKeySequence("Ctrl+A").toString() + "&" + tr("Toggle selection all"));
 }
 
 void MainWindow::setInternalState(InternalState newState)

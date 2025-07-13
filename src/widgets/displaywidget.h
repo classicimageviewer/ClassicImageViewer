@@ -125,6 +125,7 @@ public:
 	void enableSelection(bool enable);
 	QPoint getPixelInfoPos();
 	QPointF getMousePositionCorrection();
+	void toggleSelectionAll();
 signals:
 	void zoomChanged();
 	void selectionChanged();

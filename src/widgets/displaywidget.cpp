@@ -264,6 +264,13 @@ bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 				return true;
 			}
 		}
+		if ((keyEvent->modifiers() == Qt::ControlModifier) && (keyEvent->key() == Qt::Key_A))
+		{
+			if (surface)
+			{
+				surface->toggleSelectionAll();
+			}
+		}
 	}
 	return QObject::eventFilter(watched, event);
 }
@@ -908,6 +915,7 @@ void DisplaySurface::enableSelection(bool enable)
 	if (!selectionEnabled && selectionVisible)
 	{
 		selectionVisible = false;
+		selection = QRect();
 		redraw();
 	}
 	emit selectionChanged();
@@ -921,6 +929,22 @@ QPoint DisplaySurface::getPixelInfoPos()
 QPointF DisplaySurface::getMousePositionCorrection()
 {
 	return parent->getMousePositionCorrection();
+}
+
+void DisplaySurface::toggleSelectionAll()
+{
+	if (selectionEnabled)
+	{
+		if (selectionVisible)
+		{
+			changeSelection(QRect());
+		}
+		else
+		{
+			selectionVisible = true;
+			changeSelection(image.rect());
+		}
+	}
 }
 
 
