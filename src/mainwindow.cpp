@@ -278,6 +278,7 @@ void MainWindow::createMenu()
 {
 	menuAddAction(ui.menuFile, tr("&Open"), ACT_OPEN, "O",  ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuFile, tr("&Reload"), ACT_REOPEN, "Shift+R",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
+	menuAddAction(ui.menuFile, tr("Reopen in new app"), ACT_OPEN_IN_NEW_APP, "Ctrl+N",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	recentFilesMenu = new QMenu(tr("Recent &files"));
 	ui.menuFile->addMenu(recentFilesMenu);
 	updateRecentFilesMenu();
@@ -457,6 +458,18 @@ void MainWindow::actionSlot(Action a)
 					loadCurrentFile();
 					reIndexCurrentDir(true);
 				}
+			}
+			break;
+		case ACT_OPEN_IN_NEW_APP:
+			{
+				QProcess newProcess;
+				QStringList arguments;
+				arguments.append(currentDirPath + "/" + currentFilePath);
+				newProcess.setProgram(QCoreApplication::arguments().at(0));
+				newProcess.setArguments(arguments);
+				newProcess.setStandardErrorFile(QProcess::nullDevice());
+				newProcess.setStandardOutputFile(QProcess::nullDevice());
+				newProcess.startDetached();
 			}
 			break;
 		case ACT_RECENT_FILE_0:
