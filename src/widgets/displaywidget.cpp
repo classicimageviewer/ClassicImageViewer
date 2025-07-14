@@ -230,12 +230,12 @@ bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 		}
 		if (!verticalScrollBar()->isVisible())
 		{
-			if ((keyEvent->key() == Qt::Key_Down) || (keyEvent->key() == Qt::Key_PageDown))
+			if (((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_Down)) || (keyEvent->key() == Qt::Key_PageDown))
 			{
 				emit needNextImage();
 				return true;
 			}
-			if ((keyEvent->key() == Qt::Key_Up) || (keyEvent->key() == Qt::Key_PageUp))
+			if (((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_Up)) || (keyEvent->key() == Qt::Key_PageUp))
 			{
 				emit needPrevImage();
 				return true;
@@ -253,12 +253,12 @@ bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 		}
 		if (!horizontalScrollBar()->isVisible())
 		{
-			if (keyEvent->key() == Qt::Key_Right)
+			if ((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_Right))
 			{
 				emit needNextImage();
 				return true;
 			}
-			if (keyEvent->key() == Qt::Key_Left)
+			if ((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_Left))
 			{
 				emit needPrevImage();
 				return true;
@@ -269,6 +269,86 @@ bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 			if (surface)
 			{
 				surface->toggleSelectionAll();
+				return true;
+			}
+		}
+		
+		if (keyEvent->modifiers() == Qt::ShiftModifier)
+		{
+			if (surface)
+			{
+				if (keyEvent->key() == Qt::Key_Left)
+				{
+					surface->adjustSelection(-1, 0, -1, 0);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Up)
+				{
+					surface->adjustSelection(0, -1, 0, -1);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Right)
+				{
+					surface->adjustSelection(1, 0, 1, 0);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Down)
+				{
+					surface->adjustSelection(0, 1, 0, 1);
+					return true;
+				}
+			}
+		}
+		if (keyEvent->modifiers() == Qt::ControlModifier)
+		{
+			if (surface)
+			{
+				if (keyEvent->key() == Qt::Key_Left)
+				{
+					surface->adjustSelection(-1, 0, 0, 0);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Up)
+				{
+					surface->adjustSelection(0, -1, 0, 0);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Right)
+				{
+					surface->adjustSelection(1, 0, 0, 0);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Down)
+				{
+					surface->adjustSelection(0, 1, 0, 0);
+					return true;
+				}
+			}
+		}
+		if (keyEvent->modifiers() == Qt::AltModifier)
+		{
+			if (surface)
+			{
+				if (keyEvent->key() == Qt::Key_Left)
+				{
+					surface->adjustSelection(0, 0, -1, 0);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Up)
+				{
+					surface->adjustSelection(0, 0, 0, -1);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Right)
+				{
+					surface->adjustSelection(0, 0, 1, 0);
+					return true;
+				}
+				if (keyEvent->key() == Qt::Key_Down)
+				{
+					surface->adjustSelection(0, 0, 0, 1);
+					return true;
+				}
 			}
 		}
 	}
@@ -947,6 +1027,17 @@ void DisplaySurface::toggleSelectionAll()
 	}
 }
 
+void DisplaySurface::adjustSelection(int vTL, int hTL, int vBR, int hBR)
+{
+	if (selectionEnabled && selectionVisible)
+	{
+		QRect newSelection = selection.adjusted(vTL, hTL, vBR, hBR);
+		if (imageRect.contains(newSelection))
+		{
+			changeSelection(newSelection);
+		}
+	}
+}
 
 
 
