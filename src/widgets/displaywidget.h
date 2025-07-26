@@ -96,6 +96,7 @@ private: // variables
 	bool selectionEnabled;
 	bool selectionVisible;
 	bool selectionAgain;
+	double originalAspectRatio = 1.0;
 	QRect selection;
 	MouseInteractionMode mouseInteraction;
 	QPoint mouseStartPoint, mouseEndPoint;

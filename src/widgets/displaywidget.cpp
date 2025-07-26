@@ -628,15 +628,13 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
-	if((event->buttons() & Qt::LeftButton) || (event->buttons() & Qt::RightButton))
-	{
+	if((event->buttons() & Qt::LeftButton) || (event->buttons() & Qt::RightButton)) {
 		int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().x();
 		int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().y();
 		QPoint pos = QPoint(x, y);
 		mouseEndPoint = pos;
 		QRect selectionCopy = selection;
-		if (mouseInteraction == DRAG)
-		{
+		if (mouseInteraction == DRAG) {
 			mouseEndPoint = parent->mapFromScene(event->scenePos());
 			QPoint delta = mouseEndPoint - mouseStartPoint;
 			mouseStartPoint = mouseEndPoint;
@@ -683,6 +681,61 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 				selectionCopy = selectionCopyForMove;
 				selectionCopy.moveCenter(mouseEndPoint);
 			}
+			if (event->modifiers() & Qt::ControlModifier) {
+				QRect norm = selectionCopy.normalized();
+				int w = norm.width();
+				int h = norm.height();
+
+				if (h == 0 || originalAspectRatio <= 0) {
+					changeSelection(selectionCopy);
+					return;
+				}
+
+				double targetH = w / originalAspectRatio;
+				double targetW = h * originalAspectRatio;
+
+				switch (mouseInteraction) {
+					case RESIZE_TL:
+					case RESIZE_TR:
+					case RESIZE_BR:
+					case RESIZE_BL:
+					if (fabs(targetH - h) < fabs(targetW - w)) {
+						if (mouseInteraction == RESIZE_TL || mouseInteraction == RESIZE_TR)
+							selectionCopy.setTop(selectionCopy.bottom() - targetH);
+						else selectionCopy.setBottom(selectionCopy.top() + targetH);
+					} else {
+						if (mouseInteraction == RESIZE_TL || mouseInteraction == RESIZE_BL)
+							selectionCopy.setLeft(selectionCopy.right() - targetW);
+						else selectionCopy.setRight(selectionCopy.left() + targetW);
+					}
+					break;
+
+					case RESIZE_T:
+					case RESIZE_B: {
+						QRect norm = selectionCopy.normalized();
+						int newH = norm.height();
+						int newW = static_cast<int>(newH * originalAspectRatio);
+						int centerX = norm.center().x();
+						selectionCopy.setLeft(centerX - newW/2);
+						selectionCopy.setRight(centerX + newW/2);
+						break;
+					}
+
+					case RESIZE_L:
+					case RESIZE_R: {
+						QRect norm = selectionCopy.normalized();
+						int newW = norm.width();
+						int newH = static_cast<int>(newW / originalAspectRatio);
+						int centerY = norm.center().y();
+						selectionCopy.setTop(centerY - newH/2);
+						selectionCopy.setBottom(centerY + newH/2);
+						break;
+					}
+
+					default:
+					break;
+				}
+			}
 			changeSelection(selectionCopy);
 		}
 	}
@@ -706,6 +759,11 @@ void DisplaySurface::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		else
 		{
 			changeSelection(finalSelection);
+			if (selection.height() != 0) {
+				originalAspectRatio = static_cast<double>(selection.width()) / selection.height();
+			} else {
+				originalAspectRatio = 1.0;
+			}
 		}
 	} else
 	if (mouseInteraction >= RESIZE)
@@ -718,6 +776,11 @@ void DisplaySurface::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 		else
 		{
 			changeSelection(finalSelection);
+			if (selection.height() != 0) {
+				originalAspectRatio = static_cast<double>(selection.width()) / selection.height();
+			} else {
+				originalAspectRatio = 1.0;
+			}
 		}
 	}
 	parent->unsetCursor();
