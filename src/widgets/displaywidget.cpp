@@ -551,52 +551,30 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	mouseInteraction = NONE;
 	if(event->button() == Qt::LeftButton)
 	{
-		if (selectionEnabled)
-		{
+		if (selectionEnabled) {
 			int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().x();
 			int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().y();
 			QPoint pos = QPoint(x, y);
 			mouseStartPoint = pos;
 			mouseEndPoint = pos;
 			mouseInteraction = SELECT;
-			if (selectionVisible)
-			{
-				if (sensorTL.contains(pos))
-				{
+			if (selectionVisible) {
+				if (sensorTL.contains(pos)) {
 					mouseInteraction = RESIZE_TL;
-				} else
-				if (sensorTR.contains(pos))
-				{
+				} else if (sensorTR.contains(pos)) {
 					mouseInteraction = RESIZE_TR;
-				} else
-				if (sensorBR.contains(pos))
-				{
+				} else if (sensorBR.contains(pos)) {
 					mouseInteraction = RESIZE_BR;
-				} else
-				if (sensorBL.contains(pos))
-				{
+				} else if (sensorBL.contains(pos)) {
 					mouseInteraction = RESIZE_BL;
 				} else
-				if (sensorT.contains(pos))
-				{
-					mouseInteraction = RESIZE_T;
-				} else
-				if (sensorR.contains(pos))
-				{
+				if (sensorT.contains(pos)) { mouseInteraction = RESIZE_T;
+				} else if (sensorR.contains(pos)) {
 					mouseInteraction = RESIZE_R;
-				} else
-				if (sensorB.contains(pos))
-				{
+				} else if (sensorB.contains(pos)) {
 					mouseInteraction = RESIZE_B;
-				} else
-				if (sensorL.contains(pos))
-				{
+				} else if (sensorL.contains(pos)) {
 					mouseInteraction = RESIZE_L;
-				} else
-				if (sensorC.contains(pos))
-				{
-					mouseInteraction = MOVE;
-					selectionCopyForMove = selection;
 				}
 			}
 			selectionAgain = (mouseInteraction == SELECT) && selectionVisible;
@@ -613,14 +591,23 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 			}
 		}
 	}
-	else
-	if(event->button() == Qt::RightButton)
-	{
-		QPoint pos = parent->mapFromScene(event->scenePos());
-		mouseStartPoint = pos;
-		mouseEndPoint = pos;
-		mouseInteraction = DRAG;
-		parent->setCursor(Qt::ClosedHandCursor);
+	else if (event->button() == Qt::RightButton) {
+    int x = event->scenePos().x()*Globals::scalingFactor + 0.4999999 + getMousePositionCorrection().x();
+    int y = event->scenePos().y()*Globals::scalingFactor + 0.4999999 + getMousePositionCorrection().y();
+    QPoint pos(x, y);
+
+    if (selectionVisible && selection.contains(pos)) {
+        mouseInteraction = MOVE;
+        selectionCopyForMove = selection;
+        mouseStartPoint = pos;
+        parent->setCursor(Qt::ClosedHandCursor);
+    } else {
+        QPoint scrollPos = parent->mapFromScene(event->scenePos());
+        mouseStartPoint = scrollPos;
+        mouseEndPoint = scrollPos;
+        mouseInteraction = DRAG;
+        parent->setCursor(Qt::ClosedHandCursor);
+    }
 	}
 	selectScrollX = selectScrollY = 0;
 	QGraphicsScene::mousePressEvent(event);
@@ -640,9 +627,7 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 			mouseStartPoint = mouseEndPoint;
 			parent->horizontalScrollBar()->setValue(parent->horizontalScrollBar()->value() - delta.x());
 			parent->verticalScrollBar()->setValue(parent->verticalScrollBar()->value() - delta.y());
-		} else
-		if (mouseInteraction == SELECT)
-		{
+		} else if (mouseInteraction == SELECT) {
 			changeSelection(QRect(mouseStartPoint, mouseEndPoint));
 			
 			selectScrollX = selectScrollY = 0;
@@ -660,11 +645,28 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 			else if(parent->height()-cursorPos.y() < scrollCaptureRange) {
 				selectScrollY = cursorPos.y() - parent->height() + scrollCaptureRange;
 			}
-		} else
-		if (mouseInteraction >= RESIZE)
-		{
-			switch(mouseInteraction)
-			{
+		} else if (mouseInteraction == MOVE) {
+			int x = event->scenePos().x()*Globals::scalingFactor + 0.4999999 + getMousePositionCorrection().x();
+    	int y = event->scenePos().y()*Globals::scalingFactor + 0.4999999 + getMousePositionCorrection().y();
+    	QPoint pos(x, y);
+    	QPoint delta = pos - mouseStartPoint;
+
+    	QRect moved = selectionCopyForMove.translated(delta);
+
+    	QRect imgRect = image.rect();
+
+    	if (moved.left() < imgRect.left())
+        	moved.moveLeft(imgRect.left());
+    	if (moved.top() < imgRect.top())
+        	moved.moveTop(imgRect.top());
+    	if (moved.right() > imgRect.right())
+        	moved.moveRight(imgRect.right());
+    	if (moved.bottom() > imgRect.bottom())
+        	moved.moveBottom(imgRect.bottom());
+
+    	changeSelection(moved);
+		} else if (mouseInteraction >= RESIZE) {
+			switch(mouseInteraction) {
 				case RESIZE_TL: selectionCopy.setTopLeft(mouseEndPoint);     break;
 				case RESIZE_T : selectionCopy.setTop(mouseEndPoint.y());     break;
 				case RESIZE_TR: selectionCopy.setTopRight(mouseEndPoint);    break;
@@ -673,13 +675,7 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 				case RESIZE_B : selectionCopy.setBottom(mouseEndPoint.y());  break;
 				case RESIZE_BL: selectionCopy.setBottomLeft(mouseEndPoint);  break;
 				case RESIZE_L : selectionCopy.setLeft(mouseEndPoint.x());    break;
-				//case MOVE:      selectionCopy.moveCenter(mouseEndPoint);     break;
 				default: break;
-			}
-			if (mouseInteraction == MOVE)
-			{
-				selectionCopy = selectionCopyForMove;
-				selectionCopy.moveCenter(mouseEndPoint);
 			}
 			if (event->modifiers() & Qt::ControlModifier) {
 				QRect norm = selectionCopy.normalized();
