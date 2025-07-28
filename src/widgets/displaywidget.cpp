@@ -549,13 +549,12 @@ void DisplaySurface::onScrollTimeout()
 void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	mouseInteraction = NONE;
+	mouseOffset = QPoint();
 	if(event->button() == Qt::LeftButton)
 	{
 		if (selectionEnabled)
 		{
-			int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().x();
-			int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().y();
-			QPoint pos = QPoint(x, y);
+			QPoint pos = mousePositionInImage(event);
 			mouseStartPoint = pos;
 			mouseEndPoint = pos;
 			mouseInteraction = SELECT;
@@ -597,6 +596,15 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 				{
 					mouseInteraction = MOVE;
 					selectionCopyForMove = selection;
+					mouseOffset = pos - selection.center();
+				}
+				if (selection.height() > 0)
+				{
+					selectionAspectRatio = static_cast<double>(selection.width()) / selection.height();
+				}
+				else
+				{
+					selectionAspectRatio = 0.0;
 				}
 			}
 			selectionAgain = (mouseInteraction == SELECT) && selectionVisible;
@@ -616,11 +624,33 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	else
 	if(event->button() == Qt::RightButton)
 	{
-		QPoint pos = parent->mapFromScene(event->scenePos());
-		mouseStartPoint = pos;
-		mouseEndPoint = pos;
-		mouseInteraction = DRAG;
-		parent->setCursor(Qt::ClosedHandCursor);
+		QPoint pos = mousePositionInImage(event);
+		bool moveSelection = selectionEnabled && selectionVisible && selection.contains(pos);
+		if (moveSelection)
+		{
+			// check the selection is visible in the viewport
+			QRectF visibleRectInSurface = parent->mapToScene(parent->viewport()->rect()).boundingRect() ;
+			QRectF scaledSelection = QRectF(selection.x() / Globals::scalingFactor, selection.y() / Globals::scalingFactor, selection.width() / Globals::scalingFactor, selection.height() / Globals::scalingFactor);
+			moveSelection = visibleRectInSurface.contains(scaledSelection);
+		}
+		if (moveSelection)
+		{
+			mouseStartPoint = pos;
+			mouseEndPoint = pos;
+			mouseOffset = pos - selection.center();
+			mouseInteraction = MOVE;
+			selectionCopyForMove = selection;
+			selectionAgain = false;
+			parent->setCursor(Qt::ClosedHandCursor);
+		}
+		else
+		{
+			QPoint pos = parent->mapFromScene(event->scenePos());
+			mouseStartPoint = pos;
+			mouseEndPoint = pos;
+			mouseInteraction = DRAG;
+			parent->setCursor(Qt::ClosedHandCursor);
+		}
 	}
 	selectScrollX = selectScrollY = 0;
 	QGraphicsScene::mousePressEvent(event);
@@ -630,10 +660,8 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
 	if((event->buttons() & Qt::LeftButton) || (event->buttons() & Qt::RightButton))
 	{
-		int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().x();
-		int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().y();
-		QPoint pos = QPoint(x, y);
-		mouseEndPoint = pos;
+		QPoint pos = mousePositionInImage(event);
+		mouseEndPoint = pos - mouseOffset;
 		QRect selectionCopy = selection;
 		if (mouseInteraction == DRAG)
 		{
@@ -663,6 +691,29 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 				selectScrollY = cursorPos.y() - parent->height() + scrollCaptureRange;
 			}
 		} else
+		if (mouseInteraction == MOVE)
+		{
+			selectionCopy = selectionCopyForMove;
+			selectionCopy.moveCenter(mouseEndPoint);
+			QRect imageRect = image.rect();
+			if (!imageRect.contains(selectionCopy))	// limit the move within the boundaries of the image
+			{
+				int boundedX = selectionCopy.x();
+				int boundedY = selectionCopy.y();
+				if (boundedX < 0) boundedX = 0;
+				if (boundedY < 0) boundedY = 0;
+				if ((imageRect.width() - selectionCopy.width()) < boundedX)
+				{
+					boundedX = (imageRect.width() - selectionCopy.width());
+				}
+				if ((imageRect.height() - selectionCopy.height()) < boundedY)
+				{
+					boundedY = (imageRect.height() - selectionCopy.height());
+				}
+				selectionCopy.moveTo(QPoint(boundedX, boundedY));
+			}
+			changeSelection(selectionCopy);
+		} else
 		if (mouseInteraction >= RESIZE)
 		{
 			switch(mouseInteraction)
@@ -675,14 +726,74 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 				case RESIZE_B : selectionCopy.setBottom(mouseEndPoint.y());  break;
 				case RESIZE_BL: selectionCopy.setBottomLeft(mouseEndPoint);  break;
 				case RESIZE_L : selectionCopy.setLeft(mouseEndPoint.x());    break;
-				//case MOVE:      selectionCopy.moveCenter(mouseEndPoint);     break;
 				default: break;
 			}
-			if (mouseInteraction == MOVE)
+			
+			if ((event->modifiers() == Qt::ControlModifier) && (selectionAspectRatio > 0.0))
 			{
-				selectionCopy = selectionCopyForMove;
-				selectionCopy.moveCenter(mouseEndPoint);
+				QRect normalizedSelection = image.rect().intersected(selectionCopy).normalized();
+				int w = normalizedSelection.width();
+				int h = normalizedSelection.height();
+				
+				if ((h > 0) && (w > 0))
+				{
+					switch (mouseInteraction)
+					{
+						case RESIZE_TL:
+						case RESIZE_TR:
+						case RESIZE_BR:
+						case RESIZE_BL:
+							{
+								double targetH = w / selectionAspectRatio;
+								double targetW = h * selectionAspectRatio;
+								if (std::abs(targetH - h) < std::abs(targetW - w))
+								{
+									if ((mouseInteraction == RESIZE_TL) || (mouseInteraction == RESIZE_TR))
+									{
+										selectionCopy.setTop(selectionCopy.bottom() - targetH);
+									}
+									else
+									{
+										selectionCopy.setBottom(selectionCopy.top() + targetH);
+									}
+								} else {
+									if ((mouseInteraction == RESIZE_TL) || (mouseInteraction == RESIZE_BL))
+									{
+										selectionCopy.setLeft(selectionCopy.right() - targetW);
+									}
+									else
+									{
+										selectionCopy.setRight(selectionCopy.left() + targetW);
+									}
+								}
+							}
+							break;
+						case RESIZE_T:
+						case RESIZE_B:
+							{
+								int newH = h;
+								int newW = static_cast<int>(newH * selectionAspectRatio);
+								int centerX = normalizedSelection.center().x();
+								selectionCopy.setLeft(centerX - newW/2);
+								selectionCopy.setRight(centerX + newW/2);
+							}
+							break;
+						case RESIZE_L:
+						case RESIZE_R:
+							{
+								int newW = w;
+								int newH = static_cast<int>(newW / selectionAspectRatio);
+								int centerY = normalizedSelection.center().y();
+								selectionCopy.setTop(centerY - newH/2);
+								selectionCopy.setBottom(centerY + newH/2);
+							}
+							break;
+						default:
+							break;
+					}
+				}
 			}
+			
 			changeSelection(selectionCopy);
 		}
 	}
@@ -847,6 +958,12 @@ void DisplaySurface::changeSelection(QRect selection)
 	emit selectionChanged();
 }
 
+QPoint DisplaySurface::mousePositionInImage(QGraphicsSceneMouseEvent *event)
+{
+	int x = event->scenePos().x()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().x();
+	int y = event->scenePos().y()*Globals::scalingFactor+0.4999999 + getMousePositionCorrection().y();
+	return QPoint(x, y);
+}
 
 void DisplaySurface::setImage(const QImage &image)
 {

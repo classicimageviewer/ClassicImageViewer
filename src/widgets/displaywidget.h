@@ -96,9 +96,10 @@ private: // variables
 	bool selectionEnabled;
 	bool selectionVisible;
 	bool selectionAgain;
+	double selectionAspectRatio;
 	QRect selection;
 	MouseInteractionMode mouseInteraction;
-	QPoint mouseStartPoint, mouseEndPoint;
+	QPoint mouseStartPoint, mouseEndPoint, mouseOffset;
 	QRect sensorC, sensorTL, sensorT, sensorTR, sensorR, sensorBR, sensorB, sensorBL, sensorL;
 	QRect selectionCopyForMove;
 	int selectScrollX, selectScrollY;
@@ -109,6 +110,7 @@ private: // functions
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseReleaseEvent(QGraphicsSceneMouseEvent *event) override;
 	void changeSelection(QRect selection);
+	QPoint mousePositionInImage(QGraphicsSceneMouseEvent *event);
 private slots:
 	void onScrollTimeout();
 public:
