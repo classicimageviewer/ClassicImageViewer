@@ -62,6 +62,7 @@
 #include "dialogs/effectsdialog.h"
 #include "dialogs/shortcutsdialog.h"
 #include "dialogs/pastetosidedialog.h"
+#include "dialogs/customselectiondialog.h"
 #include "dialogs/batchdialog.h"
 
 #include "modules/resizer.h"
@@ -304,6 +305,7 @@ void MainWindow::createMenu()
 	undoAction = menuAddAction(ui.menuEdit, tr("&Undo"), ACT_UNDO, "Ctrl+Z",  0);
 	redoAction = menuAddAction(ui.menuEdit, tr("R&edo"), ACT_REDO, "Ctrl+J",  0);
 	menuAddSeparator(ui.menuEdit);
+	menuAddAction(ui.menuEdit, tr("Cust&om selection"), ACT_CUSTOM_SELECTION, "Shift+C",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuEdit, tr("Cut &selection"), ACT_CUT_SELECTION, "Ctrl+X",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuEdit, tr("C&rop selection"), ACT_CROP_SELECTION, "Ctrl+Y",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuEdit);
@@ -816,6 +818,18 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_REDO:
 			redoFromUndoStack();
+			break;
+		case ACT_CUSTOM_SELECTION:
+			{
+				CustomSelectionDialog * d = new CustomSelectionDialog(display->getImageSize(), display->getSelection());
+				if (d->exec() == QDialog::Accepted)
+				{
+					d->savePreferences();
+					QRect newSelection = d->getSelection();
+					display->setSelection(newSelection);
+				}
+				delete d;
+			}
 			break;
 		case ACT_CUT_SELECTION:
 			if (!display->getSelection().isNull())

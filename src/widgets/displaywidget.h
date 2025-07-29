@@ -122,6 +122,7 @@ public:
 	void setImage(const QImage &image);
 	void redraw();
 	QRect getSelection();
+	void setSelection(QRect newSelection);
 	void setZoom(double zoom);
 	double getZoom();
 	void enableSelection(bool enable);
@@ -171,6 +172,7 @@ public:
 	QImage getImage();
 	QImage getFromSelection();
 	QRect getSelection();
+	void setSelection(QRect newSelection);
 	QSize getViewportSize();
 	void enableSelection(bool enable);
 	void setZoom(double zoom);

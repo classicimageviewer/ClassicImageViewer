@@ -142,6 +142,12 @@ QRect DisplayWidget::getSelection()
 	return surface->getSelection();
 }
 
+void DisplayWidget::setSelection(QRect newSelection)
+{
+	if (!surface) return;
+	surface->setSelection(newSelection);
+}
+
 QSize DisplayWidget::getViewportSize()
 {
 	return (viewport()->size() * Globals::scalingFactor);
@@ -1085,6 +1091,13 @@ QRect DisplaySurface::getSelection()
 {
 	if (!selectionEnabled) return QRect();
 	return selection;
+}
+
+void DisplaySurface::setSelection(QRect newSelection)
+{
+	if (!selectionEnabled) return;
+	selectionVisible = true;
+	changeSelection(newSelection);
 }
 
 void DisplaySurface::setZoom(double zoom)
