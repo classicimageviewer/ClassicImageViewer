@@ -84,7 +84,6 @@ MainWindow::MainWindow() : QMainWindow()
 	currentDirPath = QString();
 	indexedDirPath = QString();
 	indexedFiles = QStringList();
-	indexedDir = QFileInfoList();
 	isFullscreen = false;
 	display = ui.displayWidget;
 	display->setBackgroundShade(Globals::prefs->getDisplayBackground());
@@ -607,7 +606,6 @@ void MainWindow::actionSlot(Action a)
 					{
 						int index = indexedFiles.indexOf(currentFilePath);
 						indexedFiles.removeAt(index);
-						indexedDir.removeAt(index);
 						if (indexedFiles.length() == 0) //deleted the last file
 						{
 							sendAction(ACT_UNLOAD);
@@ -620,8 +618,8 @@ void MainWindow::actionSlot(Action a)
 							{
 								thumbnailDialog->updateFileList(indexedDirPath, indexedFiles);
 							}
-							dirCountDisplay->setText(QString("%1").arg(indexedDir.length()));
-							setIndexDisplayNoSignals(index+1, indexedDir.length());
+							dirCountDisplay->setText(QString("%1").arg(indexedFiles.length()));
+							setIndexDisplayNoSignals(index+1, indexedFiles.length());
 							loadCurrentFile();
 						}
 					}
@@ -698,7 +696,6 @@ void MainWindow::actionSlot(Action a)
 				if (deleted)
 				{
 					indexedFiles.removeAt(index);
-					indexedDir.removeAt(index);
 					if (indexedFiles.length() == 0) //deleted the last file
 					{
 						sendAction(ACT_UNLOAD);
@@ -711,8 +708,8 @@ void MainWindow::actionSlot(Action a)
 						{
 							thumbnailDialog->updateFileList(indexedDirPath, indexedFiles);
 						}
-						dirCountDisplay->setText(QString("%1").arg(indexedDir.length()));
-						setIndexDisplayNoSignals(index+1, indexedDir.length());
+						dirCountDisplay->setText(QString("%1").arg(indexedFiles.length()));
+						setIndexDisplayNoSignals(index+1, indexedFiles.length());
 						loadCurrentFile();
 					}
 				}
@@ -976,7 +973,6 @@ void MainWindow::actionSlot(Action a)
 			currentDirPath = QString();
 			indexedDirPath = QString();
 			indexedFiles = QStringList();
-			indexedDir = QFileInfoList();
 			zoomDisplay->setText("");
 			indexDisplay->setMinimum(1);
 			indexDisplay->setMaximum(1);
@@ -1741,7 +1737,7 @@ QStringList MainWindow::fastIndexer(QString dirPath, QStringList extensions, int
 
 void MainWindow::reIndexCurrentDir(bool forced)
 {
-	if ((!forced) && (indexedDir.length() > 0) && (indexedDirPath == currentDirPath)) return; // already indexed
+	if ((!forced) && (indexedFiles.length() > 0) && (indexedDirPath == currentDirPath)) return; // already indexed
 	QApplication::setOverrideCursor(Qt::WaitCursor);
 	ui.statusBar->showMessage(tr("Indexing the current directory..."));
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
@@ -1803,7 +1799,7 @@ void MainWindow::loadCurrentFile()
 	{
 		thumbnailDialog->selectItem(index);
 	}
-	showFileModificationTime();
+	showFileModificationTime(currentDirPath + "/" + currentFilePath);
 	setIndexDisplayNoSignals(index+1);
 	setInternalState(IMAGE_FROM_FILE);
 	updateDisplayOverlayIndicator();
@@ -2189,25 +2185,11 @@ void MainWindow::updateWindowTitle()
 	setWindowTitle(title);
 }
 
-void MainWindow::showFileModificationTime()
+void MainWindow::showFileModificationTime(QString fullPath)
 {
-	if (indexedDir.length() > 0)
-	{
-		int index = indexedFiles.indexOf(currentFilePath);
-		if (index >= 0)
-		{
-			statusBarLastModified->setText(indexedDir.at(index).lastModified().toString(QString(tr("yyyy.MM.dd. hh:mm:ss"))));
-		}
-		else
-		{
-			clearFileModificationTime();
-		}
-	}
-	else
-	{
-		QFileInfo file(currentDirPath + "/" + currentFilePath);
-		statusBarLastModified->setText(file.lastModified().toString(QString(tr("yyyy.MM.dd. hh:mm:ss"))));
-	}
+	QFileInfo file(fullPath);
+	QLocale locale;
+	statusBarLastModified->setText(locale.toString(file.lastModified(), QLocale::ShortFormat));
 }
 
 void MainWindow::clearFileModificationTime()

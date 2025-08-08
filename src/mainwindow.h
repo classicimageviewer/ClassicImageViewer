@@ -18,7 +18,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QFileInfoList>
 #include <QLineEdit>
 #include <QLabel>
 #include <QSpinBox>
@@ -58,7 +57,6 @@ private: // variables
 	int currentFileIndex;
 	QString indexedDirPath;
 	QStringList indexedFiles;
-	QFileInfoList indexedDir;
 	DisplayWidget * display;
 	QLabel * displayOverlayIndicator;
 	double fullscreenZoomBefore;
@@ -118,7 +116,7 @@ private: // functions
 	void redoFromUndoStack();
 	void updateWindowTitle();
 	void deleteThumbnailDialog();
-	void showFileModificationTime();
+	void showFileModificationTime(QString fullPath);
 	void clearFileModificationTime();
 	void addPathToRecentFiles(QString path);
 	void updateRecentFilesMenu();
