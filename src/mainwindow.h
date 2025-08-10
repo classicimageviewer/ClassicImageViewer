@@ -48,6 +48,7 @@ private: // variables
 	std::vector<ActionLookUp_t> ActionLookUpTable;
 	InternalState internalState;
 	QMenu * recentFilesMenu;
+	QMenu * externalToolsMenu;
 	QMenu * zoomLevelMenu;
 	int actionLock;
 	ImageIO * imageIO;

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ExtToolConfigDialog</class>
+ <widget class="QDialog" name="ExtToolConfigDialog">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>404</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>External tools config</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="8" column="2">
+        <widget class="QLineEdit" name="lineEditScript8"/>
+       </item>
+       <item row="6" column="2">
+        <widget class="QLineEdit" name="lineEditScript6"/>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLineEdit" name="lineEditShell8">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="lineEditScript1"/>
+       </item>
+       <item row="7" column="2">
+        <widget class="QLineEdit" name="lineEditScript7"/>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="lineEditScript2"/>
+       </item>
+       <item row="5" column="2">
+        <widget class="QLineEdit" name="lineEditScript5"/>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLineEdit" name="lineEditShell9">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLineEdit" name="lineEditShell2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="lineEditShell1">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLineEdit" name="lineEditShell4">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="lineEditScript3"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="labelPath">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Full path of the script </string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="lineEditScript4"/>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLineEdit" name="lineEditShell3">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLineEdit" name="lineEditShell6">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="2">
+        <widget class="QLineEdit" name="lineEditScript9"/>
+       </item>
+       <item row="10" column="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLineEdit" name="lineEditShell5">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLineEdit" name="lineEditShell7">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelShell">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Shell</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="labelType">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>File type</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QComboBox" name="comboBox1">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="comboBox2">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QComboBox" name="comboBox3">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QComboBox" name="comboBox4">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QComboBox" name="comboBox5">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="comboBox6">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QComboBox" name="comboBox7">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QComboBox" name="comboBox8">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="9" column="1">
+        <widget class="QComboBox" name="comboBox9">
+         <item>
+          <property name="text">
+           <string>BMP</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>JPG</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PNG</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>lineEditShell1</tabstop>
+  <tabstop>comboBox1</tabstop>
+  <tabstop>lineEditScript1</tabstop>
+  <tabstop>lineEditShell2</tabstop>
+  <tabstop>comboBox2</tabstop>
+  <tabstop>lineEditScript2</tabstop>
+  <tabstop>lineEditShell3</tabstop>
+  <tabstop>comboBox3</tabstop>
+  <tabstop>lineEditScript3</tabstop>
+  <tabstop>lineEditShell4</tabstop>
+  <tabstop>comboBox4</tabstop>
+  <tabstop>lineEditScript4</tabstop>
+  <tabstop>lineEditShell5</tabstop>
+  <tabstop>comboBox5</tabstop>
+  <tabstop>lineEditScript5</tabstop>
+  <tabstop>lineEditShell6</tabstop>
+  <tabstop>comboBox6</tabstop>
+  <tabstop>lineEditScript6</tabstop>
+  <tabstop>lineEditShell7</tabstop>
+  <tabstop>comboBox7</tabstop>
+  <tabstop>lineEditScript7</tabstop>
+  <tabstop>lineEditShell8</tabstop>
+  <tabstop>comboBox8</tabstop>
+  <tabstop>lineEditScript8</tabstop>
+  <tabstop>lineEditShell9</tabstop>
+  <tabstop>comboBox9</tabstop>
+  <tabstop>lineEditScript9</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ExtToolConfigDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ExtToolConfigDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -64,6 +64,7 @@
 #include "dialogs/pastetosidedialog.h"
 #include "dialogs/customselectiondialog.h"
 #include "dialogs/batchdialog.h"
+#include "dialogs/exttoolconfigdialog.h"
 
 #include "modules/resizer.h"
 #include "modules/autocolor.h"
@@ -335,6 +336,19 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuImage, tr("Auto c&olor adjust"), ACT_AUTO_COLOR, "Shift+U",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuImage, tr("Sh&arpen"), ACT_SHARPEN, "Shift+S",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuImage, tr("&Effects"), ACT_EFFECTS, "Ctrl+E",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddSeparator(ui.menuImage);
+	externalToolsMenu = ui.menuImage->addMenu(tr("E&xternal tools"));
+	menuAddAction(externalToolsMenu, tr("Configure"), ACT_EXTERNAL_TOOL_CONFIG, NULL,  0);
+	menuAddSeparator(externalToolsMenu);
+	menuAddAction(externalToolsMenu, tr("External tool 1"), ACT_EXTERNAL_TOOL_1, "Alt+1",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 2"), ACT_EXTERNAL_TOOL_2, "Alt+2",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 3"), ACT_EXTERNAL_TOOL_3, "Alt+3",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 4"), ACT_EXTERNAL_TOOL_4, "Alt+4",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 5"), ACT_EXTERNAL_TOOL_5, "Alt+5",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 6"), ACT_EXTERNAL_TOOL_6, "Alt+6",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 7"), ACT_EXTERNAL_TOOL_7, "Alt+7",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 8"), ACT_EXTERNAL_TOOL_8, "Alt+8",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 9"), ACT_EXTERNAL_TOOL_9, "Alt+9",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	connect(ui.menuImage, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	menuAddAction(ui.menuOptions, tr("&Properties"), ACT_SETTINGS, "P",  0);
@@ -1129,6 +1143,137 @@ void MainWindow::actionSlot(Action a)
 					}
 				}
 				delete d;
+			}
+			break;
+		case ACT_EXTERNAL_TOOL_CONFIG:
+			{
+				ExtToolConfigDialog * d = new ExtToolConfigDialog();
+				if (d->exec() == QDialog::Accepted)
+				{
+					d->savePreferences();
+				}
+				delete d;
+			}
+			break;
+		case ACT_EXTERNAL_TOOL_1:
+		case ACT_EXTERNAL_TOOL_2:
+		case ACT_EXTERNAL_TOOL_3:
+		case ACT_EXTERNAL_TOOL_4:
+		case ACT_EXTERNAL_TOOL_5:
+		case ACT_EXTERNAL_TOOL_6:
+		case ACT_EXTERNAL_TOOL_7:
+		case ACT_EXTERNAL_TOOL_8:
+		case ACT_EXTERNAL_TOOL_9:
+			{
+				int index = (a - ACT_EXTERNAL_TOOL_1) + 1;
+				QString shell = Globals::prefs->fetchSpecificParameter(QString("ExtToolConfig%1").arg(index), "shell", "").toString();
+				int type = Globals::prefs->fetchSpecificParameter(QString("ExtToolConfig%1").arg(index), "type", 0).toInt();
+				QString path = Globals::prefs->fetchSpecificParameter(QString("ExtToolConfig%1").arg(index), "path", "").toString();
+				QString inputFilePath, outputFilePath;
+				QProcess process;
+				do {
+					if (shell.isEmpty() || path.isEmpty())
+					{
+						QMessageBox::critical(this, tr("Error"), QString(tr("External tool %1 is not configured.")).arg(index));
+						break;
+					}
+					
+					QString timestamp = QDateTime::currentDateTime().toString("yyyyMMddHHmmsszzz");
+					inputFilePath =  "/tmp/civ_exttool_in_" + timestamp;
+					outputFilePath = "/tmp/civ_exttool_out_" + timestamp;
+					
+					QApplication::setOverrideCursor(Qt::WaitCursor);
+					QImage img = display->getFromSelection();
+					bool success = false;
+					switch(type)
+					{
+						case 0:
+							inputFilePath += ".bmp";
+							outputFilePath += ".bmp";
+							success = imageIO->saveFile(inputFilePath, "bmp", img, QList<IObase::ParameterCluster>());
+							break;
+						case 1:
+							inputFilePath += ".jpg";
+							outputFilePath += ".jpg";
+							success = imageIO->saveFile(inputFilePath, "jpg", img, QList<IObase::ParameterCluster>());
+							break;
+						case 2:
+							inputFilePath += ".png";
+							outputFilePath += ".png";
+							success = imageIO->saveFile(inputFilePath, "png", img, QList<IObase::ParameterCluster>());
+							break;
+					}
+					if (!success)
+					{
+						QMessageBox::critical(this, tr("Error"), QString(tr("Failed to save the script input file.")));
+						break;
+					}
+					
+					process.setProgram(shell);
+					process.setArguments({path, inputFilePath, outputFilePath});
+					process.setProcessEnvironment(QProcessEnvironment::systemEnvironment());
+					process.setProcessChannelMode(QProcess::MergedChannels);
+					process.start();
+					if (!process.waitForStarted(1000))
+					{
+						QMessageBox::critical(this, tr("Error"), QString(tr("External tool %1 failed to start.")).arg(index));
+						break;
+					}
+					if (!process.waitForFinished(200))
+					{
+						QMessageBox abortDialog(QMessageBox::Warning, QString(tr("External tool %1")).arg(index), 
+											QString(tr("The execution of the script is in progress...")),
+											QMessageBox::Abort);
+						abortDialog.setEscapeButton(QMessageBox::Abort);
+						abortDialog.button(QMessageBox::Abort)->setCheckable(true);
+						abortDialog.open();
+						QCoreApplication::processEvents();
+						bool aborted = false;
+						while(!process.waitForFinished(20))
+						{
+							QCoreApplication::processEvents();
+							
+							if (abortDialog.button(QMessageBox::Abort)->isChecked())
+							{
+								aborted = true;
+								break;
+							}
+						}
+						if (aborted) break;
+					}
+					img = imageIO->loadFile(outputFilePath);
+					if (img.isNull())
+					{
+						QMessageBox::critical(this, tr("Error"), QString(tr("Failed to load the script output file.")));
+						break;
+					}
+					
+					saveToUndoStack();
+					if (display->getSelection().isNull())
+					{
+						display->updateImage(img);
+						if (currentImageSize != img.size())
+						{
+							currentImageSize = img.size();
+							setImageSize();
+							setWindowSize();
+						}
+					}
+					else
+					{
+						display->insertIntoSelection(img);
+					}
+				} while(0);
+				if (!inputFilePath.isEmpty())
+				{
+					remove(inputFilePath.toUtf8().constData());
+				}
+				if (!outputFilePath.isEmpty())
+				{
+					remove(outputFilePath.toUtf8().constData());
+				}
+				process.close();
+				QApplication::restoreOverrideCursor();
 			}
 			break;
 		case ACT_SETTINGS:
