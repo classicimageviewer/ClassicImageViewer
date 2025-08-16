@@ -37,7 +37,8 @@ QList<EffectBase::ParameterCluster> EffectModuleUnsharp::getListOfParameterClust
 	elem.displayName = QString(tr("Radius"));
 	elem.controlType = QString("slider100");
 	elem.parameterName = QString("Radius");
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleUnsharp", "Radius", QVariant(5.0));
+	elem.parameterDefaultValue = QVariant(5.0);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleUnsharp", "Radius", elem.parameterDefaultValue);
 	elem.parameterMinValue = QVariant(0.0);
 	elem.parameterMaxValue = QVariant(100.0);
 	cluster.append(elem);
@@ -45,7 +46,8 @@ QList<EffectBase::ParameterCluster> EffectModuleUnsharp::getListOfParameterClust
 	elem.displayName = QString(tr("Amount"));
 	elem.controlType = QString("slider");
 	elem.parameterName = QString("Amount");
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleUnsharp", "Amount", QVariant(10));
+	elem.parameterDefaultValue = QVariant(10);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleUnsharp", "Amount", elem.parameterDefaultValue);
 	elem.parameterMinValue = QVariant(0);
 	elem.parameterMaxValue = QVariant(100);
 	cluster.append(elem);

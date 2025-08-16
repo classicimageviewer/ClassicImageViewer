@@ -38,7 +38,8 @@ QList<EffectBase::ParameterCluster> EffectModuleSharpen::getListOfParameterClust
 	elem.displayName = QString(tr("Strength"));
 	elem.controlType = QString("slider");
 	elem.parameterName = QString("Strength");
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSharpen", "Strength", QVariant(5));
+	elem.parameterDefaultValue = QVariant(5);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSharpen", "Strength", elem.parameterDefaultValue);
 	elem.parameterMinValue = QVariant(1);
 	elem.parameterMaxValue = QVariant(100);
 	cluster.append(elem);

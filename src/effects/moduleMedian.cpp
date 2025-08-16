@@ -48,7 +48,8 @@ QList<EffectBase::ParameterCluster> EffectModuleMedian::getListOfParameterCluste
 	elem.displayName = QString(tr("Size"));
 	elem.controlType = QString("slider");
 	elem.parameterName = QString("Size");
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleMedian", "Size", QVariant(3));
+	elem.parameterDefaultValue = QVariant(3);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleMedian", "Size", elem.parameterDefaultValue);
 	elem.parameterMinValue = QVariant(3);
 	elem.parameterMaxValue = QVariant(15);
 	cluster.append(elem);

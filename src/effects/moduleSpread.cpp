@@ -47,7 +47,8 @@ QList<EffectBase::ParameterCluster> EffectModuleSpread::getListOfParameterCluste
 	elem.displayName = QString(tr("Spread"));
 	elem.controlType = QString("slider");
 	elem.parameterName = QString("Spread");
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSpread", "Spread", QVariant(1));
+	elem.parameterDefaultValue = QVariant(1);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSpread", "Spread", elem.parameterDefaultValue);
 	elem.parameterMinValue = QVariant(1);
 	elem.parameterMaxValue = QVariant(100);
 	cluster.append(elem);

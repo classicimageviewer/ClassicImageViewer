@@ -36,7 +36,8 @@ QList<EffectBase::ParameterCluster> EffectModuleSwapChannels::getListOfParameter
 	elem.displayName = QString(tr("RGB to"));
 	elem.controlType = QString("combobox");
 	elem.parameterName = QString("RGBto");
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSwapChannels", "RGBto", QVariant(0));
+	elem.parameterDefaultValue = QVariant(0);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSwapChannels", "RGBto", elem.parameterDefaultValue);
 	QStringList list = QStringList();
 	list.append(QString(tr("RGB")));
 	list.append(QString(tr("RBG")));

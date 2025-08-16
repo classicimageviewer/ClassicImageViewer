@@ -21,6 +21,7 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLabel>
+#include <QPushButton>
 #include <cmath>
 
 EffectsDialog::EffectsDialog(QImage image, QWidget * parent) : QDialog(parent)
@@ -47,6 +48,7 @@ EffectsDialog::EffectsDialog(QImage image, QWidget * parent) : QDialog(parent)
 	ui.listWidget->setCurrentRow(Globals::prefs->fetchSpecificParameter("EffectsDialog", "Effect", QVariant(0)).toInt());
 	
 	connect(ui.labelSrc, SIGNAL(clickedAt(QPoint)), this, SLOT(srcClickedAt(QPoint)));
+	connect(ui.buttonBox->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked(bool)), this, SLOT(restoreDefaults(bool)));
 }
 
 EffectsDialog::~EffectsDialog()
@@ -382,6 +384,52 @@ void EffectsDialog::integerValueChanged(int v)
 void EffectsDialog::doubleValueChanged(double v)
 {
 	Q_UNUSED(v);
+	redrawDst();
+}
+
+void EffectsDialog::restoreDefaults(bool b)
+{
+	Q_UNUSED(b);
+	
+	QList<EffectBase::ParameterCluster> parameterList = effectHub->getListOfParameterClusters(effectId);
+	for (int i = 0; i < ui.guestLayout->count(); i++)
+	{
+		QLayoutItem * child = ui.guestLayout->itemAt(i);
+		if (child != NULL)
+		{
+			QWidget * widget = child->widget();
+			if (widget != NULL)
+			{
+				for (EffectBase::ParameterCluster elem : parameterList)
+				{
+					if ((elem.parameterName.length() > 0) && (elem.parameterName == widget->objectName()))
+					{
+						if ((elem.controlType == "spinbox") || (elem.controlType == "slider"))
+						{
+							((QSpinBox*)widget)->setValue(elem.parameterDefaultValue.toInt());
+						} else
+						if ((elem.controlType == "doublespinbox") || (elem.controlType == "slider10") || (elem.controlType == "slider100") || (elem.controlType == "slider1000"))
+						{
+							((QDoubleSpinBox*)widget)->setValue(elem.parameterDefaultValue.toDouble());
+						} else
+						if (elem.controlType == "checkbox")
+						{
+							((QCheckBox*)widget)->setChecked(elem.parameterDefaultValue.toBool());
+						} else
+						if (elem.controlType == "combobox")
+						{
+							((QComboBox*)widget)->setCurrentIndex(elem.parameterDefaultValue.toInt());
+						} else
+						//TODO more
+						{
+							break;
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
 	redrawDst();
 }
 

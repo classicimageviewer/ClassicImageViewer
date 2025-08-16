@@ -37,7 +37,8 @@ QList<EffectBase::ParameterCluster> EffectModuleBlur::getListOfParameterClusters
 	elem.displayName = QString(tr("Radius"));
 	elem.controlType = QString("slider100");
 	elem.parameterName = QString("Radius");
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleBlur", "Radius", QVariant(5.0));
+	elem.parameterDefaultValue = QVariant(5.0);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleBlur", "Radius", elem.parameterDefaultValue);
 	elem.parameterMinValue = QVariant(0.0);
 	elem.parameterMaxValue = QVariant(100.0);
 	cluster.append(elem);

@@ -61,6 +61,7 @@ private slots:
 	void coupledDoubleSliderValueChanged(int v);
 	void integerValueChanged(int v);
 	void doubleValueChanged(double v);
+	void restoreDefaults(bool b);
 public:
 	EffectsDialog(QImage image, QWidget * parent = NULL);
 	~EffectsDialog();

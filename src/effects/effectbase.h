@@ -38,6 +38,7 @@ public:
 		QString controlType;
 		QString parameterName;
 		QVariant parameterValue;
+		QVariant parameterDefaultValue;
 		QVariant parameterMinValue;
 		QVariant parameterMaxValue;
 	} ParameterCluster;
