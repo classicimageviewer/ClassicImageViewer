@@ -55,6 +55,41 @@ ExtToolConfigDialog::ExtToolConfigDialog(QWidget * parent) : QDialog(parent)
   #undef FETCH_TOOL_PARAMETERS
 	
 	connect(ui.buttonBox->button(QDialogButtonBox::Help), SIGNAL(clicked(bool)), this, SLOT(help(bool)));
+	
+  #define CONFIGURE_SELECT_BUTTONS(X) \
+	ui.pushButtonSelect ## X->setIcon(this->style()->standardIcon(QStyle::SP_DialogOpenButton)); \
+	ui.pushButtonSelect ## X->setToolTip(tr("Select file")); \
+	QObject::connect(ui.pushButtonSelect ## X, &QPushButton::clicked, [=](bool checked) { \
+		Q_UNUSED(checked); \
+		QFileDialog dialog(this); \
+		dialog.setFileMode(QFileDialog::AnyFile); \
+		dialog.setViewMode(QFileDialog::Detail); \
+		QString dirPath = Globals::prefs->fetchSpecificParameter(QString("ExtToolConfig"), "dirSelect", "").toString(); \
+		if (!dirPath.isEmpty()) \
+		{ \
+			dialog.setDirectory(dirPath); \
+		} \
+		QStringList fileNames; \
+		if (dialog.exec()) \
+		{ \
+			fileNames = dialog.selectedFiles(); \
+			ui.lineEditScript ## X->setText(fileNames[0]); \
+			Globals::prefs->storeSpecificParameter(QString("ExtToolConfig"), "dirSelect", dialog.directory().absolutePath() ); \
+		} \
+	}); \
+	//
+	
+	CONFIGURE_SELECT_BUTTONS(1);
+	CONFIGURE_SELECT_BUTTONS(2);
+	CONFIGURE_SELECT_BUTTONS(3);
+	CONFIGURE_SELECT_BUTTONS(4);
+	CONFIGURE_SELECT_BUTTONS(5);
+	CONFIGURE_SELECT_BUTTONS(6);
+	CONFIGURE_SELECT_BUTTONS(7);
+	CONFIGURE_SELECT_BUTTONS(8);
+	CONFIGURE_SELECT_BUTTONS(9);
+  #undef CONFIGURE_SELECT_BUTTONS
+	
 }
 
 ExtToolConfigDialog::~ExtToolConfigDialog()
@@ -66,14 +101,19 @@ void ExtToolConfigDialog::help(bool b)
 {
 	Q_UNUSED(b);
 	QString helpText;
-	helpText += tr("External tools are scripts, that takes two argument:\n");
-	helpText += tr("1) input file path\n");
-	helpText += tr("2) output file path\n");
-	helpText += tr("Both paths are provided to these scripts.\n");
-	helpText += tr("Shell can be for example /bin/sh or /usr/bin/python.\n");
-	helpText += tr("The input and output file type shall be the same.\n");
-	helpText += tr("The output file shall be created via the script.\n");
-	helpText += tr("Both files are deleted automatically.\n");
+	helpText += tr(	"External tools are scripts, that takes two argument:\n"
+			"1) input file path\n"
+			"2) output file path\n"
+			"Both paths are provided to these scripts.\n"
+			"Shell can be for example /bin/sh or /usr/bin/python.\n"
+			"The input and output file type shall be the same.\n"
+			"The output file shall be created via the script.\n"
+			"Both files are deleted automatically.\n"
+			"\n"
+			"Example sh script (copy the image unaltered):\n"
+		);
+	helpText += "#!/bin/sh\n";
+	helpText += "cp $1 $2\n";
 	QMessageBox::information(this, tr("Help"), helpText);
 }
 
