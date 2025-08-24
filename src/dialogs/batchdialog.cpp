@@ -155,6 +155,7 @@ BatchDialog::BatchDialog(QString indexedDirPath, QStringList indexedFiles, Image
 	ui.comboBoxOutputFormat->setCurrentIndex(preferredFormatIndex);
 	
 	ui.stackedWidget->setCurrentIndex(0);
+	resizeModeChanged(ui.comboBoxResizeMode->currentIndex());
 }
 
 BatchDialog::~BatchDialog()
