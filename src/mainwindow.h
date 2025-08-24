@@ -122,6 +122,7 @@ private: // functions
 	void addPathToRecentFiles(QString path);
 	void updateRecentFilesMenu();
 	void setIndexDisplayNoSignals(int value, int maximum = 0);
+	void closeEvent(QCloseEvent *event) override;
 private slots:
 	void sendAction(Action a);
 	void actionSlot(Action a);

@@ -151,6 +151,20 @@ MainWindow::~MainWindow()
 	delete imageIO;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+	if (thumbnailDialog)
+	{
+		deleteThumbnailDialog();
+	}
+	if (Globals::prefs->getClearClipboardOnExit())
+	{
+		clearClipboard();
+	}
+	Globals::prefs->setWindowPosition(this->pos());
+	QMainWindow::closeEvent(event);
+}
+
 void MainWindow::setFileToBeOpenedOnStartup(const QString arg)
 {
 	fileToBeOpenedOnStartup = arg;
