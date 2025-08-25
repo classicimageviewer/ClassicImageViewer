@@ -181,6 +181,10 @@ void MainWindow::startup()
 			currentDirPath = file.absolutePath();
 			addPathToRecentFiles(file.absoluteFilePath());
 			sendAction(ACT_REOPEN);
+			if (Globals::prefs->getMaximizedWindow())
+			{
+				sendAction(ACT_TOGGLE_FULLSCREEN);
+			}
 		}
 		fileToBeOpenedOnStartup = QString();
 	}
