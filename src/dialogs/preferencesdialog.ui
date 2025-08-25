@@ -170,6 +170,11 @@
                 <string>Fit large images to window</string>
                </property>
               </item>
+              <item>
+               <property name="text">
+                <string>Do not fit</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="0" column="3">
