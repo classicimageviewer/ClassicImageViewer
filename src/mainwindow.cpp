@@ -141,7 +141,14 @@ MainWindow::MainWindow() : QMainWindow()
 	moveToTrashWithKIO = (!(!testTrashProc.waitForFinished(100) || (testTrashProc.error() == QProcess::FailedToStart)));
 #endif
 	clearUndoStack();
-	this->move(Globals::prefs->getWindowPosition());
+	if (Globals::prefs->getMaximizedWindow())
+	{
+		setWindowState((windowState() & ~Qt::WindowActive) | Qt::WindowMaximized);
+	}
+	else
+	{
+		this->move(Globals::prefs->getWindowPosition());
+	}
 	setInternalState(UNLOADED);
 }
 
@@ -181,7 +188,7 @@ void MainWindow::startup()
 			currentDirPath = file.absolutePath();
 			addPathToRecentFiles(file.absoluteFilePath());
 			sendAction(ACT_REOPEN);
-			if (Globals::prefs->getMaximizedWindow())
+			if (Globals::prefs->getStartFullscreen())
 			{
 				sendAction(ACT_TOGGLE_FULLSCREEN);
 			}

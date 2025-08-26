@@ -28,6 +28,7 @@
 	/*X(QVCVT, TYPE, NAME, DEFAULT_VALUE)*/ \
 	X(toString, QString, UserLocale, "") \
 	X(toBool, bool, MaximizedWindow, false) \
+	X(toBool, bool, StartFullscreen, false) \
 	X(toPoint, QPoint, WindowPosition, QPoint(0,0)) \
 	X(toBool, bool, MenubarVisible, true) \
 	X(toBool, bool, ToolbarVisible, true) \

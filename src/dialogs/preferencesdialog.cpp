@@ -31,6 +31,7 @@ PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
 	if (userLocale == "en") ui.comboBoxLocale->setCurrentIndex(1);
 	
 	ui.checkBoxStartMaximized->setChecked(Globals::prefs->getMaximizedWindow());
+	ui.checkBoxStartFullscreen->setChecked(Globals::prefs->getStartFullscreen());
 	ui.comboBoxFileOrder->setCurrentIndex(Globals::prefs->getFileOrder());
 	ui.checkBoxLoopDir->setChecked(Globals::prefs->getLoopDir());
 	ui.comboBoxDisplayMode->setCurrentIndex(Globals::prefs->getDisplayMode());
@@ -112,6 +113,7 @@ void PreferencesDialog::savePreferences()
 	}
 	
 	Globals::prefs->setMaximizedWindow(ui.checkBoxStartMaximized->isChecked());
+	Globals::prefs->setStartFullscreen(ui.checkBoxStartFullscreen->isChecked());
 	Globals::prefs->setFileOrder(ui.comboBoxFileOrder->currentIndex());
 	Globals::prefs->setLoopDir(ui.checkBoxLoopDir->isChecked());
 	Globals::prefs->setDisplayMode(ui.comboBoxDisplayMode->currentIndex());
