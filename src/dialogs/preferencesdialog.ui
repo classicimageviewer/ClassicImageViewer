@@ -278,6 +278,16 @@
                 <string>Do not fit</string>
                </property>
               </item>
+              <item>
+               <property name="text">
+                <string>Fit images to desktop</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Fit large images to desktop</string>
+               </property>
+              </item>
              </widget>
             </item>
             <item row="1" column="0" colspan="2">

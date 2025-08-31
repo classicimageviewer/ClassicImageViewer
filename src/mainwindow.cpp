@@ -96,6 +96,7 @@ MainWindow::MainWindow() : QMainWindow()
 	thumbnailDialog = NULL;
 	mvCpTargetDir = QString();
 	shortCutInfo = QStringList();
+	blockSetImageSize = false;
 
 	imageIO = new ImageIO();
 	
@@ -383,6 +384,15 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuView, tr("Toggle &status bar"), ACT_TOGGLE_STATUSBAR, "Alt+Shift+S",  ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuView, tr("Toggle &toolbar"), ACT_TOGGLE_TOOLBAR, "Alt+Shift+T",  ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuView, tr("Toggle &menu bar"), ACT_TOGGLE_MENUBAR, "Alt+Shift+M",  ACTDISABLE_FULLSCREEN);
+	menuAddSeparator(ui.menuView);
+	displayModeMenu = ui.menuView->addMenu(tr("&Display mode"));
+	menuAddAction(displayModeMenu, tr("Fit window to images"), ACT_DISPLAY_MODE_0, "Shift+O", ACTDISABLE_FULLSCREEN);
+	menuAddAction(displayModeMenu, tr("Fit all images to window"), ACT_DISPLAY_MODE_1, "Shift+W", ACTDISABLE_FULLSCREEN);
+	menuAddAction(displayModeMenu, tr("Fit large images to window"), ACT_DISPLAY_MODE_2, NULL, ACTDISABLE_FULLSCREEN);
+	menuAddAction(displayModeMenu, tr("Fit all images to desktop"), ACT_DISPLAY_MODE_4, "f", ACTDISABLE_FULLSCREEN);
+	menuAddAction(displayModeMenu, tr("Fit large images to desktop"), ACT_DISPLAY_MODE_5, "Shift+F", ACTDISABLE_FULLSCREEN);
+	menuAddAction(displayModeMenu, tr("Do not fit"), ACT_DISPLAY_MODE_3, NULL, ACTDISABLE_FULLSCREEN);
+	updateDisplayModeMenu();
 	menuAddSeparator(ui.menuView);
 	menuAddAction(ui.menuView, tr("&Full screen"), ACT_TOGGLE_FULLSCREEN, "Return",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuView);
@@ -883,8 +893,7 @@ void MainWindow::actionSlot(Action a)
 				saveToUndoStack();
 				display->newImage(i);
 				currentImageSize = i.size();
-				setImageSize();
-				setWindowSize();
+				setImageAndWindowSize();
 			}
 			break;
 		case ACT_COPY:
@@ -914,8 +923,7 @@ void MainWindow::actionSlot(Action a)
 						{
 							display->setZoom(1.0);
 						}
-						setImageSize();
-						setWindowSize();
+						setImageAndWindowSize();
 					}
 					else
 					{
@@ -992,8 +1000,7 @@ void MainWindow::actionSlot(Action a)
 						saveToUndoStack();
 						display->newImage(jointImage);
 						currentImageSize = jointImage.size();
-						setImageSize();
-						setWindowSize();
+						setImageAndWindowSize();
 					}
 					delete d;
 				}
@@ -1046,8 +1053,7 @@ void MainWindow::actionSlot(Action a)
 					saveToUndoStack();
 					display->newImage(i);
 					currentImageSize = i.size();
-					setImageSize();
-					setWindowSize();
+					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1070,8 +1076,7 @@ void MainWindow::actionSlot(Action a)
 					saveToUndoStack();
 					display->newImage(i);
 					currentImageSize = d->getNewResolution();//i.size();
-					setImageSize();
-					setWindowSize();
+					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1088,8 +1093,7 @@ void MainWindow::actionSlot(Action a)
 					saveToUndoStack();
 					display->newImage(i);
 					currentImageSize = i.size();
-					setImageSize();
-					setWindowSize();
+					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1106,8 +1110,7 @@ void MainWindow::actionSlot(Action a)
 					saveToUndoStack();
 					display->newImage(i);
 					currentImageSize = i.size();
-					setImageSize();
-					setWindowSize();
+					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1130,8 +1133,7 @@ void MainWindow::actionSlot(Action a)
 					saveToUndoStack();
 					display->newImage(i);
 					currentImageSize = i.size();
-					setImageSize();
-					setWindowSize();
+					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1158,8 +1160,7 @@ void MainWindow::actionSlot(Action a)
 						if (currentImageSize != i.size())
 						{
 							currentImageSize = i.size();
-							setImageSize();
-							setWindowSize();
+							setImageAndWindowSize();
 						}
 					}
 					else
@@ -1280,8 +1281,7 @@ void MainWindow::actionSlot(Action a)
 						if (currentImageSize != img.size())
 						{
 							currentImageSize = img.size();
-							setImageSize();
-							setWindowSize();
+							setImageAndWindowSize();
 						}
 					}
 					else
@@ -1303,6 +1303,7 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_SETTINGS:
 			{
+				int prevMode = Globals::prefs->getDisplayMode();
 				PreferencesDialog * d = new PreferencesDialog();
 				if (d->exec() == QDialog::Accepted)
 				{
@@ -1310,6 +1311,15 @@ void MainWindow::actionSlot(Action a)
 					indexDisplay->setWrapping(Globals::prefs->getLoopDir());
 					display->setBackgroundShade(Globals::prefs->getDisplayBackground());
 					ui.toolBar->setSizePolicy((Globals::prefs->getEnableToolbarShrinking() ? (QSizePolicy::Expanding) : (QSizePolicy::MinimumExpanding)), QSizePolicy::Minimum);
+					if (prevMode != Globals::prefs->getDisplayMode())
+					{
+						if (internalState != UNLOADED)
+						{
+							display->setZoom(1.0);
+							setImageAndWindowSize();
+						}
+					}
+					updateDisplayModeMenu();
 				}
 				delete d;
 			}
@@ -1333,6 +1343,27 @@ void MainWindow::actionSlot(Action a)
 			slideshowDirection = 0;
 			slideshowTimer.stop();
 			setFullscreen(!isFullscreen);
+			break;
+		case ACT_DISPLAY_MODE_0:
+		case ACT_DISPLAY_MODE_1:
+		case ACT_DISPLAY_MODE_2:
+		case ACT_DISPLAY_MODE_3:
+		case ACT_DISPLAY_MODE_4:
+		case ACT_DISPLAY_MODE_5:
+			{
+				int mode = (a - ACT_DISPLAY_MODE_0);
+				if ((mode > 3) && (mode == Globals::prefs->getDisplayMode()))
+				{
+					mode = 0;
+				}
+				Globals::prefs->setDisplayMode(mode);
+				if (internalState != UNLOADED)
+				{
+					display->setZoom(1.0);
+					setImageAndWindowSize();
+				}
+				updateDisplayModeMenu();
+			}
 			break;
 		case ACT_NEXT_FILE:
 			{
@@ -1616,7 +1647,10 @@ void MainWindow::displayZoomChanged()
 	}
 	if (Globals::prefs->getFitWindowWhenZoomed())
 	{
-		setWindowSize();
+		if (Globals::prefs->getDisplayMode() < 3)
+		{
+			setWindowSize();
+		}
 	}
 }
 
@@ -1955,8 +1989,7 @@ void MainWindow::loadCurrentFile()
 	currentImageSize = i.size();
 	display->newImage(i);
 	display->setZoom(1.0);
-	setImageSize();
-	setWindowSize();
+	setImageAndWindowSize();
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// sped up drawing
 	if (slideshowDirection==0) QApplication::restoreOverrideCursor();
 	if (i.isNull() && (slideshowDirection==0))	// don't show warning when in slideshow
@@ -2081,8 +2114,7 @@ void MainWindow::doSimpleFilter(SimpleFilter f)
 		currentImageSize = dst.size();
 		if (src.size() != dst.size())
 		{
-			setImageSize();
-			setWindowSize();
+			setImageAndWindowSize();
 		}
 	}
 }
@@ -2142,8 +2174,7 @@ void MainWindow::setFullscreen(bool fs)
 		display->setFrameShape(QFrame::Panel);
 		display->setFrameShadow(QFrame::Sunken);
 		display->setZoom(fullscreenZoomBefore);
-		setImageSize();
-		setWindowSize();
+		setImageAndWindowSize();
 		displayOverlayIndicator->clear();
 		while (QApplication::overrideCursor())
 		{
@@ -2157,7 +2188,7 @@ void MainWindow::setWindowSize()
 {
 	if (isFullscreen) return;
 	if (windowState() & Qt::WindowMaximized) return;
-	if (Globals::prefs->getDisplayMode() == 0)	//fit window to image
+	if ((Globals::prefs->getDisplayMode() == 0) || (Globals::prefs->getDisplayMode() == 5))	//fit window to image & fit large images to desktop
 	{
 		QRect desktopRect = QApplication::primaryScreen()->availableGeometry();
 		QSize windowExtra = frameGeometry().size() - geometry().size();
@@ -2172,27 +2203,41 @@ void MainWindow::setWindowSize()
 		newSize = newSize.boundedTo(availableSize);
 		this->resize(newSize);
 		
-		display->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-		display->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-		
-		if (display->horizontalScrollBar()->isVisible() || display->verticalScrollBar()->isVisible())
+		if (Globals::prefs->getDisplayMode() == 0) //fit window to image
 		{
-			if (display->horizontalScrollBar()->isVisible())
+			display->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+			display->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+			
+			if (display->horizontalScrollBar()->isVisible() || display->verticalScrollBar()->isVisible())
 			{
-				newSize.setWidth(newSize.width() + display->horizontalScrollBar()->height());
+				if (display->horizontalScrollBar()->isVisible())
+				{
+					newSize.setWidth(newSize.width() + display->horizontalScrollBar()->height());
+				}
+				if (display->verticalScrollBar()->isVisible())
+				{
+					newSize.setHeight(newSize.height() + display->verticalScrollBar()->width());
+				}
+				newSize = newSize.boundedTo(availableSize);
+				this->resize(newSize);
 			}
-			if (display->verticalScrollBar()->isVisible())
-			{
-				newSize.setHeight(newSize.height() + display->verticalScrollBar()->width());
-			}
-			newSize = newSize.boundedTo(availableSize);
-			this->resize(newSize);
 		}
+	} else
+	if (Globals::prefs->getDisplayMode() == 4)	//fit all images to desktop
+	{
+		QRect desktopRect = QApplication::primaryScreen()->availableGeometry();
+		QSize windowExtra = frameGeometry().size() - geometry().size();
+		QSize availableSize = desktopRect.size() - windowExtra;
+		
+		display->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		display->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+		this->resize(availableSize);
 	}
 }
 
 void MainWindow::setImageSize()
 {
+	if (blockSetImageSize) return;
 	QRect imageRect = QRect(QPoint(), currentImageSize);
 	QRect windowRect = QRect(QPoint(), display->getViewportSize());
 	if (isFullscreen)
@@ -2234,8 +2279,41 @@ void MainWindow::setImageSize()
 					fitImageInto(display->getViewportSize());
 				}
 				break;
+			case 4:	//fit all images to desktop
+				fitImageInto(display->getViewportSize());
+				display->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+				display->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+				break;
+			case 5:	//fit large images to desktop
+				if (windowRect.contains(imageRect))
+				{
+					display->setZoom(1.0);
+				}
+				else
+				{
+					fitImageInto(display->getViewportSize());
+				}
+				display->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+				display->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+				break;
 			default: break;
 		}
+	}
+}
+
+void MainWindow::setImageAndWindowSize()
+{
+	if (Globals::prefs->getDisplayMode() < 3)
+	{
+		setImageSize();
+		setWindowSize();
+	}
+	else
+	{
+		blockSetImageSize = true;
+		setWindowSize();
+		blockSetImageSize = false;
+		setImageSize();
 	}
 }
 
@@ -2315,8 +2393,7 @@ void MainWindow::undoFromUndoStack()
 		QImage i = undoHistory.at(undoStackPosition);
 		display->updateImage(i);
 		currentImageSize = i.size();
-		setImageSize();
-		setWindowSize();
+		setImageAndWindowSize();
 		undoIndex -= 1;
 	}
 	undoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition > 0));
@@ -2332,8 +2409,7 @@ void MainWindow::redoFromUndoStack()
 		QImage i = undoHistory.at(undoStackPosition);
 		display->updateImage(i);
 		currentImageSize = i.size();
-		setImageSize();
-		setWindowSize();
+		setImageAndWindowSize();
 		undoIndex += 1;
 	}
 	undoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition > 0));
@@ -2398,6 +2474,16 @@ void MainWindow::updateRecentFilesMenu()
 		menuAddAction(recentFilesMenu, list.at(i), (Action)(ACT_RECENT_FILE_0 + i), "",  0);
 	}
 	menuAddAction(recentFilesMenu, tr("&Clear recent files"), ACT_CLEAR_RECENT_FILES, "",  0);
+}
+
+void MainWindow::updateDisplayModeMenu()
+{
+	for (int i=0; i<6; i++)
+	{
+		QAction * a = searchQAction((Action)(ACT_DISPLAY_MODE_0 + i));
+		a->setCheckable(true);
+		a->setChecked((Globals::prefs->getDisplayMode() == i));
+	}
 }
 
 QStringList MainWindow::fileDialogOpen(const QString directoryPathOverride, bool multipleFiles)

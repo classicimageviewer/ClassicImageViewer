@@ -49,6 +49,7 @@ private: // variables
 	InternalState internalState;
 	QMenu * recentFilesMenu;
 	QMenu * externalToolsMenu;
+	QMenu * displayModeMenu;
 	QMenu * zoomLevelMenu;
 	int actionLock;
 	ImageIO * imageIO;
@@ -84,6 +85,7 @@ private: // variables
 	ThumbnailDialog * thumbnailDialog;
 	QString mvCpTargetDir;
 	QStringList shortCutInfo;
+	bool blockSetImageSize;
 
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);
@@ -107,6 +109,7 @@ private: // functions
 	void setFullscreen(bool fs);
 	void setWindowSize();
 	void setImageSize();
+	void setImageAndWindowSize();
 	void fitImageInto(QSize size);
 	void resizeEvent(QResizeEvent *event) override;
 	void updateDisplayOverlayIndicator();
@@ -121,6 +124,7 @@ private: // functions
 	void clearFileModificationTime();
 	void addPathToRecentFiles(QString path);
 	void updateRecentFilesMenu();
+	void updateDisplayModeMenu();
 	void setIndexDisplayNoSignals(int value, int maximum = 0);
 	void closeEvent(QCloseEvent *event) override;
 private slots:
