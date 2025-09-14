@@ -101,6 +101,7 @@ void DisplayWidget::updateImage(const QImage &image)
 	
 	this->image = image.copy();
 	surface->setImage(this->image);
+	emit zoomChanged();
 }
 
 void DisplayWidget::insertIntoSelection(const QImage &image)
@@ -120,6 +121,12 @@ QSize DisplayWidget::getImageSize()
 {
 	if (!surface) return QSize(0,0);
 	return image.size();
+}
+
+int DisplayWidget::getImageBpp()
+{
+	if (!surface) return 0;
+	return image.bitPlaneCount();
 }
 
 QImage DisplayWidget::getImage()

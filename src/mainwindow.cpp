@@ -1642,7 +1642,7 @@ void MainWindow::displayZoomChanged()
 	}
 	else
 	{
-		statusBarResolution->setText(QString("%1 x %2").arg(imageSize.width()).arg(imageSize.height()));
+		statusBarResolution->setText(QString("%1 x %2 x %3BPP").arg(imageSize.width()).arg(imageSize.height()).arg(display->getImageBpp()));
 		statusBarZoom->setText(QString("%1%").arg(display->getZoom()*100.0, 0, 'f', 0));
 	}
 	if (Globals::prefs->getFitWindowWhenZoomed())

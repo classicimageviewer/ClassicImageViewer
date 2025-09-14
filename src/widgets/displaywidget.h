@@ -169,6 +169,7 @@ public:
 	void updateImage(const QImage &image);
 	void insertIntoSelection(const QImage &image);
 	QSize getImageSize();
+	int getImageBpp();
 	QImage getImage();
 	QImage getFromSelection();
 	QRect getSelection();
