@@ -82,25 +82,35 @@ QImage EffectModuleUnsharp::applyEffect(QImage image, QList<EffectBase::Paramete
 		}
 	}
 	
+	QImage dst;
+	if (image.hasAlphaChannel())
+	{
+		dst = image.convertToFormat(QImage::Format_ARGB32).copy();
+	}
+	else
+	{
+		dst = image.convertToFormat(QImage::Format_RGB32).copy();
+	}
+	
 	QGraphicsBlurEffect *e = new QGraphicsBlurEffect();
 	e->setBlurRadius(radius);
 	e->setBlurHints(QGraphicsBlurEffect::QualityHint);
 	QGraphicsScene scene;
 	QGraphicsPixmapItem item;
-	item.setPixmap(QPixmap::fromImage(image));
+	item.setPixmap(QPixmap::fromImage(dst));
 	item.setGraphicsEffect(e);
 	scene.addItem(&item);
-	QImage mask(image.size(), QImage::Format_ARGB32);
+	QImage mask(dst.size(), QImage::Format_ARGB32);
 	mask.fill(Qt::transparent);
 	QPainter ptr(&mask);
-	scene.render(&ptr, QRectF(), QRectF(0, 0, image.width(), image.height()));
-	bool hasAlpha = image.hasAlphaChannel();
+	scene.render(&ptr, QRectF(), QRectF(0, 0, dst.width(), dst.height()));
+	bool hasAlpha = dst.hasAlphaChannel();
 	
-	for (int y=0; y<image.height(); y++)
+	for (int y=0; y<dst.height(); y++)
 	{
-		for (int x=0; x<image.width(); x++)
+		for (int x=0; x<dst.width(); x++)
 		{
-			QRgb iP = image.pixel(x,y);
+			QRgb iP = dst.pixel(x,y);
 			QRgb mP = mask.pixel(x,y);
 			
 			int red = qRed(iP) + amount*(qRed(iP) - qRed(mP));
@@ -109,15 +119,17 @@ QImage EffectModuleUnsharp::applyEffect(QImage image, QList<EffectBase::Paramete
 			
 			if (hasAlpha)
 			{
-				image.setPixel(x, y, qRgba(qBound(0, red, 255), qBound(0, green, 255), qBound(0, blue, 255), qAlpha(iP)));
+				dst.setPixel(x, y, qRgba(qBound(0, red, 255), qBound(0, green, 255), qBound(0, blue, 255), qAlpha(iP)));
 			}
 			else
 			{
-				image.setPixel(x, y, qRgb(qBound(0, red, 255), qBound(0, green, 255), qBound(0, blue, 255)));
+				dst.setPixel(x, y, qRgb(qBound(0, red, 255), qBound(0, green, 255), qBound(0, blue, 255)));
 			}
 		}
 	}
 	
-	return image;
+	dst = dst.convertToFormat(image.format());
+	
+	return dst;
 }
 

@@ -75,23 +75,32 @@ QImage EffectModuleSwapChannels::applyEffect(QImage image, QList<EffectBase::Par
 	}
 	
 	bool hasAlpha = image.hasAlphaChannel();
-	
-	for (int y=0; y<image.height(); y++)
+	QImage dst;
+	if (hasAlpha)
 	{
-		for (int x=0; x<image.width(); x++)
+		dst = image.convertToFormat(QImage::Format_ARGB32).copy();
+	}
+	else
+	{
+		dst = image.convertToFormat(QImage::Format_RGB32).copy();
+	}
+	
+	for (int y=0; y<dst.height(); y++)
+	{
+		for (int x=0; x<dst.width(); x++)
 		{
-			QRgb iP = image.pixel(x,y);
+			QRgb iP = dst.pixel(x,y);
 			
 			if (hasAlpha)
 			{
 				switch(rgbto)
 				{
-					case 0: image.setPixel(x, y, qRgba(qRed(iP), qGreen(iP), qBlue(iP), qAlpha(iP))); break;
-					case 1: image.setPixel(x, y, qRgba(qRed(iP), qBlue(iP), qGreen(iP), qAlpha(iP))); break;
-					case 2: image.setPixel(x, y, qRgba(qGreen(iP), qRed(iP), qBlue(iP), qAlpha(iP))); break;
-					case 3: image.setPixel(x, y, qRgba(qGreen(iP), qBlue(iP), qRed(iP), qAlpha(iP))); break;
-					case 4: image.setPixel(x, y, qRgba(qBlue(iP), qRed(iP), qGreen(iP), qAlpha(iP))); break;
-					case 5: image.setPixel(x, y, qRgba(qBlue(iP), qGreen(iP), qRed(iP), qAlpha(iP))); break;
+					case 0: dst.setPixel(x, y, qRgba(qRed(iP), qGreen(iP), qBlue(iP), qAlpha(iP))); break;
+					case 1: dst.setPixel(x, y, qRgba(qRed(iP), qBlue(iP), qGreen(iP), qAlpha(iP))); break;
+					case 2: dst.setPixel(x, y, qRgba(qGreen(iP), qRed(iP), qBlue(iP), qAlpha(iP))); break;
+					case 3: dst.setPixel(x, y, qRgba(qGreen(iP), qBlue(iP), qRed(iP), qAlpha(iP))); break;
+					case 4: dst.setPixel(x, y, qRgba(qBlue(iP), qRed(iP), qGreen(iP), qAlpha(iP))); break;
+					case 5: dst.setPixel(x, y, qRgba(qBlue(iP), qGreen(iP), qRed(iP), qAlpha(iP))); break;
 					default: break;
 				}
 			}
@@ -99,18 +108,20 @@ QImage EffectModuleSwapChannels::applyEffect(QImage image, QList<EffectBase::Par
 			{
 				switch(rgbto)
 				{
-					case 0: image.setPixel(x, y, qRgb(qRed(iP), qGreen(iP), qBlue(iP))); break;
-					case 1: image.setPixel(x, y, qRgb(qRed(iP), qBlue(iP), qGreen(iP))); break;
-					case 2: image.setPixel(x, y, qRgb(qGreen(iP), qRed(iP), qBlue(iP))); break;
-					case 3: image.setPixel(x, y, qRgb(qGreen(iP), qBlue(iP), qRed(iP))); break;
-					case 4: image.setPixel(x, y, qRgb(qBlue(iP), qRed(iP), qGreen(iP))); break;
-					case 5: image.setPixel(x, y, qRgb(qBlue(iP), qGreen(iP), qRed(iP))); break;
+					case 0: dst.setPixel(x, y, qRgb(qRed(iP), qGreen(iP), qBlue(iP))); break;
+					case 1: dst.setPixel(x, y, qRgb(qRed(iP), qBlue(iP), qGreen(iP))); break;
+					case 2: dst.setPixel(x, y, qRgb(qGreen(iP), qRed(iP), qBlue(iP))); break;
+					case 3: dst.setPixel(x, y, qRgb(qGreen(iP), qBlue(iP), qRed(iP))); break;
+					case 4: dst.setPixel(x, y, qRgb(qBlue(iP), qRed(iP), qGreen(iP))); break;
+					case 5: dst.setPixel(x, y, qRgb(qBlue(iP), qGreen(iP), qRed(iP))); break;
 					default: break;
 				}
 			}
 		}
 	}
 	
-	return image;
+	dst = dst.convertToFormat(image.format());
+	
+	return dst;
 }
 
