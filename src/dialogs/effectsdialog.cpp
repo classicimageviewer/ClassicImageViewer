@@ -24,7 +24,7 @@
 #include <QPushButton>
 #include <cmath>
 
-EffectsDialog::EffectsDialog(QImage image, QWidget * parent) : QDialog(parent)
+EffectsDialog::EffectsDialog(QImage image, QString singleEffect, QWidget * parent) : QDialog(parent)
 {
 	ui.setupUi(this);
 
@@ -45,7 +45,16 @@ EffectsDialog::EffectsDialog(QImage image, QWidget * parent) : QDialog(parent)
 	effectHub = new EffectHub();
 	ui.listWidget->addItems(effectHub->getEffects());
 	connect(ui.listWidget, SIGNAL(currentRowChanged(int)), this, SLOT(effectChanged(int)));
-	ui.listWidget->setCurrentRow(Globals::prefs->fetchSpecificParameter("EffectsDialog", "Effect", QVariant(0)).toInt());
+	if ((singleEffect.length() > 0) && (effectHub->getEffects().contains(singleEffect)))
+	{
+		ui.listWidget->setCurrentRow(effectHub->getEffects().indexOf(singleEffect));
+		ui.listWidget->hide();
+		resize(1,1);	// minimum size
+	}
+	else
+	{
+		ui.listWidget->setCurrentRow(Globals::prefs->fetchSpecificParameter("EffectsDialog", "Effect", QVariant(0)).toInt());
+	}
 	
 	connect(ui.labelSrc, SIGNAL(clickedAt(QPoint)), this, SLOT(srcClickedAt(QPoint)));
 	connect(ui.buttonBox->button(QDialogButtonBox::RestoreDefaults), SIGNAL(clicked(bool)), this, SLOT(restoreDefaults(bool)));
@@ -143,7 +152,10 @@ void EffectsDialog::redrawDst()
 void EffectsDialog::effectChanged(int row)
 {
 	effectId = row;
-	Globals::prefs->storeSpecificParameter("EffectsDialog", "Effect", effectId);
+	if (ui.listWidget->isVisible())
+	{
+		Globals::prefs->storeSpecificParameter("EffectsDialog", "Effect", effectId);
+	}
 	
 	//disconnect
 	for (CoupledSpinboxSlider elem : coupledSpinboxSliders)

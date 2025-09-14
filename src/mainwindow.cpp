@@ -355,8 +355,11 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuImage, tr("Add &border"), ACT_ADD_BORDER, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuImage, tr("&Pad to size"), ACT_PAD_TO_SIZE, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("&Grayscale"), ACT_GRAYSCALE, NULL,  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("Nega&tive"), ACT_NEGATIVE, NULL,  ACTDISABLE_UNLOADED);
+	menuAddAction(ui.menuImage, tr("I&ncrease color depth"), ACT_COLOR_DEPTH_INC, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuImage, tr("&Decrease color depth"), ACT_COLOR_DEPTH_DEC, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddSeparator(ui.menuImage);
+	menuAddAction(ui.menuImage, tr("&Grayscale"), ACT_GRAYSCALE, "Ctrl+G",  ACTDISABLE_UNLOADED);
+	menuAddAction(ui.menuImage, tr("Nega&tive"), ACT_NEGATIVE, "Ctrl+Shift+N",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuImage, tr("Adjust &colors"), ACT_COLOR_ADJUST, "Shift+G",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddSeparator(ui.menuImage);
 	menuAddAction(ui.menuImage, tr("Auto c&olor adjust"), ACT_AUTO_COLOR, "Shift+U",  ACTDISABLE_UNLOADED);
@@ -1112,6 +1115,37 @@ void MainWindow::actionSlot(Action a)
 					currentImageSize = i.size();
 					setImageAndWindowSize();
 					d->savePreferences();
+				}
+				delete d;
+			}
+			break;
+		case ACT_COLOR_DEPTH_INC:
+			{
+				QApplication::setOverrideCursor(Qt::WaitCursor);
+				saveToUndoStack();
+				QImage i = display->getImage();
+				if (i.hasAlphaChannel())
+				{
+					i = i.convertToFormat(QImage::Format_ARGB32).copy();
+				}
+				else
+				{
+					i = i.convertToFormat(QImage::Format_RGB32).copy();
+				}
+				display->updateImage(i);
+				QApplication::restoreOverrideCursor();
+			}
+			break;
+		case ACT_COLOR_DEPTH_DEC:
+			{
+				EffectsDialog * d = new EffectsDialog(display->getImage(), QString(tr("Color Quantization")));
+				if (d->exec() == QDialog::Accepted)
+				{
+					QApplication::setOverrideCursor(Qt::WaitCursor);
+					saveToUndoStack();
+					QImage i = d->applyEffects();
+					display->updateImage(i);
+					QApplication::restoreOverrideCursor();
 				}
 				delete d;
 			}

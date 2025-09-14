@@ -63,7 +63,7 @@ private slots:
 	void doubleValueChanged(double v);
 	void restoreDefaults(bool b);
 public:
-	EffectsDialog(QImage image, QWidget * parent = NULL);
+	EffectsDialog(QImage image, QString singleEffect = QString(), QWidget * parent = NULL);
 	~EffectsDialog();
 	QImage applyEffects();
 	void getSelectedEffect(QString & name, int & effectId, QList<EffectBase::ParameterCluster> & parameterList);
