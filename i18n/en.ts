@@ -68,8 +68,8 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="129"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="463"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="469"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="464"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="470"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
@@ -190,7 +190,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="456"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="477"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="478"/>
         <source>x</source>
         <translation type="unfinished"></translation>
     </message>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="522"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="574"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="575"/>
         <source>Effects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -288,100 +288,100 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="905"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="184"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="185"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="928"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="909"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="910"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="188"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="189"/>
         <source>Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="238"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="243"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="249"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="445"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="492"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="507"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="239"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="244"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="250"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="446"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="493"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="508"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="238"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="492"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="239"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="493"/>
         <source>Empty input file list.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="243"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="244"/>
         <source>At least one of the Rename / Convert options have to be selected.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="249"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="250"/>
         <source>No valid target directory provided.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="261"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="262"/>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="292"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="293"/>
         <source>All supported images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="305"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="306"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="308"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="309"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="410"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="877"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="411"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="878"/>
         <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="475"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="476"/>
         <source>pixels</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="476"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="477"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="507"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="508"/>
         <source>Cannot load image for preview.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="599"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="600"/>
         <source>Select Target Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="861"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="862"/>
         <source>done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="920"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="921"/>
         <source>Threads: %1/%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -389,33 +389,33 @@
 <context>
     <name>BatchWorker</name>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1039"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1040"/>
         <source>input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1044"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1052"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1045"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1053"/>
         <source>already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1061"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1062"/>
         <source>cannot read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1070"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1071"/>
         <source>over-crop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1178"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1187"/>
         <source>resized to zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1191"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1200"/>
         <source>cannot write</source>
         <translation type="unfinished"></translation>
     </message>
@@ -474,6 +474,64 @@
     </message>
 </context>
 <context>
+    <name>CustomSelectionDialog</name>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.ui" line="17"/>
+        <source>Custom selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.ui" line="27"/>
+        <source>Aspect ratio:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.ui" line="51"/>
+        <source>Select aspect ratio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.ui" line="72"/>
+        <source>,</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.ui" line="79"/>
+        <source>Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.ui" line="120"/>
+        <source>Position:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.ui" line="134"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.ui" line="154"/>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.cpp" line="40"/>
+        <source>Current image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.cpp" line="59"/>
+        <source>Ignore</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/customselectiondialog.cpp" line="173"/>
+        <source>The selection is too big!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleBlur</name>
     <message>
         <location filename="../src/effects/moduleBlur.cpp" line="37"/>
@@ -502,43 +560,99 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleColorAdjust.cpp" line="46"/>
+        <location filename="../src/effects/moduleColorAdjust.cpp" line="47"/>
         <source>Contrast</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleColorAdjust.cpp" line="54"/>
+        <location filename="../src/effects/moduleColorAdjust.cpp" line="56"/>
         <source>Gamma</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleColorAdjust.cpp" line="62"/>
+        <location filename="../src/effects/moduleColorAdjust.cpp" line="65"/>
         <source>Saturation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleColorAdjust.cpp" line="70"/>
+        <location filename="../src/effects/moduleColorAdjust.cpp" line="74"/>
         <source>Hue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleColorAdjust.cpp" line="78"/>
+        <location filename="../src/effects/moduleColorAdjust.cpp" line="83"/>
         <source>Red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleColorAdjust.cpp" line="86"/>
+        <location filename="../src/effects/moduleColorAdjust.cpp" line="92"/>
         <source>Green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleColorAdjust.cpp" line="94"/>
+        <location filename="../src/effects/moduleColorAdjust.cpp" line="101"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/effects/moduleColorAdjust.h" line="36"/>
         <source>Color Adjust</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EffectModuleColorQuantization</name>
+    <message>
+        <location filename="../src/effects/moduleColorQuantization.cpp" line="37"/>
+        <source>Method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleColorQuantization.cpp" line="43"/>
+        <source>Grayscale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleColorQuantization.cpp" line="44"/>
+        <source>Web-safe colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleColorQuantization.cpp" line="45"/>
+        <source>Sorted colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleColorQuantization.cpp" line="49"/>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleColorQuantization.cpp" line="58"/>
+        <source>Dithering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleColorQuantization.cpp" line="64"/>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleColorQuantization.h" line="40"/>
+        <source>Color Quantization</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EffectModuleColorTemperature</name>
+    <message>
+        <location filename="../src/effects/moduleColorTemperature.cpp" line="38"/>
+        <source>Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleColorTemperature.h" line="36"/>
+        <source>Color Temperature</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -637,32 +751,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleSwapChannels.cpp" line="41"/>
+        <location filename="../src/effects/moduleSwapChannels.cpp" line="42"/>
         <source>RGB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleSwapChannels.cpp" line="42"/>
+        <location filename="../src/effects/moduleSwapChannels.cpp" line="43"/>
         <source>RBG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleSwapChannels.cpp" line="43"/>
+        <location filename="../src/effects/moduleSwapChannels.cpp" line="44"/>
         <source>GRB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleSwapChannels.cpp" line="44"/>
+        <location filename="../src/effects/moduleSwapChannels.cpp" line="45"/>
         <source>GBR</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleSwapChannels.cpp" line="45"/>
+        <location filename="../src/effects/moduleSwapChannels.cpp" line="46"/>
         <source>BRG</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleSwapChannels.cpp" line="46"/>
+        <location filename="../src/effects/moduleSwapChannels.cpp" line="47"/>
         <source>BGR</source>
         <translation type="unfinished"></translation>
     </message>
@@ -680,7 +794,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleUnsharp.cpp" line="45"/>
+        <location filename="../src/effects/moduleUnsharp.cpp" line="46"/>
         <source>Amount</source>
         <translation type="unfinished"></translation>
     </message>
@@ -695,6 +809,93 @@
     <message>
         <location filename="../src/dialogs/effectsdialog.ui" line="17"/>
         <source>Effects</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ExtToolConfigDialog</name>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="23"/>
+        <source>External tools config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="44"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="73"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="124"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="162"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="191"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="210"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="272"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="291"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="333"/>
+        <source>BMP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="49"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="78"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="129"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="167"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="196"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="215"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="277"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="296"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="338"/>
+        <source>JPG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="54"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="83"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="134"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="172"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="201"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="220"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="282"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="301"/>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="343"/>
+        <source>PNG</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="103"/>
+        <source>File type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="154"/>
+        <source>Shell</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.ui" line="360"/>
+        <source>Full path of the script </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.cpp" line="61"/>
+        <source>Select file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.cpp" line="104"/>
+        <source>External tools are scripts, that takes two argument:
+1) input file path
+2) output file path
+Both paths are provided to these scripts.
+Shell can be for example /bin/sh or /usr/bin/python.
+The input and output file type shall be the same.
+The output file shall be created via the script.
+Both files are deleted automatically.
+
+Example sh script (copy the image unaltered):
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/exttoolconfigdialog.cpp" line="117"/>
+        <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1764,529 +1965,697 @@ SOFTWARE.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="279"/>
+        <location filename="../src/mainwindow.cpp" line="306"/>
         <source>&amp;Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="280"/>
+        <location filename="../src/mainwindow.cpp" line="307"/>
         <source>&amp;Reload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="281"/>
-        <source>Recent &amp;files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="285"/>
-        <source>&amp;Thumbnails</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="286"/>
-        <source>Slidesho&amp;w</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="287"/>
-        <source>&amp;Batch conversion</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="289"/>
-        <source>Re&amp;name file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="290"/>
-        <source>Select target directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="291"/>
-        <source>&amp;Move file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="292"/>
-        <source>&amp;Copy file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="293"/>
-        <source>&amp;Delete file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="295"/>
-        <source>Sa&amp;ve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="296"/>
-        <source>&amp;Save as</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="297"/>
-        <source>Save selection as</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="298"/>
-        <source>&amp;Print</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="300"/>
-        <source>E&amp;xit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="303"/>
-        <source>&amp;Undo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="304"/>
-        <source>R&amp;edo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="306"/>
-        <source>Cut &amp;selection</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="307"/>
-        <source>C&amp;rop selection</source>
+        <location filename="../src/mainwindow.cpp" line="308"/>
+        <source>Reopen in new app</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="309"/>
-        <source>&amp;Copy</source>
+        <source>Recent &amp;files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="310"/>
-        <source>&amp;Paste</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="311"/>
-        <source>Paste to side</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="312"/>
-        <source>Unloa&amp;d</source>
+        <location filename="../src/mainwindow.cpp" line="313"/>
+        <source>&amp;Thumbnails</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="314"/>
-        <source>C&amp;lear clipboard</source>
+        <source>Slidesho&amp;w</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="315"/>
+        <source>&amp;Batch conversion</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="317"/>
-        <source>&amp;Information</source>
+        <source>Re&amp;name file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="318"/>
+        <source>Select target directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="319"/>
-        <source>Rotate &amp;left</source>
+        <source>&amp;Move file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="320"/>
-        <source>Rotate &amp;right</source>
+        <source>&amp;Copy file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="321"/>
-        <source>C&amp;ustom rotation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="322"/>
-        <source>&amp;Vertical flip</source>
+        <source>&amp;Delete file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="323"/>
-        <source>&amp;Horizontal flip</source>
+        <source>Sa&amp;ve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="324"/>
+        <source>&amp;Save as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="325"/>
-        <source>Re&amp;size</source>
+        <source>Save selection as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="326"/>
-        <source>Add &amp;border</source>
+        <source>&amp;Print</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="327"/>
-        <source>&amp;Pad to size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="329"/>
-        <source>&amp;Grayscale</source>
+        <location filename="../src/mainwindow.cpp" line="328"/>
+        <source>E&amp;xit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="331"/>
-        <source>Adjust &amp;colors</source>
+        <source>&amp;Undo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="333"/>
-        <source>Auto c&amp;olor adjust</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="338"/>
-        <source>&amp;Properties</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="342"/>
-        <source>Toggle &amp;status bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="343"/>
-        <source>Toggle &amp;toolbar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="344"/>
-        <source>Toggle &amp;menu bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="350"/>
-        <source>Fi&amp;rst file in directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="353"/>
-        <source>Zoom &amp;in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="355"/>
-        <source>Zoom 1:1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="356"/>
-        <source>&amp;Zoom levels</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="358"/>
-        <source>10%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="359"/>
-        <source>15%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="360"/>
-        <source>20%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="361"/>
-        <source>25%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="362"/>
-        <source>33%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="363"/>
-        <source>50%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="364"/>
-        <source>66%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="365"/>
-        <source>100%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="366"/>
-        <source>125%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="367"/>
-        <source>150%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="368"/>
-        <source>175%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="369"/>
-        <source>200%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="370"/>
-        <source>300%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="371"/>
-        <source>400%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="380"/>
-        <source>First file in directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="381"/>
-        <source>Last file in directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="382"/>
-        <location filename="../src/mainwindow.cpp" line="384"/>
-        <location filename="../src/mainwindow.cpp" line="386"/>
-        <source>Previous file in directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="383"/>
-        <location filename="../src/mainwindow.cpp" line="385"/>
-        <location filename="../src/mainwindow.cpp" line="387"/>
-        <source>Next file in directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="388"/>
-        <source>Toggle selection all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="1714"/>
-        <source>Indexing the current directory...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2288"/>
-        <source>Save...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="330"/>
-        <source>Nega&amp;tive</source>
+        <location filename="../src/mainwindow.cpp" line="332"/>
+        <source>R&amp;edo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="334"/>
-        <source>Sh&amp;arpen</source>
+        <source>Cust&amp;om selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="335"/>
-        <source>&amp;Effects</source>
+        <source>Cut &amp;selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="336"/>
+        <source>C&amp;rop selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="338"/>
+        <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="339"/>
-        <source>&amp;Minimize</source>
+        <source>&amp;Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="340"/>
+        <source>Paste to side</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="341"/>
+        <source>Unloa&amp;d</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="343"/>
+        <source>C&amp;lear clipboard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="346"/>
-        <source>&amp;Full screen</source>
+        <source>&amp;Information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="348"/>
-        <source>&amp;Next file in directory</source>
+        <source>Rotate &amp;left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="349"/>
-        <source>&amp;Previous file in directory</source>
+        <source>Rotate &amp;right</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="350"/>
+        <source>C&amp;ustom rotation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="351"/>
-        <source>&amp;Last file in directory</source>
+        <source>&amp;Vertical flip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="352"/>
+        <source>&amp;Horizontal flip</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="354"/>
-        <source>Zoom &amp;out</source>
+        <source>Re&amp;size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="355"/>
+        <source>Add &amp;border</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="356"/>
+        <source>&amp;Pad to size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="358"/>
+        <source>I&amp;ncrease color depth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="359"/>
+        <source>&amp;Decrease color depth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="361"/>
+        <source>&amp;Grayscale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="363"/>
+        <source>Adjust &amp;colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="365"/>
+        <source>Auto c&amp;olor adjust</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="369"/>
+        <source>E&amp;xternal tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="370"/>
+        <source>Configure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="372"/>
+        <source>External tool 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="373"/>
+        <source>External tool 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="374"/>
-        <source>&amp;License</source>
+        <source>External tool 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="375"/>
-        <source>&amp;Shortcuts</source>
+        <source>External tool 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="376"/>
+        <source>External tool 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="377"/>
+        <source>External tool 6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="378"/>
+        <source>External tool 7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="379"/>
+        <source>External tool 8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="380"/>
+        <source>External tool 9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="383"/>
+        <source>&amp;Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="387"/>
+        <source>Toggle &amp;status bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="388"/>
+        <source>Toggle &amp;toolbar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="389"/>
+        <source>Toggle &amp;menu bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="391"/>
+        <source>&amp;Display mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="392"/>
+        <source>Fit window to images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="393"/>
+        <source>Fit all images to window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="394"/>
+        <source>Fit large images to window</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="395"/>
+        <source>Fit all images to desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="396"/>
+        <source>Fit large images to desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="397"/>
+        <source>Do not fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="404"/>
+        <source>Fi&amp;rst file in directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="407"/>
+        <source>Zoom &amp;in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="409"/>
+        <source>Zoom 1:1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="410"/>
+        <source>&amp;Zoom levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="412"/>
+        <source>10%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="413"/>
+        <source>15%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="414"/>
+        <source>20%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="415"/>
+        <source>25%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="416"/>
+        <source>33%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="417"/>
+        <source>50%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="418"/>
+        <source>66%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="419"/>
+        <source>100%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="420"/>
+        <source>125%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="421"/>
+        <source>150%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="422"/>
+        <source>175%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="423"/>
+        <source>200%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="424"/>
+        <source>300%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="425"/>
+        <source>400%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="434"/>
+        <source>First file in directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="435"/>
+        <source>Last file in directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="436"/>
+        <location filename="../src/mainwindow.cpp" line="438"/>
+        <location filename="../src/mainwindow.cpp" line="440"/>
+        <source>Previous file in directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="437"/>
+        <location filename="../src/mainwindow.cpp" line="439"/>
+        <location filename="../src/mainwindow.cpp" line="441"/>
+        <source>Next file in directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="442"/>
+        <source>Toggle selection all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="443"/>
+        <source>Adjust left side of the selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="444"/>
+        <source>Adjust top side of the selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="445"/>
+        <source>Adjust right side of the selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="446"/>
+        <source>Adjust bottom side of the selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="447"/>
+        <source>Move selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1141"/>
+        <source>Color Quantization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1237"/>
+        <source>External tool %1 is not configured.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1268"/>
+        <source>Failed to save the script input file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1279"/>
+        <source>External tool %1 failed to start.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1284"/>
+        <source>External tool %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1285"/>
+        <source>The execution of the script is in progress...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1307"/>
+        <source>Failed to load the script output file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1980"/>
+        <source>Indexing the current directory...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="2600"/>
+        <source>Save...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="362"/>
+        <source>Nega&amp;tive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="366"/>
+        <source>Sh&amp;arpen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="367"/>
+        <source>&amp;Effects</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="384"/>
+        <source>&amp;Minimize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="400"/>
+        <source>&amp;Full screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="402"/>
+        <source>&amp;Next file in directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="403"/>
+        <source>&amp;Previous file in directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="405"/>
+        <source>&amp;Last file in directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="408"/>
+        <source>Zoom &amp;out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="428"/>
+        <source>&amp;License</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="429"/>
+        <source>&amp;Shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="430"/>
         <source>&amp;About</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="539"/>
-        <location filename="../src/mainwindow.cpp" line="554"/>
-        <location filename="../src/mainwindow.cpp" line="576"/>
-        <location filename="../src/mainwindow.cpp" line="580"/>
-        <location filename="../src/mainwindow.cpp" line="616"/>
-        <location filename="../src/mainwindow.cpp" line="620"/>
-        <location filename="../src/mainwindow.cpp" line="666"/>
-        <location filename="../src/mainwindow.cpp" line="670"/>
-        <location filename="../src/mainwindow.cpp" line="711"/>
-        <location filename="../src/mainwindow.cpp" line="738"/>
-        <location filename="../src/mainwindow.cpp" line="769"/>
-        <location filename="../src/mainwindow.cpp" line="833"/>
-        <location filename="../src/mainwindow.cpp" line="868"/>
-        <location filename="../src/mainwindow.cpp" line="1766"/>
+        <location filename="../src/mainwindow.cpp" line="610"/>
+        <location filename="../src/mainwindow.cpp" line="625"/>
+        <location filename="../src/mainwindow.cpp" line="647"/>
+        <location filename="../src/mainwindow.cpp" line="651"/>
+        <location filename="../src/mainwindow.cpp" line="686"/>
+        <location filename="../src/mainwindow.cpp" line="690"/>
+        <location filename="../src/mainwindow.cpp" line="736"/>
+        <location filename="../src/mainwindow.cpp" line="740"/>
+        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="807"/>
+        <location filename="../src/mainwindow.cpp" line="838"/>
+        <location filename="../src/mainwindow.cpp" line="913"/>
+        <location filename="../src/mainwindow.cpp" line="947"/>
+        <location filename="../src/mainwindow.cpp" line="1237"/>
+        <location filename="../src/mainwindow.cpp" line="1268"/>
+        <location filename="../src/mainwindow.cpp" line="1279"/>
+        <location filename="../src/mainwindow.cpp" line="1307"/>
+        <location filename="../src/mainwindow.cpp" line="2031"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="539"/>
+        <location filename="../src/mainwindow.cpp" line="610"/>
         <source>Cannot rename to empty filename.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="554"/>
+        <location filename="../src/mainwindow.cpp" line="625"/>
         <source>Failed to rename the file.
 Maybe the provided file name already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="576"/>
-        <location filename="../src/mainwindow.cpp" line="616"/>
+        <location filename="../src/mainwindow.cpp" line="647"/>
+        <location filename="../src/mainwindow.cpp" line="686"/>
         <source>Target directory not set.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="580"/>
-        <location filename="../src/mainwindow.cpp" line="620"/>
+        <location filename="../src/mainwindow.cpp" line="651"/>
+        <location filename="../src/mainwindow.cpp" line="690"/>
         <source>Target directory cannot be the current one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="666"/>
+        <location filename="../src/mainwindow.cpp" line="736"/>
         <source>Failed to move %1 to trash.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="670"/>
+        <location filename="../src/mainwindow.cpp" line="740"/>
         <source>Failed to move %1 to trash.
 Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="711"/>
-        <location filename="../src/mainwindow.cpp" line="738"/>
+        <location filename="../src/mainwindow.cpp" line="780"/>
+        <location filename="../src/mainwindow.cpp" line="807"/>
         <source>Save to %1 failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="769"/>
+        <location filename="../src/mainwindow.cpp" line="838"/>
         <source>Printer initialization failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="833"/>
-        <location filename="../src/mainwindow.cpp" line="868"/>
+        <location filename="../src/mainwindow.cpp" line="913"/>
+        <location filename="../src/mainwindow.cpp" line="947"/>
         <source>QClipboard error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="841"/>
+        <location filename="../src/mainwindow.cpp" line="921"/>
         <source>Clipboard %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1363"/>
-        <location filename="../src/mainwindow.cpp" line="1364"/>
+        <location filename="../src/mainwindow.cpp" line="1626"/>
+        <location filename="../src/mainwindow.cpp" line="1627"/>
         <source>Trying to hack the clipboard...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1409"/>
-        <location filename="../src/mainwindow.cpp" line="1619"/>
+        <location filename="../src/mainwindow.cpp" line="1672"/>
+        <location filename="../src/mainwindow.cpp" line="1885"/>
         <source>No file loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1430"/>
-        <location filename="../src/mainwindow.cpp" line="1620"/>
+        <location filename="../src/mainwindow.cpp" line="1696"/>
+        <location filename="../src/mainwindow.cpp" line="1886"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1434"/>
+        <location filename="../src/mainwindow.cpp" line="1700"/>
         <source>Selection: %1x%2 at (%3,%4)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1458"/>
+        <location filename="../src/mainwindow.cpp" line="1724"/>
         <source>Pixel: %1 at (%2,%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1766"/>
+        <location filename="../src/mainwindow.cpp" line="2031"/>
         <source>Can not open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2167"/>
-        <location filename="../src/mainwindow.cpp" line="2177"/>
-        <source>yyyy.MM.dd. hh:mm:ss</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="2216"/>
+        <location filename="../src/mainwindow.cpp" line="2518"/>
         <source>&amp;Clear recent files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2231"/>
+        <location filename="../src/mainwindow.cpp" line="2543"/>
         <source>All supported images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2244"/>
+        <location filename="../src/mainwindow.cpp" line="2556"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2247"/>
+        <location filename="../src/mainwindow.cpp" line="2559"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2355,119 +2724,119 @@ Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation suppor
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="269"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="104"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="274"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="109"/>
         <source>Name (reversed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="279"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="114"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="284"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="119"/>
         <source>Time (reversed)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="240"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="317"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="145"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="296"/>
         <source>Start maximized</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="75"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="406"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="182"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="428"/>
         <source>Display mode:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="160"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="263"/>
         <source>Fit window to images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="165"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="268"/>
         <source>Fit all images to window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="170"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="273"/>
         <source>Fit large images to window</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="82"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="248"/>
         <source>Zoom delta:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="261"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="331"/>
         <source>Locale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="103"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="241"/>
         <source>Clear Clipboard on exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="68"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="248"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="82"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="168"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="205"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="199"/>
         <source>(if disabled, the exit could take a long time)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="110"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="134"/>
         <source>File order:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="198"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="206"/>
         <source>Loop directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="212"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="213"/>
         <source>Display background:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="152"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="175"/>
         <source>Reverse mouse wheel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="220"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="221"/>
         <source>XOR frame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="225"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="226"/>
         <source>Highlight (fast)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="96"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="234"/>
         <source>(not applied on the current image)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="131"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="75"/>
         <source>(of white)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2477,227 +2846,247 @@ Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation suppor
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="124"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="303"/>
         <source>Display quality:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="138"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="96"/>
         <source>Fit window to images when zoomed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="191"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="255"/>
         <source>Enable Toolbar shrinking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="303"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="155"/>
         <source>Fast</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="308"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="160"/>
         <source>Quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="316"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="127"/>
         <source>(reduces downscaling aliasing effects)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="332"/>
-        <source>Fullscreen</source>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="278"/>
+        <source>Do not fit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="283"/>
+        <source>Fit images to desktop</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="288"/>
+        <source>Fit large images to desktop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="338"/>
+        <source>Start fullscreen (if image is loaded on startup)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="354"/>
+        <source>Fullscreen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="360"/>
         <source>Indicator font size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="345"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="367"/>
         <source>Enable file index indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="353"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="375"/>
         <source>Dark gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="358"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="380"/>
         <source>Gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="363"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="385"/>
         <source>Light gray</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="368"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="390"/>
         <source>White</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="373"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="395"/>
         <source>Dark red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="378"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="400"/>
         <source>Red</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="383"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="405"/>
         <source>Dark green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="388"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="410"/>
         <source>Green</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="393"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="415"/>
         <source>Dark Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="398"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="420"/>
         <source>Blue</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="414"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="436"/>
         <source>Fit all images to display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="419"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="441"/>
         <source>Fit large images to display</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="427"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="449"/>
         <source>Enable file name indicator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="434"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="456"/>
         <source>px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="454"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="476"/>
         <source>Hide cursor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="471"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="493"/>
         <source>Indicator color:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="481"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="503"/>
         <source>Indicator font:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="497"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="519"/>
         <source>Undo stack</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="513"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="535"/>
         <source>Memory limit:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="520"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="542"/>
         <source>Minimum number of steps:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="550"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="572"/>
         <source>MB</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="560"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="582"/>
         <source>Thumbnails</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="593"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="615"/>
         <source>Cache size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="600"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="622"/>
         <source>Multithreading:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="608"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="630"/>
         <source>Auto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="613"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="635"/>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="618"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="640"/>
         <source>2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="623"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="645"/>
         <source>4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="628"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="650"/>
         <source>8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="633"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="655"/>
         <source>16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="638"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="660"/>
         <source>32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="643"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="665"/>
         <source>64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="664"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="686"/>
         <source>Preloading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="586"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="608"/>
         <source>Scroll speed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="88"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="89"/>
         <source>Restore defaults</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="88"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="89"/>
         <source>Do you really want to clear and restore all settings to the default?
 These includes previous files, effect parameter and more...
 The application will exit.</source>
