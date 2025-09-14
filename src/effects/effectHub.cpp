@@ -31,6 +31,7 @@
 #include "effects/moduleSwapChannels.h"
 #include "effects/moduleColorAdjust.h"
 #include "effects/moduleColorTemperature.h"
+#include "effects/moduleColorQuantization.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -53,7 +54,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleSwapChannels());
 	list.append(new EffectModuleColorAdjust());
 	list.append(new EffectModuleColorTemperature());
-	
+	list.append(new EffectModuleColorQuantization());
 	
 	
 	for (EffectBase* item : list)
