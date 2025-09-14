@@ -2112,10 +2112,18 @@ void MainWindow::doSimpleFilter(SimpleFilter f)
 			dst = src.transformed(QTransform().rotate(-90.0), Qt::SmoothTransformation);
 			break;
 		case MIRROR_V:
+		#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
 			dst = src.mirrored(false, true);
+		#else
+			dst = src.flipped(Qt::Vertical);
+		#endif
 			break;
 		case MIRROR_H:
+		#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
 			dst = src.mirrored(true, false);
+		#else
+			dst = src.flipped(Qt::Horizontal);
+		#endif
 			break;
 		case GRAYS:
 			dst = src.convertToFormat(QImage::Format_Grayscale8).convertToFormat(QImage::Format_RGB32);

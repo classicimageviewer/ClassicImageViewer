@@ -1106,11 +1106,19 @@ void BatchWorker::run()
 			}
 			if (parameters->hFlip)
 			{
+			#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
 				img = img.mirrored(true, false);
+			#else
+				img = img.flipped(Qt::Horizontal);
+			#endif
 			}
 			if (parameters->vFlip)
 			{
+			#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
 				img = img.mirrored(false, true);
+			#else
+				img = img.flipped(Qt::Vertical);
+			#endif
 			}
 			if (parameters->autoColor)
 			{
