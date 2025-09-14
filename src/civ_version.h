@@ -17,9 +17,9 @@
 #ifndef CIV_VERSION_H
 #define CIV_VERSION_H
 
-#define CIV_VERSION		"1.2.0"
+#define CIV_VERSION		"1.3.0"
 #define CIV_MAJOR_VERSION	(1)
-#define CIV_MINOR_VERSION	(2)
+#define CIV_MINOR_VERSION	(3)
 #define CIV_MICRO_VERSION	(0)
 
 

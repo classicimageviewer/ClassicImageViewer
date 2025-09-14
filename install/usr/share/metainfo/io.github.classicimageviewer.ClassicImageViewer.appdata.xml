@@ -37,6 +37,21 @@
     <binary>civ</binary>
   </provides>
   <releases>
+    <release version="1.3.0" date="2025-09-14">
+        <description>
+          <ul>
+            <li>selection improvements (adjusting shortcuts and aspect ratio)</li>
+            <li>new display modes</li>
+            <li>support of lower color depth, color quantization effect</li>
+            <li>statusbar improvements</li>
+            <li>external tools</li>
+            <li>color temperature effect</li>
+            <li>save selection</li>
+            <li>redo option</li>
+            <li>bugfixes</li>
+          </ul>
+        </description>
+    </release>
     <release version="1.2.0" date="2025-05-11">
         <description>
           <ul>
