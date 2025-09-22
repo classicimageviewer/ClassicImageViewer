@@ -2241,7 +2241,16 @@ void MainWindow::setWindowSize()
 		
 		QSize oldSize = this->size();
 		QSize extraSize = oldSize - display->viewport()->size();
-		QSize newSize = currentImageSize * (display->getZoom() / Globals::scalingFactor) + extraSize + QSize(1,1);
+		QSize imageSize = currentImageSize * (display->getZoom() / Globals::scalingFactor);
+		QSize newSize = imageSize + extraSize + QSize(1,1);
+		if (Globals::prefs->getDisplayMode() == 5) //fit large images to desktop
+		{
+			if ((imageSize.width() > availableSize.width()) || (imageSize.height() > availableSize.height()))
+			{
+				imageSize.scale(availableSize, Qt::KeepAspectRatio);
+				newSize = imageSize + extraSize + QSize(1,1);
+			}
+		}
 		newSize = newSize.boundedTo(availableSize);
 		this->resize(newSize);
 		
