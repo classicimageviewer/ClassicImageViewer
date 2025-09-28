@@ -67,10 +67,13 @@ private: // variables
 	ThumbnailLoader * loaders[64];
 	QPixmap placeholderThumbnail, unreadableThumbnail;
 	int lastUsedRow;
+	QSize iconSize;
+private: // functions
+	void loadPlaceholders(void);
 private slots:
 	void dispatch(const QString path, const int row);
 public:
-	ThumbnailModel(QString indexedDirPath, QStringList indexedFiles);
+	ThumbnailModel(QString indexedDirPath, QStringList indexedFiles, QSize iconSize);
 	~ThumbnailModel();
 	int rowCount(const QModelIndex & parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const override;
@@ -78,6 +81,7 @@ public:
 public slots:
 	void thumbnailLoaded(QPixmap *pixmap, int row);
 	void registerLastUsedRow(int row);
+	void setIconSize(QSize size);
 signals:
 	void loadRequest(const QString path, const int row) const;
 	void changedLastUsedRow(int row) const;
@@ -93,12 +97,15 @@ private: // variables
 	Ui_ThumbnailDialog ui;
 	ThumbnailModel * model;
 	QTimer scrollTimer;
+	int thumbnailSize;
 private slots:
 	void scrollTimeout();
 	void scrolled(int i);
 	void clicked(const QModelIndex & index);
+	void thumbnailSizeChanged(int i);
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);
+	void setThumbnailSize(int size);
 public:
 	ThumbnailDialog(QString indexedDirPath, QStringList indexedFiles, QWidget * parent = NULL);
 	~ThumbnailDialog();

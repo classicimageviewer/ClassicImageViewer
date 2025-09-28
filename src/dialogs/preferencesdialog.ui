@@ -595,7 +595,7 @@
             <item row="0" column="1">
              <widget class="QSpinBox" name="spinBoxThCacheSize">
               <property name="minimum">
-               <number>256</number>
+               <number>512</number>
               </property>
               <property name="maximum">
                <number>8192</number>

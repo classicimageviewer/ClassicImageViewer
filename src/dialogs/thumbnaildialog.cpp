@@ -28,13 +28,17 @@ ThumbnailDialog::ThumbnailDialog(QString indexedDirPath, QStringList indexedFile
 	ui.setupUi(this);
 	setModal(false);
 	setAttribute(Qt::WA_AlwaysShowToolTips);
-	ui.listView->setGridSize(QSize(160,160));
-	model = new ThumbnailModel(indexedDirPath, indexedFiles);
+	thumbnailSize = Globals::prefs->fetchSpecificParameter("ThumbnailDialog", "thumbnailSize", QVariant(1)).toInt();
+	model = NULL;
+	setThumbnailSize(thumbnailSize);
+	model = new ThumbnailModel(indexedDirPath, indexedFiles, ui.listView->iconSize());
 	ui.listView->setModel(model);
+	ui.comboBoxThumbnailSize->setCurrentIndex(thumbnailSize);
 	scrollTimer.setSingleShot(true);
 	connect(&scrollTimer, SIGNAL(timeout()), this, SLOT(scrollTimeout()));
 	connect(ui.listView->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(scrolled(int)));
 	connect(ui.listView, SIGNAL(doubleClicked(const QModelIndex &)), this, SLOT(clicked(const QModelIndex &)));
+	connect(ui.comboBoxThumbnailSize, SIGNAL(currentIndexChanged(int)), this, SLOT(thumbnailSizeChanged(int)));
 	ui.listView->verticalScrollBar()->setSingleStep(Globals::prefs->getThumbnailsScrollSpeed());
 	restoreGeometry(Globals::prefs->fetchSpecificParameter("ThumbnailDialog", "geometry", QByteArray()).toByteArray());
 	this->installEventFilter(this);
@@ -43,6 +47,7 @@ ThumbnailDialog::ThumbnailDialog(QString indexedDirPath, QStringList indexedFile
 ThumbnailDialog::~ThumbnailDialog()
 {
 	Globals::prefs->storeSpecificParameter("ThumbnailDialog", "geometry", saveGeometry());
+	Globals::prefs->storeSpecificParameter("ThumbnailDialog", "thumbnailSize", thumbnailSize);
 	delete model;
 }
 
@@ -62,6 +67,49 @@ void ThumbnailDialog::clicked(const QModelIndex & index)
 	if (index.isValid())
 	{
 		emit itemSelected(index.row());
+	}
+}
+
+void ThumbnailDialog::thumbnailSizeChanged(int i)
+{
+	setThumbnailSize(i);
+}
+
+void ThumbnailDialog::setThumbnailSize(int size)
+{
+	thumbnailSize = size;
+	QModelIndex indexFirstVisible = ui.listView->indexAt(QPoint(0,0));
+	switch (size)
+	{
+		case 0:
+			ui.listView->setGridSize(QSize(80,80));
+			ui.listView->setIconSize(QSize(64,64));
+			break;
+		default:
+		case 1:
+			ui.listView->setGridSize(QSize(160,160));
+			ui.listView->setIconSize(QSize(128,128));
+			break;
+		case 2:
+			ui.listView->setGridSize(QSize(288,288));
+			ui.listView->setIconSize(QSize(256,256));
+			break;
+	}
+	if (model != NULL)
+	{
+		model->setIconSize(ui.listView->iconSize());
+		if (indexFirstVisible.isValid())
+		{
+			ui.listView->scrollTo(indexFirstVisible, QAbstractItemView::PositionAtTop);
+		}
+		else
+		{
+			QModelIndex index = ui.listView->currentIndex();
+			if (index.isValid())
+			{
+				ui.listView->scrollTo(index);
+			}
+		}
 	}
 }
 
@@ -94,16 +142,17 @@ void ThumbnailDialog::updateFileList(QString indexedDirPath, QStringList indexed
 {
 	ui.listView->setModel(NULL);
 	delete model;
-	model = new ThumbnailModel(indexedDirPath, indexedFiles);
+	model = new ThumbnailModel(indexedDirPath, indexedFiles, ui.listView->iconSize());
 	ui.listView->setModel(model);
 }
 
-ThumbnailModel::ThumbnailModel(QString indexedDirPath, QStringList indexedFiles)
+ThumbnailModel::ThumbnailModel(QString indexedDirPath, QStringList indexedFiles, QSize iconSize)
 {
 	this->indexedDirPath = indexedDirPath;
 	this->indexedFiles = indexedFiles;
+	this->iconSize = iconSize*Globals::scalingFactor;
 	cacheSize = Globals::prefs->getThumbnailsCacheSize();
-	if (cacheSize < 256) cacheSize = 256;
+	if (cacheSize < 512) cacheSize = 512;
 	if (cacheSize > 8192) cacheSize = 8192;
 	pixmapCache = new QCache<int, QPixmap>(cacheSize);
 	loaderCount = Globals::prefs->getThumbnailsThreads();
@@ -132,18 +181,7 @@ ThumbnailModel::ThumbnailModel(QString indexedDirPath, QStringList indexedFiles)
 		connect(loaders[i], SIGNAL(thumbnailLoaded(QPixmap*, int)), this, SLOT(thumbnailLoaded(QPixmap*, int)));
 	}
 	
-	QImage img;
-	img = QImage(":/pixmaps/pixmaps/loader.png");
-	img.setDevicePixelRatio(Globals::scalingFactor);
-	img = img.scaled(QSize(128,128)*Globals::scalingFactor, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-	placeholderThumbnail = QPixmap::fromImage(img);
-	placeholderThumbnail.setDevicePixelRatio(Globals::scalingFactor);
-	
-	img = QImage(":/pixmaps/pixmaps/loadfailed.png");
-	img.setDevicePixelRatio(Globals::scalingFactor);
-	img = img.scaled(QSize(128,128)*Globals::scalingFactor, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-	unreadableThumbnail = QPixmap::fromImage(img);
-	unreadableThumbnail.setDevicePixelRatio(Globals::scalingFactor);
+	loadPlaceholders();
 	
 	lastUsedRow = 0;
 	connect(this, SIGNAL(loadRequest(const QString, const int)), this, SLOT(dispatch(const QString, const int)));
@@ -229,7 +267,17 @@ QVariant ThumbnailModel::data(const QModelIndex & index, int role) const
 			{
 				return unreadableThumbnail;
 			}
-			return *pixmapCache->object(row);
+			QPixmap icon = *pixmapCache->object(row);
+			if (iconSize.width() < icon.width())	// small
+			{
+				return icon.scaled(iconSize, Qt::KeepAspectRatio,  Qt::FastTransformation);
+			} else
+			if (iconSize.width() > icon.width())	// large
+			{
+				return icon.scaled(iconSize, Qt::KeepAspectRatio,  Qt::SmoothTransformation);
+			}
+			// normal
+			return icon;
 		}
 		else
 		{
@@ -254,6 +302,28 @@ void ThumbnailModel::registerLastUsedRow(int row)
 	lastUsedRow = row;
 }
 
+void ThumbnailModel::setIconSize(QSize size)
+{
+	iconSize = size * Globals::scalingFactor;
+	loadPlaceholders();
+}
+
+void ThumbnailModel::loadPlaceholders(void)
+{
+	QImage img;
+	img = QImage(":/pixmaps/pixmaps/loader.png");
+	img.setDevicePixelRatio(Globals::scalingFactor);
+	img = img.scaled(iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	placeholderThumbnail = QPixmap::fromImage(img);
+	placeholderThumbnail.setDevicePixelRatio(Globals::scalingFactor);
+	
+	img = QImage(":/pixmaps/pixmaps/loadfailed.png");
+	img.setDevicePixelRatio(Globals::scalingFactor);
+	img = img.scaled(iconSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+	unreadableThumbnail = QPixmap::fromImage(img);
+	unreadableThumbnail.setDevicePixelRatio(Globals::scalingFactor);
+}
+
 void ThumbnailModel::dispatch(const QString path, const int row)
 {
 	mutex.lock();
@@ -268,6 +338,12 @@ void ThumbnailModel::dispatch(const QString path, const int row)
 		if (queueLimit > cacheSize)
 		{
 			queueLimit = cacheSize;
+		}
+		if (requestedRowQueue.contains(-row))
+		{
+			int index = requestedRowQueue.indexOf(-row);
+			requestedRowQueue.removeAt(index);
+			pathQueue.removeAt(index);
 		}
 		while (requestedRowQueue.length() > queueLimit)
 		{
