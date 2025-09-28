@@ -25,22 +25,22 @@ The Appimage is built on old dependecies, therefore it is highly recommended, to
 
 ### Debian/Ubuntu
 
-If you want to build on Qt5:
+If you want to build on Qt6:
 
 ```
-sudo apt install g++ make qtbase5-dev qttools5-dev-tools
+sudo apt install g++ make qt6-base-dev qt6-l10n-tools qt6-image-formats-plugins
 ```
 
-As an alternative, if you want to build on Qt6:
+As an alternative, if you want to build on Qt5:
 
 ```
-sudo apt install g++ make qt6-base-dev qt6-l10n-tools
+sudo apt install g++ make qtbase5-dev qttools5-dev-tools qt5-image-formats-plugins
 ```
 
 ### Fedora
 
 ```
-sudo dnf install g++ make qt6-qtbase-devel qt6-qttools-devel
+sudo dnf install g++ make qt6-qtbase-devel qt6-qttools-devel qt6-qtimageformats
 ```
 
 ## Recommended packages
@@ -69,7 +69,7 @@ Otherwise download as ZIP and extract the content.
 
 ## Build
 
-Enter the directory of the repository.
+Enter the directory of the repository, then run the following commands:
 
 ```
 qmake .
