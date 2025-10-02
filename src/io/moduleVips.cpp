@@ -118,6 +118,7 @@ QImage IOmoduleVips::loadFile(QString path)
 	} while (0);
 	if (vImgLoaded && (vImg.width() > 0) && (vImg.height() > 0))
 	{
+		if (vImg.data() == NULL) return QImage();
 		if (vImg.format() != VIPS_FORMAT_UCHAR)
 		{
 			vImg = vImg.cast(VIPS_FORMAT_UCHAR, VImage::option()->set("shift", true));
@@ -133,8 +134,14 @@ QImage IOmoduleVips::loadFile(QString path)
 		else
 		if (vImg.bands() == 3)
 		{
+			// QImage: each scanline must be 32-bit aligned
 			QImage i = QImage(vImg.width(), vImg.height(), QImage::Format_RGB888);
-			memcpy(i.bits(), vImg.data(), vImg.width()*vImg.height()*3);
+			int vImgScanLineLength = vImg.width() * 3;
+			for (int y = 0; y < vImg.height(); ++y)
+			{
+				uint8_t * QImageScanLine = reinterpret_cast<uint8_t*>(i.scanLine(y));
+				memcpy(QImageScanLine, reinterpret_cast<const uint8_t*>(vImg.data()) + y*vImgScanLineLength, vImgScanLineLength);
+			}
 			return i.convertToFormat(QImage::Format_RGB32);
 		}
 		else
@@ -154,6 +161,35 @@ QImage IOmoduleVips::loadThumbnail(QString path, QSize thumbnailSize)
 {
 	Q_UNUSED(path);
 	Q_UNUSED(thumbnailSize);
+	try {
+		VImage vImg = VImage::thumbnail(path.toUtf8().data(), thumbnailSize.width(), VImage::option()->set("height",  thumbnailSize.height())->set("size", 0));
+		if (vImg.format() != VIPS_FORMAT_UCHAR)
+		{
+			vImg = vImg.cast(VIPS_FORMAT_UCHAR, VImage::option()->set("shift", true));
+		}
+		vImg = vImg.copy(VImage::option()->set("coding", VIPS_CODING_NONE)->set("interpretation", VIPS_INTERPRETATION_RGB));
+		if (vImg.data() == NULL) return QImage();
+		if ((vImg.bands() == 4) && vImg.has_alpha())
+		{
+			QImage i = QImage(vImg.width(), vImg.height(), QImage::Format_ARGB32);
+			memcpy(i.bits(), vImg.data(), vImg.width()*vImg.height()*4);
+			return i;
+		}
+		else
+		if (vImg.bands() == 3)
+		{
+			// QImage: each scanline must be 32-bit aligned
+			QImage i = QImage(vImg.width(), vImg.height(), QImage::Format_RGB888);
+			int vImgScanLineLength = vImg.width() * 3;
+			for (int y = 0; y < vImg.height(); ++y)
+			{
+				uint8_t * QImageScanLine = reinterpret_cast<uint8_t*>(i.scanLine(y));
+				memcpy(QImageScanLine, reinterpret_cast<const uint8_t*>(vImg.data()) + y*vImgScanLineLength, vImgScanLineLength);
+			}
+			return i.convertToFormat(QImage::Format_RGB32);
+		}
+	}
+	catch (vips::VError const&) {}
 	return QImage();
 }
 
@@ -224,6 +260,7 @@ bool IOmoduleVips::saveFile(QString path, QString format, QImage image, QList<IO
 #if defined(HAS_VIPS)
 	QImage img;
 	VImage vImg;
+	uint8_t * rgbImage = NULL;
 	if (image.hasAlphaChannel())
 	{
 		img = image.convertToFormat(QImage::Format_ARGB32);
@@ -232,7 +269,15 @@ bool IOmoduleVips::saveFile(QString path, QString format, QImage image, QList<IO
 	else
 	{
 		img = image.convertToFormat(QImage::Format_RGB888);
-		vImg = VImage::new_from_memory((void*)img.constBits(), img.width()*img.height()*3, img.width(), img.height(), 3, VIPS_FORMAT_UCHAR);
+		rgbImage = new uint8_t[img.width()*img.height()*3];
+		// QImage: each scanline is 32-bit aligned
+		int vImgScanLineLength = img.width() * 3;
+		for (int y = 0; y < img.height(); ++y)
+		{
+			uint8_t * QImageScanLine = reinterpret_cast<uint8_t*>(img.scanLine(y));
+			memcpy(rgbImage + y*vImgScanLineLength, QImageScanLine, vImgScanLineLength);
+		}
+		vImg = VImage::new_from_memory((void*)rgbImage, img.width()*img.height()*3, img.width(), img.height(), 3, VIPS_FORMAT_UCHAR);
 	}
 	
 	int quality = 100;
@@ -344,6 +389,11 @@ bool IOmoduleVips::saveFile(QString path, QString format, QImage image, QList<IO
 	} else
 	#endif
 	{}
+	
+	if (rgbImage != NULL)
+	{
+		delete [] rgbImage;
+	}
 #else
 	Q_UNUSED(path);
 	Q_UNUSED(image);
