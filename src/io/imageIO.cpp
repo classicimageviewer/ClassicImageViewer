@@ -36,6 +36,12 @@ ImageIO::ImageIO(QObject * parent) : QObject(parent)
 
 	for (IObase* item : modules)
 	{
+		qDebug() << "IO module " << item->moduleName() << " supported formats: " << item->getInputFormats().join(", ");
+		item->addInputFormatAlternatives("jpg", {"jpg", "jpeg", "jpe", "jif", "jfif", "jfi", "pjpeg", "pjp"});
+		item->addInputFormatAlternatives("jpeg", {"jpg", "jpeg", "jpe", "jif", "jfif", "jfi", "pjpeg", "pjp"});
+		item->addInputFormatAlternatives("heif", {"heif", "heifs", "heic", "heics", "avci", "avcs", "hif"});
+		item->addInputFormatAlternatives("heic", {"heif", "heifs", "heic", "heics", "avci", "avcs", "hif"});
+		item->addInputFormatAlternatives("fits", {"fits", "fit", "fts"});
 		supportedInputFormats += item->getInputFormats();
 		supportedOutputFormats += item->getOutputFormats();
 	}
@@ -65,10 +71,34 @@ QStringList ImageIO::getOutputFormats()
 
 QImage ImageIO::loadFile(QString path)
 {
+	// try loaders first, that claims support for this format
+	int dotPos = path.lastIndexOf(".");
+	if (dotPos >= 0)
+	{
+		QString extension = path.mid(dotPos+1);
+		for (IObase* item : modules)
+		{
+			if (item->getInputFormats().contains(extension))
+			{
+				QImage i = item->loadFile(path);
+				if (!(i.isNull())) 
+				{
+					//qDebug() << "Loader: " << item->moduleName();
+					return i;
+				}
+			}
+		}
+	}
+	
+	// try all loaders
 	for (IObase* item : modules)
 	{
 		QImage i = item->loadFile(path);
-		if (!(i.isNull())) return i;
+		if (!(i.isNull())) 
+		{
+			//qDebug() << "Loader: " << item->moduleName();
+			return i;
+		}
 	}
 	
 	// can't read

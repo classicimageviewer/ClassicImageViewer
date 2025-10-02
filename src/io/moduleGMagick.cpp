@@ -27,22 +27,49 @@
 IOmoduleGMagick::IOmoduleGMagick(QObject * parent) : QObject(parent)
 {
 #if defined(HAS_GMAGICK)
-	QStringList magickInputFormats = {	"ART", "AVIF", "AVS", "CALS", "CIN", "CGM", "CUR", "CUT", 
-						"DCM", "DCX", "DIB", "DPX", "FAX", "FITS", "HEIF", "HPGL",
-						"ICO", "JBIG", "JNG", "JP2", "JPC", "JXL", "MIFF", "MONO",
-						"MNG", "MTV", "OTB", "PALM", "PAM", "PBM", "PCX", "PDB",
-						"PGM", "PICON", "PICT", "PIX", "RLA", "RLE", "SCT", "SFW",
-						"SGI", "SUN", "TGA", "TIFF", "TIM", "VICAR", "VIFF", "WBMP",
-						"WPG", "XBM", "XCF", "XPM", "XWD" };
+	QStringList magickInputFormats = {
+						"ART", "AVS", "CAL", "CALS", "CIN", "CUT", "DCM", "DIB", "ICODIB", "DPX", "EMF", "WMFWIN32",
+						"FAX", "G3", "FITS", "FPX", "GIF", "GIF87", "GRAY", "GRAYA", "R", "C", "G", "M", "B", "Y", "O",
+						"K", "HEIF", "HEIC", "HRZ", "CUR", "ICO", "ICON", "BIE", "JBG", "JBIG", "JNX", "J2C", "JP2",
+						"JPC", "PGX", "JXL", "MAC", "MAT", "MIFF", "MPC", "MPR", "MPRI", "MSL", "MTV", "MVG", "OTB",
+						"PALM", "PCD", "PCDS", "PCL", "DCX", "PCX", "PDB", "PCT", "PICT", "PIX", "P7", "PAM", "PBM",
+						"PGM", "PNM", "PPM", "PSD", "PWP", "RGB", "RGBA", "RLA", "RLE", "SCT", "SFW", "SGI", "RAS",
+						"SUN", "SVG", "SVGZ", "ICB", "TGA", "VDA", "VST", "BIGTIFF", "GROUP4RAW", "PTIF", "TIF", "TIFF",
+						"TIM", "TOPOL", "UIL", "VICAR", "VIFF", "XV", "WBMP", "WEBP", "WMF", "WPG", "XBM", "XCF",
+						"PICON", "PM", "XPM", "XWD", "3FR", "ARW", "CR2", "CRW", "DCR", "DNG", "ERF", "K25", "KDC",
+						"MEF", "MRW", "NEF", "ORF", "PEF", "RAF", "SR2", "SRF", "X3F"
+					};
+	
+	QStringList magickOutputExcludeFormats = {
+						"GROUP4RAW", "PCL", "GRAY", "GRAYA", "R", "C", "G", "M", "B", "Y", "O", "K", "MPR", "MPRI", "MSL", "P7", "MVG"
+					};
+	
+	QStringList magickOutputFormats = magickInputFormats;
+	
+	for (const QString &ext : magickOutputExcludeFormats)
+	{
+		magickOutputFormats.removeAll(ext);
+	}
+	
 	for (const QString &ext : magickInputFormats)
 	{
 		try {
 			Magick::CoderInfo info(ext.toUtf8().data());
 			if (info.isReadable())
 			{
-				//TODO
-				qDebug() << "File format '" << ext.toLower().toUtf8().data() << "' available via GraphicsMagick";
 				supportedInputFormats += ext.toLower();
+			}
+		}
+		catch(Magick::Error &e) {}
+	}
+	
+	for (const QString &ext : magickOutputFormats)
+	{
+		try {
+			Magick::CoderInfo info(ext.toUtf8().data());
+			if (info.isWritable())
+			{
+				supportedOutputFormats += ext.toLower();
 			}
 		}
 		catch(Magick::Error &e) {}
@@ -72,6 +99,10 @@ QImage IOmoduleGMagick::loadFile(QString path)
 			i = QImage(mImg->columns(),mImg->rows(), QImage::Format_RGB32);
 		}
 		mImg->write(0,0,i.width(), i.height(), "BGRA", Magick::CharPixel, (void*)i.bits());
+		if (mImg->classType() == Magick::PseudoClass)
+		{
+			i = i.convertToFormat(QImage::Format_Indexed8);
+		}
 		
 		delete mImg;
 		return i;
@@ -101,10 +132,34 @@ QList<IObase::ParameterCluster> IOmoduleGMagick::getListOfParameterClusters(QStr
 
 bool IOmoduleGMagick::saveFile(QString path, QString format, QImage image, QList<IObase::ParameterCluster> parameters)
 {
+	Q_UNUSED(parameters);
+#if defined(HAS_GMAGICK)
+	Magick::Image * mImg = new Magick::Image();
+	mImg->quiet(true);
+	mImg->magick(format.toUtf8().data());
+	QImage src32;
+	if (image.hasAlphaChannel())
+	{
+		src32 = image.convertToFormat(QImage::Format_ARGB32);
+		mImg->read(src32.width(), src32.height(), "BGRA", Magick::CharPixel, (void*)src32.bits());
+	}
+	else
+	{
+		src32 = image.convertToFormat(QImage::Format_RGB32);
+		mImg->read(src32.width(), src32.height(), "BGRP", Magick::CharPixel, (void*)src32.bits());
+	}
+	if (image.depth() < 24)
+	{
+		mImg->classType(Magick::PseudoClass);
+	}
+	mImg->write(path.toUtf8().data());
+	delete mImg;
+	return true;
+#else
 	Q_UNUSED(path);
 	Q_UNUSED(format);
 	Q_UNUSED(image);
-	Q_UNUSED(parameters);
+#endif
 	return false;
 }
 

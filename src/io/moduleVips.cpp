@@ -62,7 +62,6 @@ IOmoduleVips::IOmoduleVips(QObject * parent) : QObject(parent)
 							file.remove(); \
 						} \
 						if (flag) { \
-							qDebug() << "File format '" << #EXT << "' available via libvips"; \
 							QStringList newExts = {__VA_ARGS__}; \
 							supportedInputFormats += newExts; \
 							supportedOutputFormats += newExts; \
@@ -159,8 +158,7 @@ QImage IOmoduleVips::loadFile(QString path)
 
 QImage IOmoduleVips::loadThumbnail(QString path, QSize thumbnailSize)
 {
-	Q_UNUSED(path);
-	Q_UNUSED(thumbnailSize);
+#if defined(HAS_VIPS)
 	try {
 		VImage vImg = VImage::thumbnail(path.toUtf8().data(), thumbnailSize.width(), VImage::option()->set("height",  thumbnailSize.height())->set("size", 0));
 		if (vImg.format() != VIPS_FORMAT_UCHAR)
@@ -190,6 +188,10 @@ QImage IOmoduleVips::loadThumbnail(QString path, QSize thumbnailSize)
 		}
 	}
 	catch (vips::VError const&) {}
+#else
+	Q_UNUSED(path);
+	Q_UNUSED(thumbnailSize);
+#endif
 	return QImage();
 }
 

@@ -43,8 +43,21 @@ public:
 		return supportedOutputFormats.contains(format.toLower());
 	};
 	
+	void addInputFormatAlternatives(QString format, QStringList alternativeList)
+	{
+		if (supportedInputFormats.contains(format.toLower()))
+		{
+			for (QString alternativeFormat : alternativeList)
+			{
+				supportedInputFormats += alternativeFormat.toLower();
+			}
+			supportedInputFormats.removeDuplicates();
+		}
+	};
+	
 	virtual ~IObase() {};
 	
+	virtual QString moduleName(void) = 0;
 	virtual QImage loadFile(QString path) = 0;
 	virtual QImage loadThumbnail(QString path, QSize thumbnailSize) = 0;
 	

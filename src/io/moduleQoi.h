@@ -32,6 +32,7 @@ public:
 	IOmoduleQoi(QObject * parent = NULL);
 	~IOmoduleQoi() override;
 	
+	QString moduleName(void) override {return "QOI";};
 	QImage loadFile(QString path) override;
 	QImage loadThumbnail(QString path, QSize thumbnailSize) override;
 

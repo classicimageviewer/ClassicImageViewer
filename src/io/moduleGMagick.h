@@ -32,6 +32,7 @@ public:
 	IOmoduleGMagick(QObject * parent = NULL);
 	~IOmoduleGMagick() override;
 	
+	QString moduleName(void) override {return "GMagick";};
 	QImage loadFile(QString path) override;
 	QImage loadThumbnail(QString path, QSize thumbnailSize) override;
 
