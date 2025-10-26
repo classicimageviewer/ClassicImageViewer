@@ -2259,6 +2259,7 @@ void MainWindow::setWindowSize()
 			display->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 			display->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 			
+			QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// attempt to fix occasional window sizing issue
 			if (display->horizontalScrollBar()->isVisible() || display->verticalScrollBar()->isVisible())
 			{
 				if (display->horizontalScrollBar()->isVisible())
