@@ -40,6 +40,7 @@ PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
 	ui.spinBoxZoomDelta->setValue(Globals::prefs->getZoomDelta());
 	ui.checkBoxReverseMouseWheel->setChecked(Globals::prefs->getReverseWheel());
 	ui.checkBoxClearClipboard->setChecked(Globals::prefs->getClearClipboardOnExit());
+	ui.checkBoxClearRecentFiles->setChecked(Globals::prefs->getClearRecentFilesOnExit());
 	ui.comboBoxSelector->setCurrentIndex(Globals::prefs->getUseFastSelector() ? 1:0);
 	ui.checkBoxEnableToolbarShrinking->setChecked(Globals::prefs->getEnableToolbarShrinking());
 	ui.comboBoxDisplayQuality->setCurrentIndex(Globals::prefs->getDisplayHigherQuality() ? 1:0);
@@ -122,6 +123,7 @@ void PreferencesDialog::savePreferences()
 	Globals::prefs->setZoomDelta(ui.spinBoxZoomDelta->value());
 	Globals::prefs->setReverseWheel(ui.checkBoxReverseMouseWheel->isChecked());
 	Globals::prefs->setClearClipboardOnExit(ui.checkBoxClearClipboard->isChecked());
+	Globals::prefs->setClearRecentFilesOnExit(ui.checkBoxClearRecentFiles->isChecked());
 	Globals::prefs->setUseFastSelector(ui.comboBoxSelector->currentIndex() != 0);
 	Globals::prefs->setEnableToolbarShrinking(ui.checkBoxEnableToolbarShrinking->isChecked());
 	Globals::prefs->setDisplayHigherQuality(ui.comboBoxDisplayQuality->currentIndex() != 0);

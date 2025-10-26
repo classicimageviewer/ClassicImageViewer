@@ -169,6 +169,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 	{
 		clearClipboard();
 	}
+	if (Globals::prefs->getClearRecentFilesOnExit())
+	{
+		Globals::prefs->setRecentFiles(QStringList());
+	}
 	Globals::prefs->setWindowPosition(this->pos());
 	QMainWindow::closeEvent(event);
 }
@@ -857,6 +861,10 @@ void MainWindow::actionSlot(Action a)
 				if (Globals::prefs->getClearClipboardOnExit())
 				{
 					clearClipboard();
+				}
+				if (Globals::prefs->getClearRecentFilesOnExit())
+				{
+					Globals::prefs->setRecentFiles(QStringList());
 				}
 				Globals::prefs->setWindowPosition(this->pos());
 				qApp->quit();

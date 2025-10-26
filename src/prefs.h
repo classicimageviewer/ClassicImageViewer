@@ -44,6 +44,7 @@
 	X(toInt, int, ZoomDelta, 10) \
 	X(toBool, bool, ReverseWheel, false) \
 	X(toBool, bool, ClearClipboardOnExit, true) \
+	X(toBool, bool, ClearRecentFilesOnExit, false) \
 	X(toBool, bool, UseFastSelector, false) \
 	X(toBool, bool, EnableToolbarShrinking, false) \
 	X(toBool, bool, DisplayHigherQuality, false) \
