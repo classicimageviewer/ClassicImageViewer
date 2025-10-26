@@ -110,7 +110,7 @@ MainWindow::MainWindow() : QMainWindow()
 	
 	connect(&startupTimer, SIGNAL(timeout()), this, SLOT(startup()));
 	startupTimer.setSingleShot(true);
-	startupTimer.start(66);
+	startupTimer.start(1);
 	slideshowTimer.stop();
 	slideshowDirection = 0;
 	
