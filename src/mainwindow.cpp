@@ -310,6 +310,8 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuFile, tr("&Open"), ACT_OPEN, "O",  ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuFile, tr("&Reload"), ACT_REOPEN, "Shift+R",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddAction(ui.menuFile, tr("Reopen in new app"), ACT_OPEN_IN_NEW_APP, "Ctrl+N",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
+	externalEditorMenu = ui.menuFile->addMenu(tr("Open in &external editor"));
+	updateExternalEditorMenu();
 	recentFilesMenu = new QMenu(tr("Recent &files"));
 	ui.menuFile->addMenu(recentFilesMenu);
 	updateRecentFilesMenu();
@@ -527,6 +529,34 @@ void MainWindow::actionSlot(Action a)
 				newProcess.setStandardErrorFile(QProcess::nullDevice());
 				newProcess.setStandardOutputFile(QProcess::nullDevice());
 				newProcess.startDetached();
+			}
+			break;
+		case ACT_OPEN_IN_EXTERNAL_EDITOR_0:
+		case ACT_OPEN_IN_EXTERNAL_EDITOR_1:
+		case ACT_OPEN_IN_EXTERNAL_EDITOR_2:
+		case ACT_OPEN_IN_EXTERNAL_EDITOR_3:
+			{
+				if (currentFilePath.isEmpty()) break;
+				int index = (a - ACT_OPEN_IN_EXTERNAL_EDITOR_0);
+				QStringList list = Globals::prefs->getExternalEditors();
+				QString config;
+				if (list.length() <= index) break;
+				config = list.at(index);
+				if (config.isEmpty()) break;
+				QStringList parts = config.split(";");
+				if (parts.length() < 1) break;
+				QString command = parts.at(0);
+				if (command.isEmpty()) break;
+				QStringList arguments = parts;
+				arguments.removeAt(0);
+				arguments.removeAll("");
+				arguments.append(currentDirPath + "/" + currentFilePath);
+				QProcess externalEditor;
+				externalEditor.setProgram(command);
+				externalEditor.setArguments(arguments);
+				externalEditor.setStandardErrorFile(QProcess::nullDevice());
+				externalEditor.setStandardOutputFile(QProcess::nullDevice());
+				externalEditor.startDetached();
 			}
 			break;
 		case ACT_RECENT_FILE_0:
@@ -1362,6 +1392,7 @@ void MainWindow::actionSlot(Action a)
 						}
 					}
 					updateDisplayModeMenu();
+					updateExternalEditorMenu();
 				}
 				delete d;
 			}
@@ -2534,6 +2565,39 @@ void MainWindow::updateRecentFilesMenu()
 		menuAddAction(recentFilesMenu, list.at(i), (Action)(ACT_RECENT_FILE_0 + i), "",  0);
 	}
 	menuAddAction(recentFilesMenu, tr("&Clear recent files"), ACT_CLEAR_RECENT_FILES, "",  0);
+}
+
+void MainWindow::updateExternalEditorMenu()
+{
+	externalEditorMenu->clear();
+	for (int i=0; i<4; i++)
+	{
+		removeAction((Action)(ACT_OPEN_IN_EXTERNAL_EDITOR_0 + i));
+	}
+	
+	QStringList list = Globals::prefs->getExternalEditors();
+	
+	for (int i=0; i<4; i++)
+	{
+		QString config;
+		if (list.length() > i)
+		{
+			config = list.at(i);
+		}
+		QString command;
+		if (!config.isEmpty())
+		{
+			command = config.split(";").at(0);
+		}
+		if (!command.isEmpty())
+		{
+			menuAddAction(externalEditorMenu, QString("%1) ").arg(i+1) + command, (Action)(ACT_OPEN_IN_EXTERNAL_EDITOR_0 + i),  QString("Shift+%1").arg(i+1).toUtf8().constData(),  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
+		}
+	}
+	if (externalEditorMenu->isEmpty())
+	{
+		externalEditorMenu->addAction(tr("Not configured"))->setDisabled(true);
+	}
 }
 
 void MainWindow::updateDisplayModeMenu()

@@ -36,6 +36,7 @@
 	X(toString, QString, LastOpenedDir, "") \
 	X(toString, QString, LastSaveAsDir, "") \
 	X(toStringList, QStringList, RecentFiles, QStringList()) \
+	X(toStringList, QStringList, ExternalEditors, QStringList()) \
 	X(toInt, int, FileOrder, 0) \
 	X(toBool, bool, LoopDir, true) \
 	X(toInt, int, DisplayMode, 0) \

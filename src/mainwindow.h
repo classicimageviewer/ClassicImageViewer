@@ -47,6 +47,7 @@ private: // variables
 	QTimer startupTimer;
 	std::vector<ActionLookUp_t> ActionLookUpTable;
 	InternalState internalState;
+	QMenu * externalEditorMenu;
 	QMenu * recentFilesMenu;
 	QMenu * externalToolsMenu;
 	QMenu * displayModeMenu;
@@ -123,6 +124,7 @@ private: // functions
 	void showFileModificationTime(QString fullPath);
 	void clearFileModificationTime();
 	void addPathToRecentFiles(QString path);
+	void updateExternalEditorMenu();
 	void updateRecentFilesMenu();
 	void updateDisplayModeMenu();
 	void setIndexDisplayNoSignals(int value, int maximum = 0);

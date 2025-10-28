@@ -75,6 +75,43 @@ PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
 	ui.comboBoxThMultithreading->setCurrentIndex(Globals::prefs->getThumbnailsThreads());
 	ui.spinBoxThScrollSpeed->setValue(Globals::prefs->getThumbnailsScrollSpeed());
 	
+	QStringList extEditorList = Globals::prefs->getExternalEditors();
+	QString extEditor1, extEditor2, extEditor3, extEditor4;
+	if (extEditorList.length() >= 1) extEditor1 = extEditorList.at(0);
+	if (extEditorList.length() >= 2) extEditor2 = extEditorList.at(1);
+	if (extEditorList.length() >= 3) extEditor3 = extEditorList.at(2);
+	if (extEditorList.length() >= 4) extEditor4 = extEditorList.at(3);
+	extEditorList = extEditor1.split(";");
+	ui.lineEditExtEditor1Cmd->setText(extEditorList.at(0));
+	if (extEditorList.length() > 1)
+	{
+		extEditorList.removeAt(0);
+		ui.lineEditExtEditor1Args->setText(extEditorList.join(";"));
+	}
+	extEditorList = extEditor2.split(";");
+	ui.lineEditExtEditor2Cmd->setText(extEditorList.at(0));
+	if (extEditorList.length() > 1)
+	{
+		extEditorList.removeAt(0);
+		ui.lineEditExtEditor2Args->setText(extEditorList.join(";"));
+	}
+	extEditorList = extEditor3.split(";");
+	ui.lineEditExtEditor3Cmd->setText(extEditorList.at(0));
+	if (extEditorList.length() > 1)
+	{
+		extEditorList.removeAt(0);
+		ui.lineEditExtEditor3Args->setText(extEditorList.join(";"));
+	}
+	extEditorList = extEditor4.split(";");
+	ui.lineEditExtEditor4Cmd->setText(extEditorList.at(0));
+	if (extEditorList.length() > 1)
+	{
+		extEditorList.removeAt(0);
+		ui.lineEditExtEditor4Args->setText(extEditorList.join(";"));
+	}
+
+
+	
 	restoreDefaultButton = ui.buttonBox->button(QDialogButtonBox::RestoreDefaults);
 	connect(restoreDefaultButton, SIGNAL(clicked(bool)), this, SLOT(restoreDefaults(bool)));
 }
@@ -166,5 +203,12 @@ void PreferencesDialog::savePreferences()
 	Globals::prefs->setThumbnailsPreloading(ui.checkBoxThPreloading->isChecked());
 	Globals::prefs->setThumbnailsThreads(ui.comboBoxThMultithreading->currentIndex());
 	Globals::prefs->setThumbnailsScrollSpeed(ui.spinBoxThScrollSpeed->value());
+	
+	QStringList extEditorList;
+	extEditorList.append((QStringList() << ui.lineEditExtEditor1Cmd->text() << ui.lineEditExtEditor1Args->text()).join(";"));
+	extEditorList.append((QStringList() << ui.lineEditExtEditor2Cmd->text() << ui.lineEditExtEditor2Args->text()).join(";"));
+	extEditorList.append((QStringList() << ui.lineEditExtEditor3Cmd->text() << ui.lineEditExtEditor3Args->text()).join(";"));
+	extEditorList.append((QStringList() << ui.lineEditExtEditor4Cmd->text() << ui.lineEditExtEditor4Args->text()).join(";"));
+	Globals::prefs->setExternalEditors(extEditorList);
 }
 
