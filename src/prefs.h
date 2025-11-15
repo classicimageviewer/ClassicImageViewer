@@ -93,6 +93,7 @@ public:
 	
 	void storeSpecificParameter(QString unitName, QString parameterName, QVariant value);
 	QVariant fetchSpecificParameter(QString unitName, QString parameterName, QVariant defaultValue = QVariant());
+	void removeSpecificParameter(QString unitName, QString parameterName);
 };
 
 #endif //PREFS_H

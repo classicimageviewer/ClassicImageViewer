@@ -39,7 +39,7 @@ public:
 	IOmoduleVips(QObject * parent = NULL);
 	~IOmoduleVips() override;
 	
-	QString moduleName(void) override {return "VIPS";};
+	QString moduleName(void) override {return "Vips";};
 	QImage loadFile(QString path) override;
 	QImage loadThumbnail(QString path, QSize thumbnailSize) override;
 

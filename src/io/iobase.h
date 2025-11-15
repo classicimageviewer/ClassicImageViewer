@@ -28,32 +28,24 @@ class IObase
 protected:
 	QStringList supportedInputFormats;
 	QStringList supportedOutputFormats;
+	QStringList enabledInputFormats;
+	QStringList enabledOutputFormats;
+	QStringList blockedOpenList;
+	QStringList blockedThumbnailList;
+	QStringList blockedSaveList;
+	QStringList extraOpenList;
+	bool unlistedOpen;
 public:
-	IObase() {
-		supportedInputFormats = QStringList();
-		supportedOutputFormats = QStringList();
-	};
-	QStringList getInputFormats() {
-		return supportedInputFormats;
-	};
-	QStringList getOutputFormats() {
-		return supportedOutputFormats;
-	};
-	bool outputFormatSupported(QString format) {
-		return supportedOutputFormats.contains(format.toLower());
-	};
-	
-	void addInputFormatAlternatives(QString format, QStringList alternativeList)
-	{
-		if (supportedInputFormats.contains(format.toLower()))
-		{
-			for (QString alternativeFormat : alternativeList)
-			{
-				supportedInputFormats += alternativeFormat.toLower();
-			}
-			supportedInputFormats.removeDuplicates();
-		}
-	};
+	IObase();
+	QStringList getInputFormats();
+	QStringList getOutputFormats();
+	QStringList getBlockedThumbnailFormats();
+	QStringList getAllInputFormats();
+	QStringList getAllOutputFormats();
+	bool tryToOpenAll();
+	bool outputFormatSupported(QString format);
+	void addInputFormatAlternatives(QString format, QStringList alternativeList);
+	void reloadConfig();
 	
 	virtual ~IObase() {};
 	

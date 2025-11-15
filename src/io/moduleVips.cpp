@@ -80,6 +80,8 @@ IOmoduleVips::IOmoduleVips(QObject * parent) : QObject(parent)
 	#endif
 	
 	#undef TEST_VIPS
+	
+	reloadConfig();
 #endif
 }
 

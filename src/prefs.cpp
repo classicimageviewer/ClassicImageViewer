@@ -111,3 +111,16 @@ QVariant Prefs::fetchSpecificParameter(QString unitName, QString parameterName, 
 	return value;
 }
 
+void Prefs::removeSpecificParameter(QString unitName, QString parameterName)
+{
+	if (unitName.isEmpty()) return;
+	if (parameterName.isEmpty()) return;
+	if (settings)
+	{
+		settings->beginGroup(unitName);
+		settings->remove(parameterName);
+		settings->endGroup();
+		settings->sync();
+	}
+}
+

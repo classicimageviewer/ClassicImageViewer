@@ -18,8 +18,9 @@
 #include "globals.h"
 #include <QDebug>
 #include <QMessageBox>
+#include <QHeaderView>
 
-PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
+PreferencesDialog::PreferencesDialog(ImageIO * imageIO, QWidget * parent) : QDialog(parent)
 {
 	ui.setupUi(this);
 
@@ -110,7 +111,8 @@ PreferencesDialog::PreferencesDialog(QWidget * parent) : QDialog(parent)
 		ui.lineEditExtEditor4Args->setText(extEditorList.join(";"));
 	}
 
-
+	this->imageIO = imageIO;
+	createFileFormatSettings();
 	
 	restoreDefaultButton = ui.buttonBox->button(QDialogButtonBox::RestoreDefaults);
 	connect(restoreDefaultButton, SIGNAL(clicked(bool)), this, SLOT(restoreDefaults(bool)));
@@ -210,5 +212,179 @@ void PreferencesDialog::savePreferences()
 	extEditorList.append((QStringList() << ui.lineEditExtEditor3Cmd->text() << ui.lineEditExtEditor3Args->text()).join(";"));
 	extEditorList.append((QStringList() << ui.lineEditExtEditor4Cmd->text() << ui.lineEditExtEditor4Args->text()).join(";"));
 	Globals::prefs->setExternalEditors(extEditorList);
+	
+	saveFileFormatSettings();
+}
+
+QCheckBox * PreferencesDialog::addFileFormatChechbox(QTableWidget * tableWidget, int row, int column, QString moduleName, QStringList list, QString listName, QString extension)
+{
+	QCheckBox * chechbox = new QCheckBox();
+	chechbox->setObjectName(moduleName + ";" + listName + ";" + extension);
+	chechbox->setChecked(!(list.contains(extension)));
+	QHBoxLayout * layout = new QHBoxLayout();
+	layout->addWidget(chechbox);
+	layout->setAlignment(chechbox, Qt::AlignCenter);
+	layout->setContentsMargins(0, 0, 0, 0);
+	QWidget * container = new QWidget();
+	container->setLayout(layout);
+	tableWidget->setCellWidget(row, column, container);
+	fileFormatSettings.append(chechbox);
+	return chechbox;
+}
+
+void PreferencesDialog::toggleFileFormatChechbox(QString prefix)
+{
+	for (QCheckBox * item : fileFormatSettings)
+	{
+		if (item->objectName().startsWith(prefix))
+		{
+			item->click();
+		}
+	}
+}
+
+void PreferencesDialog::createFileFormatSettings()
+{
+	QList<IObase*> ioModules = imageIO->getModules();
+	for (IObase * item : ioModules)
+	{
+		ui.listWidgetFileFormatsMoudles->addItem(item->moduleName());
+		QWidget * pageWidget = new QWidget;
+		QVBoxLayout * pageLayout = new QVBoxLayout();
+		QTableWidget * tableWidget = new QTableWidget();
+		tableWidget->setRowCount(1);
+		tableWidget->setColumnCount(4);
+		
+		tableWidget->setHorizontalHeaderLabels({tr("Extension"), tr("Open"), tr("Thumbnail"), tr("Save")});
+		tableWidget->verticalHeader()->setVisible(false);
+		
+		int row = 0;
+		QStringList inputFormats = item->getAllInputFormats();
+		QStringList outputFormats = item->getAllOutputFormats();
+		QStringList allFormats = inputFormats + outputFormats;
+		allFormats.removeDuplicates();
+		
+		QString moduleName = "IOmodule" + item->moduleName() + "/extensions";
+		
+		QStringList blockedOpenList = Globals::prefs->fetchSpecificParameter(moduleName, "blockedOpen", QVariant(QStringList())).toStringList();
+		QStringList blockedThumbnailList = Globals::prefs->fetchSpecificParameter(moduleName, "blockedThumbnail", QVariant(QStringList())).toStringList();
+		QStringList blockedSaveList = Globals::prefs->fetchSpecificParameter(moduleName, "blockedSave", QVariant(QStringList())).toStringList();
+		
+		QPushButton * toggleOpenButton = new QPushButton(tr("Toggle"));
+		QPushButton * toggleThumbnailButton = new QPushButton(tr("Toggle"));
+		QPushButton * toggleSaveButton = new QPushButton(tr("Toggle"));
+		QObject::connect(toggleOpenButton, &QPushButton::clicked, [=]() { toggleFileFormatChechbox(moduleName + ";blockedOpen;"); });
+		QObject::connect(toggleThumbnailButton, &QPushButton::clicked, [=]() { toggleFileFormatChechbox(moduleName + ";blockedThumbnail;"); });
+		QObject::connect(toggleSaveButton, &QPushButton::clicked, [=]() { toggleFileFormatChechbox(moduleName + ";blockedSave;"); });
+		tableWidget->setRowCount(row+1);
+		tableWidget->setCellWidget(row, 1, toggleOpenButton);
+		tableWidget->setCellWidget(row, 2, toggleThumbnailButton);
+		tableWidget->setCellWidget(row, 3, toggleSaveButton);
+		row += 1;
+		
+		for (const QString & ext :allFormats)
+		{
+			tableWidget->setRowCount(row+1);
+			tableWidget->setCellWidget(row, 0, new QLabel(ext));
+			
+			if (inputFormats.contains(ext))
+			{
+				QCheckBox * openCheckBox = addFileFormatChechbox(tableWidget, row, 1, moduleName, blockedOpenList, "blockedOpen", ext);
+				QCheckBox * thumbnailCheckBox = addFileFormatChechbox(tableWidget, row, 2, moduleName, blockedThumbnailList, "blockedThumbnail", ext);
+				thumbnailCheckBox->setVisible(openCheckBox->isChecked());
+				QObject::connect(openCheckBox, &QCheckBox::clicked, [=](bool checked) { thumbnailCheckBox->setVisible(checked); });
+			}
+			if (outputFormats.contains(ext))
+			{
+				addFileFormatChechbox(tableWidget, row, 3, moduleName, blockedSaveList, "blockedSave", ext);
+			}
+			row += 1;
+		}
+		
+		pageLayout->addWidget(tableWidget);
+		
+		QHBoxLayout * extraFormatLayout = new QHBoxLayout();
+		QLineEdit * extraFormats = new QLineEdit();
+		extraFormats->setObjectName(moduleName);
+		extraFormats->setPlaceholderText(tr("additional extensions, use semicolon as separator"));
+		extraFormats->setToolTip(tr("additional extensions, use semicolon as separator"));
+		extraFormats->setText(Globals::prefs->fetchSpecificParameter(moduleName, "extraOpen", QVariant(QStringList())).toStringList().join(";"));
+		extraFormatLayout->addWidget(new QLabel(tr("Try to open: ")));
+		extraFormatLayout->addWidget(extraFormats);
+		pageLayout->addItem(extraFormatLayout);
+		extraFileFormatSettings.append(extraFormats);
+		
+		QHBoxLayout * unlistedLayout = new QHBoxLayout();
+		QCheckBox * unlistedCheckBox = new QCheckBox("Try to open unlisted formats");
+		unlistedCheckBox->setObjectName(moduleName);
+		unlistedCheckBox->setChecked(Globals::prefs->fetchSpecificParameter(moduleName, "unlistedOpen", QVariant(false)).toBool());
+		unlistedLayout->addWidget(unlistedCheckBox);
+		pageLayout->addItem(unlistedLayout);
+		unlistedFileFormatSettings.append(unlistedCheckBox);
+		
+		pageWidget->setLayout(pageLayout);
+		ui.stackedWidgetFileFormats->addWidget(pageWidget);
+	}
+	ui.listWidgetFileFormatsMoudles->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+	ui.listWidgetFileFormatsMoudles->setCurrentRow(0);
+	ui.stackedWidgetFileFormats->setCurrentIndex(0);
+	connect(ui.listWidgetFileFormatsMoudles, SIGNAL(currentRowChanged(int)), this, SLOT(changeFileFormatsTab(int)));
+	
+}
+
+void PreferencesDialog::changeFileFormatsTab(int i)
+{
+	ui.stackedWidgetFileFormats->setCurrentIndex(i);
+}
+
+void PreferencesDialog::saveFileFormatSettings()
+{
+	QList<IObase*> ioModules = imageIO->getModules();
+	for (IObase * item : ioModules)
+	{
+		QString moduleName = "IOmodule" + item->moduleName() + "/extensions";
+		
+		Globals::prefs->removeSpecificParameter(moduleName, "blockedOpen");
+		Globals::prefs->removeSpecificParameter(moduleName, "blockedThumbnail");
+		Globals::prefs->removeSpecificParameter(moduleName, "blockedSave");
+	}
+	for (const QCheckBox * item : fileFormatSettings)
+	{
+		QStringList names = item->objectName().split(';');
+		if (names.length() != 3) continue;
+		QString moduleName = names.at(0);
+		QString listName = names.at(1);
+		QString extension = names.at(2);
+		if (moduleName.isEmpty()) continue;
+		if (listName.isEmpty()) continue;
+		if (extension.isEmpty()) continue;
+		if (!(item->isChecked()))
+		{
+			QStringList blockedList = Globals::prefs->fetchSpecificParameter(moduleName, listName, QVariant(QStringList())).toStringList();
+			blockedList += extension;
+			Globals::prefs->storeSpecificParameter(moduleName, listName, blockedList);
+		}
+	}
+	for (const QLineEdit * item : extraFileFormatSettings)
+	{
+		QString moduleName = item->objectName();
+		if (moduleName.isEmpty()) continue;
+		QStringList extraFormats = item->text().split(";");
+		QStringList extraFormatsFiltered;
+		for (QString & e : extraFormats)
+		{
+			QString f = e.simplified();
+			f.replace(".", "");
+			if (f.isEmpty()) continue;
+			extraFormatsFiltered.append(f);
+		}
+		Globals::prefs->storeSpecificParameter(moduleName, "extraOpen", extraFormatsFiltered);
+	}
+	for (const QCheckBox * item : unlistedFileFormatSettings)
+	{
+		QString moduleName = item->objectName();
+		if (moduleName.isEmpty()) continue;
+		Globals::prefs->storeSpecificParameter(moduleName, "unlistedOpen", item->isChecked());
+	}
 }
 

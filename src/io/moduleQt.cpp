@@ -30,6 +30,8 @@ IOmoduleQt::IOmoduleQt(QObject * parent) : QObject(parent)
 	
 	for (const QByteArray & item : writer.supportedImageFormats())
 		supportedOutputFormats.append(QString::fromUtf8(item).toLower());
+	
+	reloadConfig();
 }
 
 IOmoduleQt::~IOmoduleQt()

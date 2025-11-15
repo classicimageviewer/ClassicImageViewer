@@ -23,32 +23,32 @@
 #include "io/moduleGMagick.h"
 #include "io/moduleQoi.h"
 
+bool ImageIO::debugPrintSupportedFormats = true;
+
 ImageIO::ImageIO(QObject * parent) : QObject(parent)
 {
 	modules = QList<IObase*>();
-	supportedInputFormats = QStringList();
-	supportedOutputFormats = QStringList();
 	
 	modules.append(new IOmoduleQt());
 	modules.append(new IOmoduleVips());
 	modules.append(new IOmoduleGMagick());
 	modules.append(new IOmoduleQoi());
-
+	
 	for (IObase* item : modules)
 	{
-		qDebug() << "IO module " << item->moduleName() << " supported formats: " << item->getInputFormats().join(", ");
+		if (debugPrintSupportedFormats)
+		{
+			qDebug() << "IO module " << item->moduleName() << " supported formats: " << item->getInputFormats().join(", ");
+		}
 		item->addInputFormatAlternatives("jpg", {"jpg", "jpeg", "jpe", "jif", "jfif", "jfi", "pjpeg", "pjp"});
 		item->addInputFormatAlternatives("jpeg", {"jpg", "jpeg", "jpe", "jif", "jfif", "jfi", "pjpeg", "pjp"});
 		item->addInputFormatAlternatives("heif", {"heif", "heifs", "heic", "heics", "avci", "avcs", "hif"});
 		item->addInputFormatAlternatives("heic", {"heif", "heifs", "heic", "heics", "avci", "avcs", "hif"});
 		item->addInputFormatAlternatives("fits", {"fits", "fit", "fts"});
-		supportedInputFormats += item->getInputFormats();
-		supportedOutputFormats += item->getOutputFormats();
 	}
-	supportedInputFormats.removeDuplicates();
-	supportedOutputFormats.removeDuplicates();
-	supportedInputFormats.sort();
-	supportedOutputFormats.sort();
+	debugPrintSupportedFormats = false;
+	
+	reloadConfig();
 }
 
 ImageIO::~ImageIO()
@@ -69,35 +69,28 @@ QStringList ImageIO::getOutputFormats()
 	return supportedOutputFormats;
 }
 
-QImage ImageIO::loadFile(QString path)
+QString ImageIO::extensionOf(QString path)
 {
-	// try loaders first, that claims support for this format
 	int dotPos = path.lastIndexOf(".");
 	if (dotPos >= 0)
 	{
-		QString extension = path.mid(dotPos+1);
-		for (IObase* item : modules)
-		{
-			if (item->getInputFormats().contains(extension))
-			{
-				QImage i = item->loadFile(path);
-				if (!(i.isNull())) 
-				{
-					//qDebug() << "Loader: " << item->moduleName();
-					return i;
-				}
-			}
-		}
+		return path.mid(dotPos+1);
 	}
-	
-	// try all loaders
+	return QString();
+}
+
+QImage ImageIO::loadFile(QString path)
+{
 	for (IObase* item : modules)
 	{
-		QImage i = item->loadFile(path);
-		if (!(i.isNull())) 
+		if (item->getInputFormats().contains(extensionOf(path)) || item->tryToOpenAll())
 		{
-			//qDebug() << "Loader: " << item->moduleName();
-			return i;
+			QImage i = item->loadFile(path);
+			if (!(i.isNull())) 
+			{
+				//qDebug() << "Loader: " << item->moduleName();
+				return i;
+			}
 		}
 	}
 	
@@ -109,15 +102,21 @@ QImage ImageIO::loadThumbnail(QString path, QSize thumbnailSize)
 {
 	for (IObase* item : modules)
 	{
-		QImage i = item->loadThumbnail(path, thumbnailSize);
-		if (!(i.isNull())) return i;
+		if (item->getInputFormats().contains(extensionOf(path)) && !(item->getBlockedThumbnailFormats().contains(extensionOf(path))))
+		{
+			QImage i = item->loadThumbnail(path, thumbnailSize);
+			if (!(i.isNull())) return i;
+		}
 	}
 	
 	// try fullscale loader
 	for (IObase* item : modules)
 	{
-		QImage i = item->loadFile(path);
-		if (!(i.isNull())) return i.scaled(thumbnailSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+		if (item->getInputFormats().contains(extensionOf(path)) || item->tryToOpenAll())
+		{
+			QImage i = item->loadFile(path);
+			if (!(i.isNull())) return i.scaled(thumbnailSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+		}
 	}
 	
 	// can't read
@@ -147,3 +146,31 @@ bool ImageIO::saveFile(QString path, QString format, QImage image, QList<IObase:
 	}
 	return false;
 }
+
+QList<IObase*> ImageIO::getModules()
+{
+	return modules;
+}
+
+void ImageIO::reloadConfig()
+{
+	for (IObase* item : modules)
+	{
+		item->reloadConfig();
+	}
+	
+	supportedInputFormats = QStringList();
+	supportedOutputFormats = QStringList();
+	
+	for (IObase* item : modules)
+	{
+		supportedInputFormats += item->getInputFormats();
+		supportedOutputFormats += item->getOutputFormats();
+	}
+	
+	supportedInputFormats.removeDuplicates();
+	supportedOutputFormats.removeDuplicates();
+	supportedInputFormats.sort();
+	supportedOutputFormats.sort();
+}
+

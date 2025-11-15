@@ -1376,7 +1376,7 @@ void MainWindow::actionSlot(Action a)
 		case ACT_SETTINGS:
 			{
 				int prevMode = Globals::prefs->getDisplayMode();
-				PreferencesDialog * d = new PreferencesDialog();
+				PreferencesDialog * d = new PreferencesDialog(imageIO);
 				if (d->exec() == QDialog::Accepted)
 				{
 					d->savePreferences();
@@ -1393,6 +1393,7 @@ void MainWindow::actionSlot(Action a)
 					}
 					updateDisplayModeMenu();
 					updateExternalEditorMenu();
+					imageIO->reloadConfig();
 				}
 				delete d;
 			}

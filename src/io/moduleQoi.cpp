@@ -28,6 +28,8 @@ IOmoduleQoi::IOmoduleQoi(QObject * parent) : QObject(parent)
 {
 	supportedInputFormats.append(QString("qoi"));
 	supportedOutputFormats.append(QString("qoi"));
+	
+	reloadConfig();
 }
 
 IOmoduleQoi::~IOmoduleQoi()

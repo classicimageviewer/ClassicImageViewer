@@ -74,6 +74,8 @@ IOmoduleGMagick::IOmoduleGMagick(QObject * parent) : QObject(parent)
 		}
 		catch(Magick::Error &e) {}
 	}
+	
+	reloadConfig();
 #endif
 }
 

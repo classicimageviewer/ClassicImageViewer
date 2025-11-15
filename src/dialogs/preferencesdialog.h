@@ -19,7 +19,9 @@
 
 #include <QDialog>
 #include <QPushButton>
+#include <QTableWidget>
 #include "ui_preferencesdialog.h"
+#include "io/imageIO.h"
 
 class PreferencesDialog : public QDialog
 {
@@ -27,11 +29,20 @@ class PreferencesDialog : public QDialog
 private:
 	Ui_PreferencesDialog ui;
 	QPushButton * restoreDefaultButton;
+	ImageIO * imageIO;
+	QList<QCheckBox*> fileFormatSettings;
+	QList<QLineEdit*> extraFileFormatSettings;
+	QList<QCheckBox*> unlistedFileFormatSettings;
+	QCheckBox * addFileFormatChechbox(QTableWidget * tableWidget, int row, int column, QString moduleName, QStringList list, QString listName, QString extension);
+	void toggleFileFormatChechbox(QString prefix);
+	void createFileFormatSettings();
+	void saveFileFormatSettings();
 private slots:
 	void displayModeChanged(int i);
 	void restoreDefaults(bool b);
+	void changeFileFormatsTab(int i);
 public:
-	PreferencesDialog(QWidget * parent = NULL);
+	PreferencesDialog(ImageIO * imageIO, QWidget * parent = NULL);
 	~PreferencesDialog();
 	void savePreferences();
 

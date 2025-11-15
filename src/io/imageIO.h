@@ -28,9 +28,12 @@ class ImageIO : public QObject
 {
 	Q_OBJECT
 private: // variables
+	static bool debugPrintSupportedFormats;
 	QList<IObase*> modules;
 	QStringList supportedInputFormats;
 	QStringList supportedOutputFormats;
+private: // functions
+	QString extensionOf(QString path);
 public:
 	ImageIO(QObject * parent = NULL);
 	~ImageIO();
@@ -40,6 +43,8 @@ public:
 	QImage loadThumbnail(QString path, QSize thumbnailSize);
 	QList<IObase::ParameterCluster> getListOfParameterClusters(QString format);
 	bool saveFile(QString path, QString format, QImage image, QList<IObase::ParameterCluster> parameters);
+	QList<IObase*> getModules();
+	void reloadConfig();
 };
 
 #endif //IMAGEIO_H
