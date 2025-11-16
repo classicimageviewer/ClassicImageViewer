@@ -43,6 +43,12 @@ sudo apt install g++ make qtbase5-dev qttools5-dev-tools qt5-image-formats-plugi
 sudo dnf install g++ make qt6-qtbase-devel qt6-qttools-devel qt6-qtimageformats
 ```
 
+### openSUSE
+
+```
+sudo zypper install gcc-c++ make qt6-base-devel qt6-tools-devel qt6-imageformats
+```
+
 ## Recommended packages
 
 ### Debian/Ubuntu
@@ -55,6 +61,12 @@ sudo apt install libvips-dev libgraphicsmagick++1-dev libimage-exiftool-perl
 
 ```
 sudo dnf install vips-devel GraphicsMagick-c++-devel perl-Image-ExifTool
+```
+
+### openSUSE
+
+```
+sudo zypper install libvips-devel libGraphicsMagick++-devel exiftool
 ```
 
 ## Get the source
@@ -72,10 +84,12 @@ Otherwise download as ZIP and extract the content.
 Enter the directory of the repository, then run the following commands:
 
 ```
-qmake .
+qmake6 .
 make -j$(nproc)
 make install
 ```
+
+> In case of Qt5 build use qmake instead of qmake6
 
 This will build and install for the current user, into
 
