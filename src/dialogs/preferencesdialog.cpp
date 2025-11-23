@@ -373,7 +373,7 @@ void PreferencesDialog::saveFileFormatSettings()
 		QStringList extraFormatsFiltered;
 		for (QString & e : extraFormats)
 		{
-			QString f = e.simplified();
+			QString f = e.simplified().toLower();
 			f.replace(".", "");
 			if (f.isEmpty()) continue;
 			extraFormatsFiltered.append(f);

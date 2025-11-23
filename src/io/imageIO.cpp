@@ -74,7 +74,7 @@ QString ImageIO::extensionOf(QString path)
 	int dotPos = path.lastIndexOf(".");
 	if (dotPos >= 0)
 	{
-		return path.mid(dotPos+1);
+		return path.mid(dotPos+1).toLower();
 	}
 	return QString();
 }
