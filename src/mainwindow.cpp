@@ -430,6 +430,9 @@ void MainWindow::createMenu()
 	menuAddAction(zoomLevelMenu, tr("300%"), ACT_ZOOM_300, NULL,  ACTDISABLE_UNLOADED);
 	menuAddAction(zoomLevelMenu, tr("400%"), ACT_ZOOM_400, NULL,  ACTDISABLE_UNLOADED);
 	connect(ui.menuView, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
+	menuAddSeparator(ui.menuView);
+	menuAddAction(ui.menuView, tr("Increase transparency"), ACT_INCR_TRANSPARENCY, "Alt+Shift+E",  0);
+	menuAddAction(ui.menuView, tr("Decrease transparency"), ACT_DECR_TRANSPARENCY, "Alt+Shift+D",  0);
 	
 	menuAddAction(ui.menuHelp, tr("&License"), ACT_LICENSE, NULL,  0);
 	menuAddAction(ui.menuHelp, tr("&Shortcuts"), ACT_SHORTCUTS, NULL,  0);
@@ -1568,6 +1571,12 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_ZOOM_400:
 			display->setZoom(4.0);
+			break;
+		case ACT_INCR_TRANSPARENCY:
+			setWindowOpacity(qBound(0.1, windowOpacity()*0.9, 1.0));
+			break;
+		case ACT_DECR_TRANSPARENCY:
+			setWindowOpacity(qBound(0.1, windowOpacity()/0.9, 1.0));
 			break;
 		case ACT_LICENSE:
 			{
