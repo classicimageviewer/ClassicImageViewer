@@ -22,7 +22,7 @@
 
 EffectModuleCharcoal::EffectModuleCharcoal(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleCharcoal");
 }
 
 EffectModuleCharcoal::~EffectModuleCharcoal()
@@ -42,11 +42,6 @@ bool EffectModuleCharcoal::available()
 QList<EffectBase::ParameterCluster> EffectModuleCharcoal::getListOfParameterClusters()
 {
 	return QList<EffectBase::ParameterCluster>();
-}
-
-void EffectModuleCharcoal::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	Q_UNUSED(parameters);
 }
 
 QImage EffectModuleCharcoal::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

@@ -22,7 +22,7 @@
 
 EffectModuleSpread::EffectModuleSpread(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleSpread");
 }
 
 EffectModuleSpread::~EffectModuleSpread()
@@ -41,27 +41,11 @@ bool EffectModuleSpread::available()
 
 QList<EffectBase::ParameterCluster> EffectModuleSpread::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
-
-	elem.displayName = QString(tr("Spread"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Spread");
-	elem.parameterDefaultValue = QVariant(1);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSpread", "Spread", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(1);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
-
+	QList<EffectBase::ParameterCluster> cluster;
+	
+	cluster += uiParamSlider(tr("Spread"), "Spread", 1, 1, 100);
+	
 	return cluster;
-}
-
-void EffectModuleSpread::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleSpread", elem.parameterName, elem.parameterValue);
-	}
 }
 
 QImage EffectModuleSpread::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

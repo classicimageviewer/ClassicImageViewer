@@ -22,7 +22,7 @@
 
 EffectModuleSharpen::EffectModuleSharpen(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleSharpen");
 }
 
 EffectModuleSharpen::~EffectModuleSharpen()
@@ -32,27 +32,11 @@ EffectModuleSharpen::~EffectModuleSharpen()
 
 QList<EffectBase::ParameterCluster> EffectModuleSharpen::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
-
-	elem.displayName = QString(tr("Strength"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Strength");
-	elem.parameterDefaultValue = QVariant(5);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSharpen", "Strength", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(1);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
-
+	QList<EffectBase::ParameterCluster> cluster;
+	
+	cluster += uiParamSlider(tr("Strength"), "Strength", 5, 1, 100);
+	
 	return cluster;
-}
-
-void EffectModuleSharpen::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleSharpen", elem.parameterName, elem.parameterValue);
-	}
 }
 
 QImage EffectModuleSharpen::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

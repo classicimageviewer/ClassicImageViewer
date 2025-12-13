@@ -21,7 +21,7 @@
 
 EffectModuleBlur::EffectModuleBlur(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleBlur");
 }
 
 EffectModuleBlur::~EffectModuleBlur()
@@ -31,27 +31,11 @@ EffectModuleBlur::~EffectModuleBlur()
 
 QList<EffectBase::ParameterCluster> EffectModuleBlur::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
+	QList<EffectBase::ParameterCluster> cluster;
 
-	elem.displayName = QString(tr("Radius"));
-	elem.controlType = QString("slider100");
-	elem.parameterName = QString("Radius");
-	elem.parameterDefaultValue = QVariant(5.0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleBlur", "Radius", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(0.0);
-	elem.parameterMaxValue = QVariant(100.0);
-	cluster.append(elem);
+	cluster += uiParamSlider100(tr("Radius"), "Radius", 5.0, 0.0, 100.0);
 
 	return cluster;
-}
-
-void EffectModuleBlur::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleBlur", elem.parameterName, elem.parameterValue);
-	}
 }
 
 QImage EffectModuleBlur::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

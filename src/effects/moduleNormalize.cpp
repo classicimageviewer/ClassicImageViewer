@@ -22,7 +22,7 @@
 
 EffectModuleNormalize::EffectModuleNormalize(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleNormalize");
 }
 
 EffectModuleNormalize::~EffectModuleNormalize()
@@ -42,11 +42,6 @@ bool EffectModuleNormalize::available()
 QList<EffectBase::ParameterCluster> EffectModuleNormalize::getListOfParameterClusters()
 {
 	return QList<EffectBase::ParameterCluster>();
-}
-
-void EffectModuleNormalize::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	Q_UNUSED(parameters);
 }
 
 QImage EffectModuleNormalize::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

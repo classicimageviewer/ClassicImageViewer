@@ -21,7 +21,7 @@
 
 EffectModuleUnsharp::EffectModuleUnsharp(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleUnsharp");
 }
 
 EffectModuleUnsharp::~EffectModuleUnsharp()
@@ -31,36 +31,12 @@ EffectModuleUnsharp::~EffectModuleUnsharp()
 
 QList<EffectBase::ParameterCluster> EffectModuleUnsharp::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
-
-	elem.displayName = QString(tr("Radius"));
-	elem.controlType = QString("slider100");
-	elem.parameterName = QString("Radius");
-	elem.parameterDefaultValue = QVariant(5.0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleUnsharp", "Radius", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(0.0);
-	elem.parameterMaxValue = QVariant(100.0);
-	cluster.append(elem);
-
-	elem.displayName = QString(tr("Amount"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Amount");
-	elem.parameterDefaultValue = QVariant(10);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleUnsharp", "Amount", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(0);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
-
+	QList<EffectBase::ParameterCluster> cluster;
+	
+	cluster += uiParamSlider100(tr("Radius"), "Radius", 5.0, 0.0, 100.0);
+	cluster += uiParamSlider(tr("Amount"), "Amount", 10, 0, 100);
+	
 	return cluster;
-}
-
-void EffectModuleUnsharp::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleUnsharp", elem.parameterName, elem.parameterValue);
-	}
 }
 
 QImage EffectModuleUnsharp::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

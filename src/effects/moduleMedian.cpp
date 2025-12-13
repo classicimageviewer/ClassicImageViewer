@@ -23,7 +23,7 @@
 
 EffectModuleMedian::EffectModuleMedian(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleMedian");
 }
 
 EffectModuleMedian::~EffectModuleMedian()
@@ -42,27 +42,11 @@ bool EffectModuleMedian::available()
 
 QList<EffectBase::ParameterCluster> EffectModuleMedian::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
-
-	elem.displayName = QString(tr("Size"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Size");
-	elem.parameterDefaultValue = QVariant(3);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleMedian", "Size", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(3);
-	elem.parameterMaxValue = QVariant(15);
-	cluster.append(elem);
-
+	QList<EffectBase::ParameterCluster> cluster;
+	
+	cluster += uiParamSlider(tr("Size"), "Size", 3, 3, 15);
+	
 	return cluster;
-}
-
-void EffectModuleMedian::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleMedian", elem.parameterName, elem.parameterValue);
-	}
 }
 
 QImage EffectModuleMedian::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

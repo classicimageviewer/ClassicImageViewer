@@ -24,14 +24,10 @@
 
 class EffectBase
 {
+private:
+	QString moduleName;
 public:
 	EffectBase() {};
-	
-	virtual ~EffectBase() {};
-	
-	virtual bool available() = 0;
-	virtual QString getName() = 0;
-	virtual bool previewModeIsZoom() = 0;
 	
 	typedef struct {
 		QString displayName;
@@ -43,8 +39,26 @@ public:
 		QVariant parameterMaxValue;
 	} ParameterCluster;
 	
+	void setModuleName(QString name);
+	QString getModuleName(void);
+	void saveEffectParameters(QList<EffectBase::ParameterCluster> parameters);
+	
+	ParameterCluster uiParamSpinbox(QString displayName, QString paramName, int defaultValue, int minValue, int maxValue);
+	ParameterCluster uiParamDoubleSpinbox(QString displayName, QString paramName, double defaultValue, double minValue, double maxValue);
+	ParameterCluster uiParamSlider(QString displayName, QString paramName, int defaultValue, int minValue, int maxValue);
+	ParameterCluster uiParamSlider10(QString displayName, QString paramName, double defaultValue, double minValue, double maxValue);
+	ParameterCluster uiParamSlider100(QString displayName, QString paramName, double defaultValue, double minValue, double maxValue);
+	ParameterCluster uiParamSlider1000(QString displayName, QString paramName, double defaultValue, double minValue, double maxValue);
+	ParameterCluster uiParamCheckbox(QString displayName, QString paramName, bool defaultValue);
+	ParameterCluster uiParamCombobox(QString displayName, QString paramName, int defaultValue, QStringList list);
+	
+	virtual ~EffectBase() {};
+	
+	virtual bool available() = 0;
+	virtual QString getName() = 0;
+	virtual bool previewModeIsZoom() = 0;
+	
 	virtual QList<EffectBase::ParameterCluster> getListOfParameterClusters() = 0;
-	virtual void saveEffectParameters(QList<EffectBase::ParameterCluster> parameters) = 0;
 	virtual QImage applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters) = 0;
 };
 

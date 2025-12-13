@@ -22,7 +22,7 @@
 
 EffectModuleReduceNoise::EffectModuleReduceNoise(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleReduceNoise");
 }
 
 EffectModuleReduceNoise::~EffectModuleReduceNoise()
@@ -42,11 +42,6 @@ bool EffectModuleReduceNoise::available()
 QList<EffectBase::ParameterCluster> EffectModuleReduceNoise::getListOfParameterClusters()
 {
 	return QList<EffectBase::ParameterCluster>();
-}
-
-void EffectModuleReduceNoise::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	Q_UNUSED(parameters);
 }
 
 QImage EffectModuleReduceNoise::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

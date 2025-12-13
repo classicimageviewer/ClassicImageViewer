@@ -22,7 +22,7 @@
 
 EffectModuleColorTemperature::EffectModuleColorTemperature(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleColorTemperature");
 }
 
 EffectModuleColorTemperature::~EffectModuleColorTemperature()
@@ -32,27 +32,11 @@ EffectModuleColorTemperature::~EffectModuleColorTemperature()
 
 QList<EffectBase::ParameterCluster> EffectModuleColorTemperature::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
+	QList<EffectBase::ParameterCluster> cluster;
 	
-	elem.displayName = QString(tr("Temperature"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Temperature");
-	elem.parameterDefaultValue = QVariant(6500);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorTemperature", "Temperature", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(1000);
-	elem.parameterMaxValue = QVariant(12000);
-	cluster.append(elem);
+	cluster += uiParamSlider(tr("Temperature"), "Temperature", 6500, 1000, 12000);
 	
 	return cluster;
-}
-
-void EffectModuleColorTemperature::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleColorTemperature", elem.parameterName, elem.parameterValue);
-	}
 }
 
 QImage EffectModuleColorTemperature::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

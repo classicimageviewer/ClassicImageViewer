@@ -21,7 +21,7 @@
 
 EffectModuleColorQuantization::EffectModuleColorQuantization(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleColorQuantization");
 }
 
 EffectModuleColorQuantization::~EffectModuleColorQuantization()
@@ -31,52 +31,22 @@ EffectModuleColorQuantization::~EffectModuleColorQuantization()
 
 QList<EffectBase::ParameterCluster> EffectModuleColorQuantization::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
+	QList<EffectBase::ParameterCluster> cluster;
 	
-	elem.displayName = QString(tr("Method"));
-	elem.controlType = QString("combobox");
-	elem.parameterName = QString("Method");
-	elem.parameterDefaultValue = QVariant(2);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorQuantization", "Method", elem.parameterDefaultValue);
-	QStringList list = QStringList();
-	list.append(QString(tr("Grayscale")));
-	list.append(QString(tr("Web-safe colors")));
-	list.append(QString(tr("Sorted colors")));
-	elem.parameterMinValue = QVariant(list);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Colors"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Colors");
-	elem.parameterDefaultValue = QVariant(16);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorQuantization", "Colors", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(2);
-	elem.parameterMaxValue = QVariant(256);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Dithering"));
-	elem.controlType = QString("combobox");
-	elem.parameterName = QString("Dithering");
-	elem.parameterDefaultValue = QVariant(1);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorQuantization", "Dithering", elem.parameterDefaultValue);
-	list = QStringList();
-	list.append(QString(tr("None")));
-	list.append(QString("Floyd-Steinberg"));
-	list.append(QString("Stucki"));
-	list.append(QString("Sierra"));
-	elem.parameterMinValue = QVariant(list);
-	cluster.append(elem);
+	QStringList methodList;
+	methodList.append(QString(tr("Grayscale")));
+	methodList.append(QString(tr("Web-safe colors")));
+	methodList.append(QString(tr("Sorted colors")));
+	QStringList ditheringList;
+	ditheringList.append(QString(tr("None")));
+	ditheringList.append(QString("Floyd-Steinberg"));
+	ditheringList.append(QString("Stucki"));
+	ditheringList.append(QString("Sierra"));
+	cluster += uiParamCombobox(tr("Method"), "Method", 2, methodList);
+	cluster += uiParamSlider(tr("Colors"), "Colors", 16, 2, 256);
+	cluster += uiParamCombobox(tr("Dithering"), "Dithering", 1, ditheringList);
 	
 	return cluster;
-}
-
-void EffectModuleColorQuantization::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleColorQuantization", elem.parameterName, elem.parameterValue);
-	}
 }
 
 inline int EffectModuleColorQuantization::colorError(QRgb a, QRgb b)

@@ -22,7 +22,7 @@
 
 EffectModuleDespeckle::EffectModuleDespeckle(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleDespeckle");
 }
 
 EffectModuleDespeckle::~EffectModuleDespeckle()
@@ -42,11 +42,6 @@ bool EffectModuleDespeckle::available()
 QList<EffectBase::ParameterCluster> EffectModuleDespeckle::getListOfParameterClusters()
 {
 	return QList<EffectBase::ParameterCluster>();
-}
-
-void EffectModuleDespeckle::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	Q_UNUSED(parameters);
 }
 
 QImage EffectModuleDespeckle::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

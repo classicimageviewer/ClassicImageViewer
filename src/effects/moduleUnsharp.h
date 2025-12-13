@@ -17,7 +17,7 @@
 #ifndef MODULEUNSHARP_H
 #define MODULEUNSHARP_H
 
-#include "effectbase.h"
+#include "effectBase.h"
 
 #include <QObject>
 #include <QVariant>
@@ -37,7 +37,6 @@ public:
 	bool previewModeIsZoom() override  {return true;};
 	
 	QList<EffectBase::ParameterCluster> getListOfParameterClusters() override;
-	void saveEffectParameters(QList<EffectBase::ParameterCluster> parameters) override;
 	QImage applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters) override;
 };
 

@@ -20,7 +20,7 @@
 
 EffectModuleSwapChannels::EffectModuleSwapChannels(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleSwapChannels");
 }
 
 EffectModuleSwapChannels::~EffectModuleSwapChannels()
@@ -30,14 +30,8 @@ EffectModuleSwapChannels::~EffectModuleSwapChannels()
 
 QList<EffectBase::ParameterCluster> EffectModuleSwapChannels::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
-
-	elem.displayName = QString(tr("RGB to"));
-	elem.controlType = QString("combobox");
-	elem.parameterName = QString("RGBto");
-	elem.parameterDefaultValue = QVariant(0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleSwapChannels", "RGBto", elem.parameterDefaultValue);
+	QList<EffectBase::ParameterCluster> cluster;
+	
 	QStringList list = QStringList();
 	list.append(QString(tr("RGB")));
 	list.append(QString(tr("RBG")));
@@ -45,18 +39,9 @@ QList<EffectBase::ParameterCluster> EffectModuleSwapChannels::getListOfParameter
 	list.append(QString(tr("GBR")));
 	list.append(QString(tr("BRG")));
 	list.append(QString(tr("BGR")));
-	elem.parameterMinValue = QVariant(list);
-	cluster.append(elem);
-
+	cluster += uiParamCombobox(tr("RGB to"), "RGBto", 0, list);
+	
 	return cluster;
-}
-
-void EffectModuleSwapChannels::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleSwapChannels", elem.parameterName, elem.parameterValue);
-	}
 }
 
 QImage EffectModuleSwapChannels::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

@@ -23,7 +23,7 @@
 
 EffectModuleSobel::EffectModuleSobel(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleSobel");
 }
 
 EffectModuleSobel::~EffectModuleSobel()
@@ -43,11 +43,6 @@ bool EffectModuleSobel::available()
 QList<EffectBase::ParameterCluster> EffectModuleSobel::getListOfParameterClusters()
 {
 	return QList<EffectBase::ParameterCluster>();
-}
-
-void EffectModuleSobel::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	Q_UNUSED(parameters);
 }
 
 QImage EffectModuleSobel::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

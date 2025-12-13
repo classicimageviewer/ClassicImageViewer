@@ -21,7 +21,7 @@
 
 EffectModuleSepia::EffectModuleSepia(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleSepia");
 }
 
 EffectModuleSepia::~EffectModuleSepia()
@@ -32,11 +32,6 @@ EffectModuleSepia::~EffectModuleSepia()
 QList<EffectBase::ParameterCluster> EffectModuleSepia::getListOfParameterClusters()
 {
 	return QList<EffectBase::ParameterCluster>();
-}
-
-void EffectModuleSepia::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	Q_UNUSED(parameters);
 }
 
 QImage EffectModuleSepia::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

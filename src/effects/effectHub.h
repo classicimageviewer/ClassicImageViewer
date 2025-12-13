@@ -20,7 +20,7 @@
 #include <QObject>
 #include <QImage>
 #include <QList>
-#include "effects/effectbase.h"
+#include "effects/effectBase.h"
 
 class EffectHub : public QObject
 {

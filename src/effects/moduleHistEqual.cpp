@@ -23,7 +23,7 @@
 
 EffectModuleHistEqual::EffectModuleHistEqual(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleHistEqual");
 }
 
 EffectModuleHistEqual::~EffectModuleHistEqual()
@@ -43,11 +43,6 @@ bool EffectModuleHistEqual::available()
 QList<EffectBase::ParameterCluster> EffectModuleHistEqual::getListOfParameterClusters()
 {
 	return QList<EffectBase::ParameterCluster>();
-}
-
-void EffectModuleHistEqual::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	Q_UNUSED(parameters);
 }
 
 QImage EffectModuleHistEqual::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)

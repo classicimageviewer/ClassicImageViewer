@@ -17,7 +17,7 @@
 #ifndef MODULESWAPCHANNELS_H
 #define MODULESWAPCHANNELS_H
 
-#include "effectbase.h"
+#include "effectBase.h"
 
 #include <QObject>
 #include <QVariant>
@@ -37,7 +37,6 @@ public:
 	bool previewModeIsZoom() override  {return false;};
 	
 	QList<EffectBase::ParameterCluster> getListOfParameterClusters() override;
-	void saveEffectParameters(QList<EffectBase::ParameterCluster> parameters) override;
 	QImage applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters) override;
 };
 

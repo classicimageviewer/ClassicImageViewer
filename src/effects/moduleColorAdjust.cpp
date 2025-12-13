@@ -22,7 +22,7 @@
 
 EffectModuleColorAdjust::EffectModuleColorAdjust(QObject * parent) : QObject(parent)
 {
-	
+	setModuleName("EffectModuleColorAdjust");
 }
 
 EffectModuleColorAdjust::~EffectModuleColorAdjust()
@@ -32,90 +32,18 @@ EffectModuleColorAdjust::~EffectModuleColorAdjust()
 
 QList<EffectBase::ParameterCluster> EffectModuleColorAdjust::getListOfParameterClusters()
 {
-	EffectBase::ParameterCluster elem;
-	QList<EffectBase::ParameterCluster> cluster = QList<EffectBase::ParameterCluster>();
+	QList<EffectBase::ParameterCluster> cluster;
 	
-	elem.displayName = QString(tr("Brightness"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Brightness");
-	elem.parameterDefaultValue = QVariant(0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorAdjust", "Brightness", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(-100);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Contrast"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Contrast");
-	elem.parameterDefaultValue = QVariant(0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorAdjust", "Contrast", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(-100);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Gamma"));
-	elem.controlType = QString("slider100");
-	elem.parameterName = QString("Gamma");
-	elem.parameterDefaultValue = QVariant(1.0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorAdjust", "Gamma", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(0.01);
-	elem.parameterMaxValue = QVariant(9.99);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Saturation"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Saturation");
-	elem.parameterDefaultValue = QVariant(0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorAdjust", "Saturation", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(-100);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Hue"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Hue");
-	elem.parameterDefaultValue = QVariant(0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorAdjust", "Hue", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(-180);
-	elem.parameterMaxValue = QVariant(180);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Red"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Red");
-	elem.parameterDefaultValue = QVariant(0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorAdjust", "Red", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(-100);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Green"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Green");
-	elem.parameterDefaultValue = QVariant(0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorAdjust", "Green", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(-100);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
-	
-	elem.displayName = QString(tr("Blue"));
-	elem.controlType = QString("slider");
-	elem.parameterName = QString("Blue");
-	elem.parameterDefaultValue = QVariant(0);
-	elem.parameterValue = Globals::prefs->fetchSpecificParameter("EffectModuleColorAdjust", "Blue", elem.parameterDefaultValue);
-	elem.parameterMinValue = QVariant(-100);
-	elem.parameterMaxValue = QVariant(100);
-	cluster.append(elem);
+	cluster += uiParamSlider(tr("Brightness"), "Brightness", 0, -100, 100);
+	cluster += uiParamSlider(tr("Contrast"), "Contrast", 0, -100, 100);
+	cluster += uiParamSlider100(tr("Gamma"), "Gamma", 1.0, 0.01, 9.99);
+	cluster += uiParamSlider(tr("Saturation"), "Saturation", 0, -100, 100);
+	cluster += uiParamSlider(tr("Hue"), "Hue", 0, -180, 180);
+	cluster += uiParamSlider(tr("Red"), "Red", 0, -100, 100);
+	cluster += uiParamSlider(tr("Green"), "Green", 0, -100, 100);
+	cluster += uiParamSlider(tr("Blue"), "Blue", 0, -100, 100);
 	
 	return cluster;
-}
-
-void EffectModuleColorAdjust::saveEffectParameters(QList<EffectBase::ParameterCluster> parameters)
-{
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		Globals::prefs->storeSpecificParameter("EffectModuleColorAdjust", elem.parameterName, elem.parameterValue);
-	}
 }
 
 QImage EffectModuleColorAdjust::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
