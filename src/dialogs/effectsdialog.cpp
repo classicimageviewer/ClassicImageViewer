@@ -50,6 +50,7 @@ EffectsDialog::EffectsDialog(QImage image, QString singleEffect, QWidget * paren
 		ui.listWidget->setCurrentRow(effectHub->getEffects().indexOf(singleEffect));
 		ui.listWidget->hide();
 		resize(1,1);	// minimum size
+		setWindowTitle(singleEffect);
 	}
 	else
 	{
