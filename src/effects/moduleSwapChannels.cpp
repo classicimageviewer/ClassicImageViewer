@@ -59,6 +59,7 @@ QImage EffectModuleSwapChannels::applyEffect(QImage image, QList<EffectBase::Par
 		dst = image.convertToFormat(QImage::Format_RGB32).copy();
 	}
 	
+	#pragma omp parallel for schedule(dynamic, 1)
 	for (int y=0; y<dst.height(); y++)
 	{
 		for (int x=0; x<dst.width(); x++)
