@@ -28,7 +28,7 @@ class ColorAdjust : public QObject
 public:
 	using QObject::QObject;
 	
-	static QImage AdjustColor(const QImage src, double valueOfBrightness, double valueOfContrast, double valueOfGamma, double valueOfSaturation, double valueOfHue, double valueOfRed, double valueOfGreen, double valueOfBlue);
+	static QImage AdjustColor(const QImage src, double valueOfBrightness, double valueOfContrast, double valueOfGamma, double valueOfExposure, double valueOfSaturation, double valueOfHue, double valueOfRed, double valueOfGreen, double valueOfBlue);
 };
 
 #endif //COLORADJ_H

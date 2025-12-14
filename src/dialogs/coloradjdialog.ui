@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>668</width>
-    <height>636</height>
+    <height>668</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,8 +63,8 @@
      </item>
      <item>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxContrast">
+       <item row="7" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxGreen">
          <property name="decimals">
           <number>0</number>
          </property>
@@ -76,6 +76,26 @@
          </property>
          <property name="singleStep">
           <double>1.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelSaturation">
+         <property name="text">
+          <string>Saturation:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="2">
+        <widget class="QSlider" name="horizontalSliderBlue">
+         <property name="minimum">
+          <number>-100</number>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
@@ -95,22 +115,21 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="labelSaturation">
-         <property name="text">
-          <string>Saturation:</string>
+       <item row="5" column="2">
+        <widget class="QSlider" name="horizontalSliderHue">
+         <property name="minimum">
+          <number>-180</number>
+         </property>
+         <property name="maximum">
+          <number>180</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="labelGreen">
-         <property name="text">
-          <string>Green:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QSlider" name="horizontalSliderContrast">
+       <item row="0" column="2">
+        <widget class="QSlider" name="horizontalSliderBrightness">
          <property name="minimum">
           <number>-100</number>
          </property>
@@ -122,8 +141,15 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxBlue">
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelContrast">
+         <property name="text">
+          <string>Contrast:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxContrast">
          <property name="decimals">
           <number>0</number>
          </property>
@@ -138,7 +164,20 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="1">
+       <item row="4" column="2">
+        <widget class="QSlider" name="horizontalSliderSaturation">
+         <property name="minimum">
+          <number>-100</number>
+         </property>
+         <property name="maximum">
+          <number>100</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
         <widget class="QDoubleSpinBox" name="doubleSpinBoxSaturation">
          <property name="decimals">
           <number>0</number>
@@ -154,6 +193,27 @@
          </property>
         </widget>
        </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelHue">
+         <property name="text">
+          <string>Hue:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="labelRed">
+         <property name="text">
+          <string>Red:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="labelBlue">
+         <property name="text">
+          <string>Blue:</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0">
         <widget class="QLabel" name="labelBrightness">
          <property name="text">
@@ -161,8 +221,24 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="2">
-        <widget class="QSlider" name="horizontalSliderSaturation">
+       <item row="5" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxHue">
+         <property name="decimals">
+          <number>0</number>
+         </property>
+         <property name="minimum">
+          <double>-180.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>180.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>1.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QSlider" name="horizontalSliderRed">
          <property name="minimum">
           <number>-100</number>
          </property>
@@ -194,8 +270,8 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxRed">
+       <item row="8" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxBlue">
          <property name="decimals">
           <number>0</number>
          </property>
@@ -210,46 +286,14 @@
          </property>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxHue">
-         <property name="decimals">
-          <number>0</number>
-         </property>
-         <property name="minimum">
-          <double>-180.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>180.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>1.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBoxGreen">
-         <property name="decimals">
-          <number>0</number>
-         </property>
-         <property name="minimum">
-          <double>-100.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>100.000000000000000</double>
-         </property>
-         <property name="singleStep">
-          <double>1.000000000000000</double>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="labelContrast">
+       <item row="7" column="0">
+        <widget class="QLabel" name="labelGreen">
          <property name="text">
-          <string>Contrast:</string>
+          <string>Green:</string>
          </property>
         </widget>
        </item>
-       <item row="6" column="2">
+       <item row="7" column="2">
         <widget class="QSlider" name="horizontalSliderGreen">
          <property name="minimum">
           <number>-100</number>
@@ -262,49 +306,19 @@
          </property>
         </widget>
        </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="labelRed">
-         <property name="text">
-          <string>Red:</string>
+       <item row="6" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxRed">
+         <property name="decimals">
+          <number>0</number>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QSlider" name="horizontalSliderBrightness">
          <property name="minimum">
-          <number>-100</number>
+          <double>-100.000000000000000</double>
          </property>
          <property name="maximum">
-          <number>100</number>
+          <double>100.000000000000000</double>
          </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="2">
-        <widget class="QSlider" name="horizontalSliderRed">
-         <property name="minimum">
-          <number>-100</number>
-         </property>
-         <property name="maximum">
-          <number>100</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-        </widget>
-       </item>
-       <item row="7" column="2">
-        <widget class="QSlider" name="horizontalSliderBlue">
-         <property name="minimum">
-          <number>-100</number>
-         </property>
-         <property name="maximum">
-          <number>100</number>
-         </property>
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
+         <property name="singleStep">
+          <double>1.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -324,30 +338,49 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
-        <widget class="QLabel" name="labelBlue">
-         <property name="text">
-          <string>Blue:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="labelHue">
-         <property name="text">
-          <string>Hue:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QSlider" name="horizontalSliderHue">
+       <item row="1" column="2">
+        <widget class="QSlider" name="horizontalSliderContrast">
          <property name="minimum">
-          <number>-180</number>
+          <number>-100</number>
          </property>
          <property name="maximum">
-          <number>180</number>
+          <number>100</number>
          </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelExposure">
+         <property name="text">
+          <string>Exposure:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QSlider" name="horizontalSliderExposure">
+         <property name="minimum">
+          <number>-1000</number>
+         </property>
+         <property name="maximum">
+          <number>1000</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxExposure">
+         <property name="minimum">
+          <double>-10.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>10.000000000000000</double>
+         </property>
+         <property name="singleStep">
+          <double>0.010000000000000</double>
          </property>
         </widget>
        </item>
@@ -395,6 +428,7 @@
   <tabstop>doubleSpinBoxBrightness</tabstop>
   <tabstop>doubleSpinBoxContrast</tabstop>
   <tabstop>doubleSpinBoxGamma</tabstop>
+  <tabstop>doubleSpinBoxExposure</tabstop>
   <tabstop>doubleSpinBoxSaturation</tabstop>
   <tabstop>doubleSpinBoxHue</tabstop>
   <tabstop>doubleSpinBoxRed</tabstop>
@@ -404,6 +438,7 @@
   <tabstop>horizontalSliderBrightness</tabstop>
   <tabstop>horizontalSliderContrast</tabstop>
   <tabstop>horizontalSliderGamma</tabstop>
+  <tabstop>horizontalSliderExposure</tabstop>
   <tabstop>horizontalSliderSaturation</tabstop>
   <tabstop>horizontalSliderHue</tabstop>
   <tabstop>horizontalSliderRed</tabstop>

@@ -30,6 +30,7 @@ ColorAdjDialog::ColorAdjDialog(QImage image, QWidget * parent) : QDialog(parent)
 	GETPREF(Brightness, 0, 1);
 	GETPREF(Contrast, 0, 1);
 	GETPREF(Gamma, 1.0, 100.0);
+	GETPREF(Exposure, 0, 100.0);
 	GETPREF(Saturation, 0, 1);
 	GETPREF(Hue, 0, 1);
 	GETPREF(Red, 0, 1);
@@ -48,6 +49,7 @@ ColorAdjDialog::ColorAdjDialog(QImage image, QWidget * parent) : QDialog(parent)
 	CONNECTC(Brightness);
 	CONNECTC(Contrast);
 	CONNECTC(Gamma);
+	CONNECTC(Exposure);
 	CONNECTC(Saturation);
 	CONNECTC(Hue);
 	CONNECTC(Red);
@@ -73,6 +75,7 @@ void ColorAdjDialog::restoreDefaults(bool b)
 	SETVAL(Brightness, 0, 1);
 	SETVAL(Contrast, 0, 1);
 	SETVAL(Gamma, 1.0, 100.0);
+	SETVAL(Exposure, 0.0, 100.0);
 	SETVAL(Saturation, 0, 1);
 	SETVAL(Hue, 0, 1);
 	SETVAL(Red, 0, 1);
@@ -89,6 +92,7 @@ void ColorAdjDialog::spinBoxChanged(double value)
 	COPYVAL(Brightness, 1);
 	COPYVAL(Contrast, 1);
 	COPYVAL(Gamma, 100);
+	COPYVAL(Exposure, 100);
 	COPYVAL(Saturation, 1);
 	COPYVAL(Hue, 1);
 	COPYVAL(Red, 1);
@@ -105,6 +109,7 @@ void ColorAdjDialog::sliderChanged(int value)
 	COPYVAL(Brightness, 1);
 	COPYVAL(Contrast, 1);
 	COPYVAL(Gamma, 100);
+	COPYVAL(Exposure, 100);
 	COPYVAL(Saturation, 1);
 	COPYVAL(Hue, 1);
 	COPYVAL(Red, 1);
@@ -124,7 +129,7 @@ void ColorAdjDialog::displayAdjusted()
 
 QImage ColorAdjDialog::adjustColor(QImage i)
 {
-	return ColorAdjust::AdjustColor(i, valueOfBrightness/100.0, valueOfContrast/100.0, valueOfGamma, valueOfSaturation/100.0, valueOfHue/180.0, valueOfRed/100.0, valueOfGreen/100.0, valueOfBlue/100.0);
+	return ColorAdjust::AdjustColor(i, valueOfBrightness/100.0, valueOfContrast/100.0, valueOfGamma, valueOfExposure, valueOfSaturation/100.0, valueOfHue/180.0, valueOfRed/100.0, valueOfGreen/100.0, valueOfBlue/100.0);
 }
 
 void ColorAdjDialog::savePreferences()
@@ -135,6 +140,7 @@ void ColorAdjDialog::savePreferences()
 		SETPREF(Brightness);
 		SETPREF(Contrast);
 		SETPREF(Gamma);
+		SETPREF(Exposure);
 		SETPREF(Saturation);
 		SETPREF(Hue);
 		SETPREF(Red);

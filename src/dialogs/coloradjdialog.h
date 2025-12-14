@@ -33,6 +33,7 @@ private:
 	double valueOfBrightness;
 	double valueOfContrast;
 	double valueOfGamma;
+	double valueOfExposure;
 	double valueOfSaturation;
 	double valueOfHue;
 	double valueOfRed;

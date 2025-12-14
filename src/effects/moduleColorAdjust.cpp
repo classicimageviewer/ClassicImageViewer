@@ -37,6 +37,7 @@ QList<EffectBase::ParameterCluster> EffectModuleColorAdjust::getListOfParameterC
 	cluster += uiParamSlider(tr("Brightness"), "Brightness", 0, -100, 100);
 	cluster += uiParamSlider(tr("Contrast"), "Contrast", 0, -100, 100);
 	cluster += uiParamSlider100(tr("Gamma"), "Gamma", 1.0, 0.01, 9.99);
+	cluster += uiParamSlider100(tr("Exposure"), "Exposure", 0.0, -10.0, 10.0);
 	cluster += uiParamSlider(tr("Saturation"), "Saturation", 0, -100, 100);
 	cluster += uiParamSlider(tr("Hue"), "Hue", 0, -180, 180);
 	cluster += uiParamSlider(tr("Red"), "Red", 0, -100, 100);
@@ -51,12 +52,13 @@ QImage EffectModuleColorAdjust::applyEffect(QImage image, QList<EffectBase::Para
 	double valueOfBrightness = getParamDoubleValue(parameters, "Brightness", 0.0) / 100.0; // -1.0 .. 1.0
 	double valueOfContrast = getParamDoubleValue(parameters, "Contrast", 0.0) / 100.0; // -1.0 .. 1.0
 	double valueOfGamma = getParamDoubleValue(parameters, "Gamma", 1.0);
+	double valueOfExposure = getParamDoubleValue(parameters, "Exposure", 0.0);
 	double valueOfSaturation = getParamDoubleValue(parameters, "Saturation", 0.0) / 100.0; // -1.0 .. 1.0
 	double valueOfHue = getParamDoubleValue(parameters, "Hue", 0.0) / 180.0; // -1.0 .. 1.0
 	double valueOfRed = getParamDoubleValue(parameters, "Red", 0.0) / 100.0; // -1.0 .. 1.0
 	double valueOfGreen = getParamDoubleValue(parameters, "Green", 0.0) / 100.0; // -1.0 .. 1.0
 	double valueOfBlue = getParamDoubleValue(parameters, "Blue", 0.0) / 100.0; // -1.0 .. 1.0
 	
-	return ColorAdjust::AdjustColor(image, valueOfBrightness, valueOfContrast, valueOfGamma, valueOfSaturation, valueOfHue, valueOfRed, valueOfGreen, valueOfBlue);
+	return ColorAdjust::AdjustColor(image, valueOfBrightness, valueOfContrast, valueOfGamma, valueOfExposure, valueOfSaturation, valueOfHue, valueOfRed, valueOfGreen, valueOfBlue);
 }
 

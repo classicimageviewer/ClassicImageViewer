@@ -20,7 +20,7 @@
 #include <QDebug>
 #include <omp.h>
 
-QImage ColorAdjust::AdjustColor(const QImage src, double valueOfBrightness, double valueOfContrast, double valueOfGamma, double valueOfSaturation, double valueOfHue, double valueOfRed, double valueOfGreen, double valueOfBlue)
+QImage ColorAdjust::AdjustColor(const QImage src, double valueOfBrightness, double valueOfContrast, double valueOfGamma, double valueOfExposure, double valueOfSaturation, double valueOfHue, double valueOfRed, double valueOfGreen, double valueOfBlue)
 {
 	QImage dst = src.convertToFormat(QImage::Format_RGB32).copy();
 
@@ -74,6 +74,7 @@ QImage ColorAdjust::AdjustColor(const QImage src, double valueOfBrightness, doub
 		val += 0.5;
 		if (val < 0) val = 0;
 		val = std::pow(val, 1.0/valueOfGamma);
+		val *= std::exp2(valueOfExposure);
 		val *= 255.0;
 		bcgLUT[i] = std::round(qBound(0.0, val, 255.0));
 	}
