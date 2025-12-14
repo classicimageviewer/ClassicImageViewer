@@ -173,31 +173,9 @@ void EffectModuleColorQuantization::sortedGetPalette(QImage image, int colors)
 
 QImage EffectModuleColorQuantization::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	int method = 2;
-	int colors = 2;
-	int dithering = 1;
-	
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "Method")
-		{
-			method = elem.parameterValue.toInt();
-		}
-		else
-		if (elem.parameterName == "Colors")
-		{
-			colors = elem.parameterValue.toInt();
-		}
-		else
-		if (elem.parameterName == "Dithering")
-		{
-			dithering = elem.parameterValue.toInt();
-		}
-		else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
+	int method = getParamIntValue(parameters, "Method", 2);
+	int colors = getParamIntValue(parameters, "Colors", 2);
+	int dithering = getParamIntValue(parameters, "Dithering", 1);
 	
 	QImage dst = image.convertToFormat(QImage::Format_RGB32).copy();
 	

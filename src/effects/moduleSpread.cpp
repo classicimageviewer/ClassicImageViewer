@@ -50,22 +50,14 @@ QList<EffectBase::ParameterCluster> EffectModuleSpread::getListOfParameterCluste
 
 QImage EffectModuleSpread::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	int spread = 0;
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "Spread")
-		{
-			spread = elem.parameterValue.toInt();
-		} else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
 #if defined(HAS_GMAGICK)
+	int spread = getParamIntValue(parameters, "Spread", 0);
+	
 	Magick::Image * mImg = convertQImageToMImage(image);
 	mImg->spread(spread);
 	return convertMImageToQImage(mImg);
 #else
+	Q_UNUSED(parameters);
 	return image;
 #endif
 }

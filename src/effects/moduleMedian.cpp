@@ -51,22 +51,14 @@ QList<EffectBase::ParameterCluster> EffectModuleMedian::getListOfParameterCluste
 
 QImage EffectModuleMedian::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	int size = 0;
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "Size")
-		{
-			size = elem.parameterValue.toInt();
-		} else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
 #if defined(HAS_VIPS)
+	int size = getParamIntValue(parameters, "Size", 0);
+	
 	VImage vImg = convertQImageToVImage(image);
 	vImg = vImg.median(size);
 	return convertVImageToQImage(vImg, image.hasAlphaChannel());
 #else
+	Q_UNUSED(parameters);
 	return image;
 #endif
 }

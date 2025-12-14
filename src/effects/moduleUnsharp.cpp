@@ -41,22 +41,8 @@ QList<EffectBase::ParameterCluster> EffectModuleUnsharp::getListOfParameterClust
 
 QImage EffectModuleUnsharp::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	double radius = 0;
-	double amount = 0;
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "Radius")
-		{
-			radius = elem.parameterValue.toDouble();
-		} else
-		if (elem.parameterName == "Amount")
-		{
-			amount = elem.parameterValue.toInt() / 100.0;
-		} else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
+	double radius = getParamDoubleValue(parameters, "Radius", 0.0);
+	double amount = getParamDoubleValue(parameters, "Amount", 0.0) / 100.0;
 	
 	QImage dst;
 	if (image.hasAlphaChannel())

@@ -152,4 +152,28 @@ EffectBase::ParameterCluster EffectBase::uiParamCombobox(QString displayName, QS
 	return elem;
 }
 
+int EffectBase::getParamIntValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, int defaultValue)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		if (elem.parameterName == paramName)
+		{
+			return elem.parameterValue.toInt();
+		}
+	}
+	return defaultValue;
+}
+
+double EffectBase::getParamDoubleValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, double defaultValue)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		if (elem.parameterName == paramName)
+		{
+			return elem.parameterValue.toDouble();
+		}
+	}
+	return defaultValue;
+}
+
 

@@ -48,48 +48,14 @@ QList<EffectBase::ParameterCluster> EffectModuleColorAdjust::getListOfParameterC
 
 QImage EffectModuleColorAdjust::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	double valueOfBrightness, valueOfContrast, valueOfGamma, valueOfSaturation, valueOfHue, valueOfRed, valueOfGreen, valueOfBlue;
-	valueOfGamma = 1.0;
-	valueOfBrightness = valueOfContrast = valueOfSaturation = valueOfHue = valueOfRed = valueOfGreen = valueOfBlue = 0.0;
-	
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "Brightness")
-		{
-			valueOfBrightness = elem.parameterValue.toInt() / 100.0; // -1.0 .. 1.0
-		} else
-		if (elem.parameterName == "Contrast")
-		{
-			valueOfContrast = elem.parameterValue.toInt() / 100.0; // -1.0 .. 1.0
-		} else
-		if (elem.parameterName == "Gamma")
-		{
-			valueOfGamma = elem.parameterValue.toDouble();
-		} else
-		if (elem.parameterName == "Saturation")
-		{
-			valueOfSaturation = elem.parameterValue.toInt() / 100.0; // -1.0 .. 1.0
-		} else
-		if (elem.parameterName == "Hue")
-		{
-			valueOfHue = elem.parameterValue.toInt() / 180.0; // -1.0 .. 1.0
-		} else
-		if (elem.parameterName == "Red")
-		{
-			valueOfRed = elem.parameterValue.toInt() / 100.0; // -1.0 .. 1.0
-		} else
-		if (elem.parameterName == "Green")
-		{
-			valueOfGreen = elem.parameterValue.toInt() / 100.0; // -1.0 .. 1.0
-		} else
-		if (elem.parameterName == "Blue")
-		{
-			valueOfBlue = elem.parameterValue.toInt() / 100.0; // -1.0 .. 1.0
-		} else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
+	double valueOfBrightness = getParamDoubleValue(parameters, "Brightness", 0.0) / 100.0; // -1.0 .. 1.0
+	double valueOfContrast = getParamDoubleValue(parameters, "Contrast", 0.0) / 100.0; // -1.0 .. 1.0
+	double valueOfGamma = getParamDoubleValue(parameters, "Gamma", 1.0);
+	double valueOfSaturation = getParamDoubleValue(parameters, "Saturation", 0.0) / 100.0; // -1.0 .. 1.0
+	double valueOfHue = getParamDoubleValue(parameters, "Hue", 0.0) / 180.0; // -1.0 .. 1.0
+	double valueOfRed = getParamDoubleValue(parameters, "Red", 0.0) / 100.0; // -1.0 .. 1.0
+	double valueOfGreen = getParamDoubleValue(parameters, "Green", 0.0) / 100.0; // -1.0 .. 1.0
+	double valueOfBlue = getParamDoubleValue(parameters, "Blue", 0.0) / 100.0; // -1.0 .. 1.0
 	
 	return ColorAdjust::AdjustColor(image, valueOfBrightness, valueOfContrast, valueOfGamma, valueOfSaturation, valueOfHue, valueOfRed, valueOfGreen, valueOfBlue);
 }

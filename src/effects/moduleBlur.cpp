@@ -40,17 +40,7 @@ QList<EffectBase::ParameterCluster> EffectModuleBlur::getListOfParameterClusters
 
 QImage EffectModuleBlur::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	double radius = 0;
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "Radius")
-		{
-			radius = elem.parameterValue.toDouble();
-		} else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
+	double radius = getParamDoubleValue(parameters, "Radius", 0.0);
 	
 	QGraphicsBlurEffect *e = new QGraphicsBlurEffect();
 	e->setBlurRadius(radius);

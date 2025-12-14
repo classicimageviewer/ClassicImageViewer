@@ -41,19 +41,7 @@ QList<EffectBase::ParameterCluster> EffectModuleColorTemperature::getListOfParam
 
 QImage EffectModuleColorTemperature::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	int temperature = 6500;
-	
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "Temperature")
-		{
-			temperature = elem.parameterValue.toInt();
-		}
-		else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
+	int temperature = getParamIntValue(parameters, "Temperature", 6500);
 	
 	QImage dst = image.convertToFormat(QImage::Format_RGB32).copy();
 	

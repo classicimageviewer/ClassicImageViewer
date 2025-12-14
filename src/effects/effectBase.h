@@ -52,6 +52,9 @@ public:
 	ParameterCluster uiParamCheckbox(QString displayName, QString paramName, bool defaultValue);
 	ParameterCluster uiParamCombobox(QString displayName, QString paramName, int defaultValue, QStringList list);
 	
+	int getParamIntValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, int defaultValue);
+	double getParamDoubleValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, double defaultValue);
+	
 	virtual ~EffectBase() {};
 	
 	virtual bool available() = 0;

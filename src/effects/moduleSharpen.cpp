@@ -41,17 +41,7 @@ QList<EffectBase::ParameterCluster> EffectModuleSharpen::getListOfParameterClust
 
 QImage EffectModuleSharpen::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	double strength = 0;
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "Strength")
-		{
-			strength = elem.parameterValue.toInt() / 100.0; // 0.01 .. 1.0
-		} else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
+	double strength = getParamDoubleValue(parameters, "Strength", 0.0) / 100.0; // 0.01 .. 1.0
 	
 	return Sharpener::Sharpen(image, strength);
 }

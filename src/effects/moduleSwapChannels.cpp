@@ -46,18 +46,7 @@ QList<EffectBase::ParameterCluster> EffectModuleSwapChannels::getListOfParameter
 
 QImage EffectModuleSwapChannels::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
-	int rgbto = 0;
-	for (const EffectBase::ParameterCluster & elem : parameters)
-	{
-		if (elem.parameterName == "RGBto")
-		{
-			rgbto = elem.parameterValue.toInt();
-		}
-		else
-		{
-			qDebug() << "Invalid parameter" << elem.parameterName;
-		}
-	}
+	int rgbto = getParamIntValue(parameters, "RGBto", 0);
 	
 	bool hasAlpha = image.hasAlphaChannel();
 	QImage dst;
