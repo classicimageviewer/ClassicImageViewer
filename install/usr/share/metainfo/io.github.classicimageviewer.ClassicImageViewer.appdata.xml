@@ -37,6 +37,17 @@
     <binary>civ</binary>
   </provides>
   <releases>
+    <release version="1.4.0" date="2025-12-20">
+        <description>
+          <ul>
+            <li>enable more image formats</li>
+            <li>file format preferences</li>
+            <li>external editor options</li>
+            <li>other improvements</li>
+            <li>bugfixes</li>
+          </ul>
+        </description>
+    </release>
     <release version="1.3.1" date="2025-09-28">
         <description>
           <ul>
