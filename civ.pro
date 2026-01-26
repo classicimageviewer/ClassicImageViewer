@@ -69,7 +69,8 @@ FORMS += src/*.ui \
 
 RESOURCES += resources/res.qrc
 
-TRANSLATIONS = i18n/en.ts
+TRANSLATIONS = i18n/en.ts \
+		i18n/de.ts
 
 
 # Automating Generation of QM Files
@@ -104,7 +105,7 @@ icons.path = $${PREFIX}/share/icons/
 icons.files = install/usr/share/icons/*
 pixmaps.path = $${PREFIX}/share/pixmaps/
 pixmaps.files = install/usr/share/icons/hicolor/128x128/apps/civ.png
-qmfiles.path = $${PREFIX}/share/$${TARGET}/languages/
+qmfiles.path = $${PREFIX}/share/ClassicImageViewer/i18n/
 qmfiles.files = $${TRANSLATIONS_FILES}
 desktop.path = $${PREFIX}/share/applications
 desktop.files = install/usr/share/applications/classicimageviewer.desktop
