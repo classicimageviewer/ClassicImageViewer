@@ -41,7 +41,7 @@
             <bool>true</bool>
            </property>
            <property name="plainText">
-            <string>                    GNU GENERAL PUBLIC LICENSE
+            <string notr="true">                    GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
  Copyright (C) 2007 Free Software Foundation, Inc. &lt;https://fsf.org/&gt;
@@ -732,7 +732,7 @@ Public License instead of this License.  But first, please read
             <bool>true</bool>
            </property>
            <property name="plainText">
-            <string>GNOME icon theme is distributed under the terms of either GNU LGPL v.3 or Creative Commons BY-SA 3.0 license.
+            <string notr="true">GNOME icon theme is distributed under the terms of either GNU LGPL v.3 or Creative Commons BY-SA 3.0 license.
 
 This work is licenced under the Creative Commons Attribution-Share Alike 3.0
 United States License. To view a copy of this licence, visit
@@ -925,7 +925,7 @@ Library.
             <bool>true</bool>
            </property>
            <property name="plainText">
-            <string>MIT License
+            <string notr="true">MIT License
 
 Copyright (c) 2022 Dominic Szablewski
 
