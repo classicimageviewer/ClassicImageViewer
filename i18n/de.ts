@@ -578,7 +578,7 @@
     <message>
         <location filename="../src/effects/moduleColorAdjust.cpp" line="40"/>
         <source>Exposure</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Belichtung</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleColorAdjust.cpp" line="41"/>
@@ -1049,7 +1049,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/dialogs/licensedialog.ui" line="35"/>
         <source>ClassicImageViewer</source>
-        <translation>ClassicImageViewer </translation>
+        <translation type="unfinished">ClassicImageViewer</translation>
     </message>
     <message>
         <location filename="../src/dialogs/licensedialog.ui" line="726"/>
@@ -1952,10 +1952,6 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
         <translation>Zwischenablage beim Beenden leeren</translation>
     </message>
     <message>
-        <source>Clear recent files on exit</source>
-        <translation type="obsolete">Liste der zuletzt geöffneten Dateien beim Beenden löschen</translation>
-    </message>
-    <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="127"/>
         <location filename="../src/dialogs/preferencesdialog.ui" line="406"/>
         <source>%</source>
@@ -2064,7 +2060,7 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="226"/>
         <source>Clear Recent files on exit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Liste der zuletzt geöffneten Dateien beim Beenden löschen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="457"/>
@@ -2169,47 +2165,47 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="764"/>
         <source>External editors</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Externe Bearbeitungsprogramme</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="781"/>
         <source>Editor 4</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Programm 4</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="791"/>
         <source>Editor 1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Programm 1</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="798"/>
         <source>Editor 3</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Programm 3</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="814"/>
         <source>Editor 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Programm 2</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="824"/>
         <source>Command (full path)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Befehl (vollständiger Pfad)</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="831"/>
         <source>Optional argument(s separated by semicolons)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Optionale Argumente (&quot;;&quot; als Trennzeichen)</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="854"/>
         <source>File formats</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dateiformate</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="862"/>
         <source>IO modules:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">IO-Module:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="242"/>
@@ -2313,12 +2309,12 @@ Das Programm wird dann beendet.</translation>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="263"/>
         <source>Extension</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Erweiterung</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="263"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Öffnen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="263"/>
@@ -2328,25 +2324,25 @@ Das Programm wird dann beendet.</translation>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="263"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Speichern</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="278"/>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="279"/>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="280"/>
         <source>Toggle</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">(De-)Aktivieren</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="314"/>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="315"/>
         <source>additional extensions, use semicolon as separator</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">zusätzliche Erweiterungen, zum Trennen &quot;;&quot; verwenden</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="317"/>
         <source>Try to open: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Versuche zu öffnen:</translation>
     </message>
 </context>
 <context>
@@ -2545,17 +2541,17 @@ Das Programm wird dann beendet.</translation>
     <message>
         <location filename="../src/dialogs/thumbnaildialog.ui" line="65"/>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Klein</translation>
     </message>
     <message>
         <location filename="../src/dialogs/thumbnaildialog.ui" line="70"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="../src/dialogs/thumbnaildialog.ui" line="75"/>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Groß</translation>
     </message>
 </context>
 </TS>
