@@ -314,7 +314,7 @@ void PreferencesDialog::createFileFormatSettings()
 		extraFormats->setPlaceholderText(tr("additional extensions, use semicolon as separator"));
 		extraFormats->setToolTip(tr("additional extensions, use semicolon as separator"));
 		extraFormats->setText(Globals::prefs->fetchSpecificParameter(moduleName, "extraOpen", QVariant(QStringList())).toStringList().join(";"));
-		extraFormatLayout->addWidget(new QLabel(tr("Try to open: ")));
+		extraFormatLayout->addWidget(new QLabel(tr("Try to open:")));
 		extraFormatLayout->addWidget(extraFormats);
 		pageLayout->addItem(extraFormatLayout);
 		extraFileFormatSettings.append(extraFormats);

@@ -357,7 +357,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Full path of the script </string>
+          <string>Full path of the script</string>
          </property>
         </widget>
        </item>

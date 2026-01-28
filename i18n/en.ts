@@ -880,7 +880,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/exttoolconfigdialog.ui" line="360"/>
-        <source>Full path of the script </source>
+        <source>Full path of the script</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2326,7 +2326,7 @@ The application will exit.</source>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="317"/>
-        <source>Try to open: </source>
+        <source>Try to open:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
