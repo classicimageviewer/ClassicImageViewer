@@ -2344,6 +2344,11 @@ Das Programm wird dann beendet.</translation>
         <source>Try to open:</source>
         <translation type="unfinished">Versuche zu öffnen:</translation>
     </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="323"/>
+        <source>Try to open unlisted formats</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>RenameDialog</name>

@@ -320,7 +320,7 @@ void PreferencesDialog::createFileFormatSettings()
 		extraFileFormatSettings.append(extraFormats);
 		
 		QHBoxLayout * unlistedLayout = new QHBoxLayout();
-		QCheckBox * unlistedCheckBox = new QCheckBox("Try to open unlisted formats");
+		QCheckBox * unlistedCheckBox = new QCheckBox(tr("Try to open unlisted formats"));
 		unlistedCheckBox->setObjectName(moduleName);
 		unlistedCheckBox->setChecked(Globals::prefs->fetchSpecificParameter(moduleName, "unlistedOpen", QVariant(false)).toBool());
 		unlistedLayout->addWidget(unlistedCheckBox);
