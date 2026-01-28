@@ -283,7 +283,7 @@ QAction * MainWindow::menuAddAction(QMenu * menu, QString text, Action event, co
 			if (s.length() > 0)
 			{
 				shortCuts.append(QKeySequence(s));
-				shortCutInfo.append(QKeySequence(s).toString() + "&" + text.remove('&'));
+				shortCutInfo.append(QKeySequence(s).toString(QKeySequence::NativeText) + "&" + text.remove('&'));
 			}
 		}
 		if (shortCuts.length() > 0)
@@ -440,20 +440,20 @@ void MainWindow::createMenu()
 	connect(ui.menuHelp, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	//"hidden" shortucts (handled in DisplayWidget)
-	shortCutInfo.append(QKeySequence("Home").toString() + "&" + tr("First file in directory"));
-	shortCutInfo.append(QKeySequence("End").toString() + "&" + tr("Last file in directory"));
-	shortCutInfo.append(QKeySequence("Left").toString() + "&" + tr("Previous file in directory"));
-	shortCutInfo.append(QKeySequence("Right").toString() + "&" + tr("Next file in directory"));
-	shortCutInfo.append(QKeySequence("Up").toString() + "&" + tr("Previous file in directory"));
-	shortCutInfo.append(QKeySequence("Down").toString() + "&" + tr("Next file in directory"));
-	shortCutInfo.append(QKeySequence("PgUp").toString() + "&" + tr("Previous file in directory"));
-	shortCutInfo.append(QKeySequence("PgDown").toString() + "&" + tr("Next file in directory"));
-	shortCutInfo.append(QKeySequence("Ctrl+A").toString() + "&" + tr("Toggle selection all"));
-	shortCutInfo.append(QKeySequence("Ctrl+Left,Ctrl+Right").toString() + "&" + tr("Adjust left side of the selection"));
-	shortCutInfo.append(QKeySequence("Ctrl+Up,Ctrl+Down").toString() + "&" + tr("Adjust top side of the selection"));
-	shortCutInfo.append(QKeySequence("Alt+Left,Alt+Right").toString() + "&" + tr("Adjust right side of the selection"));
-	shortCutInfo.append(QKeySequence("Alt+Up,Alt+Down").toString() + "&" + tr("Adjust bottom side of the selection"));
-	shortCutInfo.append(QKeySequence("Shift+Left,Shift+Right,Shift+Up,Shift+Down").toString() + "&" + tr("Move selection"));
+	shortCutInfo.append(QKeySequence("Home").toString(QKeySequence::NativeText) + "&" + tr("First file in directory"));
+	shortCutInfo.append(QKeySequence("End").toString(QKeySequence::NativeText) + "&" + tr("Last file in directory"));
+	shortCutInfo.append(QKeySequence("Left").toString(QKeySequence::NativeText) + "&" + tr("Previous file in directory"));
+	shortCutInfo.append(QKeySequence("Right").toString(QKeySequence::NativeText) + "&" + tr("Next file in directory"));
+	shortCutInfo.append(QKeySequence("Up").toString(QKeySequence::NativeText) + "&" + tr("Previous file in directory"));
+	shortCutInfo.append(QKeySequence("Down").toString(QKeySequence::NativeText) + "&" + tr("Next file in directory"));
+	shortCutInfo.append(QKeySequence("PgUp").toString(QKeySequence::NativeText) + "&" + tr("Previous file in directory"));
+	shortCutInfo.append(QKeySequence("PgDown").toString(QKeySequence::NativeText) + "&" + tr("Next file in directory"));
+	shortCutInfo.append(QKeySequence("Ctrl+A").toString(QKeySequence::NativeText) + "&" + tr("Toggle selection all"));
+	shortCutInfo.append(QKeySequence("Ctrl+Left,Ctrl+Right").toString(QKeySequence::NativeText) + "&" + tr("Adjust left side of the selection"));
+	shortCutInfo.append(QKeySequence("Ctrl+Up,Ctrl+Down").toString(QKeySequence::NativeText) + "&" + tr("Adjust top side of the selection"));
+	shortCutInfo.append(QKeySequence("Alt+Left,Alt+Right").toString(QKeySequence::NativeText) + "&" + tr("Adjust right side of the selection"));
+	shortCutInfo.append(QKeySequence("Alt+Up,Alt+Down").toString(QKeySequence::NativeText) + "&" + tr("Adjust bottom side of the selection"));
+	shortCutInfo.append(QKeySequence("Shift+Left,Shift+Right,Shift+Up,Shift+Down").toString(QKeySequence::NativeText) + "&" + tr("Move selection"));
 }
 
 void MainWindow::setInternalState(InternalState newState)
