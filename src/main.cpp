@@ -28,6 +28,7 @@
 #include <QSettings>
 #include <QTranslator>
 #include <QDebug>
+#include <QLibraryInfo>
 #include <unistd.h>
 #include "mainwindow.h"
 #include "globals.h"
@@ -97,9 +98,24 @@ int main(int argc, char *argv[])
 	{
 		userLocale = defaultLocale;
 	}
-	QTranslator translator;
-	bool translatorLoaded = false;
-	app.installTranslator(&translator);
+	
+	QTranslator qtTranslator;
+	#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+	if (qtTranslator.load("qt_" + userLocale, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
+	#else
+	if (qtTranslator.load("qt_" + userLocale, QLibraryInfo::path(QLibraryInfo::TranslationsPath)))
+	#endif
+	{
+		app.installTranslator(&qtTranslator);
+		qDebug() << "QTranslator Qt locale: " << userLocale;
+	}
+	else
+	{
+		qDebug() << "QTranslator failed to load Qt locale: " << userLocale;
+	}
+	
+	QTranslator appTranslator;
+	bool appTranslatorLoaded = false;
 	QStringList qmPaths = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
 	qmPaths.append("..");	// for local testing
 	for(int i=0; i<qmPaths.length(); i++)
@@ -107,17 +123,18 @@ int main(int argc, char *argv[])
 		QFileInfo qmFile(qmPaths[i] + "/i18n/" + userLocale + ".qm");
 		if (qmFile.exists() && qmFile.isFile())
 		{
-			translatorLoaded = translator.load(userLocale, qmPaths[i] + "/i18n");
-			if (translatorLoaded)
+			appTranslatorLoaded = appTranslator.load(userLocale, qmPaths[i] + "/i18n");
+			if (appTranslatorLoaded)
 			{
-				qDebug() << "QTranslator locale: " << userLocale;
+				qDebug() << "QTranslator app locale: " << userLocale;
+				app.installTranslator(&appTranslator);
 				break;
 			}
 		}
 	}
-	if (!translatorLoaded)
+	if (!appTranslatorLoaded)
 	{
-		qDebug() << "QTranslator failed to load locale: " << userLocale;
+		qDebug() << "QTranslator failed to load app locale: " << userLocale;
 	}
 	
 	// UI
