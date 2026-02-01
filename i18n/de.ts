@@ -193,7 +193,7 @@
         <location filename="../src/dialogs/batchdialog.ui" line="456"/>
         <location filename="../src/dialogs/batchdialog.cpp" line="478"/>
         <source>x</source>
-        <translation></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="490"/>
@@ -270,7 +270,7 @@
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="791"/>
         <source>Threads</source>
-        <translation></translation>
+        <translation type="unfinished">Threads</translation>
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="805"/>
@@ -364,7 +364,7 @@
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="477"/>
         <source>%</source>
-        <translation></translation>
+        <translation type="unfinished">%</translation>
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="508"/>
@@ -384,7 +384,7 @@
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="921"/>
         <source>Threads: %1/%2</source>
-        <translation></translation>
+        <translation type="unfinished">Threads: %1/%2</translation>
     </message>
 </context>
 <context>
@@ -1616,7 +1616,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="2609"/>
         <source>Not configured</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nicht konfiguriert</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2692"/>
@@ -1832,7 +1832,7 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
     <message>
         <location filename="../src/dialogs/padtosizedialog.ui" line="78"/>
         <source>x</source>
-        <translation></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../src/dialogs/padtosizedialog.ui" line="92"/>
@@ -2331,7 +2331,7 @@ Das Programm wird dann beendet.</translation>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="279"/>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="280"/>
         <source>Toggle</source>
-        <translation type="unfinished">(De-)Aktivieren</translation>
+        <translation type="unfinished">De-/Aktivieren</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="314"/>
@@ -2347,7 +2347,7 @@ Das Programm wird dann beendet.</translation>
     <message>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="323"/>
         <source>Try to open unlisted formats</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Versuche nicht aufgeführte Formate zu öffnen</translation>
     </message>
 </context>
 <context>
