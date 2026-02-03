@@ -38,6 +38,8 @@ AboutDialog::AboutDialog(QWidget * parent) : QDialog(parent)
 	QPixmap pix = QPixmap::fromImage(img);
 	pix.setDevicePixelRatio(Globals::scalingFactor);
 	ui.labelLogo->setPixmap(pix);
+	ui.labelHomePageLink->setOpenExternalLinks(true);
+	ui.labelGithubPageLink->setOpenExternalLinks(true);
 	setFixedSize(size());
 }
 
