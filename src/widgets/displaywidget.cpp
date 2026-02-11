@@ -227,17 +227,37 @@ bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 				verticalScrollBar()->setValue(verticalScrollBar()->maximum());
 				return true;
 			}
+			if ((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_PageUp))
+			{
+				verticalScrollBar()->setValue(verticalScrollBar()->value() - verticalScrollBar()->pageStep());
+				return true;
+			}
+			if ((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_PageDown))
+			{
+				verticalScrollBar()->setValue(verticalScrollBar()->value() + verticalScrollBar()->pageStep());
+				return true;
+			}
 		}
 		if (horizontalScrollBar()->isVisible())
 		{
-			if ((keyEvent->modifiers() == Qt::AltModifier) && (keyEvent->key() == Qt::Key_Home))
+			if ((keyEvent->modifiers() == Qt::ShiftModifier) && (keyEvent->key() == Qt::Key_Home))
 			{
 				horizontalScrollBar()->setValue(0);
 				return true;
 			}
-			if ((keyEvent->modifiers() == Qt::AltModifier) && (keyEvent->key() == Qt::Key_End))
+			if ((keyEvent->modifiers() == Qt::ShiftModifier) && (keyEvent->key() == Qt::Key_End))
 			{
 				horizontalScrollBar()->setValue(horizontalScrollBar()->maximum());
+				return true;
+			}
+			if ((keyEvent->modifiers() == Qt::ShiftModifier) && (keyEvent->key() == Qt::Key_PageUp))
+			{
+				horizontalScrollBar()->setValue(horizontalScrollBar()->value() - horizontalScrollBar()->pageStep());
+				return true;
+			}
+			if ((keyEvent->modifiers() == Qt::ShiftModifier) && (keyEvent->key() == Qt::Key_PageDown))
+			{
+				horizontalScrollBar()->setValue(horizontalScrollBar()->value() + horizontalScrollBar()->pageStep());
 				return true;
 			}
 		}
@@ -398,6 +418,16 @@ void DisplayWidget::wheelEvent(QWheelEvent *event)
 		QPointF delta = posAfterScale - mousePos;
 		horizontalScrollBar()->setValue(horizontalScrollBar()->value() + delta.x());
 		verticalScrollBar()->setValue(verticalScrollBar()->value() + delta.y());
+	}
+	else
+	if ((event->modifiers() == Qt::ShiftModifier) && (horizontalScrollBar()->isVisible()))
+	{
+		horizontalScrollBar()->setValue(horizontalScrollBar()->value() - QApplication::wheelScrollLines()*direction*horizontalScrollBar()->singleStep());
+	}
+	else
+	if ((event->modifiers() == Qt::NoModifier) && (verticalScrollBar()->isVisible()))
+	{
+		verticalScrollBar()->setValue(verticalScrollBar()->value() - QApplication::wheelScrollLines()*direction*verticalScrollBar()->singleStep());
 	}
 	else
 	if ((event->modifiers() == Qt::NoModifier) && (!verticalScrollBar()->isVisible()))
