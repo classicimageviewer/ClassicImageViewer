@@ -32,6 +32,7 @@
 #include "effects/moduleColorAdjust.h"
 #include "effects/moduleColorTemperature.h"
 #include "effects/moduleColorQuantization.h"
+#include "effects/moduleHalftone.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -55,6 +56,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleColorAdjust());
 	list.append(new EffectModuleColorTemperature());
 	list.append(new EffectModuleColorQuantization());
+	list.append(new EffectModuleHalftone());
 	
 	
 	for (EffectBase* item : list)

@@ -675,6 +675,34 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleHalftone</name>
+    <message>
+        <location filename="../src/effects/moduleHalftone.cpp" line="44"/>
+        <source>Radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleHalftone.cpp" line="45"/>
+        <source>Cyan screen angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleHalftone.cpp" line="46"/>
+        <source>Magenta screen angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleHalftone.cpp" line="47"/>
+        <source>Yellow screen angle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleHalftone.h" line="36"/>
+        <source>Halftone</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleHistEqual</name>
     <message>
         <location filename="../src/effects/moduleHistEqual.h" line="36"/>
