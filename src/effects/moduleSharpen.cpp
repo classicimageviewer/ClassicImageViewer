@@ -17,7 +17,7 @@
 #include "moduleSharpen.h"
 #include "globals.h"
 #include <QDebug>
-#include "modules/sharpener.h"
+#include "lib/sharpener.h"
 
 
 EffectModuleSharpen::EffectModuleSharpen(QObject * parent) : QObject(parent)

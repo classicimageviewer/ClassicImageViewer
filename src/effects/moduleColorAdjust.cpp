@@ -17,7 +17,7 @@
 #include "moduleColorAdjust.h"
 #include "globals.h"
 #include <QDebug>
-#include "modules/coloradj.h"
+#include "lib/coloradj.h"
 
 
 EffectModuleColorAdjust::EffectModuleColorAdjust(QObject * parent) : QObject(parent)

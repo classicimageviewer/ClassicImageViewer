@@ -66,9 +66,9 @@
 #include "dialogs/batchdialog.h"
 #include "dialogs/exttoolconfigdialog.h"
 
-#include "modules/resizer.h"
-#include "modules/autocolor.h"
-#include "modules/sharpener.h"
+#include "lib/resizer.h"
+#include "lib/autocolor.h"
+#include "lib/sharpener.h"
 
 
 MainWindow::MainWindow() : QMainWindow()

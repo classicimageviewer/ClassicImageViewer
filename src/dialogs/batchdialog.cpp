@@ -33,9 +33,9 @@
 #include <algorithm>
 #include <vector>
 #include <cmath>
-#include "modules/resizer.h"
-#include "modules/autocolor.h"
-#include "modules/sharpener.h"
+#include "lib/resizer.h"
+#include "lib/autocolor.h"
+#include "lib/sharpener.h"
 #include "dialogs/effectsdialog.h"
 
 BatchDialog::BatchDialog(QString indexedDirPath, QStringList indexedFiles, ImageIO * imageIO, QWidget * parent) : QDialog(parent)

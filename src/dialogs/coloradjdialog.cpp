@@ -16,7 +16,7 @@
 
 #include "coloradjdialog.h"
 #include "globals.h"
-#include "modules/coloradj.h"
+#include "lib/coloradj.h"
 #include <QDebug>
 #include <QColorDialog>
 

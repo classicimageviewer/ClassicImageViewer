@@ -53,7 +53,7 @@ SOURCES += src/*.cpp \
 	src/io/xt/*.cpp \
 	src/widgets/*.cpp \
 	src/dialogs/*.cpp \
-	src/modules/*.cpp \
+	src/lib/*.cpp \
 	src/effects/*.cpp 
 
 HEADERS += src/*.h \
@@ -61,7 +61,7 @@ HEADERS += src/*.h \
 	src/io/xt/*.h \
 	src/widgets/*.h \
 	src/dialogs/*.h \
-	src/modules/*.h \
+	src/lib/*.h \
 	src/effects/*.h 
 
 FORMS += src/*.ui \

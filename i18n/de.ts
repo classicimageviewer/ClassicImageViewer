@@ -2488,33 +2488,33 @@ Das Programm wird dann beendet.</translation>
 <context>
     <name>Resizer</name>
     <message>
-        <location filename="../src/modules/resizer.cpp" line="122"/>
+        <location filename="../src/lib/resizer.cpp" line="122"/>
         <source>Nearest Neighbor</source>
         <translation type="unfinished">Nächster-Nachbar-Interpolation (nearest neighbor)</translation>
     </message>
     <message>
-        <location filename="../src/modules/resizer.cpp" line="123"/>
+        <location filename="../src/lib/resizer.cpp" line="123"/>
         <source>Bilinear</source>
         <translation type="unfinished">Bilineare Interpolation (bilinear)</translation>
     </message>
     <message>
-        <location filename="../src/modules/resizer.cpp" line="125"/>
+        <location filename="../src/lib/resizer.cpp" line="125"/>
         <source>Bicubic (Catmull-Rom)</source>
         <translation type="unfinished">Bikubische Interpolation (bicubic) (Catmull-Rom)</translation>
     </message>
     <message>
-        <location filename="../src/modules/resizer.cpp" line="126"/>
+        <location filename="../src/lib/resizer.cpp" line="126"/>
         <source>Bicubic (Mitchell-Netravali)</source>
         <translation type="unfinished">Bikubische Interpolation (bicubic) (Mitchell-Netravali)</translation>
     </message>
     <message>
-        <location filename="../src/modules/resizer.cpp" line="127"/>
-        <location filename="../src/modules/resizer.cpp" line="130"/>
+        <location filename="../src/lib/resizer.cpp" line="127"/>
+        <location filename="../src/lib/resizer.cpp" line="130"/>
         <source>Lanczos</source>
         <translation type="unfinished">Lanczos Interpolation</translation>
     </message>
     <message>
-        <location filename="../src/modules/resizer.cpp" line="129"/>
+        <location filename="../src/lib/resizer.cpp" line="129"/>
         <source>Bicubic</source>
         <translation type="unfinished">Bikubische Interpolation (bicubic)</translation>
     </message>

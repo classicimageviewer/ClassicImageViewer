@@ -19,7 +19,7 @@
 
 #include <QDialog>
 #include "ui_resizedialog.h"
-#include "modules/resizer.h"
+#include "lib/resizer.h"
 
 class ResizeDialog : public QDialog
 {
