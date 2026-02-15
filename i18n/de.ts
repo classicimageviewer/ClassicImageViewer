@@ -712,6 +712,24 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleLocalColorCorrection</name>
+    <message>
+        <location filename="../src/effects/moduleLocalColorCorrection.cpp" line="37"/>
+        <source>Radius</source>
+        <translation type="unfinished">Radius</translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleLocalColorCorrection.cpp" line="38"/>
+        <source>Strength</source>
+        <translation type="unfinished">Stärke</translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleLocalColorCorrection.h" line="35"/>
+        <source>Local Color Correction</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleMedian</name>
     <message>
         <location filename="../src/effects/moduleMedian.cpp" line="47"/>
@@ -823,6 +841,14 @@
         <location filename="../src/effects/moduleSwapChannels.h" line="36"/>
         <source>Swap channels</source>
         <translation type="unfinished">Kanäle tauschen</translation>
+    </message>
+</context>
+<context>
+    <name>EffectModuleTemplate</name>
+    <message>
+        <location filename="../src/effects/moduleTemplate.h" line="45"/>
+        <source>Template</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
