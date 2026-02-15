@@ -26,6 +26,7 @@ public:
 	static Prefs * prefs;
 	static QMainWindow * MainWindowWidget;
 	static double scalingFactor;
+	static int getThreadCount(void);
 };
 
 #endif //GLOBALS_H

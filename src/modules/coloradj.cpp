@@ -79,6 +79,7 @@ QImage ColorAdjust::AdjustColor(const QImage src, double valueOfBrightness, doub
 		bcgLUT[i] = std::round(qBound(0.0, val, 255.0));
 	}
 	
+	omp_set_num_threads(Globals::getThreadCount());
 	#pragma omp parallel for schedule(dynamic, 1)
 	for (int y=0; y<dst.height(); y++)
 	{

@@ -15,6 +15,8 @@
 
 
 #include "effectHub.h"
+#include <omp.h>
+#include "globals.h" 
 #include <QDebug>
 #include "effects/moduleSharpen.h"
 #include "effects/moduleBlur.h"
@@ -116,6 +118,7 @@ void EffectHub::saveEffectParameters(int effectId, QList<EffectBase::ParameterCl
 QImage EffectHub::applyEffect(int effectId, QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
 	if (!checkId(effectId)) return image;
+	omp_set_num_threads(Globals::getThreadCount());
 	return modules.at(effectId)->applyEffect(image, parameters);
 }
 

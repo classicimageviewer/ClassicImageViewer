@@ -70,6 +70,7 @@ PreferencesDialog::PreferencesDialog(ImageIO * imageIO, QWidget * parent) : QDia
 	}
 	ui.spinBoxFsIndicatorFontSize->setValue(Globals::prefs->getFullscreenIndicatorFontSize());
 	
+	ui.comboBoxOpMultithreading->setCurrentIndex(Globals::prefs->getInternalThreads());
 	ui.spinBoxUsMinimumSteps->setValue(Globals::prefs->getUndoStackMinimumSteps());
 	ui.spinBoxUsMemoryLimit->setValue(Globals::prefs->getUndoStackMemoryLimit());
 	
@@ -203,6 +204,7 @@ void PreferencesDialog::savePreferences()
 	Globals::prefs->setFullscreenIndicatorFontFamily(ui.fontComboBoxFsIndicatorFontFamily->currentFont().family());
 	Globals::prefs->setFullscreenIndicatorFontSize(ui.spinBoxFsIndicatorFontSize->value());
 	
+	Globals::prefs->setInternalThreads(ui.comboBoxOpMultithreading->currentIndex());
 	Globals::prefs->setUndoStackMinimumSteps(ui.spinBoxUsMinimumSteps->value());
 	Globals::prefs->setUndoStackMemoryLimit(ui.spinBoxUsMemoryLimit->value());
 

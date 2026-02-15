@@ -15,6 +15,7 @@
 
 
 #include "globals.h"
+#include <QThread>
 
 // one instance
 Globals globalsInstance;
@@ -24,4 +25,24 @@ Prefs * Globals::prefs = NULL;
 QMainWindow * Globals::MainWindowWidget = NULL;
 double Globals::scalingFactor = 1.0;
 
-
+int Globals::getThreadCount(void)
+{
+	if (Globals::prefs == NULL) return 1;
+	
+	int threadCount = Globals::prefs->getInternalThreads();
+	if (threadCount == 0)
+	{
+		threadCount = QThread::idealThreadCount();
+	}
+	else
+	{
+		int exp = threadCount - 1;
+		threadCount = 1;
+		for (int i=0; i<exp; i++ )
+		{
+			threadCount *= 2;
+		}
+	}
+	if (threadCount < 1) threadCount = 1;
+	return threadCount;
+}
