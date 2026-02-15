@@ -1,4 +1,4 @@
-// Copyright (C) 2023 zhuvoy
+// Copyright (C) 2026 zhuvoy
 // 
 // This file is part of ClassicImageViewer.
 // 
@@ -14,11 +14,30 @@
 // If not, see <https://www.gnu.org/licenses/>.
 
 
-#include "sharpener.h"
+#include "imageOp.h"
 #include "globals.h"
 #include <cmath>
+#include <QGraphicsBlurEffect>
 
-QImage Sharpener::Sharpen(const QImage src, double strength)
+QImage ImageOp::Blur(const QImage image, double radius)
+{
+	QGraphicsBlurEffect *e = new QGraphicsBlurEffect();
+	e->setBlurRadius(radius);
+	e->setBlurHints(QGraphicsBlurEffect::QualityHint);
+	QGraphicsScene scene;
+	QGraphicsPixmapItem item;
+	item.setPixmap(QPixmap::fromImage(image));
+	item.setGraphicsEffect(e);
+	scene.addItem(&item);
+	QImage dst(image.size(), QImage::Format_ARGB32);
+	dst.fill(Qt::transparent);
+	QPainter ptr(&dst);
+	scene.render(&ptr, QRectF(), QRectF(0, 0, image.width(), image.height()));
+	
+	return dst.convertToFormat(image.format()); 
+}
+
+QImage ImageOp::Sharpen(const QImage src, double strength)
 {
 	QImage dst = src.convertToFormat(QImage::Format_RGB32).copy();
 	
@@ -55,5 +74,5 @@ QImage Sharpener::Sharpen(const QImage src, double strength)
 		dst.setAlphaChannel(src.convertToFormat(QImage::Format_Alpha8));
 	}
 	return dst;
-}
+}      
 

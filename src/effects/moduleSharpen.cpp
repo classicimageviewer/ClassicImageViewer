@@ -17,7 +17,7 @@
 #include "moduleSharpen.h"
 #include "globals.h"
 #include <QDebug>
-#include "lib/sharpener.h"
+#include "lib/imageOp.h"
 
 
 EffectModuleSharpen::EffectModuleSharpen(QObject * parent) : QObject(parent)
@@ -43,6 +43,6 @@ QImage EffectModuleSharpen::applyEffect(QImage image, QList<EffectBase::Paramete
 {
 	double strength = getParamDoubleValue(parameters, "Strength", 0.0) / 100.0; // 0.01 .. 1.0
 	
-	return Sharpener::Sharpen(image, strength);
+	return ImageOp::Sharpen(image, strength);
 }
 

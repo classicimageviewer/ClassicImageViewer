@@ -16,9 +16,8 @@
 #include "moduleLocalColorCorrection.h"
 #include "globals.h"
 #include <QDebug>
-#include <QGraphicsBlurEffect>
 #include <cmath>
-
+#include "lib/imageOp.h"
 
 EffectModuleLocalColorCorrection::EffectModuleLocalColorCorrection(QObject * parent) : QObject(parent)
 {
@@ -39,8 +38,6 @@ QList<EffectBase::ParameterCluster> EffectModuleLocalColorCorrection::getListOfP
 	
 	return cluster;
 }
-
-#include <QElapsedTimer>
 
 QImage EffectModuleLocalColorCorrection::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
@@ -64,41 +61,8 @@ QImage EffectModuleLocalColorCorrection::applyEffect(QImage image, QList<EffectB
 	
 	
 	QImage luminance = image.convertToFormat(QImage::Format_Grayscale8);
+	QImage mask = ImageOp::Blur(luminance, radius);
 	
-	QImage luminanceExtended(image.size() + QSize(2*radius,2*radius), QImage::Format_Grayscale8);
-	#pragma omp parallel for schedule(static, 1)
-	for (int y = 0; y < image.height() + 2*radius; y++)
-	{
-		int yr = abs(y - radius);
-		if (yr >= image.height())
-		{
-			yr = 2*image.height() - yr - 1;
-		}
-		uint8_t * sRow = luminance.scanLine(yr);
-		uint8_t * dRow = luminanceExtended.scanLine(y);
-		for (int x = 0; x < image.width() + 2*radius; x++)
-		{
-			int xr = abs(x - radius);
-			if (xr >= image.width())
-			{
-				xr = 2*image.width() - xr - 1;
-			}
-			dRow[x] = sRow[xr];
-		}
-	}
-	
-	QGraphicsBlurEffect *e = new QGraphicsBlurEffect();
-	e->setBlurRadius(radius);
-	e->setBlurHints(QGraphicsBlurEffect::QualityHint);
-	QGraphicsScene scene;
-	QGraphicsPixmapItem item;
-	item.setPixmap(QPixmap::fromImage(luminanceExtended));
-	item.setGraphicsEffect(e);
-	scene.addItem(&item);
-	QImage mask(image.size(), QImage::Format_Grayscale8);
-	mask.fill(0);
-	QPainter ptr(&mask);
-	scene.render(&ptr, QRectF(), QRectF(radius, radius, image.width(), image.height()));
 	auto lut = new uint8_t[256][256];
 	
 	#pragma omp parallel for schedule(static, 16)

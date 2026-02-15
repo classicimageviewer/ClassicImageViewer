@@ -68,7 +68,7 @@
 
 #include "lib/resizer.h"
 #include "lib/autocolor.h"
-#include "lib/sharpener.h"
+#include "lib/imageOp.h"
 
 
 MainWindow::MainWindow() : QMainWindow()
@@ -2192,7 +2192,7 @@ void MainWindow::doSimpleFilter(SimpleFilter f)
 			break;
 		case SHARPEN:
 			QApplication::setOverrideCursor(Qt::WaitCursor);
-			dst = Sharpener::Sharpen(src, 0.05);
+			dst = ImageOp::Sharpen(src, 0.05);
 			QApplication::restoreOverrideCursor();
 			break;
 		default:

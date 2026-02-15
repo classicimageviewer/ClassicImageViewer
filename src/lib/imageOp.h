@@ -1,4 +1,4 @@
-// Copyright (C) 2023 zhuvoy
+// Copyright (C) 2026 zhuvoy
 // 
 // This file is part of ClassicImageViewer.
 // 
@@ -14,21 +14,20 @@
 // If not, see <https://www.gnu.org/licenses/>.
 
 
-#ifndef SHARPENER_H
-#define SHARPENER_H
+#ifndef IMAGEOP_H
+#define IMAGEOP_H
 
 #include <QObject>
 #include <QImage>
-#include <QSize>
-#include <QStringList>
 
-class Sharpener : public QObject
+class ImageOp : public QObject
 {
 	Q_OBJECT
 public:
 	using QObject::QObject;
 	
+	static QImage Blur(const QImage image, double radius);
 	static QImage Sharpen(const QImage src, double strength);
 };
 
-#endif //SHARPENER_H
+#endif //BLURRING_H

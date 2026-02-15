@@ -35,7 +35,7 @@
 #include <cmath>
 #include "lib/resizer.h"
 #include "lib/autocolor.h"
-#include "lib/sharpener.h"
+#include "lib/imageOp.h"
 #include "dialogs/effectsdialog.h"
 
 BatchDialog::BatchDialog(QString indexedDirPath, QStringList indexedFiles, ImageIO * imageIO, QWidget * parent) : QDialog(parent)
@@ -1126,7 +1126,7 @@ void BatchWorker::run()
 			}
 			if (parameters->sharpen)
 			{
-				img = Sharpener::Sharpen(img, 0.05);
+				img = ImageOp::Sharpen(img, 0.05);
 			}
 			if (parameters->grayscale)
 			{

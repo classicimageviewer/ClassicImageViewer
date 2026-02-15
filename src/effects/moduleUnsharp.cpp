@@ -17,7 +17,7 @@
 #include "moduleUnsharp.h"
 #include "globals.h"
 #include <QDebug>
-#include <QGraphicsBlurEffect>
+#include "lib/imageOp.h"
 
 EffectModuleUnsharp::EffectModuleUnsharp(QObject * parent) : QObject(parent)
 {
@@ -54,18 +54,8 @@ QImage EffectModuleUnsharp::applyEffect(QImage image, QList<EffectBase::Paramete
 		dst = image.convertToFormat(QImage::Format_RGB32).copy();
 	}
 	
-	QGraphicsBlurEffect *e = new QGraphicsBlurEffect();
-	e->setBlurRadius(radius);
-	e->setBlurHints(QGraphicsBlurEffect::QualityHint);
-	QGraphicsScene scene;
-	QGraphicsPixmapItem item;
-	item.setPixmap(QPixmap::fromImage(dst));
-	item.setGraphicsEffect(e);
-	scene.addItem(&item);
-	QImage mask(dst.size(), QImage::Format_ARGB32);
-	mask.fill(Qt::transparent);
-	QPainter ptr(&mask);
-	scene.render(&ptr, QRectF(), QRectF(0, 0, dst.width(), dst.height()));
+	QImage mask = ImageOp::Blur(dst, radius);
+	
 	bool hasAlpha = dst.hasAlphaChannel();
 	
 	for (int y=0; y<dst.height(); y++)

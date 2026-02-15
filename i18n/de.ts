@@ -714,12 +714,12 @@
 <context>
     <name>EffectModuleLocalColorCorrection</name>
     <message>
-        <location filename="../src/effects/moduleLocalColorCorrection.cpp" line="37"/>
+        <location filename="../src/effects/moduleLocalColorCorrection.cpp" line="36"/>
         <source>Radius</source>
         <translation type="unfinished">Radius</translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleLocalColorCorrection.cpp" line="38"/>
+        <location filename="../src/effects/moduleLocalColorCorrection.cpp" line="37"/>
         <source>Strength</source>
         <translation type="unfinished">Stärke</translation>
     </message>

@@ -17,7 +17,7 @@
 #include "moduleBlur.h"
 #include "globals.h"
 #include <QDebug>
-#include <QGraphicsBlurEffect>
+#include "lib/imageOp.h"
 
 EffectModuleBlur::EffectModuleBlur(QObject * parent) : QObject(parent)
 {
@@ -42,19 +42,6 @@ QImage EffectModuleBlur::applyEffect(QImage image, QList<EffectBase::ParameterCl
 {
 	double radius = getParamDoubleValue(parameters, "Radius", 0.0);
 	
-	QGraphicsBlurEffect *e = new QGraphicsBlurEffect();
-	e->setBlurRadius(radius);
-	e->setBlurHints(QGraphicsBlurEffect::QualityHint);
-	QGraphicsScene scene;
-	QGraphicsPixmapItem item;
-	item.setPixmap(QPixmap::fromImage(image));
-	item.setGraphicsEffect(e);
-	scene.addItem(&item);
-	QImage dst(image.size(), QImage::Format_ARGB32);
-	dst.fill(Qt::transparent);
-	QPainter ptr(&dst);
-	scene.render(&ptr, QRectF(), QRectF(0, 0, image.width(), image.height()));
-	
-	return dst.convertToFormat(image.format());
+	return ImageOp::Blur(image, radius);
 }
 
