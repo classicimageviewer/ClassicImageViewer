@@ -119,6 +119,7 @@ PreferencesDialog::PreferencesDialog(ImageIO * imageIO, QWidget * parent) : QDia
 	
 	restoreDefaultButton = ui.buttonBox->button(QDialogButtonBox::RestoreDefaults);
 	connect(restoreDefaultButton, SIGNAL(clicked(bool)), this, SLOT(restoreDefaults(bool)));
+	adjustSize();
 }
 
 PreferencesDialog::~PreferencesDialog()

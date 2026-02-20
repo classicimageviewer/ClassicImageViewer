@@ -59,6 +59,9 @@
               <property name="text">
                <string>(if disabled, the exit could take a long time)</string>
               </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item row="0" column="1">
@@ -210,6 +213,9 @@
              <widget class="QLabel" name="labelSelectorExplain">
               <property name="text">
                <string>(not applied on the current image)</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -464,6 +470,9 @@
               <property name="text">
                <string>(of white)</string>
               </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
              </widget>
             </item>
             <item row="2" column="0">
@@ -532,6 +541,9 @@
              <widget class="QLabel" name="labelDisplayQualityExplain">
               <property name="text">
                <string>(reduces downscaling aliasing effects)</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
