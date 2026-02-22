@@ -6,6 +6,8 @@ make -s -j$(nproc)
 cp build/civ AppRun/usr/bin
 cp install/usr/share/icons/hicolor/256x256/civ.png Apprun
 cp -r install/usr/share AppRun/usr
+mkdir -p AppRun/usr/share/ClassicImageViewer/i18n/
+cp i18n/*.qm AppRun/usr/share/ClassicImageViewer/i18n/
 mkdir -p AppImage
 chmod -R 0755 *
 cd AppImage

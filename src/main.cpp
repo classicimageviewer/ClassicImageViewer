@@ -118,6 +118,11 @@ int main(int argc, char *argv[])
 	bool appTranslatorLoaded = false;
 	QStringList qmPaths = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation);
 	qmPaths.append("..");	// for local testing
+	char * appdir = getenv("APPDIR");
+	if (appdir)
+	{
+		qmPaths.append(QString(appdir) + "/usr/share/ClassicImageViewer");	// for Appimage
+	}
 	for(int i=0; i<qmPaths.length(); i++)
 	{
 		QFileInfo qmFile(qmPaths[i] + "/i18n/" + userLocale + ".qm");
