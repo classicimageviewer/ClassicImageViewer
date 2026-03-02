@@ -154,7 +154,7 @@ QImage ImageOp::Kernel2D(const QImage image, EdgeHandling edgeHandling, int kern
 				int py = y + ky + dy;
 				for (int kx = -dx; kx <= dx; kx++)
 				{
-					int multiplier = kernel[kernelHeight*(ky+dy) + (kx+dx)];
+					int multiplier = kernel[kernelWidth*(ky+dy) + (kx+dx)];
 					if (multiplier == 0) continue;
 					int px = x + kx;
 					if (px < 0)
