@@ -36,6 +36,7 @@
 #include "effects/moduleColorQuantization.h"
 #include "effects/moduleHalftone.h"
 #include "effects/moduleLocalColorCorrection.h"
+#include "effects/moduleKernels.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -61,6 +62,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleColorQuantization());
 	list.append(new EffectModuleHalftone());
 	list.append(new EffectModuleLocalColorCorrection());
+	list.append(new EffectModuleKernels());
 	
 	
 	for (EffectBase* item : list)
