@@ -49,6 +49,14 @@ sudo dnf install g++ make qt6-qtbase-devel qt6-qttools-devel qt6-qtimageformats
 sudo zypper install gcc-c++ make qt6-base-devel qt6-tools-devel qt6-imageformats
 ```
 
+### MacOS
+
+Requires Homebrew.
+
+```
+brew install qttools qtimageformats libomp
+```
+
 ## Recommended packages
 
 ### Debian/Ubuntu
@@ -106,4 +114,12 @@ On Wayland, if you experience window sizing issues, try to set QT_QPA_PLATFORM t
 ```
 export QT_QPA_PLATFORM=xcb
 civ
+```
+
+On MacOS the target is civ.app, which "make install" copies to ~/.local/bin/.
+
+The user can optionally create a symlink to make it available via the MacOS Launchpad:
+
+```
+ln -s ~/.local/bin/civ.app ~/Applications
 ```
