@@ -28,6 +28,18 @@ public:
 	
 	static QImage Blur(const QImage image, double radius);
 	static QImage Sharpen(const QImage src, double strength);
+	
+	enum EdgeHandling
+	{
+		Mirror,
+		Extend
+	};
+	
+	static QImage Kernel2D(const QImage image, EdgeHandling edgeHandling, int kernelWidth, int kernelHeight, const int * kernel, int div, int offset);
+	static QImage Kernel2D(const QImage image, EdgeHandling edgeHandling, QSize kernelSize, const int * kernel, int div, int offset)
+	{
+		return Kernel2D(image, edgeHandling, kernelSize.width(), kernelSize.height(), kernel, div, offset);
+	};
 };
 
 #endif //BLURRING_H
