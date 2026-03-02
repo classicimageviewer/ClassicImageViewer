@@ -24,8 +24,36 @@ MOC_DIR = build/moc
 RCC_DIR = build/rcc
 UI_DIR = build/ui
 
-QMAKE_CXXFLAGS += -fopenmp
-LIBS += -fopenmp
+macx {
+	QMAKE_LFLAGS += -lomp
+
+	eval(QMAKE_TARGET.arch = ""): {
+		ARCH = $$system(uname -m)
+
+		contains(ARCH, arm64): {
+			QMAKE_TARGET.arch = arm64
+		}
+
+		contains(ARCH, x86_64): {
+			QMAKE_TARGET.arch = x86_64
+		}
+	}
+
+	contains(QMAKE_TARGET.arch, arm64) {
+		message("Building for Apple Silicon MacOS")
+		INCLUDEPATH += /opt/homebrew/opt/libomp/include
+		LIBS += -L/opt/homebrew/opt/libomp/lib
+	}
+
+	contains(QMAKE_TARGET.arch, x86_64) {
+		message("Building for Intel MacOS")
+		INCLUDEPATH += /usr/local/opt/libomp/include
+		LIBS += -L/usr/local/opt/libomp/lib
+	}
+} else {
+	QMAKE_CXXFLAGS += -fopenmp
+	LIBS += -fopenmp
+}
 
 exists (/usr/include/GraphicsMagick/Magick++.h) {
 	message( "Has GraphicsMagick..." )

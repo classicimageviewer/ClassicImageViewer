@@ -1989,7 +1989,11 @@ QStringList MainWindow::fastIndexer(QString dirPath, QStringList extensions, int
 		{
 			struct stat attr;
 			stat(fullPath.c_str(), &attr);
+#ifdef __APPLE__
+			double t = attr.st_mtimespec.tv_sec + attr.st_mtimespec.tv_nsec * 1.0e-9;
+#else
 			double t = attr.st_mtim.tv_sec + attr.st_mtim.tv_nsec * 1.0e-9;
+#endif
 			mTimeNameVector.push_back(std::make_pair(t, qDName));
 		}
 		else
