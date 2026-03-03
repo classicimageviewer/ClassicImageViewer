@@ -51,9 +51,11 @@ public:
 	ParameterCluster uiParamSlider1000(QString displayName, QString paramName, double defaultValue, double minValue, double maxValue);
 	ParameterCluster uiParamCheckbox(QString displayName, QString paramName, bool defaultValue);
 	ParameterCluster uiParamCombobox(QString displayName, QString paramName, int defaultValue, QStringList list);
+	ParameterCluster uiParamTextEdit(QString displayName, QString paramName, QString defaultValue);
 	
 	int getParamIntValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, int defaultValue);
 	double getParamDoubleValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, double defaultValue);
+	QString getParamStringValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, QString defaultValue);
 	
 	virtual ~EffectBase() {};
 	

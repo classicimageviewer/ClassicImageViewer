@@ -152,6 +152,19 @@ EffectBase::ParameterCluster EffectBase::uiParamCombobox(QString displayName, QS
 	return elem;
 }
 
+EffectBase::ParameterCluster EffectBase::uiParamTextEdit(QString displayName, QString paramName, QString defaultValue)
+{
+	ParameterCluster elem;
+	
+	elem.displayName = displayName;
+	elem.controlType = QString("textedit");
+	elem.parameterName = paramName;
+	elem.parameterDefaultValue = QVariant(defaultValue);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter(moduleName, paramName, elem.parameterDefaultValue);
+	
+	return elem;
+}
+
 int EffectBase::getParamIntValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, int defaultValue)
 {
 	for (const EffectBase::ParameterCluster & elem : parameters)
@@ -176,4 +189,15 @@ double EffectBase::getParamDoubleValue(QList<EffectBase::ParameterCluster> param
 	return defaultValue;
 }
 
+QString EffectBase::getParamStringValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, QString defaultValue)
+{
+	for (const EffectBase::ParameterCluster & elem : parameters)
+	{
+		if (elem.parameterName == paramName)
+		{
+			return elem.parameterValue.toString();
+		}
+	}
+	return defaultValue;
+}
 

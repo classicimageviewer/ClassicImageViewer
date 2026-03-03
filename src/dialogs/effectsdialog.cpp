@@ -22,6 +22,7 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QPushButton>
+#include <QTextEdit>
 #include <cmath>
 
 EffectsDialog::EffectsDialog(QImage image, QString singleEffect, QWidget * parent) : QDialog(parent)
@@ -331,6 +332,16 @@ void EffectsDialog::effectChanged(int row)
 			cb->setCurrentIndex(elem.parameterValue.toInt());
 			ui.guestLayout->addWidget(cb, currentRow, 1);
 			connect(cb, SIGNAL(currentIndexChanged(int)), this, SLOT(integerValueChanged(int)));
+		} else
+		if (elem.controlType == "textedit")
+		{
+			ui.guestLayout->addWidget(new QLabel(elem.displayName), currentRow, 0);
+			QTextEdit * te = new QTextEdit();
+			te->setObjectName(elem.parameterName);
+			te->setText(elem.parameterValue.toString());
+			te->setLineWrapMode(QTextEdit::NoWrap);
+			ui.guestLayout->addWidget(te, currentRow, 1);
+			connect(te, SIGNAL(textChanged()), this, SLOT(textValueChanged()));
 		}
 		//TODO more
 		
@@ -400,6 +411,11 @@ void EffectsDialog::doubleValueChanged(double v)
 	redrawDst();
 }
 
+void EffectsDialog::textValueChanged(void)
+{
+	redrawDst();
+}
+
 void EffectsDialog::restoreDefaults(bool b)
 {
 	Q_UNUSED(b);
@@ -432,6 +448,10 @@ void EffectsDialog::restoreDefaults(bool b)
 						if (elem.controlType == "combobox")
 						{
 							((QComboBox*)widget)->setCurrentIndex(elem.parameterDefaultValue.toInt());
+						} else
+						if (elem.controlType == "textedit")
+						{
+							((QTextEdit*)widget)->setText(elem.parameterDefaultValue.toString());
 						} else
 						//TODO more
 						{
@@ -483,6 +503,10 @@ void EffectsDialog::getSelectedEffect(QString & name, int & effectId, QList<Effe
 						{
 							cluster.parameterValue = QVariant(((QComboBox*)widget)->currentIndex());
 						} else
+						if (elem.controlType == "textedit")
+						{
+							cluster.parameterValue = QVariant(((QTextEdit*)widget)->toPlainText());
+						} else
 						//TODO more
 						{
 							break;
@@ -498,19 +522,22 @@ void EffectsDialog::getSelectedEffect(QString & name, int & effectId, QList<Effe
 
 }
 
-QImage EffectsDialog::applyEffectsOn(QImage image)
+QImage EffectsDialog::applyEffectsOn(QImage image, bool saveParams)
 {
 	QString name;
 	int id;
 	QList<EffectBase::ParameterCluster> parameterList;
 	getSelectedEffect(name, id, parameterList);
-	effectHub->saveEffectParameters(id, parameterList);
+	if (saveParams)
+	{
+		effectHub->saveEffectParameters(id, parameterList);
+	}
 	return effectHub->applyEffect(id, image, parameterList);
 }
 
 QImage EffectsDialog::applyEffects()
 {
-	return applyEffectsOn(originalImg);
+	return applyEffectsOn(originalImg, true);
 }
 
 

@@ -53,6 +53,7 @@ QList<EffectBase::ParameterCluster> EffectModuleTemplate::getListOfParameterClus
 	cluster += uiParamSlider100(QString displayName, QString paramName, double defaultValue, double minValue, double maxValue);		// this will add an floating point slider with 0.01 resolution to the UI
 	cluster += uiParamSlider1000(QString displayName, QString paramName, double defaultValue, double minValue, double maxValue);		// this will add an floating point slider with 0.001 resolution to the UI
 	cluster += uiParamCheckbox(QString displayName, QString paramName, bool defaultValue);							// this will add a checkbox to the UI
+	cluster += uiParamTextEdit(QString displayName, QString paramName, QString defaultValue);						// this will add a text edit field to the UI
 	
 	QStringList list = QStringList();													// the list of the combobox
 	list.append(QString(tr("List item 1")));
@@ -71,6 +72,7 @@ QImage EffectModuleTemplate::applyEffect(QImage image, QList<EffectBase::Paramet
 	/*
 	int integerParameter = getParamIntValue(parameters, QString paramName, int defaultValue);						// retrieve integer value of Spinbox, Slider, Checkbox and Combobox
 	double doubleParameter = getParamDoubleValue(parameters, QString paramName, double defaultValue);					// retrieve floating point value of DoubleSpinbox, Slider10, Slider100 and Slider1000
+	QString stringParamter = getParamStringValue(parameters, QString paramName, QString defaultValue); 					// retrieve string value of TextEdit
 	*/
 	
 	bool hasAlpha = image.hasAlphaChannel();

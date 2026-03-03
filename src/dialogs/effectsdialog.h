@@ -51,7 +51,7 @@ private: // variables
 private: // functions
 	void redrawSrc(QPoint zoomPos);
 	void redrawDst();
-	QImage applyEffectsOn(QImage image);
+	QImage applyEffectsOn(QImage image, bool saveParams = false);
 private slots:
 	void srcClickedAt(QPoint pos);
 	void effectChanged(int row);
@@ -61,6 +61,7 @@ private slots:
 	void coupledDoubleSliderValueChanged(int v);
 	void integerValueChanged(int v);
 	void doubleValueChanged(double v);
+	void textValueChanged(void);
 	void restoreDefaults(bool b);
 public:
 	EffectsDialog(QImage image, QString singleEffect = QString(), QWidget * parent = NULL);
