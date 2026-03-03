@@ -1,6 +1,6 @@
 # ClassicImageViewer
 
-ClassicImageViewer is a simple and fast image viewer for Linux with some editing features.
+ClassicImageViewer is a simple and fast image viewer for Linux, BSDs and MacOS with some editing features.
 
 ![ClassicImageViewer](./misc/screenshot.png?raw=true "ClassicImageViewer") 
 
@@ -47,6 +47,12 @@ sudo dnf install g++ make qt6-qtbase-devel qt6-qttools-devel qt6-qtimageformats
 
 ```
 sudo zypper install gcc-c++ make qt6-base-devel qt6-tools-devel qt6-imageformats
+```
+
+### FreeBSD
+
+```
+pkg install qt6-tools qt6-imageformats
 ```
 
 ### MacOS
