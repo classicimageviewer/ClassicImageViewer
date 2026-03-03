@@ -668,6 +668,49 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleCustomKernel</name>
+    <message>
+        <location filename="../src/effects/moduleCustomKernel.cpp" line="34"/>
+        <source># comma or space separated integer values</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleCustomKernel.cpp" line="45"/>
+        <source>Kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleCustomKernel.cpp" line="46"/>
+        <source>Divisor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleCustomKernel.cpp" line="47"/>
+        <source>Offset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleCustomKernel.cpp" line="50"/>
+        <source>Mirror</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleCustomKernel.cpp" line="51"/>
+        <source>Extend</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleCustomKernel.cpp" line="52"/>
+        <source>Edge</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleCustomKernel.h" line="37"/>
+        <source>Custom kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleDespeckle</name>
     <message>
         <location filename="../src/effects/moduleDespeckle.h" line="36"/>
@@ -943,6 +986,26 @@
         <location filename="../src/dialogs/effectsdialog.ui" line="17"/>
         <source>Effects</source>
         <translation>Effekte</translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="559"/>
+        <source>Preset name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="565"/>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="565"/>
+        <source>Cannot create nameless preset.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="653"/>
+        <source>Presets</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2670,6 +2733,14 @@ Das Programm wird dann beendet.</translation>
         <location filename="../src/dialogs/targetdirdialog.cpp" line="41"/>
         <source>Select Target Directory</source>
         <translation>Zielverzeichnis auswählen</translation>
+    </message>
+</context>
+<context>
+    <name>TextInputDialog</name>
+    <message>
+        <location filename="../src/dialogs/textinputdialog.ui" line="23"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -52,6 +52,7 @@ private: // functions
 	void redrawSrc(QPoint zoomPos);
 	void redrawDst();
 	QImage applyEffectsOn(QImage image, bool saveParams = false);
+	void updatePresets(int index = 0);
 private slots:
 	void srcClickedAt(QPoint pos);
 	void effectChanged(int row);
@@ -63,6 +64,9 @@ private slots:
 	void doubleValueChanged(double v);
 	void textValueChanged(void);
 	void restoreDefaults(bool b);
+	void presetChanged(int v);
+	void presetAdd(bool b);
+	void presetRemove(bool b);
 public:
 	EffectsDialog(QImage image, QString singleEffect = QString(), QWidget * parent = NULL);
 	~EffectsDialog();

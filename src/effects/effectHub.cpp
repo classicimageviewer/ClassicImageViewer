@@ -126,3 +126,9 @@ QImage EffectHub::applyEffect(int effectId, QImage image, QList<EffectBase::Para
 	return modules.at(effectId)->applyEffect(image, parameters);
 }
 
+QString EffectHub::getModuleName(int effectId)
+{
+	if (!checkId(effectId)) return QString();
+	return modules.at(effectId)->getModuleName();
+}
+

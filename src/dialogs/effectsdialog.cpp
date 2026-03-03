@@ -23,7 +23,10 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QTextEdit>
+#include <QMessageBox>
 #include <cmath>
+#include "dialogs/textinputdialog.h"
+
 
 EffectsDialog::EffectsDialog(QImage image, QString singleEffect, QWidget * parent) : QDialog(parent)
 {
@@ -42,6 +45,13 @@ EffectsDialog::EffectsDialog(QImage image, QString singleEffect, QWidget * paren
 	ui.labelSrc->setPixmap(srcPix);
 	QSize pixSize = srcPix.size() / Globals::scalingFactor;
 	srcClickRect = QRect(QPoint(160-pixSize.width()/2, 160-pixSize.height()/2), pixSize);
+	
+	ui.comboBoxPresets->setVisible(false);
+	ui.pushButtonPresetAdd->setVisible(false);
+	ui.pushButtonPresetRemove->setVisible(false);
+	connect(ui.comboBoxPresets, SIGNAL(currentIndexChanged(int)), this, SLOT(presetChanged(int)));
+	connect(ui.pushButtonPresetAdd, SIGNAL(clicked(bool)), this, SLOT(presetAdd(bool)));
+	connect(ui.pushButtonPresetRemove, SIGNAL(clicked(bool)), this, SLOT(presetRemove(bool)));
 	
 	effectHub = new EffectHub();
 	ui.listWidget->addItems(effectHub->getEffects());
@@ -348,6 +358,11 @@ void EffectsDialog::effectChanged(int row)
 		currentRow += 1;
 	}
 	
+	ui.comboBoxPresets->setVisible(parameterList.size() > 0);
+	ui.pushButtonPresetAdd->setVisible(parameterList.size() > 0);
+	ui.pushButtonPresetRemove->setVisible(parameterList.size() > 0);
+	updatePresets();
+	
 	srcClickedAt(QPoint(160, 160));
 }
 
@@ -464,6 +479,194 @@ void EffectsDialog::restoreDefaults(bool b)
 		}
 	}
 	redrawDst();
+	
+	ui.comboBoxPresets->setCurrentIndex(0);
+}
+
+void EffectsDialog::presetChanged(int v)
+{
+	if (v == 0) return;
+	v -= 1;
+	QString moduleName = effectHub->getModuleName(effectId);
+	QList<QVariant> presetList = Globals::prefs->fetchSpecificParameter("EffectsDialog", "PresetsOf" + moduleName, QList<QVariant>()).toList();
+	QVariant preset = presetList.at(v);
+	QList<QVariant> presetElements = preset.toList();
+	QList<QVariant> presetSettings;
+	if (presetElements.size() > 1)
+	{
+		presetSettings = presetElements.at(1).toList();
+	}
+	
+	QList<EffectBase::ParameterCluster> parameterListOriginal = effectHub->getListOfParameterClusters(effectId);
+	for (int i = 0; i < ui.guestLayout->count(); i++)
+	{
+		QLayoutItem * child = ui.guestLayout->itemAt(i);
+		if (child != NULL)
+		{
+			QWidget * widget = child->widget();
+			if (widget != NULL)
+			{
+				for (EffectBase::ParameterCluster elem : parameterListOriginal)
+				{
+					if ((elem.parameterName.length() > 0) && (elem.parameterName == widget->objectName()))
+					{
+						QVariant presetValue;
+						for (int p = 0; p < presetSettings.size() / 2; p++)
+						{
+							if (elem.parameterName == presetSettings.at(p*2).toString() )
+							{
+								presetValue = presetSettings.at(p*2 + 1);
+								break;
+							}
+						}
+						if (!presetValue.isValid()) break;
+						
+						if ((elem.controlType == "spinbox") || (elem.controlType == "slider"))
+						{
+							((QSpinBox*)widget)->setValue(presetValue.toInt());
+						} else
+						if ((elem.controlType == "doublespinbox") || (elem.controlType == "slider10") || (elem.controlType == "slider100") || (elem.controlType == "slider1000"))
+						{
+							((QDoubleSpinBox*)widget)->setValue(presetValue.toDouble());
+						} else
+						if (elem.controlType == "checkbox")
+						{
+							((QCheckBox*)widget)->setChecked(presetValue.toBool());
+						} else
+						if (elem.controlType == "combobox")
+						{
+							((QComboBox*)widget)->setCurrentIndex(presetValue.toInt());
+						} else
+						if (elem.controlType == "textedit")
+						{
+							((QTextEdit*)widget)->setText(presetValue.toString());
+						} else
+						//TODO more
+						{
+							break;
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
+}
+
+void EffectsDialog::presetAdd(bool b)
+{
+	Q_UNUSED(b);
+	TextInputDialog * d = new TextInputDialog(tr("Preset name"), "");
+	if (d->exec() == QDialog::Accepted)
+	{
+		QString newName = d->getText();
+		if (newName.length() < 1)
+		{
+			QMessageBox::critical(this, tr("Error"), tr("Cannot create nameless preset."));
+		}
+		else
+		{
+			QString moduleName = effectHub->getModuleName(effectId);
+			QList<QVariant> presetList = Globals::prefs->fetchSpecificParameter("EffectsDialog", "PresetsOf" + moduleName, QList<QVariant>()).toList();
+			QList<QVariant> newPreset;
+			newPreset.append(QVariant(newName));
+			QList<QVariant> newSettings;
+			
+			QList<EffectBase::ParameterCluster> parameterListOriginal = effectHub->getListOfParameterClusters(effectId);
+			for (int i = 0; i < ui.guestLayout->count(); i++)
+			{
+				QLayoutItem * child = ui.guestLayout->itemAt(i);
+				if (child != NULL)
+				{
+					QWidget * widget = child->widget();
+					if (widget != NULL)
+					{
+						for (EffectBase::ParameterCluster elem : parameterListOriginal)
+						{
+							if ((elem.parameterName.length() > 0) && (elem.parameterName == widget->objectName()))
+							{
+								QList<QVariant> parameter;
+								parameter.append(QVariant(elem.parameterName));
+								if ((elem.controlType == "spinbox") || (elem.controlType == "slider"))
+								{
+									parameter.append(QVariant(((QSpinBox*)widget)->value()));
+								} else
+								if ((elem.controlType == "doublespinbox") || (elem.controlType == "slider10") || (elem.controlType == "slider100") || (elem.controlType == "slider1000"))
+								{
+									parameter.append(QVariant(((QDoubleSpinBox*)widget)->value()));
+								} else
+								if (elem.controlType == "checkbox")
+								{
+									parameter.append(QVariant(((QCheckBox*)widget)->isChecked()));
+								} else
+								if (elem.controlType == "combobox")
+								{
+									parameter.append(QVariant(((QComboBox*)widget)->currentIndex()));
+								} else
+								if (elem.controlType == "textedit")
+								{
+									parameter.append(QVariant(((QTextEdit*)widget)->toPlainText()));
+								} else
+								//TODO more
+								{
+									break;
+								}
+								
+								newSettings.append(parameter);
+								break;
+							}
+						}
+					}
+				}
+			}
+			
+			
+			newPreset.append(QVariant(newSettings));
+			presetList.append(QVariant(newPreset));
+			Globals::prefs->storeSpecificParameter("EffectsDialog", "PresetsOf" + moduleName, presetList);
+			
+			updatePresets(ui.comboBoxPresets->count());
+		}
+	}
+	delete d;
+}
+
+void EffectsDialog::presetRemove(bool b)
+{
+	Q_UNUSED(b);
+	int removeIndex = ui.comboBoxPresets->currentIndex();
+	if (removeIndex > 0)
+	{
+		removeIndex -= 1;
+		QString moduleName = effectHub->getModuleName(effectId);
+		QList<QVariant> presetList = Globals::prefs->fetchSpecificParameter("EffectsDialog", "PresetsOf" + moduleName, QList<QVariant>()).toList();
+		presetList.removeAt(removeIndex);
+		Globals::prefs->storeSpecificParameter("EffectsDialog", "PresetsOf" + moduleName, presetList);
+		updatePresets(0);
+	}
+}
+
+void EffectsDialog::updatePresets(int index)
+{
+	ui.comboBoxPresets->blockSignals(true);
+	ui.comboBoxPresets->clear();
+	ui.comboBoxPresets->addItem(tr("Presets"));
+	
+	QString moduleName = effectHub->getModuleName(effectId);
+	QList<QVariant> presetList = Globals::prefs->fetchSpecificParameter("EffectsDialog", "PresetsOf" + moduleName, QList<QVariant>()).toList();
+	for (QVariant & preset : presetList)
+	{
+		QList<QVariant> presetElements = preset.toList();
+		QString presetName = "???";
+		if (presetElements.size() > 0)
+		{
+			presetName = presetElements.at(0).toString();
+		}
+		ui.comboBoxPresets->addItem(presetName);
+	}
+	
+	ui.comboBoxPresets->setCurrentIndex(index);
+	ui.comboBoxPresets->blockSignals(false);
 }
 
 void EffectsDialog::getSelectedEffect(QString & name, int & effectId, QList<EffectBase::ParameterCluster> & parameterList)

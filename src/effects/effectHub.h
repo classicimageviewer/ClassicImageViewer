@@ -40,6 +40,7 @@ public:
 	QList<EffectBase::ParameterCluster> getListOfParameterClusters(int effectId);
 	void saveEffectParameters(int effectId, QList<EffectBase::ParameterCluster> parameters);
 	QImage applyEffect(int effectId, QImage image, QList<EffectBase::ParameterCluster> parameters);
+	QString getModuleName(int effectId);
 };
 
 #endif //EFFECTHUB_H
