@@ -65,6 +65,7 @@
 #include "dialogs/customselectiondialog.h"
 #include "dialogs/batchdialog.h"
 #include "dialogs/exttoolconfigdialog.h"
+#include "dialogs/sheardialog.h"
 
 #include "lib/resizer.h"
 #include "lib/autocolor.h"
@@ -356,6 +357,7 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuImage, tr("C&ustom rotation"), ACT_ROTATE_C, "Ctrl+U",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuImage, tr("&Vertical flip"), ACT_FLIP_V, "V",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuImage, tr("&Horizontal flip"), ACT_FLIP_H, "H",  ACTDISABLE_UNLOADED);
+	menuAddAction(ui.menuImage, tr("Shear"), ACT_SHEAR, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddSeparator(ui.menuImage);
 	menuAddAction(ui.menuImage, tr("Re&size"), ACT_RESIZE, "Ctrl+R",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuImage, tr("Add &border"), ACT_ADD_BORDER, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
@@ -1108,6 +1110,23 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_FLIP_H:
 			doSimpleFilter(MIRROR_H);
+			break;
+		case ACT_SHEAR:
+			{
+				ShearDialog * d = new ShearDialog(display->getImage());
+				if (d->exec() == QDialog::Accepted)
+				{
+					QApplication::setOverrideCursor(Qt::WaitCursor);
+					QImage i = d->shearImage(display->getImage());
+					QApplication::restoreOverrideCursor();
+					saveToUndoStack();
+					display->newImage(i);
+					currentImageSize = i.size();
+					setImageAndWindowSize();
+					d->savePreferences();
+				}
+				delete d;
+			}
 			break;
 		case ACT_RESIZE:
 			{
