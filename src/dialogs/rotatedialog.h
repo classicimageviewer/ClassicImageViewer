@@ -27,12 +27,14 @@ class RotateDialog : public QDialog
 private:
 	Ui_RotateDialog ui;
 	QImage srcImg;
-	double angle;
+	int fillMethod;
+	double angle, blur;
 	QColor backgroundColor;
 	void displayRotated();
 private slots:
 	void spinBoxChanged(double value);
 	void sliderChanged(int value);
+	void changeFillMethod(int v);
 	void changeBackgroundColor(bool b);
 public:
 	RotateDialog(QImage image, QWidget * parent = NULL);

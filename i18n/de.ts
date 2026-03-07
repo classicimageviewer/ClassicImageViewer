@@ -2658,7 +2658,22 @@ Das Programm wird dann beendet.</translation>
         <translation>Drehen</translation>
     </message>
     <message>
+        <location filename="../src/dialogs/rotatedialog.ui" line="109"/>
+        <source>Extend edges with blur</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/dialogs/rotatedialog.ui" line="114"/>
+        <source>Color</source>
+        <translation type="unfinished">Farbe</translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/rotatedialog.ui" line="119"/>
+        <source>Transparent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/rotatedialog.ui" line="143"/>
         <source>Fill color</source>
         <translation>Füllfarbe</translation>
     </message>

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>668</width>
-    <height>405</height>
+    <height>438</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -92,6 +92,35 @@
          </property>
         </widget>
        </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QComboBox" name="comboBoxFill">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <item>
+          <property name="text">
+           <string>Extend edges with blur</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Color</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Transparent</string>
+          </property>
+         </item>
+        </widget>
+       </item>
        <item>
         <spacer name="horizontalSpacer">
          <property name="orientation">
@@ -112,6 +141,39 @@
         <widget class="QPushButton" name="pushButtonColor">
          <property name="text">
           <string>Fill color</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="doubleSpinBoxBlur">
+         <property name="decimals">
+          <number>1</number>
+         </property>
+         <property name="maximum">
+          <double>256.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSlider" name="horizontalSliderBlur">
+         <property name="maximum">
+          <number>2560</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelFillParamSpacer">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string notr="true"/>
          </property>
         </widget>
        </item>
