@@ -183,7 +183,14 @@ QImage RotateDialog::rotateImage(QImage i)
 		}
 		
 		QImage rotated = extended.transformed(transform, Qt::SmoothTransformation);
-		dst.fill(backgroundColor);
+		if (i.hasAlphaChannel())
+		{
+			dst.fill(Qt::transparent);
+		}
+		else
+		{
+			dst.fill(backgroundColor);
+		}
 		QPainter p(&dst);
 		p.drawImage((rotatedSize.width() - rotated.width())/2, (rotatedSize.height() - rotated.height())/2, rotated);
 		p.end();
