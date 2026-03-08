@@ -196,14 +196,16 @@ QImage ShearDialog::shearImage(QImage i, double scale)
 		}
 		
 		QPainter q(&extended);
-		q.drawImage(QRect(0, hy, hx, i.height()), i, QRect(0, 0, 1, i.height()));					// left
-		q.drawImage(QRect(hx + i.width(), hy, hx, i.height()), i, QRect(i.width() - 1, 0, 1, i.height()));		// right
-		q.drawImage(QRect(hx, 0, i.width(), hy), i, QRect(0, 0, i.width(), 1));						// top
-		q.drawImage(QRect(hx, hy + i.height(), i.width(), hy), i, QRect(0, i.height() - 1, i.width(), 1));		// bottom
-		q.drawImage(QRect(0, 0, hx, hy), i, QRect(0, 0, 1, 1));								// top left
-		q.drawImage(QRect(0, hy + i.height(), hx, hy), i, QRect(0, i.height() - 1, 1, 1));				// bottom left
-		q.drawImage(QRect(hx + i.width(), 0, hx, hy), i, QRect(i.width() - 1, 0, 1, 1));				// top right
-		q.drawImage(QRect(hx + i.width(), hy + i.height(), hx, hy), i, QRect(i.width() - 1, i.height() - 1, 1, 1));	// bottom right
+		if (direction == 0)
+		{
+			q.drawImage(QRect(0, hy, hx, i.height()), i, QRect(0, 0, 1, i.height()));					// left
+			q.drawImage(QRect(hx + i.width(), hy, hx, i.height()), i, QRect(i.width() - 1, 0, 1, i.height()));		// right
+		}
+		else
+		{
+			q.drawImage(QRect(hx, 0, i.width(), hy), i, QRect(0, 0, i.width(), 1));						// top
+			q.drawImage(QRect(hx, hy + i.height(), i.width(), hy), i, QRect(0, i.height() - 1, i.width(), 1));		// bottom
+		}
 		q.drawImage(hx, hy, i);
 		q.end();
 		
