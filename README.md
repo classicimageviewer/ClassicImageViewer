@@ -12,6 +12,7 @@ ClassicImageViewer is a simple and fast image viewer for Linux, BSDs and MacOS w
 - Thumbnails
 - Slideshow
 - Batch conversion / renaming
+- Macros
 
 # Download
 
