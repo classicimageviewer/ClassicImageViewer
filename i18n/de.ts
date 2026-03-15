@@ -69,8 +69,8 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="129"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="464"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="470"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="466"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="472"/>
         <source>Preview</source>
         <translation>Vorschau</translation>
     </message>
@@ -191,7 +191,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="456"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="478"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="480"/>
         <source>x</source>
         <translation>x</translation>
     </message>
@@ -202,7 +202,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="522"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="575"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="579"/>
         <source>Effects</source>
         <translation>Effekte</translation>
     </message>
@@ -295,7 +295,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="928"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="910"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="916"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -308,15 +308,15 @@
         <location filename="../src/dialogs/batchdialog.cpp" line="239"/>
         <location filename="../src/dialogs/batchdialog.cpp" line="244"/>
         <location filename="../src/dialogs/batchdialog.cpp" line="250"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="446"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="493"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="508"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="448"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="495"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="510"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="239"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="493"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="495"/>
         <source>Empty input file list.</source>
         <translation>Eingangs-Dateiliste leeren.</translation>
     </message>
@@ -351,38 +351,38 @@
         <translation>Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="411"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="878"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="413"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="884"/>
         <source>Files</source>
         <translation>Dateien</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="476"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="478"/>
         <source>pixels</source>
         <translation>Pixel</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="477"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="479"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="508"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="510"/>
         <source>Cannot load image for preview.</source>
         <translation>Bild kann nicht für Vorschau geladen werden.</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="600"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="604"/>
         <source>Select Target Directory</source>
         <translation>Zielverzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="862"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="866"/>
         <source>done</source>
         <translation>Fertig</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="921"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="927"/>
         <source>Threads: %1/%2</source>
         <translation>Threads: %1/%2</translation>
     </message>
@@ -390,33 +390,33 @@
 <context>
     <name>BatchWorker</name>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1040"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1046"/>
         <source>input</source>
         <translation>Eingabe</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1045"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1053"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1051"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1059"/>
         <source>already exists</source>
         <translation>existiert bereits</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1062"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1068"/>
         <source>cannot read</source>
         <translation>kann nicht gelesen werden</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1071"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1077"/>
         <source>over-crop</source>
         <translation>Beschneidungsgrenzen überschritten</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1187"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1180"/>
         <source>resized to zero</source>
         <translation>Größe auf 0 geändert</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1200"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1193"/>
         <source>cannot write</source>
         <translation>kann nicht schreiben</translation>
     </message>
@@ -2097,12 +2097,12 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
         <translation>Aktuelles Verzeichnis indexieren...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2728"/>
+        <location filename="../src/mainwindow.cpp" line="2715"/>
         <source>Not configured</source>
         <translation>Nicht konfiguriert</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2811"/>
+        <location filename="../src/mainwindow.cpp" line="2798"/>
         <source>Save...</source>
         <translation>Speichern...</translation>
     </message>
@@ -2280,22 +2280,22 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
         <translation>%1 kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2696"/>
+        <location filename="../src/mainwindow.cpp" line="2683"/>
         <source>&amp;Clear recent files</source>
         <translation>Liste der zuletzt &amp;geöffneten Dateien löschen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2754"/>
+        <location filename="../src/mainwindow.cpp" line="2741"/>
         <source>All supported images</source>
         <translation>Alle unterstützten Bilder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2767"/>
+        <location filename="../src/mainwindow.cpp" line="2754"/>
         <source>All files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2770"/>
+        <location filename="../src/mainwindow.cpp" line="2757"/>
         <source>Open File</source>
         <translation>Datei öffnen</translation>
     </message>

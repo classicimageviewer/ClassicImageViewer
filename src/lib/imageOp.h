@@ -43,6 +43,7 @@ public:
 	
 	static QImage RotateRight(const QImage image);
 	static QImage RotateLeft(const QImage image);
+	static QImage Rotate180(const QImage image);
 	static QImage MirrorVertical(const QImage image);
 	static QImage MirrorHorizontal(const QImage image);
 	static QImage Grayscale(const QImage image);

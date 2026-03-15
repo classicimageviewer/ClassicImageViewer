@@ -2274,35 +2274,22 @@ void MainWindow::doSimpleFilter(SimpleFilter f)
 	switch(f)
 	{
 		case ROT_R:
-			dst = src.transformed(QTransform().rotate(90.0), Qt::SmoothTransformation);
+			dst = ImageOp::RotateRight(src);
 			break;
 		case ROT_L:
-			dst = src.transformed(QTransform().rotate(-90.0), Qt::SmoothTransformation);
+			dst = ImageOp::RotateLeft(src);
 			break;
 		case MIRROR_V:
-		#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
-			dst = src.mirrored(false, true);
-		#else
-			dst = src.flipped(Qt::Vertical);
-		#endif
+			dst = ImageOp::MirrorVertical(src);
 			break;
 		case MIRROR_H:
-		#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
-			dst = src.mirrored(true, false);
-		#else
-			dst = src.flipped(Qt::Horizontal);
-		#endif
+			dst = ImageOp::MirrorHorizontal(src);
 			break;
 		case GRAYS:
-			dst = src.convertToFormat(QImage::Format_Grayscale8).convertToFormat(QImage::Format_RGB32);
-			if (src.hasAlphaChannel())
-			{
-				dst.setAlphaChannel(src.convertToFormat(QImage::Format_Alpha8));
-			}
+			dst = ImageOp::Grayscale(src);
 			break;
 		case NEGATIVE:
-			dst = src;
-			dst.invertPixels();
+			dst = ImageOp::Negative(src);
 			break;
 		case COLORADJ:
 			QApplication::setOverrideCursor(Qt::WaitCursor);

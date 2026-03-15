@@ -401,7 +401,9 @@ void BatchDialog::rebuildInputTable(int index)
 	{
 		QList<QStandardItem*> rowData;
 		rowData.clear();
-		rowData.append(new QStandardItem(fullPath));
+		QStandardItem * item = new QStandardItem(fullPath);
+		item->setEditable(false);
+		rowData.append(item);
 		model->appendRow(rowData);
 	}
 	delete ui.tableViewInput->selectionModel();	// delete old model
@@ -565,7 +567,9 @@ void BatchDialog::rebuildEffectTable(int index)
 	{
 		QList<QStandardItem*> rowData;
 		rowData.clear();
-		rowData.append(new QStandardItem(effect.name));
+		QStandardItem * item = new QStandardItem(effect.name);
+		item->setEditable(false);
+		rowData.append(item);
 		model->appendRow(rowData);
 	}
 	delete ui.tableViewEffects->selectionModel();	// delete old model
@@ -866,7 +870,9 @@ void BatchDialog::rebuildProgressTable(int index)
 			statusItem->setToolTip(status);
 		}
 		rowData.append(statusItem);
-		rowData.append(new QStandardItem(outputList.at(i)));
+		QStandardItem * item = new QStandardItem(outputList.at(i));
+		item->setEditable(false);
+		rowData.append(item);
 		model->appendRow(rowData);
 	}
 	delete ui.tableViewProgress->selectionModel();	// delete old model
@@ -1093,32 +1099,24 @@ void BatchWorker::run()
 					switch (parameters->rotateDir)
 					{
 						case 0:
-							img = img.transformed(QTransform().rotate(90.0), Qt::SmoothTransformation);
+							img = ImageOp::RotateRight(img);
 							break;
 						case 1:
-							img = img.transformed(QTransform().rotate(-90.0), Qt::SmoothTransformation);
+							img = ImageOp::RotateLeft(img);
 							break;
 						case 2:
-							img = img.transformed(QTransform().rotate(180.0), Qt::SmoothTransformation);
+							img = ImageOp::Rotate180(img);
 							break;
 					}
 				}
 			}
 			if (parameters->hFlip)
 			{
-			#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
-				img = img.mirrored(true, false);
-			#else
-				img = img.flipped(Qt::Horizontal);
-			#endif
+				img = ImageOp::MirrorHorizontal(img);
 			}
 			if (parameters->vFlip)
 			{
-			#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
-				img = img.mirrored(false, true);
-			#else
-				img = img.flipped(Qt::Vertical);
-			#endif
+				img = ImageOp::MirrorVertical(img);
 			}
 			if (parameters->autoColor)
 			{
@@ -1130,16 +1128,11 @@ void BatchWorker::run()
 			}
 			if (parameters->grayscale)
 			{
-				QImage tmp = img.convertToFormat(QImage::Format_Grayscale8).convertToFormat(QImage::Format_RGB32);
-				if (img.hasAlphaChannel())
-				{
-					tmp.setAlphaChannel(img.convertToFormat(QImage::Format_Alpha8));
-				}
-				img = tmp;
+				img = ImageOp::Grayscale(img);
 			}
 			if (parameters->negative)
 			{
-				img.invertPixels();
+				img = ImageOp::Negative(img);
 			}
 			if (parameters->resize)
 			{

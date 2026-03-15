@@ -226,6 +226,11 @@ QImage ImageOp::RotateLeft(const QImage image)
 	return image.transformed(QTransform().rotate(-90.0), Qt::SmoothTransformation);
 }
 
+QImage ImageOp::Rotate180(const QImage image)
+{
+	return image.transformed(QTransform().rotate(180.0), Qt::SmoothTransformation);
+}
+
 QImage ImageOp::MirrorVertical(const QImage image)
 {
 #if QT_VERSION < QT_VERSION_CHECK(6,9,0)
