@@ -20,7 +20,7 @@
 #include <QColorDialog>
 #include <cmath>
 
-PadToSizeDialog::PadToSizeDialog(QWidget * parent) : QDialog(parent)
+PadToSizeDialog::PadToSizeDialog(QMap<QString, QVariant> intialConfig, QWidget * parent) : QDialog(parent)
 {
 	ui.setupUi(this);
 	setFixedSize(size());
@@ -30,7 +30,39 @@ PadToSizeDialog::PadToSizeDialog(QWidget * parent) : QDialog(parent)
 	ui.spinBoxHeight->setValue(Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "height", 0).toInt());
 	ui.doubleSpinBoxWidthRatio->setValue(Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "widthRatio", 1.0).toDouble());
 	ui.doubleSpinBoxHeightRatio->setValue(Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "heightRatio", 1.0).toDouble());
-	switch (Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "mode", 0).toInt())
+	int mode = Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "mode", 0).toInt();
+	int method = Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "method", 0).toInt();
+	
+	if (intialConfig.contains("backgroundColor"))
+	{
+		backgroundColor = intialConfig["backgroundColor"].value<QColor>();
+	}
+	if (intialConfig.contains("width"))
+	{
+		ui.spinBoxWidth->setValue(intialConfig["width"].toInt());
+	}
+	if (intialConfig.contains("height"))
+	{
+		ui.spinBoxHeight->setValue(intialConfig["height"].toInt());
+	}
+	if (intialConfig.contains("widthRatio"))
+	{
+		ui.doubleSpinBoxWidthRatio->setValue(intialConfig["widthRatio"].toDouble());
+	}
+	if (intialConfig.contains("heightRatio"))
+	{
+		ui.doubleSpinBoxHeightRatio->setValue(intialConfig["heightRatio"].toDouble());
+	}
+	if (intialConfig.contains("mode"))
+	{
+		mode = intialConfig["mode"].toInt();
+	}
+	if (intialConfig.contains("method"))
+	{
+		method = intialConfig["method"].toInt();
+	}
+	
+	switch (mode)
 	{
 		default:
 		case 0:
@@ -50,7 +82,7 @@ PadToSizeDialog::PadToSizeDialog(QWidget * parent) : QDialog(parent)
 			break;
 	}
 	
-	switch (Globals::prefs->fetchSpecificParameter("PadToSizeDialog", "method", 0).toInt())
+	switch (method)
 	{
 		default:
 		case 0:
@@ -173,4 +205,22 @@ void PadToSizeDialog::savePreferences()
 	if (ui.radioButtonRD->isChecked()) Globals::prefs->storeSpecificParameter("PadToSizeDialog", "mode", 4);
 	Globals::prefs->storeSpecificParameter("PadToSizeDialog", "method", (ui.radioButtonAR->isChecked() ? 1:0));
 }
+
+QMap<QString, QVariant> PadToSizeDialog::getConfig()
+{
+	QMap<QString, QVariant> config;
+	config["backgroundColor"] = backgroundColor;
+	config["width"] = ui.spinBoxWidth->value();
+	config["height"] = ui.spinBoxHeight->value();
+	config["widthRatio"] = ui.doubleSpinBoxWidthRatio->value();
+	config["heightRatio"] = ui.doubleSpinBoxHeightRatio->value();
+	config["mode"] = 0;
+	if (ui.radioButtonLU->isChecked()) config["mode"] = 1;
+	if (ui.radioButtonRU->isChecked()) config["mode"] = 2;
+	if (ui.radioButtonLD->isChecked()) config["mode"] = 3;
+	if (ui.radioButtonRD->isChecked()) config["mode"] = 4;
+	config["method"] = (ui.radioButtonAR->isChecked() ? 1:0);
+	return config;
+}
+
 

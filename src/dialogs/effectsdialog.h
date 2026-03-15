@@ -53,6 +53,7 @@ private: // functions
 	void redrawDst();
 	QImage applyEffectsOn(QImage image, bool saveParams = false);
 	void updatePresets(int index = 0);
+	void applyParameterList(QList<EffectBase::ParameterCluster> & parameterList);
 private slots:
 	void srcClickedAt(QPoint pos);
 	void effectChanged(int row);
@@ -68,11 +69,11 @@ private slots:
 	void presetAdd(bool b);
 	void presetRemove(bool b);
 public:
-	EffectsDialog(QImage image, QString singleEffect = QString(), QWidget * parent = NULL);
+	EffectsDialog(QImage image, QString singleEffect = QString(), QMap<QString, QVariant> intialConfig = QMap<QString, QVariant>(), QWidget * parent = NULL);
 	~EffectsDialog();
 	QImage applyEffects();
 	void getSelectedEffect(QString & name, int & effectId, QList<EffectBase::ParameterCluster> & parameterList);
-	
+	QMap<QString, QVariant> getConfig();
 
 };
 

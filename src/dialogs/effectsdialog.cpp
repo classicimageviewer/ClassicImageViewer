@@ -28,7 +28,7 @@
 #include "dialogs/textinputdialog.h"
 
 
-EffectsDialog::EffectsDialog(QImage image, QString singleEffect, QWidget * parent) : QDialog(parent)
+EffectsDialog::EffectsDialog(QImage image, QString singleEffect, QMap<QString, QVariant> intialConfig, QWidget * parent) : QDialog(parent)
 {
 	ui.setupUi(this);
 
@@ -65,7 +65,43 @@ EffectsDialog::EffectsDialog(QImage image, QString singleEffect, QWidget * paren
 	}
 	else
 	{
-		ui.listWidget->setCurrentRow(Globals::prefs->fetchSpecificParameter("EffectsDialog", "Effect", QVariant(0)).toInt());
+		int id = Globals::prefs->fetchSpecificParameter("EffectsDialog", "Effect", QVariant(0)).toInt();
+		if (intialConfig.contains("effectId"))
+		{
+			id = intialConfig["effectId"].toInt();
+		}
+		ui.listWidget->setCurrentRow(id);
+	}
+	
+	if (intialConfig.contains("resetToDefaults"))
+	{
+		if (intialConfig["resetToDefaults"].toBool())
+		{
+			restoreDefaults(true);
+		}
+	}
+	
+	if (intialConfig.contains("effectParamsControlType") && intialConfig.contains("effectParamsParameterName") && intialConfig.contains("effectParamsParameterValue"))
+	{
+		QStringList effectParamsControlType = intialConfig["effectParamsControlType"].toStringList();
+		QStringList effectParamsParameterName = intialConfig["effectParamsParameterName"].toStringList();
+		QList<QVariant> effectParamsParameterValue = intialConfig["effectParamsParameterValue"].toList();
+		
+		int paramsLen = effectParamsParameterName.length();
+		
+		if ((effectParamsControlType.length() == paramsLen) && (effectParamsParameterValue.length() == paramsLen))
+		{
+			QList<EffectBase::ParameterCluster> params;
+			for (int i = 0; i < paramsLen; i++)
+			{
+				EffectBase::ParameterCluster param;
+				param.controlType = effectParamsControlType[i];
+				param.parameterName = effectParamsParameterName[i];
+				param.parameterValue = effectParamsParameterValue[i];
+				params.append(param);
+			}
+			applyParameterList(params);
+		}
 	}
 	
 	connect(ui.labelSrc, SIGNAL(clickedAt(QPoint)), this, SLOT(srcClickedAt(QPoint)));
@@ -553,6 +589,55 @@ void EffectsDialog::presetChanged(int v)
 	}
 }
 
+void EffectsDialog::applyParameterList(QList<EffectBase::ParameterCluster> & parameterList)
+{
+	for (int i = 0; i < ui.guestLayout->count(); i++)
+	{
+		QLayoutItem * child = ui.guestLayout->itemAt(i);
+		if (child != NULL)
+		{
+			QWidget * widget = child->widget();
+			if (widget != NULL)
+			{
+				for (EffectBase::ParameterCluster elem : parameterList)
+				{
+					if ((elem.parameterName.length() > 0) && (elem.parameterName == widget->objectName()))
+					{
+						if ((elem.controlType == "spinbox") || (elem.controlType == "slider"))
+						{
+							((QSpinBox*)widget)->setValue(elem.parameterValue.toInt());
+						} else
+						if ((elem.controlType == "doublespinbox") || (elem.controlType == "slider10") || (elem.controlType == "slider100") || (elem.controlType == "slider1000"))
+						{
+							((QDoubleSpinBox*)widget)->setValue(elem.parameterValue.toDouble());
+						} else
+						if (elem.controlType == "checkbox")
+						{
+							((QCheckBox*)widget)->setChecked(elem.parameterValue.toBool());
+						} else
+						if (elem.controlType == "combobox")
+						{
+							((QComboBox*)widget)->setCurrentIndex(elem.parameterValue.toInt());
+						} else
+						if (elem.controlType == "textedit")
+						{
+							((QTextEdit*)widget)->setText(elem.parameterValue.toString());
+						} else
+						//TODO more
+						{
+							break;
+						}
+						break;
+					}
+				}
+			}
+		}
+	}
+	redrawDst();
+	
+	ui.comboBoxPresets->setCurrentIndex(0);
+}
+
 void EffectsDialog::presetAdd(bool b)
 {
 	Q_UNUSED(b);
@@ -689,7 +774,8 @@ void EffectsDialog::getSelectedEffect(QString & name, int & effectId, QList<Effe
 					if ((elem.parameterName.length() > 0) && (elem.parameterName == widget->objectName()))
 					{
 						EffectBase::ParameterCluster cluster;
-						cluster.parameterName = elem.parameterName;
+						//cluster.parameterName = elem.parameterName;
+						cluster = elem;
 						if ((elem.controlType == "spinbox") || (elem.controlType == "slider"))
 						{
 							cluster.parameterValue = QVariant(((QSpinBox*)widget)->value());
@@ -722,7 +808,30 @@ void EffectsDialog::getSelectedEffect(QString & name, int & effectId, QList<Effe
 			}
 		}
 	}
+}
 
+QMap<QString, QVariant> EffectsDialog::getConfig()
+{
+	QMap<QString, QVariant> config;
+	QString name;
+	int effectId;
+	QList<EffectBase::ParameterCluster> parameterList;
+	getSelectedEffect(name, effectId, parameterList);
+	config["effectName"] = name;
+	config["effectId"] = effectId;
+	QStringList effectParamsControlType;
+	QStringList effectParamsParameterName;
+	QList<QVariant> effectParamsParameterValue;
+	for(EffectBase::ParameterCluster param : parameterList)
+	{
+		effectParamsControlType.append(param.controlType);
+		effectParamsParameterName.append(param.parameterName);
+		effectParamsParameterValue.append(param.parameterValue);
+	}
+	config["effectParamsControlType"] = effectParamsControlType;
+	config["effectParamsParameterName"] = effectParamsParameterName;
+	config["effectParamsParameterValue"] = effectParamsParameterValue;
+	return config;
 }
 
 QImage EffectsDialog::applyEffectsOn(QImage image, bool saveParams)

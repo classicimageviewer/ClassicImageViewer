@@ -19,7 +19,7 @@
 #include <QDebug>
 #include <QColorDialog>
 
-AddBorderDialog::AddBorderDialog(QWidget * parent) : QDialog(parent)
+AddBorderDialog::AddBorderDialog(QMap<QString, QVariant> intialConfig, QWidget * parent) : QDialog(parent)
 {
 	ui.setupUi(this);
 	setFixedSize(size());
@@ -29,6 +29,27 @@ AddBorderDialog::AddBorderDialog(QWidget * parent) : QDialog(parent)
 	ui.spinBoxRight->setValue(Globals::prefs->fetchSpecificParameter("AddBorderDialog", "right", 0).toInt());
 	ui.spinBoxBottom->setValue(Globals::prefs->fetchSpecificParameter("AddBorderDialog", "bottom", 0).toInt());
 	ui.spinBoxLeft->setValue(Globals::prefs->fetchSpecificParameter("AddBorderDialog", "left", 0).toInt());
+	
+	if (intialConfig.contains("backgroundColor"))
+	{
+		backgroundColor = intialConfig["backgroundColor"].value<QColor>();
+	}
+	if (intialConfig.contains("top"))
+	{
+		ui.spinBoxTop->setValue(intialConfig["top"].toInt());
+	}
+	if (intialConfig.contains("right"))
+	{
+		ui.spinBoxRight->setValue(intialConfig["right"].toInt());
+	}
+	if (intialConfig.contains("bottom"))
+	{
+		ui.spinBoxBottom->setValue(intialConfig["bottom"].toInt());
+	}
+	if (intialConfig.contains("left"))
+	{
+		ui.spinBoxLeft->setValue(intialConfig["left"].toInt());
+	}
 	
 	connect(ui.pushButtonColor, SIGNAL(clicked(bool)), this, SLOT(changeBackgroundColor(bool)));
 }
@@ -70,5 +91,16 @@ void AddBorderDialog::savePreferences()
 	Globals::prefs->storeSpecificParameter("AddBorderDialog", "right", ui.spinBoxRight->value());
 	Globals::prefs->storeSpecificParameter("AddBorderDialog", "bottom", ui.spinBoxBottom->value());
 	Globals::prefs->storeSpecificParameter("AddBorderDialog", "left", ui.spinBoxLeft->value());
+}
+
+QMap<QString, QVariant> AddBorderDialog::getConfig()
+{
+	QMap<QString, QVariant> config;
+	config["backgroundColor"] = backgroundColor;
+	config["top"] = ui.spinBoxTop->value();
+	config["right"] = ui.spinBoxRight->value();
+	config["bottom"] = ui.spinBoxBottom->value();
+	config["left"] = ui.spinBoxLeft->value();
+	return config;
 }
 

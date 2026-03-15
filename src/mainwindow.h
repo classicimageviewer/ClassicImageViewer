@@ -50,6 +50,7 @@ private: // variables
 	QMenu * externalEditorMenu;
 	QMenu * recentFilesMenu;
 	QMenu * externalToolsMenu;
+	QMenu * macrosMenu;
 	QMenu * displayModeMenu;
 	QMenu * zoomLevelMenu;
 	int actionLock;

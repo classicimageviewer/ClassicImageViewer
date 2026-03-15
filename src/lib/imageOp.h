@@ -40,6 +40,13 @@ public:
 	{
 		return Kernel2D(image, edgeHandling, kernelSize.width(), kernelSize.height(), kernel, div, offset);
 	};
+	
+	static QImage RotateRight(const QImage image);
+	static QImage RotateLeft(const QImage image);
+	static QImage MirrorVertical(const QImage image);
+	static QImage MirrorHorizontal(const QImage image);
+	static QImage Grayscale(const QImage image);
+	static QImage Negative(const QImage image);
 };
 
-#endif //BLURRING_H
+#endif //IMAGEOP_H

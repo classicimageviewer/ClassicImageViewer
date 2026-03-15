@@ -32,10 +32,11 @@ private slots:
 	void selectSize(bool b);
 	void selectAR(bool b);
 public:
-	PadToSizeDialog(QWidget * parent = NULL);
+	PadToSizeDialog(QMap<QString, QVariant> intialConfig = QMap<QString, QVariant>(), QWidget * parent = NULL);
 	~PadToSizeDialog();
 	QImage padToSize(QImage i);
 	void savePreferences();
+	QMap<QString, QVariant> getConfig();
 };
 
 #endif //PADTOSIZEDIALOG_H

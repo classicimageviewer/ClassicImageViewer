@@ -216,3 +216,48 @@ QImage ImageOp::Kernel2D(const QImage image, EdgeHandling edgeHandling, int kern
 	return dst.convertToFormat(image.format());
 }
 
+QImage ImageOp::RotateRight(const QImage image)
+{
+	return image.transformed(QTransform().rotate(90.0), Qt::SmoothTransformation);
+}
+
+QImage ImageOp::RotateLeft(const QImage image)
+{
+	return image.transformed(QTransform().rotate(-90.0), Qt::SmoothTransformation);
+}
+
+QImage ImageOp::MirrorVertical(const QImage image)
+{
+#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
+	return image.mirrored(false, true);
+#else
+	return image.flipped(Qt::Vertical);
+#endif
+}
+
+QImage ImageOp::MirrorHorizontal(const QImage image)
+{
+#if QT_VERSION < QT_VERSION_CHECK(6,9,0)
+	return image.mirrored(true, false);
+#else
+	return image.flipped(Qt::Horizontal);
+#endif
+}
+
+QImage ImageOp::Grayscale(const QImage image)
+{
+	QImage dst = image.convertToFormat(QImage::Format_Grayscale8).convertToFormat(QImage::Format_RGB32);
+	if (image.hasAlphaChannel())
+	{
+		dst.setAlphaChannel(image.convertToFormat(QImage::Format_Alpha8));
+	}
+	return dst;
+}
+
+QImage ImageOp::Negative(const QImage image)
+{
+	QImage dst = image;
+	dst.invertPixels();
+	return dst;
+}
+

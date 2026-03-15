@@ -66,11 +66,12 @@
 #include "dialogs/batchdialog.h"
 #include "dialogs/exttoolconfigdialog.h"
 #include "dialogs/sheardialog.h"
+#include "dialogs/macroconfigdialog.h"
 
 #include "lib/resizer.h"
 #include "lib/autocolor.h"
 #include "lib/imageOp.h"
-
+#include "lib/macroEngine.h"
 
 MainWindow::MainWindow() : QMainWindow()
 {
@@ -386,6 +387,19 @@ void MainWindow::createMenu()
 	menuAddAction(externalToolsMenu, tr("External tool 7"), ACT_EXTERNAL_TOOL_7, "Alt+7",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddAction(externalToolsMenu, tr("External tool 8"), ACT_EXTERNAL_TOOL_8, "Alt+8",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	menuAddAction(externalToolsMenu, tr("External tool 9"), ACT_EXTERNAL_TOOL_9, "Alt+9",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddSeparator(ui.menuImage);
+	macrosMenu = ui.menuImage->addMenu(tr("&Macros"));
+	menuAddAction(macrosMenu, tr("Configure"), ACT_MACRO_CONFIG, "Ctrl+Shift+M",  0);
+	menuAddSeparator(macrosMenu);
+	menuAddAction(macrosMenu, tr("Macro 1"), ACT_MACRO_1, "Ctrl+1",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 2"), ACT_MACRO_2, "Ctrl+2",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 3"), ACT_MACRO_3, "Ctrl+3",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 4"), ACT_MACRO_4, "Ctrl+4",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 5"), ACT_MACRO_5, "Ctrl+5",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 6"), ACT_MACRO_6, "Ctrl+6",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 7"), ACT_MACRO_7, "Ctrl+7",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 8"), ACT_MACRO_8, "Ctrl+8",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 9"), ACT_MACRO_9, "Ctrl+9",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
 	connect(ui.menuImage, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	menuAddAction(ui.menuOptions, tr("&Properties"), ACT_SETTINGS, "P",  0);
@@ -1392,6 +1406,88 @@ void MainWindow::actionSlot(Action a)
 					remove(outputFilePath.toUtf8().constData());
 				}
 				process.close();
+				QApplication::restoreOverrideCursor();
+			}
+			break;
+		case ACT_MACRO_CONFIG:
+			{
+				MacroConfigDialog * d = new MacroConfigDialog(display->getImage());
+				if (d->exec() == QDialog::Accepted)
+				{
+					d->savePreferences();
+				}
+				delete d;
+			}
+			break;
+		case ACT_MACRO_1:
+		case ACT_MACRO_2:
+		case ACT_MACRO_3:
+		case ACT_MACRO_4:
+		case ACT_MACRO_5:
+		case ACT_MACRO_6:
+		case ACT_MACRO_7:
+		case ACT_MACRO_8:
+		case ACT_MACRO_9:
+			{
+				int index = (a - ACT_MACRO_1) + 1;
+				if (!MacroConfigDialog::isMacroEnabled(index)) break;
+				
+				MacroEngine * macroEngine = new MacroEngine();
+				
+				QApplication::setOverrideCursor(Qt::WaitCursor);
+				int input = MacroConfigDialog::macroInputConfig(index);
+				int output = MacroConfigDialog::macroOutputConfig(index);
+				auto macro = MacroConfigDialog::getMacro(index);
+				QImage inputImage, outputImage;
+				if (input == 0)		// Selection
+				{
+					inputImage = display->getFromSelection();
+				}
+				else			// Entire image
+				{
+					inputImage = display->getImage();
+				}
+				
+				outputImage = macroEngine->runMacro(inputImage, macro);
+				
+				if (output == 0)	// Replace image
+				{
+					saveToUndoStack();
+					display->updateImage(outputImage);
+					if (currentImageSize != outputImage.size())
+					{
+						currentImageSize = outputImage.size();
+						setImageAndWindowSize();
+					}
+				} else
+				if (output == 1)	// Insert back into selection
+				{
+					saveToUndoStack();
+					if (display->getSelection().isNull())
+					{
+						display->updateImage(outputImage);
+						if (currentImageSize != outputImage.size())
+						{
+							currentImageSize = outputImage.size();
+							setImageAndWindowSize();
+						}
+					}
+					else
+					{
+						display->insertIntoSelection(outputImage);
+					}
+				}
+				else			// No change
+				{
+					;
+				}
+				
+				if (MacroConfigDialog::macroOutputClipboard(index))
+				{
+					addToClipboard(outputImage);
+				}
+				
+				delete macroEngine;
 				QApplication::restoreOverrideCursor();
 			}
 			break;

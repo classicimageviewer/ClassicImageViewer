@@ -1,4 +1,4 @@
-// Copyright (C) 2023 zhuvoy
+// Copyright (C) 2026 zhuvoy
 // 
 // This file is part of ClassicImageViewer.
 // 
@@ -14,27 +14,46 @@
 // If not, see <https://www.gnu.org/licenses/>.
 
 
-#ifndef ADDBORDERDIALOG_H
-#define ADDBORDERDIALOG_H
+#ifndef MACROENGINE_H
+#define MACROENGINE_H
 
-#include <QDialog>
+#include <QObject>
 #include <QImage>
-#include "ui_addborderdialog.h"
+#include "effects/effectBase.h"
+#include "effects/effectHub.h"
 
-class AddBorderDialog : public QDialog
+class MacroEngine : public QObject
 {
 	Q_OBJECT
 private:
-	Ui_AddBorderDialog ui;
-	QColor backgroundColor;
-private slots:
-	void changeBackgroundColor(bool b);
+	EffectHub * effectHub;
 public:
-	AddBorderDialog(QMap<QString, QVariant> intialConfig = QMap<QString, QVariant>(), QWidget * parent = NULL);
-	~AddBorderDialog();
-	QImage addBorder(QImage i);
-	void savePreferences();
-	QMap<QString, QVariant> getConfig();
+	using QObject::QObject;
+	
+	enum class Op : int {
+		RotateLeft,
+		RotateRight,
+		RotateCustom,
+		FlipVertical,
+		FlipHorizontal,
+		Shear,
+		Resize,
+		AddBorder,
+		PaddToSize,
+		ColorDepthIncrease,
+		ColorDepthDecrease,
+		Grayscale,
+		Negative,
+		AdjustColors,
+		AutoColorAdjust,
+		Sharpen,
+		Effects,
+		ExternalTools
+	};
+	
+	MacroEngine();
+	~MacroEngine();
+	QImage runMacro(QImage image, QList<QMap<QString, QVariant>> macro);
 };
 
-#endif //ADDBORDERDIALOG_H
+#endif //MACROENGINE_H
