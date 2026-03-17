@@ -88,6 +88,7 @@ private: // variables
 	QString mvCpTargetDir;
 	QStringList shortCutInfo;
 	bool blockSetImageSize;
+	bool temporaryDeleteConfirmSuppress;
 
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);

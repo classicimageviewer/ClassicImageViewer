@@ -46,6 +46,7 @@ PreferencesDialog::PreferencesDialog(ImageIO * imageIO, QWidget * parent) : QDia
 	ui.checkBoxClearRecentFiles->setChecked(Globals::prefs->getClearRecentFilesOnExit());
 	ui.comboBoxSelector->setCurrentIndex(Globals::prefs->getUseFastSelector() ? 1:0);
 	ui.checkBoxEnableToolbarShrinking->setChecked(Globals::prefs->getEnableToolbarShrinking());
+	ui.checkBoxConfirmDelete->setChecked(Globals::prefs->getConfirmDelete());
 	ui.comboBoxDisplayQuality->setCurrentIndex(Globals::prefs->getDisplayHigherQuality() ? 1:0);
 	
 	ui.checkBoxFsHideCursor->setChecked(Globals::prefs->getFullscreenHideCursor());
@@ -172,6 +173,7 @@ void PreferencesDialog::savePreferences()
 	Globals::prefs->setClearRecentFilesOnExit(ui.checkBoxClearRecentFiles->isChecked());
 	Globals::prefs->setUseFastSelector(ui.comboBoxSelector->currentIndex() != 0);
 	Globals::prefs->setEnableToolbarShrinking(ui.checkBoxEnableToolbarShrinking->isChecked());
+	Globals::prefs->setConfirmDelete(ui.checkBoxConfirmDelete->isChecked());
 	Globals::prefs->setDisplayHigherQuality(ui.comboBoxDisplayQuality->currentIndex() != 0);
 	
 	Globals::prefs->setFullscreenHideCursor(ui.checkBoxFsHideCursor->isChecked());

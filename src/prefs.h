@@ -63,6 +63,7 @@
 	X(toInt, int, ThumbnailsThreads, 0) \
 	X(toInt, int, ThumbnailsScrollSpeed, 32) \
 	X(toInt, int, InternalThreads, 0) \
+	X(toBool, bool, ConfirmDelete, true) \
 	// end_of_list
 
 

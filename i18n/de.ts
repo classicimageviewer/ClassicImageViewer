@@ -1527,775 +1527,785 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="312"/>
+        <location filename="../src/mainwindow.cpp" line="313"/>
         <source>&amp;Open</source>
         <translation>&amp;Öffnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="313"/>
+        <location filename="../src/mainwindow.cpp" line="314"/>
         <source>&amp;Reload</source>
         <translation>&amp;Neu laden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="314"/>
+        <location filename="../src/mainwindow.cpp" line="315"/>
         <source>Reopen in new app</source>
         <translation>In neuem Fenster erneut öffnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="315"/>
+        <location filename="../src/mainwindow.cpp" line="316"/>
         <source>Open in &amp;external editor</source>
         <translation>In &amp;externem Editor öffnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="317"/>
+        <location filename="../src/mainwindow.cpp" line="318"/>
         <source>Recent &amp;files</source>
         <translation>Zuletzt geöffnete &amp;Dateien</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="321"/>
+        <location filename="../src/mainwindow.cpp" line="322"/>
         <source>&amp;Thumbnails</source>
         <translation>&amp;Vorschaubilder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="322"/>
+        <location filename="../src/mainwindow.cpp" line="323"/>
         <source>Slidesho&amp;w</source>
         <translation>Dia&amp;schau</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="323"/>
+        <location filename="../src/mainwindow.cpp" line="324"/>
         <source>&amp;Batch conversion</source>
         <translation>&amp;Batch(Stapel)-Konvertierung / Umbenennung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="325"/>
+        <location filename="../src/mainwindow.cpp" line="326"/>
         <source>Re&amp;name file</source>
         <translation>Datei &amp;umbenennen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="326"/>
+        <location filename="../src/mainwindow.cpp" line="327"/>
         <source>Select target directory</source>
         <translation>Zielverzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="327"/>
+        <location filename="../src/mainwindow.cpp" line="328"/>
         <source>&amp;Move file</source>
         <translation>Datei &amp;verschieben</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="328"/>
+        <location filename="../src/mainwindow.cpp" line="329"/>
         <source>&amp;Copy file</source>
         <translation>Datei &amp;kopieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="329"/>
+        <location filename="../src/mainwindow.cpp" line="330"/>
         <source>&amp;Delete file</source>
         <translation>Datei &amp;löschen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="331"/>
+        <location filename="../src/mainwindow.cpp" line="332"/>
         <source>Sa&amp;ve</source>
         <translation>S&amp;peichern</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="332"/>
+        <location filename="../src/mainwindow.cpp" line="333"/>
         <source>&amp;Save as</source>
         <translation>&amp;Speichern unter</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="333"/>
+        <location filename="../src/mainwindow.cpp" line="334"/>
         <source>Save selection as</source>
         <translation>Auswahl speichern als</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="334"/>
+        <location filename="../src/mainwindow.cpp" line="335"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="336"/>
+        <location filename="../src/mainwindow.cpp" line="337"/>
         <source>E&amp;xit</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="339"/>
+        <location filename="../src/mainwindow.cpp" line="340"/>
         <source>&amp;Undo</source>
         <translation>R&amp;ückgängig</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="340"/>
+        <location filename="../src/mainwindow.cpp" line="341"/>
         <source>R&amp;edo</source>
         <translation>Wi&amp;ederholen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="342"/>
+        <location filename="../src/mainwindow.cpp" line="343"/>
         <source>Cust&amp;om selection</source>
         <translation>&amp;Benutzerdefinierte Auswahl</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="343"/>
+        <location filename="../src/mainwindow.cpp" line="344"/>
         <source>Cut &amp;selection</source>
         <translation>Au&amp;swahl ausschneiden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="344"/>
+        <location filename="../src/mainwindow.cpp" line="345"/>
         <source>C&amp;rop selection</source>
         <translation>Auswahl &amp;freistellen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="346"/>
+        <location filename="../src/mainwindow.cpp" line="347"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="347"/>
+        <location filename="../src/mainwindow.cpp" line="348"/>
         <source>&amp;Paste</source>
         <translation>&amp;Einfügen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="348"/>
+        <location filename="../src/mainwindow.cpp" line="349"/>
         <source>Paste to side</source>
         <translation>Seitlich einfügen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="349"/>
+        <location filename="../src/mainwindow.cpp" line="350"/>
         <source>Unloa&amp;d</source>
         <translation>Entla&amp;den</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="351"/>
+        <location filename="../src/mainwindow.cpp" line="352"/>
         <source>C&amp;lear clipboard</source>
         <translation>&amp;Zwischenablage leeren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="354"/>
+        <location filename="../src/mainwindow.cpp" line="355"/>
         <source>&amp;Information</source>
         <translation>&amp;Information</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="356"/>
+        <location filename="../src/mainwindow.cpp" line="357"/>
         <source>Rotate &amp;left</source>
         <translation>Nach &amp;links drehen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="357"/>
+        <location filename="../src/mainwindow.cpp" line="358"/>
         <source>Rotate &amp;right</source>
         <translation>Nach &amp;rechts drehen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="358"/>
+        <location filename="../src/mainwindow.cpp" line="359"/>
         <source>C&amp;ustom rotation</source>
         <translation>Ben&amp;utzerdefiniertes Drehen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="359"/>
+        <location filename="../src/mainwindow.cpp" line="360"/>
         <source>&amp;Vertical flip</source>
         <translation>&amp;Vertikal spiegeln</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="360"/>
+        <location filename="../src/mainwindow.cpp" line="361"/>
         <source>&amp;Horizontal flip</source>
         <translation>&amp;Horizontal spiegeln</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="361"/>
+        <location filename="../src/mainwindow.cpp" line="362"/>
         <source>Shear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="363"/>
+        <location filename="../src/mainwindow.cpp" line="364"/>
         <source>Re&amp;size</source>
         <translation>Grö&amp;ße ändern</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="364"/>
+        <location filename="../src/mainwindow.cpp" line="365"/>
         <source>Add &amp;border</source>
         <translation>Ran&amp;d hinzufügen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="365"/>
+        <location filename="../src/mainwindow.cpp" line="366"/>
         <source>&amp;Pad to size</source>
         <translation>&amp;Auffüllen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="367"/>
+        <location filename="../src/mainwindow.cpp" line="368"/>
         <source>I&amp;ncrease color depth</source>
         <translation>Farbtiefe erhöhe&amp;n</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="368"/>
+        <location filename="../src/mainwindow.cpp" line="369"/>
         <source>&amp;Decrease color depth</source>
         <translation>Farbtiefe re&amp;duzieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="370"/>
+        <location filename="../src/mainwindow.cpp" line="371"/>
         <source>&amp;Grayscale</source>
         <translation>&amp;Graustufen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="372"/>
+        <location filename="../src/mainwindow.cpp" line="373"/>
         <source>Adjust &amp;colors</source>
         <translation>Farben &amp;anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="374"/>
+        <location filename="../src/mainwindow.cpp" line="375"/>
         <source>Auto c&amp;olor adjust</source>
         <translation>Aut&amp;omatische Farbanpassung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="378"/>
+        <location filename="../src/mainwindow.cpp" line="379"/>
         <source>E&amp;xternal tools</source>
         <translation>E&amp;xterne Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="379"/>
-        <location filename="../src/mainwindow.cpp" line="392"/>
+        <location filename="../src/mainwindow.cpp" line="380"/>
+        <location filename="../src/mainwindow.cpp" line="393"/>
         <source>Configure</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="381"/>
+        <location filename="../src/mainwindow.cpp" line="382"/>
         <source>External tool 1</source>
         <translation>Externes Werkzeug 1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="382"/>
+        <location filename="../src/mainwindow.cpp" line="383"/>
         <source>External tool 2</source>
         <translation>Externes Werkzeug 2</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="383"/>
+        <location filename="../src/mainwindow.cpp" line="384"/>
         <source>External tool 3</source>
         <translation>Externes Werkzeug 3</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="384"/>
+        <location filename="../src/mainwindow.cpp" line="385"/>
         <source>External tool 4</source>
         <translation>Externes Werkzeug 4</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="385"/>
+        <location filename="../src/mainwindow.cpp" line="386"/>
         <source>External tool 5</source>
         <translation>Externes Werkzeug 5</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="386"/>
+        <location filename="../src/mainwindow.cpp" line="387"/>
         <source>External tool 6</source>
         <translation>Externes Werkzeug 6</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="387"/>
+        <location filename="../src/mainwindow.cpp" line="388"/>
         <source>External tool 7</source>
         <translation>Externes Werkzeug 7</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="388"/>
+        <location filename="../src/mainwindow.cpp" line="389"/>
         <source>External tool 8</source>
         <translation>Externes Werkzeug 8</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="389"/>
+        <location filename="../src/mainwindow.cpp" line="390"/>
         <source>External tool 9</source>
         <translation>Externes Werkzeug 9</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="391"/>
+        <location filename="../src/mainwindow.cpp" line="392"/>
         <source>&amp;Macros</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="394"/>
+        <location filename="../src/mainwindow.cpp" line="395"/>
         <source>Macro 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="395"/>
+        <location filename="../src/mainwindow.cpp" line="396"/>
         <source>Macro 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="396"/>
+        <location filename="../src/mainwindow.cpp" line="397"/>
         <source>Macro 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="397"/>
+        <location filename="../src/mainwindow.cpp" line="398"/>
         <source>Macro 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="398"/>
+        <location filename="../src/mainwindow.cpp" line="399"/>
         <source>Macro 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="399"/>
+        <location filename="../src/mainwindow.cpp" line="400"/>
         <source>Macro 6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="400"/>
+        <location filename="../src/mainwindow.cpp" line="401"/>
         <source>Macro 7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="401"/>
+        <location filename="../src/mainwindow.cpp" line="402"/>
         <source>Macro 8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="402"/>
+        <location filename="../src/mainwindow.cpp" line="403"/>
         <source>Macro 9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="405"/>
+        <location filename="../src/mainwindow.cpp" line="406"/>
         <source>&amp;Properties</source>
         <translation>&amp;Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="409"/>
+        <location filename="../src/mainwindow.cpp" line="410"/>
         <source>Toggle &amp;status bar</source>
         <translation>&amp;Statusleiste ein-/ausschalten</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="410"/>
+        <location filename="../src/mainwindow.cpp" line="411"/>
         <source>Toggle &amp;toolbar</source>
         <translation>Werkzeugleis&amp;te ein-/ausschalten</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="411"/>
+        <location filename="../src/mainwindow.cpp" line="412"/>
         <source>Toggle &amp;menu bar</source>
         <translation>&amp;Menüleiste ein-/ausschalten</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="413"/>
+        <location filename="../src/mainwindow.cpp" line="414"/>
         <source>&amp;Display mode</source>
         <translation>Anzeige-Optionen (Fenstermo&amp;dus)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="414"/>
+        <location filename="../src/mainwindow.cpp" line="415"/>
         <source>Fit window to images</source>
         <translation>Fenstergröße an Bilder anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="415"/>
+        <location filename="../src/mainwindow.cpp" line="416"/>
         <source>Fit all images to window</source>
         <translation>Alle Bilder an Fenstergröße anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="416"/>
+        <location filename="../src/mainwindow.cpp" line="417"/>
         <source>Fit large images to window</source>
         <translation>Große Bilder an Fenstergröße anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="417"/>
+        <location filename="../src/mainwindow.cpp" line="418"/>
         <source>Fit all images to desktop</source>
         <translation>Alle Bilder an Schreibtisch anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="418"/>
+        <location filename="../src/mainwindow.cpp" line="419"/>
         <source>Fit large images to desktop</source>
         <translation>Große Bilder an Schreibtisch anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="419"/>
+        <location filename="../src/mainwindow.cpp" line="420"/>
         <source>Do not fit</source>
         <translation>Nicht anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="426"/>
+        <location filename="../src/mainwindow.cpp" line="427"/>
         <source>Fi&amp;rst file in directory</source>
         <translation>E&amp;rste Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="429"/>
+        <location filename="../src/mainwindow.cpp" line="430"/>
         <source>Zoom &amp;in</source>
         <translation>Vergrößer&amp;n</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="431"/>
+        <location filename="../src/mainwindow.cpp" line="432"/>
         <source>Zoom 1:1</source>
         <translation>Originalgröße</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="432"/>
+        <location filename="../src/mainwindow.cpp" line="433"/>
         <source>&amp;Zoom levels</source>
         <translation>&amp;Vergrößerungsstufen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="434"/>
+        <location filename="../src/mainwindow.cpp" line="435"/>
         <source>10%</source>
         <translation>10%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="435"/>
+        <location filename="../src/mainwindow.cpp" line="436"/>
         <source>15%</source>
         <translation>15%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="436"/>
+        <location filename="../src/mainwindow.cpp" line="437"/>
         <source>20%</source>
         <translation>20%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="437"/>
+        <location filename="../src/mainwindow.cpp" line="438"/>
         <source>25%</source>
         <translation>25%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="438"/>
+        <location filename="../src/mainwindow.cpp" line="439"/>
         <source>33%</source>
         <translation>33%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="439"/>
+        <location filename="../src/mainwindow.cpp" line="440"/>
         <source>50%</source>
         <translation>50%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="440"/>
+        <location filename="../src/mainwindow.cpp" line="441"/>
         <source>66%</source>
         <translation>66%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="441"/>
+        <location filename="../src/mainwindow.cpp" line="442"/>
         <source>100%</source>
         <translation>100%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="442"/>
+        <location filename="../src/mainwindow.cpp" line="443"/>
         <source>125%</source>
         <translation>125%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="443"/>
+        <location filename="../src/mainwindow.cpp" line="444"/>
         <source>150%</source>
         <translation>150%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="444"/>
+        <location filename="../src/mainwindow.cpp" line="445"/>
         <source>175%</source>
         <translation>175%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="445"/>
+        <location filename="../src/mainwindow.cpp" line="446"/>
         <source>200%</source>
         <translation>200%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="446"/>
+        <location filename="../src/mainwindow.cpp" line="447"/>
         <source>300%</source>
         <translation>300%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="447"/>
+        <location filename="../src/mainwindow.cpp" line="448"/>
         <source>400%</source>
         <translation>400%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="450"/>
+        <location filename="../src/mainwindow.cpp" line="451"/>
         <source>Increase transparency</source>
         <translation>Transparenz erhöhen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="451"/>
+        <location filename="../src/mainwindow.cpp" line="452"/>
         <source>Decrease transparency</source>
         <translation>Transparenz reduzieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="459"/>
+        <location filename="../src/mainwindow.cpp" line="460"/>
         <source>First file in directory</source>
         <translation>Erste Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="460"/>
+        <location filename="../src/mainwindow.cpp" line="461"/>
         <source>Last file in directory</source>
         <translation>Letzte Datei im Verzeichnis</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwindow.cpp" line="461"/>
-        <location filename="../src/mainwindow.cpp" line="463"/>
-        <location filename="../src/mainwindow.cpp" line="465"/>
-        <source>Previous file in directory</source>
-        <translation>Vorherige Datei im Verzeichnis</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="462"/>
         <location filename="../src/mainwindow.cpp" line="464"/>
         <location filename="../src/mainwindow.cpp" line="466"/>
+        <source>Previous file in directory</source>
+        <translation>Vorherige Datei im Verzeichnis</translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="463"/>
+        <location filename="../src/mainwindow.cpp" line="465"/>
+        <location filename="../src/mainwindow.cpp" line="467"/>
         <source>Next file in directory</source>
         <translation>Nächste Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="467"/>
+        <location filename="../src/mainwindow.cpp" line="468"/>
         <source>Toggle selection all</source>
         <translation>&quot;Alles auswählen&quot; ein-/ausschalten</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="468"/>
+        <location filename="../src/mainwindow.cpp" line="469"/>
         <source>Adjust left side of the selection</source>
         <translation>Auswahl links anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="469"/>
+        <location filename="../src/mainwindow.cpp" line="470"/>
         <source>Adjust top side of the selection</source>
         <translation>Auswahl oben anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="470"/>
+        <location filename="../src/mainwindow.cpp" line="471"/>
         <source>Adjust right side of the selection</source>
         <translation>Auswahl rechts anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="471"/>
+        <location filename="../src/mainwindow.cpp" line="472"/>
         <source>Adjust bottom side of the selection</source>
         <translation>Auswahl unten anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="472"/>
+        <location filename="../src/mainwindow.cpp" line="473"/>
         <source>Move selection</source>
         <translation>Auswahl verschieben</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1215"/>
+        <location filename="../src/mainwindow.cpp" line="758"/>
+        <source>Delete the current file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="762"/>
+        <source>Do not show for the rest of the session.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1231"/>
         <source>Color Quantization</source>
         <translation>Farbreduktion</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1311"/>
+        <location filename="../src/mainwindow.cpp" line="1327"/>
         <source>External tool %1 is not configured.</source>
         <translation>Externes Werkzeug %1ist nicht konfiguriert.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1342"/>
+        <location filename="../src/mainwindow.cpp" line="1358"/>
         <source>Failed to save the script input file.</source>
         <translation>Eingangsdatei des Skriptes konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1353"/>
+        <location filename="../src/mainwindow.cpp" line="1369"/>
         <source>External tool %1 failed to start.</source>
         <translation>Externes Werkzeug %1 konnte nicht gestartet werden.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1358"/>
+        <location filename="../src/mainwindow.cpp" line="1374"/>
         <source>External tool %1</source>
         <translation>Externes Werkzeug %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1359"/>
+        <location filename="../src/mainwindow.cpp" line="1375"/>
         <source>The execution of the script is in progress...</source>
         <translation>Skript wird ausgeführt...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1381"/>
+        <location filename="../src/mainwindow.cpp" line="1397"/>
         <source>Failed to load the script output file.</source>
         <translation>Ausgabedatei des Skriptes konnte nicht geladen werden.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2148"/>
+        <location filename="../src/mainwindow.cpp" line="2164"/>
         <source>Indexing the current directory...</source>
         <translation>Aktuelles Verzeichnis indexieren...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2715"/>
+        <location filename="../src/mainwindow.cpp" line="2731"/>
         <source>Not configured</source>
         <translation>Nicht konfiguriert</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2798"/>
+        <location filename="../src/mainwindow.cpp" line="2814"/>
         <source>Save...</source>
         <translation>Speichern...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="371"/>
+        <location filename="../src/mainwindow.cpp" line="372"/>
         <source>Nega&amp;tive</source>
         <translation>Nega&amp;tive</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="375"/>
+        <location filename="../src/mainwindow.cpp" line="376"/>
         <source>Sh&amp;arpen</source>
         <translation>Sch&amp;ärfen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="376"/>
+        <location filename="../src/mainwindow.cpp" line="377"/>
         <source>&amp;Effects</source>
         <translation>&amp;Effekte</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="406"/>
+        <location filename="../src/mainwindow.cpp" line="407"/>
         <source>&amp;Minimize</source>
         <translation>&amp;Minimieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="422"/>
+        <location filename="../src/mainwindow.cpp" line="423"/>
         <source>&amp;Full screen</source>
         <translation>&amp;Vollbild</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="424"/>
+        <location filename="../src/mainwindow.cpp" line="425"/>
         <source>&amp;Next file in directory</source>
         <translation>&amp;Nächste Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="425"/>
+        <location filename="../src/mainwindow.cpp" line="426"/>
         <source>&amp;Previous file in directory</source>
         <translation>Vo&amp;rherige Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="427"/>
+        <location filename="../src/mainwindow.cpp" line="428"/>
         <source>&amp;Last file in directory</source>
         <translation>&amp;Letzte Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="430"/>
+        <location filename="../src/mainwindow.cpp" line="431"/>
         <source>Zoom &amp;out</source>
         <translation>V&amp;erkleinern</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="453"/>
+        <location filename="../src/mainwindow.cpp" line="454"/>
         <source>&amp;License</source>
         <translation>&amp;Lizenz</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="454"/>
+        <location filename="../src/mainwindow.cpp" line="455"/>
         <source>&amp;Shortcuts</source>
         <translation>Ta&amp;stenkürzel</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="455"/>
+        <location filename="../src/mainwindow.cpp" line="456"/>
         <source>&amp;About</source>
         <translation>&amp;Über</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="663"/>
-        <location filename="../src/mainwindow.cpp" line="678"/>
-        <location filename="../src/mainwindow.cpp" line="700"/>
-        <location filename="../src/mainwindow.cpp" line="704"/>
-        <location filename="../src/mainwindow.cpp" line="739"/>
-        <location filename="../src/mainwindow.cpp" line="743"/>
-        <location filename="../src/mainwindow.cpp" line="789"/>
-        <location filename="../src/mainwindow.cpp" line="793"/>
-        <location filename="../src/mainwindow.cpp" line="833"/>
-        <location filename="../src/mainwindow.cpp" line="860"/>
-        <location filename="../src/mainwindow.cpp" line="891"/>
-        <location filename="../src/mainwindow.cpp" line="970"/>
-        <location filename="../src/mainwindow.cpp" line="1004"/>
-        <location filename="../src/mainwindow.cpp" line="1311"/>
-        <location filename="../src/mainwindow.cpp" line="1342"/>
-        <location filename="../src/mainwindow.cpp" line="1353"/>
-        <location filename="../src/mainwindow.cpp" line="1381"/>
-        <location filename="../src/mainwindow.cpp" line="2199"/>
+        <location filename="../src/mainwindow.cpp" line="664"/>
+        <location filename="../src/mainwindow.cpp" line="679"/>
+        <location filename="../src/mainwindow.cpp" line="701"/>
+        <location filename="../src/mainwindow.cpp" line="705"/>
+        <location filename="../src/mainwindow.cpp" line="740"/>
+        <location filename="../src/mainwindow.cpp" line="744"/>
+        <location filename="../src/mainwindow.cpp" line="805"/>
+        <location filename="../src/mainwindow.cpp" line="809"/>
+        <location filename="../src/mainwindow.cpp" line="849"/>
+        <location filename="../src/mainwindow.cpp" line="876"/>
+        <location filename="../src/mainwindow.cpp" line="907"/>
+        <location filename="../src/mainwindow.cpp" line="986"/>
+        <location filename="../src/mainwindow.cpp" line="1020"/>
+        <location filename="../src/mainwindow.cpp" line="1327"/>
+        <location filename="../src/mainwindow.cpp" line="1358"/>
+        <location filename="../src/mainwindow.cpp" line="1369"/>
+        <location filename="../src/mainwindow.cpp" line="1397"/>
+        <location filename="../src/mainwindow.cpp" line="2215"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="663"/>
+        <location filename="../src/mainwindow.cpp" line="664"/>
         <source>Cannot rename to empty filename.</source>
         <translation>Kann nicht in leeren Dateinamen umbennen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="678"/>
+        <location filename="../src/mainwindow.cpp" line="679"/>
         <source>Failed to rename the file.
 Maybe the provided file name already exists.</source>
         <translation>Umbennen der Datei fehlgeschlagen.
 Eventuell existiert bereits eine Datei mit dem angegebenen Dateinamen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="700"/>
-        <location filename="../src/mainwindow.cpp" line="739"/>
+        <location filename="../src/mainwindow.cpp" line="701"/>
+        <location filename="../src/mainwindow.cpp" line="740"/>
         <source>Target directory not set.</source>
         <translation>Kein Zielverteichnis angebeben.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="704"/>
-        <location filename="../src/mainwindow.cpp" line="743"/>
+        <location filename="../src/mainwindow.cpp" line="705"/>
+        <location filename="../src/mainwindow.cpp" line="744"/>
         <source>Target directory cannot be the current one.</source>
         <translation>Zielverzeichnis darf nicht das aktuell verwendete sein.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="789"/>
+        <location filename="../src/mainwindow.cpp" line="805"/>
         <source>Failed to move %1 to trash.</source>
         <translation>Konnte %1 nicht in den Papierkorb verschieben.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="793"/>
+        <location filename="../src/mainwindow.cpp" line="809"/>
         <source>Failed to move %1 to trash.
 Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation supported.</source>
         <translation>Konnte %1 nicht in den Papierkorb verschieben.
 Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operationen unterstützt.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="833"/>
-        <location filename="../src/mainwindow.cpp" line="860"/>
+        <location filename="../src/mainwindow.cpp" line="849"/>
+        <location filename="../src/mainwindow.cpp" line="876"/>
         <source>Save to %1 failed.</source>
         <translation>Speichern nach %1 fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="891"/>
+        <location filename="../src/mainwindow.cpp" line="907"/>
         <source>Printer initialization failed.</source>
         <translation>Druckereinrichtung fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="970"/>
-        <location filename="../src/mainwindow.cpp" line="1004"/>
+        <location filename="../src/mainwindow.cpp" line="986"/>
+        <location filename="../src/mainwindow.cpp" line="1020"/>
         <source>QClipboard error.</source>
         <translation>Zwischenablagefehler (Qt).</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="978"/>
+        <location filename="../src/mainwindow.cpp" line="994"/>
         <source>Clipboard %1</source>
         <translation>Zwischenablage %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1790"/>
-        <location filename="../src/mainwindow.cpp" line="1791"/>
+        <location filename="../src/mainwindow.cpp" line="1806"/>
+        <location filename="../src/mainwindow.cpp" line="1807"/>
         <source>Trying to hack the clipboard...</source>
         <translation>Versuche Zwischenablage zu hacken...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1836"/>
-        <location filename="../src/mainwindow.cpp" line="2049"/>
+        <location filename="../src/mainwindow.cpp" line="1852"/>
+        <location filename="../src/mainwindow.cpp" line="2065"/>
         <source>No file loaded</source>
         <translation>Keine Datei geladen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1860"/>
-        <location filename="../src/mainwindow.cpp" line="2050"/>
+        <location filename="../src/mainwindow.cpp" line="1876"/>
+        <location filename="../src/mainwindow.cpp" line="2066"/>
         <source>No selection</source>
         <translation>Keine Auswahl</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1864"/>
+        <location filename="../src/mainwindow.cpp" line="1880"/>
         <source>Selection: %1x%2 at (%3,%4)</source>
         <translation>Auswahl: %1x%2 at (%3,%4)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1888"/>
+        <location filename="../src/mainwindow.cpp" line="1904"/>
         <source>Pixel: %1 at (%2,%3)</source>
         <translation>Pixel: %1 at (%2,%3)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2199"/>
+        <location filename="../src/mainwindow.cpp" line="2215"/>
         <source>Can not open %1</source>
         <translation>%1 kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2683"/>
+        <location filename="../src/mainwindow.cpp" line="2699"/>
         <source>&amp;Clear recent files</source>
         <translation>Liste der zuletzt &amp;geöffneten Dateien löschen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2741"/>
+        <location filename="../src/mainwindow.cpp" line="2757"/>
         <source>All supported images</source>
         <translation>Alle unterstützten Bilder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2754"/>
+        <location filename="../src/mainwindow.cpp" line="2770"/>
         <source>All files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2757"/>
+        <location filename="../src/mainwindow.cpp" line="2773"/>
         <source>Open File</source>
         <translation>Datei öffnen</translation>
     </message>
@@ -2364,443 +2374,448 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
         <translation>Allgemein</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="100"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="152"/>
         <source>Name</source>
         <translation>Nach Name</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="105"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="157"/>
         <source>Name (reversed)</source>
         <translation>Nach Name (umgekehrt)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="110"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="162"/>
         <source>Time</source>
         <translation>Nach Zeit</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="115"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="167"/>
         <source>Time (reversed)</source>
         <translation>Nach Zeit (umgekehrt)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="77"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="91"/>
         <source>System</source>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="164"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="77"/>
         <source>Start maximized</source>
         <translation>Maximiert starten</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="418"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="425"/>
         <source>Display</source>
         <translation>Anzeige</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="515"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="636"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="522"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="643"/>
         <source>Display mode:</source>
         <translation>Anzeige-Optionen (Fenstermodus):</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="431"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="438"/>
         <source>Fit window to images</source>
         <translation>Fenstergröße an Bilder anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="436"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="443"/>
         <source>Fit all images to window</source>
         <translation>Alle Bilder an Fenstergröße anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="441"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="448"/>
         <source>Fit large images to window</source>
         <translation>Große Bilder an Fenstergröße anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="184"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="127"/>
         <source>Zoom delta:</source>
         <translation>Zoom-Faktor:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="143"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="225"/>
         <source>Locale:</source>
         <translation>Spracheinstellung:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="150"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="106"/>
         <source>Clear Clipboard on exit</source>
         <translation>Zwischenablage beim Beenden leeren</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="130"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="508"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="232"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="515"/>
         <source>%</source>
         <translation>%</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="60"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="141"/>
         <source>(if disabled, the exit could take a long time)</source>
         <translation>(wenn deaktiviert kann das nächste Schließen des Programmfensters länger dauern)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="201"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="53"/>
         <source>File order:</source>
         <translation>Dateisortierung:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="53"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="113"/>
         <source>Loop directory</source>
         <translation>Verzeichnisschleife</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="481"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="488"/>
         <source>Display background:</source>
         <translation>Anzeige-Hintergrund:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="225"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="60"/>
         <source>Reverse mouse wheel</source>
         <translation>Mausradrichtung umkehren</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="86"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="189"/>
         <source>XOR frame</source>
         <translation>XOR-Rahmen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="91"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="194"/>
         <source>Highlight (fast)</source>
         <translation>Hervorheben (schnell)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="215"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="209"/>
         <source>(not applied on the current image)</source>
         <translation>(wird nicht auf aktuelles Bild angewendet)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="471"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="478"/>
         <source>(of white)</source>
         <translation>(bezogen auf Weiß)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="208"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="99"/>
         <source>Selection tool:</source>
         <translation>Auswahlwerkzeug:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="522"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="529"/>
         <source>Display quality:</source>
         <translation>Darstellungsqualität:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="464"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="471"/>
         <source>Fit window to images when zoomed</source>
         <translation>Fenstergröße bei Vergrößerung an Bilder anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="123"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="134"/>
         <source>Enable Toolbar shrinking</source>
         <translation>Verkleinerung der Werkzeugleiste aktivieren</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="530"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="537"/>
         <source>Fast</source>
         <translation>Schnell</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="535"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="542"/>
         <source>Quality</source>
         <translation>Qualität</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="543"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="550"/>
         <source>(reduces downscaling aliasing effects)</source>
         <translation>(reduziert Treppen-Effekt beim Verkleinern)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="446"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="453"/>
         <source>Do not fit</source>
         <translation>Nicht anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="451"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="458"/>
         <source>Fit images to desktop</source>
         <translation>Bilder an Schreibtisch anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="456"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="463"/>
         <source>Fit large images to desktop</source>
         <translation>Große Bilder an Schreibtisch anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="157"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="120"/>
         <source>Start fullscreen (if image is loaded on startup)</source>
         <translation>Im Vollbildmodus starten (wenn Bild beim Starten geöffnet wird)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="232"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="202"/>
         <source>Clear Recent files on exit</source>
         <translation>Liste der zuletzt geöffneten Dateien beim Beenden löschen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="256"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="239"/>
+        <source>Ask before deleting files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="263"/>
         <source>Performance</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="262"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="269"/>
         <source>Internal operations</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="562"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="569"/>
         <source>Fullscreen</source>
         <translation>Vollbild</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="568"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="575"/>
         <source>Indicator font size:</source>
         <translation>Anzeige-Schriftgöße:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="575"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="582"/>
         <source>Enable file index indicator</source>
         <translation>Datei-Index-anzeigen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="583"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="590"/>
         <source>Dark gray</source>
         <translation>Dunkelgrau</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="588"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="595"/>
         <source>Gray</source>
         <translation>Grau</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="593"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="600"/>
         <source>Light gray</source>
         <translation>Hellgrau</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="598"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="605"/>
         <source>White</source>
         <translation>Weiß</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="603"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="610"/>
         <source>Dark red</source>
         <translation>Dunkelrot</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="608"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="615"/>
         <source>Red</source>
         <translation>Rot</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="613"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="620"/>
         <source>Dark green</source>
         <translation>Dunkelgrün</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="618"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="625"/>
         <source>Green</source>
         <translation>Grün</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="623"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="630"/>
         <source>Dark Blue</source>
         <translation>Dunkelblau</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="628"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="635"/>
         <source>Blue</source>
         <translation>Blau</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="644"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="651"/>
         <source>Fit all images to display</source>
         <translation>Alle Bilder an Anzeige anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="649"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="656"/>
         <source>Fit large images to display</source>
         <translation>Große Bilder an Anzeige anpassen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="657"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="664"/>
         <source>Enable file name indicator</source>
         <translation>Dateiname anzeigen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="664"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="671"/>
         <source>px</source>
         <translation>px</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="684"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="691"/>
         <source>Hide cursor</source>
         <translation>Mauszeiger verbergen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="701"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="708"/>
         <source>Indicator color:</source>
         <translation>Anzeige-Farbe:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="711"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="718"/>
         <source>Indicator font:</source>
         <translation>Anzeige-Schrift:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="869"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="876"/>
         <source>External editors</source>
         <translation>Externe Bearbeitungsprogramme</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="886"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="893"/>
         <source>Editor 4</source>
         <translation>Programm 4</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="896"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="903"/>
         <source>Editor 1</source>
         <translation>Programm 1</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="903"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="910"/>
         <source>Editor 3</source>
         <translation>Programm 3</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="919"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="926"/>
         <source>Editor 2</source>
         <translation>Programm 2</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="929"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="936"/>
         <source>Command (full path)</source>
         <translation>Befehl (vollständiger Pfad)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="936"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="943"/>
         <source>Optional argument(s separated by semicolons)</source>
         <translation>Optionale Argumente (&quot;;&quot; als Trennzeichen)</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="959"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="966"/>
         <source>File formats</source>
         <translation>Dateiformate</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="967"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="974"/>
         <source>IO modules:</source>
         <translation>IO-Module:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="341"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="348"/>
         <source>Undo stack</source>
         <translation>Rückgängig-Stapel</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="357"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="364"/>
         <source>Memory limit:</source>
         <translation>Speicherlimit:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="364"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="371"/>
         <source>Minimum number of steps:</source>
         <translation>Mindestanzahl an Schritten:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="394"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="401"/>
         <source>MB</source>
         <translation>MB</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="735"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="742"/>
         <source>Thumbnails</source>
         <translation>Vorschaubilder</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="774"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="781"/>
         <source>Cache size:</source>
         <translation>Cache-Größe:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="312"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="781"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="319"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="788"/>
         <source>Multithreading:</source>
         <translation>Multithreading:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="269"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="789"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="276"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="796"/>
         <source>Auto</source>
         <translation>Automatisch</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="274"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="794"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="281"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="801"/>
         <source>1</source>
         <translation>1</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="279"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="799"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="286"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="806"/>
         <source>2</source>
         <translation>2</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="284"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="804"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="291"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="811"/>
         <source>4</source>
         <translation>4</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="289"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="809"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="296"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="816"/>
         <source>8</source>
         <translation>8</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="294"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="814"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="301"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="821"/>
         <source>16</source>
         <translation>16</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="299"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="819"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="306"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="826"/>
         <source>32</source>
         <translation>32</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="304"/>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="824"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="311"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="831"/>
         <source>64</source>
         <translation>64</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="845"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="852"/>
         <source>Preloading</source>
         <translation>Laden der Anfangsgrößen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.ui" line="767"/>
+        <location filename="../src/dialogs/preferencesdialog.ui" line="774"/>
         <source>Scroll speed:</source>
         <translation>Bildlauf-Geschwindigkeit:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="133"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="134"/>
         <source>Restore defaults</source>
         <translation>Standardeinstellungen wiederherstellen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="133"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="134"/>
         <source>Do you really want to clear and restore all settings to the default?
 These includes previous files, effect parameter and more...
 The application will exit.</source>
@@ -2809,45 +2824,45 @@ Dies betrifft auch &quot;zuletzt göffnete Dateien, Effekt-Einstellungen und meh
 Das Programm wird dann beendet.</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="266"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
         <source>Extension</source>
         <translation>Erweiterung</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="266"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="266"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
         <source>Thumbnail</source>
         <translation>Vorschaubild</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="266"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="281"/>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="282"/>
         <location filename="../src/dialogs/preferencesdialog.cpp" line="283"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="284"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="285"/>
         <source>Toggle</source>
         <translation>De-/Aktivieren</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="317"/>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="318"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="319"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="320"/>
         <source>additional extensions, use semicolon as separator</source>
         <translation>zusätzliche Erweiterungen, zum Trennen &quot;;&quot; verwenden</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="320"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="322"/>
         <source>Try to open:</source>
         <translation>Versuche zu öffnen:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="326"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="328"/>
         <source>Try to open unlisted formats</source>
         <translation>Versuche nicht aufgeführte Formate zu öffnen</translation>
     </message>

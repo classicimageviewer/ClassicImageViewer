@@ -99,6 +99,7 @@ MainWindow::MainWindow() : QMainWindow()
 	mvCpTargetDir = QString();
 	shortCutInfo = QStringList();
 	blockSetImageSize = false;
+	temporaryDeleteConfirmSuppress = false;
 
 	imageIO = new ImageIO();
 	
@@ -751,6 +752,21 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_FILE_DELETE:
 			{
+				if (!temporaryDeleteConfirmSuppress && Globals::prefs->getConfirmDelete())
+				{
+					QMessageBox msgBox;
+					msgBox.setText(tr("Delete the current file?"));
+					msgBox.setIcon(QMessageBox::Question);
+					msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+					msgBox.setDefaultButton(QMessageBox::No);
+					QCheckBox * noReminderCheckbox = new QCheckBox(tr("Do not show for the rest of the session."));
+					msgBox.setCheckBox(noReminderCheckbox);
+					if (msgBox.exec() != QMessageBox::Yes) break;
+					if (noReminderCheckbox->isChecked())
+					{
+						temporaryDeleteConfirmSuppress = true;
+					}
+				}
 				bool deleted = false;
 				int index = indexedFiles.indexOf(currentFilePath);
 #if QT_VERSION < QT_VERSION_CHECK(5,15,0)
