@@ -28,6 +28,7 @@
 #include "widgets/savefiledialog.h"
 #include "io/imageIO.h"
 #include "dialogs/thumbnaildialog.h"
+#include "dialogs/histogramdialog.h"
 
 class MainWindow : public QMainWindow
 {
@@ -85,6 +86,7 @@ private: // variables
 	QLabel * statusBarLastModified;
 	QLabel * statusBarSelection;
 	ThumbnailDialog * thumbnailDialog;
+	HistogramDialog * histogramDialog;
 	QString mvCpTargetDir;
 	QStringList shortCutInfo;
 	bool blockSetImageSize;
@@ -123,6 +125,7 @@ private: // functions
 	void redoFromUndoStack();
 	void updateWindowTitle();
 	void deleteThumbnailDialog();
+	void deleteHistogramDialog();
 	void showFileModificationTime(QString fullPath);
 	void clearFileModificationTime();
 	void addPathToRecentFiles(QString path);
@@ -146,6 +149,7 @@ private slots:
 	void indexDisplayChanged(int i);
 	void slideshowTimeout();
 	void thumbnailDialogClosed(int i);
+	void histogramDialogClosed(int i);
 	void thumbnailItemSelected(int index);
 signals:
 	void actionSignal(Action a);

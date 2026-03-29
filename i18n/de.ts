@@ -1106,6 +1106,59 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     </message>
 </context>
 <context>
+    <name>HistogramDialog</name>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.ui" line="23"/>
+        <source>Histogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.ui" line="136"/>
+        <source>Green</source>
+        <translation type="unfinished">Grün</translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.ui" line="225"/>
+        <source>Red</source>
+        <translation type="unfinished">Rot</translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.ui" line="255"/>
+        <source>Gray</source>
+        <translation type="unfinished">Grau</translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.ui" line="318"/>
+        <source>Blue</source>
+        <translation type="unfinished">Blau</translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.ui" line="416"/>
+        <source>☰</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.cpp" line="49"/>
+        <source>Lock opacity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.cpp" line="54"/>
+        <source>Draw lines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.cpp" line="95"/>
+        <source>Pixel count:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/histogramdialog.cpp" line="96"/>
+        <source>Index:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IOmoduleQt</name>
     <message>
         <location filename="../src/io/moduleQt.cpp" line="77"/>
@@ -1527,785 +1580,790 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="313"/>
+        <location filename="../src/mainwindow.cpp" line="319"/>
         <source>&amp;Open</source>
         <translation>&amp;Öffnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="314"/>
+        <location filename="../src/mainwindow.cpp" line="320"/>
         <source>&amp;Reload</source>
         <translation>&amp;Neu laden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="315"/>
+        <location filename="../src/mainwindow.cpp" line="321"/>
         <source>Reopen in new app</source>
         <translation>In neuem Fenster erneut öffnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="316"/>
+        <location filename="../src/mainwindow.cpp" line="322"/>
         <source>Open in &amp;external editor</source>
         <translation>In &amp;externem Editor öffnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="318"/>
+        <location filename="../src/mainwindow.cpp" line="324"/>
         <source>Recent &amp;files</source>
         <translation>Zuletzt geöffnete &amp;Dateien</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="322"/>
+        <location filename="../src/mainwindow.cpp" line="328"/>
         <source>&amp;Thumbnails</source>
         <translation>&amp;Vorschaubilder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="323"/>
+        <location filename="../src/mainwindow.cpp" line="329"/>
         <source>Slidesho&amp;w</source>
         <translation>Dia&amp;schau</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="324"/>
+        <location filename="../src/mainwindow.cpp" line="330"/>
         <source>&amp;Batch conversion</source>
         <translation>&amp;Batch(Stapel)-Konvertierung / Umbenennung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="326"/>
+        <location filename="../src/mainwindow.cpp" line="332"/>
         <source>Re&amp;name file</source>
         <translation>Datei &amp;umbenennen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="327"/>
+        <location filename="../src/mainwindow.cpp" line="333"/>
         <source>Select target directory</source>
         <translation>Zielverzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="328"/>
+        <location filename="../src/mainwindow.cpp" line="334"/>
         <source>&amp;Move file</source>
         <translation>Datei &amp;verschieben</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="329"/>
+        <location filename="../src/mainwindow.cpp" line="335"/>
         <source>&amp;Copy file</source>
         <translation>Datei &amp;kopieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="330"/>
+        <location filename="../src/mainwindow.cpp" line="336"/>
         <source>&amp;Delete file</source>
         <translation>Datei &amp;löschen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="332"/>
+        <location filename="../src/mainwindow.cpp" line="338"/>
         <source>Sa&amp;ve</source>
         <translation>S&amp;peichern</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="333"/>
+        <location filename="../src/mainwindow.cpp" line="339"/>
         <source>&amp;Save as</source>
         <translation>&amp;Speichern unter</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="334"/>
+        <location filename="../src/mainwindow.cpp" line="340"/>
         <source>Save selection as</source>
         <translation>Auswahl speichern als</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="335"/>
+        <location filename="../src/mainwindow.cpp" line="341"/>
         <source>&amp;Print</source>
         <translation>&amp;Drucken</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="337"/>
+        <location filename="../src/mainwindow.cpp" line="343"/>
         <source>E&amp;xit</source>
         <translation>&amp;Beenden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="340"/>
+        <location filename="../src/mainwindow.cpp" line="346"/>
         <source>&amp;Undo</source>
         <translation>R&amp;ückgängig</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="341"/>
+        <location filename="../src/mainwindow.cpp" line="347"/>
         <source>R&amp;edo</source>
         <translation>Wi&amp;ederholen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="343"/>
+        <location filename="../src/mainwindow.cpp" line="349"/>
         <source>Cust&amp;om selection</source>
         <translation>&amp;Benutzerdefinierte Auswahl</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="344"/>
+        <location filename="../src/mainwindow.cpp" line="350"/>
         <source>Cut &amp;selection</source>
         <translation>Au&amp;swahl ausschneiden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="345"/>
+        <location filename="../src/mainwindow.cpp" line="351"/>
         <source>C&amp;rop selection</source>
         <translation>Auswahl &amp;freistellen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="347"/>
+        <location filename="../src/mainwindow.cpp" line="353"/>
         <source>&amp;Copy</source>
         <translation>&amp;Kopieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="348"/>
+        <location filename="../src/mainwindow.cpp" line="354"/>
         <source>&amp;Paste</source>
         <translation>&amp;Einfügen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="349"/>
+        <location filename="../src/mainwindow.cpp" line="355"/>
         <source>Paste to side</source>
         <translation>Seitlich einfügen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="350"/>
+        <location filename="../src/mainwindow.cpp" line="356"/>
         <source>Unloa&amp;d</source>
         <translation>Entla&amp;den</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="352"/>
+        <location filename="../src/mainwindow.cpp" line="358"/>
         <source>C&amp;lear clipboard</source>
         <translation>&amp;Zwischenablage leeren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="355"/>
+        <location filename="../src/mainwindow.cpp" line="361"/>
         <source>&amp;Information</source>
         <translation>&amp;Information</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="357"/>
+        <location filename="../src/mainwindow.cpp" line="363"/>
         <source>Rotate &amp;left</source>
         <translation>Nach &amp;links drehen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="358"/>
+        <location filename="../src/mainwindow.cpp" line="364"/>
         <source>Rotate &amp;right</source>
         <translation>Nach &amp;rechts drehen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="359"/>
+        <location filename="../src/mainwindow.cpp" line="365"/>
         <source>C&amp;ustom rotation</source>
         <translation>Ben&amp;utzerdefiniertes Drehen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="360"/>
+        <location filename="../src/mainwindow.cpp" line="366"/>
         <source>&amp;Vertical flip</source>
         <translation>&amp;Vertikal spiegeln</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="361"/>
+        <location filename="../src/mainwindow.cpp" line="367"/>
         <source>&amp;Horizontal flip</source>
         <translation>&amp;Horizontal spiegeln</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="362"/>
+        <location filename="../src/mainwindow.cpp" line="368"/>
         <source>Shear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="364"/>
+        <location filename="../src/mainwindow.cpp" line="370"/>
         <source>Re&amp;size</source>
         <translation>Grö&amp;ße ändern</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="365"/>
+        <location filename="../src/mainwindow.cpp" line="371"/>
         <source>Add &amp;border</source>
         <translation>Ran&amp;d hinzufügen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="366"/>
+        <location filename="../src/mainwindow.cpp" line="372"/>
         <source>&amp;Pad to size</source>
         <translation>&amp;Auffüllen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="368"/>
+        <location filename="../src/mainwindow.cpp" line="374"/>
         <source>I&amp;ncrease color depth</source>
         <translation>Farbtiefe erhöhe&amp;n</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="369"/>
+        <location filename="../src/mainwindow.cpp" line="375"/>
         <source>&amp;Decrease color depth</source>
         <translation>Farbtiefe re&amp;duzieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="371"/>
+        <location filename="../src/mainwindow.cpp" line="377"/>
         <source>&amp;Grayscale</source>
         <translation>&amp;Graustufen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="373"/>
+        <location filename="../src/mainwindow.cpp" line="379"/>
         <source>Adjust &amp;colors</source>
         <translation>Farben &amp;anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="375"/>
+        <location filename="../src/mainwindow.cpp" line="380"/>
+        <source>Histogram</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="382"/>
         <source>Auto c&amp;olor adjust</source>
         <translation>Aut&amp;omatische Farbanpassung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="379"/>
+        <location filename="../src/mainwindow.cpp" line="386"/>
         <source>E&amp;xternal tools</source>
         <translation>E&amp;xterne Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="380"/>
-        <location filename="../src/mainwindow.cpp" line="393"/>
+        <location filename="../src/mainwindow.cpp" line="387"/>
+        <location filename="../src/mainwindow.cpp" line="400"/>
         <source>Configure</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="382"/>
+        <location filename="../src/mainwindow.cpp" line="389"/>
         <source>External tool 1</source>
         <translation>Externes Werkzeug 1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="383"/>
+        <location filename="../src/mainwindow.cpp" line="390"/>
         <source>External tool 2</source>
         <translation>Externes Werkzeug 2</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="384"/>
+        <location filename="../src/mainwindow.cpp" line="391"/>
         <source>External tool 3</source>
         <translation>Externes Werkzeug 3</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="385"/>
+        <location filename="../src/mainwindow.cpp" line="392"/>
         <source>External tool 4</source>
         <translation>Externes Werkzeug 4</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="386"/>
+        <location filename="../src/mainwindow.cpp" line="393"/>
         <source>External tool 5</source>
         <translation>Externes Werkzeug 5</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="387"/>
+        <location filename="../src/mainwindow.cpp" line="394"/>
         <source>External tool 6</source>
         <translation>Externes Werkzeug 6</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="388"/>
+        <location filename="../src/mainwindow.cpp" line="395"/>
         <source>External tool 7</source>
         <translation>Externes Werkzeug 7</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="389"/>
+        <location filename="../src/mainwindow.cpp" line="396"/>
         <source>External tool 8</source>
         <translation>Externes Werkzeug 8</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="390"/>
+        <location filename="../src/mainwindow.cpp" line="397"/>
         <source>External tool 9</source>
         <translation>Externes Werkzeug 9</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="392"/>
+        <location filename="../src/mainwindow.cpp" line="399"/>
         <source>&amp;Macros</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="395"/>
+        <location filename="../src/mainwindow.cpp" line="402"/>
         <source>Macro 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="396"/>
+        <location filename="../src/mainwindow.cpp" line="403"/>
         <source>Macro 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="397"/>
+        <location filename="../src/mainwindow.cpp" line="404"/>
         <source>Macro 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="398"/>
+        <location filename="../src/mainwindow.cpp" line="405"/>
         <source>Macro 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="399"/>
+        <location filename="../src/mainwindow.cpp" line="406"/>
         <source>Macro 5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="400"/>
+        <location filename="../src/mainwindow.cpp" line="407"/>
         <source>Macro 6</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="401"/>
+        <location filename="../src/mainwindow.cpp" line="408"/>
         <source>Macro 7</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="402"/>
+        <location filename="../src/mainwindow.cpp" line="409"/>
         <source>Macro 8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="403"/>
+        <location filename="../src/mainwindow.cpp" line="410"/>
         <source>Macro 9</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="406"/>
+        <location filename="../src/mainwindow.cpp" line="413"/>
         <source>&amp;Properties</source>
         <translation>&amp;Eigenschaften</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="410"/>
+        <location filename="../src/mainwindow.cpp" line="417"/>
         <source>Toggle &amp;status bar</source>
         <translation>&amp;Statusleiste ein-/ausschalten</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="411"/>
+        <location filename="../src/mainwindow.cpp" line="418"/>
         <source>Toggle &amp;toolbar</source>
         <translation>Werkzeugleis&amp;te ein-/ausschalten</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="412"/>
+        <location filename="../src/mainwindow.cpp" line="419"/>
         <source>Toggle &amp;menu bar</source>
         <translation>&amp;Menüleiste ein-/ausschalten</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="414"/>
+        <location filename="../src/mainwindow.cpp" line="421"/>
         <source>&amp;Display mode</source>
         <translation>Anzeige-Optionen (Fenstermo&amp;dus)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="415"/>
+        <location filename="../src/mainwindow.cpp" line="422"/>
         <source>Fit window to images</source>
         <translation>Fenstergröße an Bilder anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="416"/>
+        <location filename="../src/mainwindow.cpp" line="423"/>
         <source>Fit all images to window</source>
         <translation>Alle Bilder an Fenstergröße anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="417"/>
+        <location filename="../src/mainwindow.cpp" line="424"/>
         <source>Fit large images to window</source>
         <translation>Große Bilder an Fenstergröße anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="418"/>
+        <location filename="../src/mainwindow.cpp" line="425"/>
         <source>Fit all images to desktop</source>
         <translation>Alle Bilder an Schreibtisch anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="419"/>
+        <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Fit large images to desktop</source>
         <translation>Große Bilder an Schreibtisch anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="420"/>
+        <location filename="../src/mainwindow.cpp" line="427"/>
         <source>Do not fit</source>
         <translation>Nicht anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="427"/>
+        <location filename="../src/mainwindow.cpp" line="434"/>
         <source>Fi&amp;rst file in directory</source>
         <translation>E&amp;rste Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="430"/>
+        <location filename="../src/mainwindow.cpp" line="437"/>
         <source>Zoom &amp;in</source>
         <translation>Vergrößer&amp;n</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="432"/>
+        <location filename="../src/mainwindow.cpp" line="439"/>
         <source>Zoom 1:1</source>
         <translation>Originalgröße</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="433"/>
+        <location filename="../src/mainwindow.cpp" line="440"/>
         <source>&amp;Zoom levels</source>
         <translation>&amp;Vergrößerungsstufen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="435"/>
+        <location filename="../src/mainwindow.cpp" line="442"/>
         <source>10%</source>
         <translation>10%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="436"/>
+        <location filename="../src/mainwindow.cpp" line="443"/>
         <source>15%</source>
         <translation>15%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="437"/>
+        <location filename="../src/mainwindow.cpp" line="444"/>
         <source>20%</source>
         <translation>20%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="438"/>
+        <location filename="../src/mainwindow.cpp" line="445"/>
         <source>25%</source>
         <translation>25%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="439"/>
+        <location filename="../src/mainwindow.cpp" line="446"/>
         <source>33%</source>
         <translation>33%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="440"/>
+        <location filename="../src/mainwindow.cpp" line="447"/>
         <source>50%</source>
         <translation>50%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="441"/>
+        <location filename="../src/mainwindow.cpp" line="448"/>
         <source>66%</source>
         <translation>66%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="442"/>
+        <location filename="../src/mainwindow.cpp" line="449"/>
         <source>100%</source>
         <translation>100%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="443"/>
+        <location filename="../src/mainwindow.cpp" line="450"/>
         <source>125%</source>
         <translation>125%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="444"/>
+        <location filename="../src/mainwindow.cpp" line="451"/>
         <source>150%</source>
         <translation>150%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="445"/>
+        <location filename="../src/mainwindow.cpp" line="452"/>
         <source>175%</source>
         <translation>175%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="446"/>
+        <location filename="../src/mainwindow.cpp" line="453"/>
         <source>200%</source>
         <translation>200%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="447"/>
+        <location filename="../src/mainwindow.cpp" line="454"/>
         <source>300%</source>
         <translation>300%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="448"/>
+        <location filename="../src/mainwindow.cpp" line="455"/>
         <source>400%</source>
         <translation>400%</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="451"/>
+        <location filename="../src/mainwindow.cpp" line="458"/>
         <source>Increase transparency</source>
         <translation>Transparenz erhöhen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="452"/>
+        <location filename="../src/mainwindow.cpp" line="459"/>
         <source>Decrease transparency</source>
         <translation>Transparenz reduzieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="460"/>
+        <location filename="../src/mainwindow.cpp" line="467"/>
         <source>First file in directory</source>
         <translation>Erste Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="461"/>
+        <location filename="../src/mainwindow.cpp" line="468"/>
         <source>Last file in directory</source>
         <translation>Letzte Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="462"/>
-        <location filename="../src/mainwindow.cpp" line="464"/>
-        <location filename="../src/mainwindow.cpp" line="466"/>
+        <location filename="../src/mainwindow.cpp" line="469"/>
+        <location filename="../src/mainwindow.cpp" line="471"/>
+        <location filename="../src/mainwindow.cpp" line="473"/>
         <source>Previous file in directory</source>
         <translation>Vorherige Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="463"/>
-        <location filename="../src/mainwindow.cpp" line="465"/>
-        <location filename="../src/mainwindow.cpp" line="467"/>
+        <location filename="../src/mainwindow.cpp" line="470"/>
+        <location filename="../src/mainwindow.cpp" line="472"/>
+        <location filename="../src/mainwindow.cpp" line="474"/>
         <source>Next file in directory</source>
         <translation>Nächste Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="468"/>
+        <location filename="../src/mainwindow.cpp" line="475"/>
         <source>Toggle selection all</source>
         <translation>&quot;Alles auswählen&quot; ein-/ausschalten</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="469"/>
+        <location filename="../src/mainwindow.cpp" line="476"/>
         <source>Adjust left side of the selection</source>
         <translation>Auswahl links anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="470"/>
+        <location filename="../src/mainwindow.cpp" line="477"/>
         <source>Adjust top side of the selection</source>
         <translation>Auswahl oben anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="471"/>
+        <location filename="../src/mainwindow.cpp" line="478"/>
         <source>Adjust right side of the selection</source>
         <translation>Auswahl rechts anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="472"/>
+        <location filename="../src/mainwindow.cpp" line="479"/>
         <source>Adjust bottom side of the selection</source>
         <translation>Auswahl unten anpassen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="473"/>
+        <location filename="../src/mainwindow.cpp" line="480"/>
         <source>Move selection</source>
         <translation>Auswahl verschieben</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="758"/>
+        <location filename="../src/mainwindow.cpp" line="765"/>
         <source>Delete the current file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="762"/>
+        <location filename="../src/mainwindow.cpp" line="769"/>
         <source>Do not show for the rest of the session.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1231"/>
+        <location filename="../src/mainwindow.cpp" line="1255"/>
         <source>Color Quantization</source>
         <translation>Farbreduktion</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1327"/>
+        <location filename="../src/mainwindow.cpp" line="1370"/>
         <source>External tool %1 is not configured.</source>
         <translation>Externes Werkzeug %1ist nicht konfiguriert.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1358"/>
+        <location filename="../src/mainwindow.cpp" line="1401"/>
         <source>Failed to save the script input file.</source>
         <translation>Eingangsdatei des Skriptes konnte nicht gespeichert werden.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1369"/>
+        <location filename="../src/mainwindow.cpp" line="1412"/>
         <source>External tool %1 failed to start.</source>
         <translation>Externes Werkzeug %1 konnte nicht gestartet werden.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1374"/>
+        <location filename="../src/mainwindow.cpp" line="1417"/>
         <source>External tool %1</source>
         <translation>Externes Werkzeug %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1375"/>
+        <location filename="../src/mainwindow.cpp" line="1418"/>
         <source>The execution of the script is in progress...</source>
         <translation>Skript wird ausgeführt...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1397"/>
+        <location filename="../src/mainwindow.cpp" line="1440"/>
         <source>Failed to load the script output file.</source>
         <translation>Ausgabedatei des Skriptes konnte nicht geladen werden.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2164"/>
+        <location filename="../src/mainwindow.cpp" line="2232"/>
         <source>Indexing the current directory...</source>
         <translation>Aktuelles Verzeichnis indexieren...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2731"/>
+        <location filename="../src/mainwindow.cpp" line="2803"/>
         <source>Not configured</source>
         <translation>Nicht konfiguriert</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2814"/>
+        <location filename="../src/mainwindow.cpp" line="2886"/>
         <source>Save...</source>
         <translation>Speichern...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="372"/>
+        <location filename="../src/mainwindow.cpp" line="378"/>
         <source>Nega&amp;tive</source>
         <translation>Nega&amp;tive</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="376"/>
+        <location filename="../src/mainwindow.cpp" line="383"/>
         <source>Sh&amp;arpen</source>
         <translation>Sch&amp;ärfen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="377"/>
+        <location filename="../src/mainwindow.cpp" line="384"/>
         <source>&amp;Effects</source>
         <translation>&amp;Effekte</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="407"/>
+        <location filename="../src/mainwindow.cpp" line="414"/>
         <source>&amp;Minimize</source>
         <translation>&amp;Minimieren</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="423"/>
+        <location filename="../src/mainwindow.cpp" line="430"/>
         <source>&amp;Full screen</source>
         <translation>&amp;Vollbild</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="425"/>
+        <location filename="../src/mainwindow.cpp" line="432"/>
         <source>&amp;Next file in directory</source>
         <translation>&amp;Nächste Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="426"/>
+        <location filename="../src/mainwindow.cpp" line="433"/>
         <source>&amp;Previous file in directory</source>
         <translation>Vo&amp;rherige Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="428"/>
+        <location filename="../src/mainwindow.cpp" line="435"/>
         <source>&amp;Last file in directory</source>
         <translation>&amp;Letzte Datei im Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="431"/>
+        <location filename="../src/mainwindow.cpp" line="438"/>
         <source>Zoom &amp;out</source>
         <translation>V&amp;erkleinern</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="454"/>
+        <location filename="../src/mainwindow.cpp" line="461"/>
         <source>&amp;License</source>
         <translation>&amp;Lizenz</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="455"/>
+        <location filename="../src/mainwindow.cpp" line="462"/>
         <source>&amp;Shortcuts</source>
         <translation>Ta&amp;stenkürzel</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="456"/>
+        <location filename="../src/mainwindow.cpp" line="463"/>
         <source>&amp;About</source>
         <translation>&amp;Über</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="664"/>
-        <location filename="../src/mainwindow.cpp" line="679"/>
-        <location filename="../src/mainwindow.cpp" line="701"/>
-        <location filename="../src/mainwindow.cpp" line="705"/>
-        <location filename="../src/mainwindow.cpp" line="740"/>
-        <location filename="../src/mainwindow.cpp" line="744"/>
-        <location filename="../src/mainwindow.cpp" line="805"/>
-        <location filename="../src/mainwindow.cpp" line="809"/>
-        <location filename="../src/mainwindow.cpp" line="849"/>
-        <location filename="../src/mainwindow.cpp" line="876"/>
-        <location filename="../src/mainwindow.cpp" line="907"/>
-        <location filename="../src/mainwindow.cpp" line="986"/>
-        <location filename="../src/mainwindow.cpp" line="1020"/>
-        <location filename="../src/mainwindow.cpp" line="1327"/>
-        <location filename="../src/mainwindow.cpp" line="1358"/>
-        <location filename="../src/mainwindow.cpp" line="1369"/>
-        <location filename="../src/mainwindow.cpp" line="1397"/>
-        <location filename="../src/mainwindow.cpp" line="2215"/>
+        <location filename="../src/mainwindow.cpp" line="671"/>
+        <location filename="../src/mainwindow.cpp" line="686"/>
+        <location filename="../src/mainwindow.cpp" line="708"/>
+        <location filename="../src/mainwindow.cpp" line="712"/>
+        <location filename="../src/mainwindow.cpp" line="747"/>
+        <location filename="../src/mainwindow.cpp" line="751"/>
+        <location filename="../src/mainwindow.cpp" line="812"/>
+        <location filename="../src/mainwindow.cpp" line="816"/>
+        <location filename="../src/mainwindow.cpp" line="856"/>
+        <location filename="../src/mainwindow.cpp" line="883"/>
+        <location filename="../src/mainwindow.cpp" line="914"/>
+        <location filename="../src/mainwindow.cpp" line="1000"/>
+        <location filename="../src/mainwindow.cpp" line="1036"/>
+        <location filename="../src/mainwindow.cpp" line="1370"/>
+        <location filename="../src/mainwindow.cpp" line="1401"/>
+        <location filename="../src/mainwindow.cpp" line="1412"/>
+        <location filename="../src/mainwindow.cpp" line="1440"/>
+        <location filename="../src/mainwindow.cpp" line="2284"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="664"/>
+        <location filename="../src/mainwindow.cpp" line="671"/>
         <source>Cannot rename to empty filename.</source>
         <translation>Kann nicht in leeren Dateinamen umbennen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="679"/>
+        <location filename="../src/mainwindow.cpp" line="686"/>
         <source>Failed to rename the file.
 Maybe the provided file name already exists.</source>
         <translation>Umbennen der Datei fehlgeschlagen.
 Eventuell existiert bereits eine Datei mit dem angegebenen Dateinamen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="701"/>
-        <location filename="../src/mainwindow.cpp" line="740"/>
+        <location filename="../src/mainwindow.cpp" line="708"/>
+        <location filename="../src/mainwindow.cpp" line="747"/>
         <source>Target directory not set.</source>
         <translation>Kein Zielverteichnis angebeben.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="705"/>
-        <location filename="../src/mainwindow.cpp" line="744"/>
+        <location filename="../src/mainwindow.cpp" line="712"/>
+        <location filename="../src/mainwindow.cpp" line="751"/>
         <source>Target directory cannot be the current one.</source>
         <translation>Zielverzeichnis darf nicht das aktuell verwendete sein.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="805"/>
+        <location filename="../src/mainwindow.cpp" line="812"/>
         <source>Failed to move %1 to trash.</source>
         <translation>Konnte %1 nicht in den Papierkorb verschieben.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="809"/>
+        <location filename="../src/mainwindow.cpp" line="816"/>
         <source>Failed to move %1 to trash.
 Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation supported.</source>
         <translation>Konnte %1 nicht in den Papierkorb verschieben.
 Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operationen unterstützt.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="849"/>
-        <location filename="../src/mainwindow.cpp" line="876"/>
+        <location filename="../src/mainwindow.cpp" line="856"/>
+        <location filename="../src/mainwindow.cpp" line="883"/>
         <source>Save to %1 failed.</source>
         <translation>Speichern nach %1 fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="907"/>
+        <location filename="../src/mainwindow.cpp" line="914"/>
         <source>Printer initialization failed.</source>
         <translation>Druckereinrichtung fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="986"/>
-        <location filename="../src/mainwindow.cpp" line="1020"/>
+        <location filename="../src/mainwindow.cpp" line="1000"/>
+        <location filename="../src/mainwindow.cpp" line="1036"/>
         <source>QClipboard error.</source>
         <translation>Zwischenablagefehler (Qt).</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="994"/>
+        <location filename="../src/mainwindow.cpp" line="1008"/>
         <source>Clipboard %1</source>
         <translation>Zwischenablage %1</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1806"/>
-        <location filename="../src/mainwindow.cpp" line="1807"/>
+        <location filename="../src/mainwindow.cpp" line="1854"/>
+        <location filename="../src/mainwindow.cpp" line="1855"/>
         <source>Trying to hack the clipboard...</source>
         <translation>Versuche Zwischenablage zu hacken...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1852"/>
-        <location filename="../src/mainwindow.cpp" line="2065"/>
+        <location filename="../src/mainwindow.cpp" line="1900"/>
+        <location filename="../src/mainwindow.cpp" line="2133"/>
         <source>No file loaded</source>
         <translation>Keine Datei geladen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1876"/>
-        <location filename="../src/mainwindow.cpp" line="2066"/>
+        <location filename="../src/mainwindow.cpp" line="1924"/>
+        <location filename="../src/mainwindow.cpp" line="2134"/>
         <source>No selection</source>
         <translation>Keine Auswahl</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1880"/>
+        <location filename="../src/mainwindow.cpp" line="1928"/>
         <source>Selection: %1x%2 at (%3,%4)</source>
         <translation>Auswahl: %1x%2 at (%3,%4)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1904"/>
+        <location filename="../src/mainwindow.cpp" line="1952"/>
         <source>Pixel: %1 at (%2,%3)</source>
         <translation>Pixel: %1 at (%2,%3)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2215"/>
+        <location filename="../src/mainwindow.cpp" line="2284"/>
         <source>Can not open %1</source>
         <translation>%1 kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2699"/>
+        <location filename="../src/mainwindow.cpp" line="2771"/>
         <source>&amp;Clear recent files</source>
         <translation>Liste der zuletzt &amp;geöffneten Dateien löschen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2757"/>
+        <location filename="../src/mainwindow.cpp" line="2829"/>
         <source>All supported images</source>
         <translation>Alle unterstützten Bilder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2770"/>
+        <location filename="../src/mainwindow.cpp" line="2842"/>
         <source>All files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2773"/>
+        <location filename="../src/mainwindow.cpp" line="2845"/>
         <source>Open File</source>
         <translation>Datei öffnen</translation>
     </message>

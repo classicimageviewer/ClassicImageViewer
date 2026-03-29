@@ -96,6 +96,7 @@ MainWindow::MainWindow() : QMainWindow()
 	layout->addWidget(displayOverlayIndicator);
 	clipboardCounter = 0;
 	thumbnailDialog = NULL;
+	histogramDialog = NULL;
 	mvCpTargetDir = QString();
 	shortCutInfo = QStringList();
 	blockSetImageSize = false;
@@ -159,6 +160,7 @@ MainWindow::MainWindow() : QMainWindow()
 MainWindow::~MainWindow()
 {
 	deleteThumbnailDialog();
+	deleteHistogramDialog();
 	delete imageIO;
 }
 
@@ -167,6 +169,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
 	if (thumbnailDialog)
 	{
 		deleteThumbnailDialog();
+	}
+	if (histogramDialog)
+	{
+		deleteHistogramDialog();
 	}
 	if (Globals::prefs->getClearClipboardOnExit())
 	{
@@ -371,6 +377,7 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuImage, tr("&Grayscale"), ACT_GRAYSCALE, "Ctrl+G",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuImage, tr("Nega&tive"), ACT_NEGATIVE, "Ctrl+Shift+N",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuImage, tr("Adjust &colors"), ACT_COLOR_ADJUST, "Shift+G",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuImage, tr("Histogram"), ACT_HISTOGRAM, "Shift+H",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuImage);
 	menuAddAction(ui.menuImage, tr("Auto c&olor adjust"), ACT_AUTO_COLOR, "Shift+U",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuImage, tr("Sh&arpen"), ACT_SHARPEN, "Shift+S",  ACTDISABLE_UNLOADED);
@@ -922,6 +929,11 @@ void MainWindow::actionSlot(Action a)
 				deleteThumbnailDialog();
 			}
 			else
+			if (histogramDialog)
+			{
+				deleteHistogramDialog();
+			}
+			else
 			{
 				if (Globals::prefs->getClearClipboardOnExit())
 				{
@@ -961,6 +973,7 @@ void MainWindow::actionSlot(Action a)
 				insert.fill(0);
 				saveToUndoStack();
 				display->insertIntoSelection(insert);
+				if (histogramDialog) histogramDialog->processImage(display->getImage());
 			}
 			break;
 		case ACT_CROP_SELECTION:
@@ -968,6 +981,7 @@ void MainWindow::actionSlot(Action a)
 				QImage i = display->getFromSelection();
 				saveToUndoStack();
 				display->newImage(i);
+				if (histogramDialog) histogramDialog->processImage(i);
 				currentImageSize = i.size();
 				setImageAndWindowSize();
 			}
@@ -994,6 +1008,7 @@ void MainWindow::actionSlot(Action a)
 						currentImageName = QString(tr("Clipboard %1")).arg(clipboardCounter);
 						clearPastedUndoStack();
 						display->newImage(i);
+						if (histogramDialog) histogramDialog->processImage(i);
 						currentImageSize = i.size();
 						if (Globals::prefs->getDisplayMode() == 0)
 						{
@@ -1005,6 +1020,7 @@ void MainWindow::actionSlot(Action a)
 					{
 						saveToUndoStack();
 						display->insertIntoSelection(getFromClipboard());
+						if (histogramDialog) histogramDialog->processImage(display->getImage());
 					}
 				}
 			}
@@ -1075,6 +1091,7 @@ void MainWindow::actionSlot(Action a)
 						painter.end();
 						saveToUndoStack();
 						display->newImage(jointImage);
+						if (histogramDialog) histogramDialog->processImage(jointImage);
 						currentImageSize = jointImage.size();
 						setImageAndWindowSize();
 					}
@@ -1089,6 +1106,7 @@ void MainWindow::actionSlot(Action a)
 			}
 			setInternalState(UNLOADED);
 			display->newImage(QImage());
+			if (histogramDialog) histogramDialog->processImage(QImage());
 			currentImageSize = QSize();
 			currentImageName = QString();
 			currentFilePath = QString();
@@ -1128,6 +1146,7 @@ void MainWindow::actionSlot(Action a)
 					QApplication::restoreOverrideCursor();
 					saveToUndoStack();
 					display->newImage(i);
+					if (histogramDialog) histogramDialog->processImage(i);
 					currentImageSize = i.size();
 					setImageAndWindowSize();
 					d->savePreferences();
@@ -1151,6 +1170,7 @@ void MainWindow::actionSlot(Action a)
 					QApplication::restoreOverrideCursor();
 					saveToUndoStack();
 					display->newImage(i);
+					if (histogramDialog) histogramDialog->processImage(i);
 					currentImageSize = i.size();
 					setImageAndWindowSize();
 					d->savePreferences();
@@ -1168,6 +1188,7 @@ void MainWindow::actionSlot(Action a)
 					QApplication::restoreOverrideCursor();
 					saveToUndoStack();
 					display->newImage(i);
+					if (histogramDialog) histogramDialog->processImage(i);
 					currentImageSize = d->getNewResolution();//i.size();
 					setImageAndWindowSize();
 					d->savePreferences();
@@ -1185,6 +1206,7 @@ void MainWindow::actionSlot(Action a)
 					QApplication::restoreOverrideCursor();
 					saveToUndoStack();
 					display->newImage(i);
+					if (histogramDialog) histogramDialog->processImage(i);
 					currentImageSize = i.size();
 					setImageAndWindowSize();
 					d->savePreferences();
@@ -1202,6 +1224,7 @@ void MainWindow::actionSlot(Action a)
 					QApplication::restoreOverrideCursor();
 					saveToUndoStack();
 					display->newImage(i);
+					if (histogramDialog) histogramDialog->processImage(i);
 					currentImageSize = i.size();
 					setImageAndWindowSize();
 					d->savePreferences();
@@ -1223,6 +1246,7 @@ void MainWindow::actionSlot(Action a)
 					i = i.convertToFormat(QImage::Format_RGB32).copy();
 				}
 				display->updateImage(i);
+				if (histogramDialog) histogramDialog->processImage(i);
 				QApplication::restoreOverrideCursor();
 			}
 			break;
@@ -1235,6 +1259,7 @@ void MainWindow::actionSlot(Action a)
 					saveToUndoStack();
 					QImage i = d->applyEffects();
 					display->updateImage(i);
+					if (histogramDialog) histogramDialog->processImage(i);
 					QApplication::restoreOverrideCursor();
 				}
 				delete d;
@@ -1256,11 +1281,27 @@ void MainWindow::actionSlot(Action a)
 					QApplication::restoreOverrideCursor();
 					saveToUndoStack();
 					display->newImage(i);
+					if (histogramDialog) histogramDialog->processImage(i);
 					currentImageSize = i.size();
 					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
+			}
+			break;
+		case ACT_HISTOGRAM:
+			if (histogramDialog == NULL)
+			{
+				QApplication::setOverrideCursor(Qt::WaitCursor);
+				histogramDialog = new HistogramDialog(this);
+				histogramDialog->show();
+				connect(histogramDialog, SIGNAL(finished(int)), this, SLOT(histogramDialogClosed(int)));
+				histogramDialog->processImage(display->getImage());
+				QApplication::restoreOverrideCursor();
+			}
+			else
+			{
+				deleteHistogramDialog();
 			}
 			break;
 		case ACT_AUTO_COLOR:
@@ -1281,6 +1322,7 @@ void MainWindow::actionSlot(Action a)
 					if (display->getSelection().isNull())
 					{
 						display->updateImage(i);
+						if (histogramDialog) histogramDialog->processImage(i);
 						if (currentImageSize != i.size())
 						{
 							currentImageSize = i.size();
@@ -1290,6 +1332,7 @@ void MainWindow::actionSlot(Action a)
 					else
 					{
 						display->insertIntoSelection(i);
+						if (histogramDialog) histogramDialog->processImage(display->getImage());
 					}
 				}
 				delete d;
@@ -1402,6 +1445,7 @@ void MainWindow::actionSlot(Action a)
 					if (display->getSelection().isNull())
 					{
 						display->updateImage(img);
+						if (histogramDialog) histogramDialog->processImage(img);
 						if (currentImageSize != img.size())
 						{
 							currentImageSize = img.size();
@@ -1411,6 +1455,7 @@ void MainWindow::actionSlot(Action a)
 					else
 					{
 						display->insertIntoSelection(img);
+						if (histogramDialog) histogramDialog->processImage(display->getImage());
 					}
 				} while(0);
 				if (!inputFilePath.isEmpty())
@@ -1470,6 +1515,7 @@ void MainWindow::actionSlot(Action a)
 				{
 					saveToUndoStack();
 					display->updateImage(outputImage);
+					if (histogramDialog) histogramDialog->processImage(outputImage);
 					if (currentImageSize != outputImage.size())
 					{
 						currentImageSize = outputImage.size();
@@ -1482,6 +1528,7 @@ void MainWindow::actionSlot(Action a)
 					if (display->getSelection().isNull())
 					{
 						display->updateImage(outputImage);
+						if (histogramDialog) histogramDialog->processImage(outputImage);
 						if (currentImageSize != outputImage.size())
 						{
 							currentImageSize = outputImage.size();
@@ -1491,6 +1538,7 @@ void MainWindow::actionSlot(Action a)
 					else
 					{
 						display->insertIntoSelection(outputImage);
+						if (histogramDialog) histogramDialog->processImage(display->getImage());
 					}
 				}
 				else			// No change
@@ -1955,10 +2003,30 @@ void MainWindow::deleteThumbnailDialog()
 	}
 }
 
+void MainWindow::deleteHistogramDialog()
+{
+	if (histogramDialog)
+	{
+		disconnect(histogramDialog, SIGNAL(finished(int)), NULL, NULL);
+		if (histogramDialog->isVisible())
+		{
+			histogramDialog->close();
+		}
+		delete histogramDialog;
+		histogramDialog = NULL;
+	}
+}
+
 void MainWindow::thumbnailDialogClosed(int i)
 {
 	Q_UNUSED(i);
 	deleteThumbnailDialog();
+}
+
+void MainWindow::histogramDialogClosed(int i)
+{
+	Q_UNUSED(i);
+	deleteHistogramDialog();
 }
 
 void MainWindow::thumbnailItemSelected(int index)
@@ -2206,6 +2274,7 @@ void MainWindow::loadCurrentFile()
 	QImage i = imageIO->loadFile(currentDirPath + "/" + currentFilePath);
 	currentImageSize = i.size();
 	display->newImage(i);
+	if (histogramDialog) histogramDialog->processImage(i);
 	display->setZoom(1.0);
 	setImageAndWindowSize();
 	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// sped up drawing
@@ -2324,6 +2393,7 @@ void MainWindow::doSimpleFilter(SimpleFilter f)
 	{
 		saveToUndoStack();
 		display->updateImage(dst);
+		if (histogramDialog) histogramDialog->processImage(dst);
 		currentImageSize = dst.size();
 		if (src.size() != dst.size())
 		{
@@ -2615,6 +2685,7 @@ void MainWindow::undoFromUndoStack()
 		undoStackPosition -= 1;
 		QImage i = undoHistory.at(undoStackPosition);
 		display->updateImage(i);
+		if (histogramDialog) histogramDialog->processImage(i);
 		currentImageSize = i.size();
 		setImageAndWindowSize();
 		undoIndex -= 1;
@@ -2631,6 +2702,7 @@ void MainWindow::redoFromUndoStack()
 		undoStackPosition += 1;
 		QImage i = undoHistory.at(undoStackPosition);
 		display->updateImage(i);
+		if (histogramDialog) histogramDialog->processImage(i);
 		currentImageSize = i.size();
 		setImageAndWindowSize();
 		undoIndex += 1;
