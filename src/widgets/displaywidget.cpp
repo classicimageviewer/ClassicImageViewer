@@ -33,6 +33,7 @@ DisplayWidget::DisplayWidget(QWidget *parent) : QGraphicsView(parent)
 	setSizePolicy(QSizePolicy::Expanding , QSizePolicy::Expanding);
 	emptyScene = new QGraphicsScene(this);
 	surface = NULL;
+	isAnimated = false;
 	selectionEnabled = true;
 	zoom = 1.0;
 	image = QImage();
@@ -46,6 +47,8 @@ DisplayWidget::DisplayWidget(QWidget *parent) : QGraphicsView(parent)
 
 DisplayWidget::~DisplayWidget()
 {
+	isAnimated = false;
+	animationTimer.stop();
 	setScene(NULL);
 	if (surface)
 	{
@@ -64,8 +67,70 @@ void DisplayWidget::setBackgroundShade(int shade)
 	setBackgroundBrush(QBrush(QColor(shade, shade, shade)));
 }
 
+void DisplayWidget::animationTimeout(void)
+{
+	if (!isAnimated) return;
+	if (!surface) return;
+	if (frames.length() < 1) return;
+	animationCounter = (animationCounter + 1) % frames.length();
+	this->image = frames[animationCounter];
+	surface->setImage(this->image);
+	animationTimer.start(frameDurationMs[animationCounter]);
+}
+
+void DisplayWidget::newImageSequence(const QList<QImage> frames, const QList<int> frameDurationMs)
+{
+	isAnimated = true;
+	if (surface)
+	{
+		setScene(NULL);
+		disconnect(surface, SIGNAL(zoomChanged()), NULL, NULL);
+		disconnect(surface, SIGNAL(selectionChanged()), NULL, NULL);
+		disconnect(surface, SIGNAL(pixelInfo()), NULL, NULL);
+		delete surface;
+		surface = NULL;
+	}
+	if (frames.length() <= 0)
+	{
+		this->image = QImage();
+	}
+	else
+	{
+		this->image = frames[0];
+	}
+	if (image.isNull())
+	{
+		emit zoomChanged();
+		emit selectionChanged();
+		setScene(emptyScene);
+		isAnimated = false;
+		return;
+	}
+	this->frames = frames;
+	this->frameDurationMs = frameDurationMs;
+	surface = new DisplaySurface(this);
+	connect(surface, SIGNAL(zoomChanged()), this, SIGNAL(zoomChanged())); // redirect signals
+	connect(surface, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
+	connect(surface, SIGNAL(pixelInfo()), this, SIGNAL(pixelInfo()));
+	surface->enableSelection(false);
+	setScene(surface);
+	surface->setImage(this->image);
+	surface->setZoom(zoom);
+	emit selectionChanged();
+	animationCounter = 0;
+	animationTimer.setSingleShot(true);
+	disconnect(&animationTimer, SIGNAL(timeout()), NULL, NULL);
+	if (frameDurationMs.length() > 0)
+	{
+		connect(&animationTimer, SIGNAL(timeout()), this, SLOT(animationTimeout()));
+		animationTimer.start(frameDurationMs[0]);
+	}
+}
+
 void DisplayWidget::newImage(const QImage &image)
 {
+	isAnimated = false;
+	animationTimer.stop();
 	if (surface)
 	{
 		setScene(NULL);
@@ -162,7 +227,7 @@ QSize DisplayWidget::getViewportSize()
 
 void DisplayWidget::enableSelection(bool enable)
 {
-	selectionEnabled = enable;
+	selectionEnabled = enable && !isAnimated;
 	if (surface)
 	{
 		surface->enableSelection(selectionEnabled);

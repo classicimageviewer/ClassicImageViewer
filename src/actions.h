@@ -20,6 +20,7 @@
 #define ACTDISABLE_UNLOADED	(1 << 0)
 #define ACTDISABLE_FULLSCREEN	(1 << 1)
 #define ACTDISABLE_CLIPBOARD	(1 << 2)
+#define ACTDISABLE_ANIMATION	(1 << 3)
 
 enum Action
 {

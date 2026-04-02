@@ -40,7 +40,7 @@ private: // typedefs
 		Action event;
 		int flags;
 	} ActionLookUp_t;
-	enum InternalState {UNLOADED=0, IMAGE_FROM_FILE, IMAGE_FROM_CLIPBOARD};
+	enum InternalState {UNLOADED=0, IMAGE_FROM_FILE, ANIMATION_FROM_FILE, IMAGE_FROM_CLIPBOARD};
 	enum SimpleFilter {NONE=0, ROT_R, ROT_L, MIRROR_V, MIRROR_H, GRAYS, NEGATIVE, COLORADJ, SHARPEN};
 
 private: // variables

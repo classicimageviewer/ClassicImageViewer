@@ -201,7 +201,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="522"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="579"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="586"/>
         <source>Effects</source>
         <translation type="unfinished"></translation>
     </message>
@@ -294,7 +294,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.ui" line="928"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="916"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="923"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -310,6 +310,7 @@
         <location filename="../src/dialogs/batchdialog.cpp" line="448"/>
         <location filename="../src/dialogs/batchdialog.cpp" line="495"/>
         <location filename="../src/dialogs/batchdialog.cpp" line="510"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="516"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -351,7 +352,7 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="413"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="884"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="891"/>
         <source>Files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -367,21 +368,26 @@
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="510"/>
+        <source>Cannot load animation for preview.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/batchdialog.cpp" line="516"/>
         <source>Cannot load image for preview.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="604"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="611"/>
         <source>Select Target Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="866"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="873"/>
         <source>done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="927"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="934"/>
         <source>Threads: %1/%2</source>
         <translation type="unfinished"></translation>
     </message>
@@ -389,33 +395,38 @@
 <context>
     <name>BatchWorker</name>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1046"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1053"/>
         <source>input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1051"/>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1059"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1058"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1066"/>
         <source>already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1068"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1075"/>
+        <source>animations not supported</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1080"/>
         <source>cannot read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1077"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1090"/>
         <source>over-crop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1180"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1193"/>
         <source>resized to zero</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/batchdialog.cpp" line="1193"/>
+        <location filename="../src/dialogs/batchdialog.cpp" line="1206"/>
         <source>cannot write</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1150,42 +1161,42 @@ Example sh script (copy the image unaltered):
 <context>
     <name>IOmoduleQt</name>
     <message>
-        <location filename="../src/io/moduleQt.cpp" line="77"/>
+        <location filename="../src/io/moduleQt.cpp" line="93"/>
         <source>Compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleQt.cpp" line="82"/>
+        <location filename="../src/io/moduleQt.cpp" line="98"/>
         <source>no compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleQt.cpp" line="83"/>
+        <location filename="../src/io/moduleQt.cpp" line="99"/>
         <source>LZW compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleQt.cpp" line="88"/>
+        <location filename="../src/io/moduleQt.cpp" line="104"/>
         <source>Compression ratio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleQt.cpp" line="102"/>
+        <location filename="../src/io/moduleQt.cpp" line="118"/>
         <source>Compression level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleQt.cpp" line="111"/>
+        <location filename="../src/io/moduleQt.cpp" line="127"/>
         <source>Quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleQt.cpp" line="123"/>
+        <location filename="../src/io/moduleQt.cpp" line="139"/>
         <source>Optimized write</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleQt.cpp" line="132"/>
+        <location filename="../src/io/moduleQt.cpp" line="148"/>
         <source>Progressive scan</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1193,52 +1204,52 @@ Example sh script (copy the image unaltered):
 <context>
     <name>IOmoduleVips</name>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="206"/>
+        <location filename="../src/io/moduleVips.cpp" line="210"/>
         <source>Quality</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="217"/>
+        <location filename="../src/io/moduleVips.cpp" line="221"/>
         <source>Lossless</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="226"/>
+        <location filename="../src/io/moduleVips.cpp" line="230"/>
         <source>Compression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="231"/>
+        <location filename="../src/io/moduleVips.cpp" line="235"/>
         <source>Auto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="232"/>
+        <location filename="../src/io/moduleVips.cpp" line="236"/>
         <source>AOM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="233"/>
+        <location filename="../src/io/moduleVips.cpp" line="237"/>
         <source>RAV1E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="234"/>
+        <location filename="../src/io/moduleVips.cpp" line="238"/>
         <source>SVT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="235"/>
+        <location filename="../src/io/moduleVips.cpp" line="239"/>
         <source>x265</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="242"/>
+        <location filename="../src/io/moduleVips.cpp" line="246"/>
         <source>Dithering</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/io/moduleVips.cpp" line="250"/>
+        <location filename="../src/io/moduleVips.cpp" line="254"/>
         <source>Quantisation effort</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2104,62 +2115,67 @@ Example sh script (copy the image unaltered):
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="765"/>
+        <location filename="../src/mainwindow.cpp" line="766"/>
         <source>Delete the current file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="769"/>
+        <location filename="../src/mainwindow.cpp" line="770"/>
         <source>Do not show for the rest of the session.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1255"/>
+        <location filename="../src/mainwindow.cpp" line="1256"/>
         <source>Color Quantization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1370"/>
+        <location filename="../src/mainwindow.cpp" line="1374"/>
         <source>External tool %1 is not configured.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1401"/>
+        <location filename="../src/mainwindow.cpp" line="1405"/>
         <source>Failed to save the script input file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1412"/>
+        <location filename="../src/mainwindow.cpp" line="1416"/>
         <source>External tool %1 failed to start.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1417"/>
+        <location filename="../src/mainwindow.cpp" line="1421"/>
         <source>External tool %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1418"/>
+        <location filename="../src/mainwindow.cpp" line="1422"/>
         <source>The execution of the script is in progress...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1440"/>
+        <location filename="../src/mainwindow.cpp" line="1444"/>
+        <source>Cannot load animated script output file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1450"/>
         <source>Failed to load the script output file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2232"/>
+        <location filename="../src/mainwindow.cpp" line="2243"/>
         <source>Indexing the current directory...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2803"/>
+        <location filename="../src/mainwindow.cpp" line="2838"/>
         <source>Not configured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2886"/>
+        <location filename="../src/mainwindow.cpp" line="2921"/>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2224,133 +2240,134 @@ Example sh script (copy the image unaltered):
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="671"/>
-        <location filename="../src/mainwindow.cpp" line="686"/>
-        <location filename="../src/mainwindow.cpp" line="708"/>
-        <location filename="../src/mainwindow.cpp" line="712"/>
-        <location filename="../src/mainwindow.cpp" line="747"/>
-        <location filename="../src/mainwindow.cpp" line="751"/>
-        <location filename="../src/mainwindow.cpp" line="812"/>
-        <location filename="../src/mainwindow.cpp" line="816"/>
-        <location filename="../src/mainwindow.cpp" line="856"/>
-        <location filename="../src/mainwindow.cpp" line="883"/>
-        <location filename="../src/mainwindow.cpp" line="914"/>
-        <location filename="../src/mainwindow.cpp" line="1000"/>
-        <location filename="../src/mainwindow.cpp" line="1036"/>
-        <location filename="../src/mainwindow.cpp" line="1370"/>
-        <location filename="../src/mainwindow.cpp" line="1401"/>
-        <location filename="../src/mainwindow.cpp" line="1412"/>
-        <location filename="../src/mainwindow.cpp" line="1440"/>
-        <location filename="../src/mainwindow.cpp" line="2284"/>
+        <location filename="../src/mainwindow.cpp" line="672"/>
+        <location filename="../src/mainwindow.cpp" line="687"/>
+        <location filename="../src/mainwindow.cpp" line="709"/>
+        <location filename="../src/mainwindow.cpp" line="713"/>
+        <location filename="../src/mainwindow.cpp" line="748"/>
+        <location filename="../src/mainwindow.cpp" line="752"/>
+        <location filename="../src/mainwindow.cpp" line="813"/>
+        <location filename="../src/mainwindow.cpp" line="817"/>
+        <location filename="../src/mainwindow.cpp" line="857"/>
+        <location filename="../src/mainwindow.cpp" line="884"/>
+        <location filename="../src/mainwindow.cpp" line="915"/>
+        <location filename="../src/mainwindow.cpp" line="1001"/>
+        <location filename="../src/mainwindow.cpp" line="1037"/>
+        <location filename="../src/mainwindow.cpp" line="1374"/>
+        <location filename="../src/mainwindow.cpp" line="1405"/>
+        <location filename="../src/mainwindow.cpp" line="1416"/>
+        <location filename="../src/mainwindow.cpp" line="1444"/>
+        <location filename="../src/mainwindow.cpp" line="1450"/>
+        <location filename="../src/mainwindow.cpp" line="2318"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="671"/>
+        <location filename="../src/mainwindow.cpp" line="672"/>
         <source>Cannot rename to empty filename.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="686"/>
+        <location filename="../src/mainwindow.cpp" line="687"/>
         <source>Failed to rename the file.
 Maybe the provided file name already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="708"/>
-        <location filename="../src/mainwindow.cpp" line="747"/>
+        <location filename="../src/mainwindow.cpp" line="709"/>
+        <location filename="../src/mainwindow.cpp" line="748"/>
         <source>Target directory not set.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="712"/>
-        <location filename="../src/mainwindow.cpp" line="751"/>
+        <location filename="../src/mainwindow.cpp" line="713"/>
+        <location filename="../src/mainwindow.cpp" line="752"/>
         <source>Target directory cannot be the current one.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="812"/>
+        <location filename="../src/mainwindow.cpp" line="813"/>
         <source>Failed to move %1 to trash.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="816"/>
+        <location filename="../src/mainwindow.cpp" line="817"/>
         <source>Failed to move %1 to trash.
 Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="856"/>
-        <location filename="../src/mainwindow.cpp" line="883"/>
+        <location filename="../src/mainwindow.cpp" line="857"/>
+        <location filename="../src/mainwindow.cpp" line="884"/>
         <source>Save to %1 failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="914"/>
+        <location filename="../src/mainwindow.cpp" line="915"/>
         <source>Printer initialization failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1000"/>
-        <location filename="../src/mainwindow.cpp" line="1036"/>
+        <location filename="../src/mainwindow.cpp" line="1001"/>
+        <location filename="../src/mainwindow.cpp" line="1037"/>
         <source>QClipboard error.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1008"/>
+        <location filename="../src/mainwindow.cpp" line="1009"/>
         <source>Clipboard %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1854"/>
-        <location filename="../src/mainwindow.cpp" line="1855"/>
+        <location filename="../src/mainwindow.cpp" line="1865"/>
+        <location filename="../src/mainwindow.cpp" line="1866"/>
         <source>Trying to hack the clipboard...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1900"/>
-        <location filename="../src/mainwindow.cpp" line="2133"/>
+        <location filename="../src/mainwindow.cpp" line="1911"/>
+        <location filename="../src/mainwindow.cpp" line="2144"/>
         <source>No file loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1924"/>
-        <location filename="../src/mainwindow.cpp" line="2134"/>
+        <location filename="../src/mainwindow.cpp" line="1935"/>
+        <location filename="../src/mainwindow.cpp" line="2145"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1928"/>
+        <location filename="../src/mainwindow.cpp" line="1939"/>
         <source>Selection: %1x%2 at (%3,%4)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1952"/>
+        <location filename="../src/mainwindow.cpp" line="1963"/>
         <source>Pixel: %1 at (%2,%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2284"/>
+        <location filename="../src/mainwindow.cpp" line="2318"/>
         <source>Can not open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2771"/>
+        <location filename="../src/mainwindow.cpp" line="2806"/>
         <source>&amp;Clear recent files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2829"/>
+        <location filename="../src/mainwindow.cpp" line="2864"/>
         <source>All supported images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2842"/>
+        <location filename="../src/mainwindow.cpp" line="2877"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2845"/>
+        <location filename="../src/mainwindow.cpp" line="2880"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>

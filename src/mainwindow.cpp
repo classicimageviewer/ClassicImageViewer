@@ -335,10 +335,10 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuFile, tr("&Copy file"), ACT_FILE_COPY, "F8",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddAction(ui.menuFile, tr("&Delete file"), ACT_FILE_DELETE, "Del",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddSeparator(ui.menuFile);
-	menuAddAction(ui.menuFile, tr("Sa&ve"), ACT_SAVE, "Ctrl+S",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuFile, tr("&Save as"), ACT_SAVE_AS, "S",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuFile, tr("Save selection as"), ACT_SAVE_SELECTION_AS, "Ctrl+Shift+S",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuFile, tr("&Print"), ACT_PRINT, "Ctrl+P",  ACTDISABLE_UNLOADED);
+	menuAddAction(ui.menuFile, tr("Sa&ve"), ACT_SAVE, "Ctrl+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuFile, tr("&Save as"), ACT_SAVE_AS, "S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuFile, tr("Save selection as"), ACT_SAVE_SELECTION_AS, "Ctrl+Shift+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuFile, tr("&Print"), ACT_PRINT, "Ctrl+P",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuFile);
 	menuAddAction(ui.menuFile, tr("E&xit"), ACT_EXIT, "Esc",  0);
 	connect(ui.menuFile, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
@@ -346,13 +346,13 @@ void MainWindow::createMenu()
 	undoAction = menuAddAction(ui.menuEdit, tr("&Undo"), ACT_UNDO, "Ctrl+Z",  0);
 	redoAction = menuAddAction(ui.menuEdit, tr("R&edo"), ACT_REDO, "Ctrl+J",  0);
 	menuAddSeparator(ui.menuEdit);
-	menuAddAction(ui.menuEdit, tr("Cust&om selection"), ACT_CUSTOM_SELECTION, "Shift+C",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(ui.menuEdit, tr("Cut &selection"), ACT_CUT_SELECTION, "Ctrl+X",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuEdit, tr("C&rop selection"), ACT_CROP_SELECTION, "Ctrl+Y",  ACTDISABLE_UNLOADED);
+	menuAddAction(ui.menuEdit, tr("Cust&om selection"), ACT_CUSTOM_SELECTION, "Shift+C",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuEdit, tr("Cut &selection"), ACT_CUT_SELECTION, "Ctrl+X",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuEdit, tr("C&rop selection"), ACT_CROP_SELECTION, "Ctrl+Y",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("&Copy"), ACT_COPY, "Ctrl+C",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuEdit, tr("&Paste"), ACT_PASTE, "Ctrl+V",  0);
-	menuAddAction(ui.menuEdit, tr("Paste to side"), ACT_PASTE_TO_SIDE, "Ctrl+D",  ACTDISABLE_UNLOADED);
+	menuAddAction(ui.menuEdit, tr("Paste to side"), ACT_PASTE_TO_SIDE, "Ctrl+D",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuEdit, tr("Unloa&d"), ACT_UNLOAD, "D",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("C&lear clipboard"), ACT_CLEAR_CLIPBOARD, NULL,  0);
@@ -360,54 +360,54 @@ void MainWindow::createMenu()
 	
 	menuAddAction(ui.menuImage, tr("&Information"), ACT_INFO, "I",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("Rotate &left"), ACT_ROTATE_L, "L",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("Rotate &right"), ACT_ROTATE_R, "R",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("C&ustom rotation"), ACT_ROTATE_C, "Ctrl+U",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(ui.menuImage, tr("&Vertical flip"), ACT_FLIP_V, "V",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("&Horizontal flip"), ACT_FLIP_H, "H",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("Shear"), ACT_SHEAR, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuImage, tr("Rotate &left"), ACT_ROTATE_L, "L",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("Rotate &right"), ACT_ROTATE_R, "R",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("C&ustom rotation"), ACT_ROTATE_C, "Ctrl+U",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("&Vertical flip"), ACT_FLIP_V, "V",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("&Horizontal flip"), ACT_FLIP_H, "H",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("Shear"), ACT_SHEAR, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("Re&size"), ACT_RESIZE, "Ctrl+R",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(ui.menuImage, tr("Add &border"), ACT_ADD_BORDER, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(ui.menuImage, tr("&Pad to size"), ACT_PAD_TO_SIZE, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuImage, tr("Re&size"), ACT_RESIZE, "Ctrl+R",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("Add &border"), ACT_ADD_BORDER, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("&Pad to size"), ACT_PAD_TO_SIZE, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("I&ncrease color depth"), ACT_COLOR_DEPTH_INC, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(ui.menuImage, tr("&Decrease color depth"), ACT_COLOR_DEPTH_DEC, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuImage, tr("I&ncrease color depth"), ACT_COLOR_DEPTH_INC, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("&Decrease color depth"), ACT_COLOR_DEPTH_DEC, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("&Grayscale"), ACT_GRAYSCALE, "Ctrl+G",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("Nega&tive"), ACT_NEGATIVE, "Ctrl+Shift+N",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("Adjust &colors"), ACT_COLOR_ADJUST, "Shift+G",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuImage, tr("&Grayscale"), ACT_GRAYSCALE, "Ctrl+G",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("Nega&tive"), ACT_NEGATIVE, "Ctrl+Shift+N",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("Adjust &colors"), ACT_COLOR_ADJUST, "Shift+G",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuImage, tr("Histogram"), ACT_HISTOGRAM, "Shift+H",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("Auto c&olor adjust"), ACT_AUTO_COLOR, "Shift+U",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("Sh&arpen"), ACT_SHARPEN, "Shift+S",  ACTDISABLE_UNLOADED);
-	menuAddAction(ui.menuImage, tr("&Effects"), ACT_EFFECTS, "Ctrl+E",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuImage, tr("Auto c&olor adjust"), ACT_AUTO_COLOR, "Shift+U",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("Sh&arpen"), ACT_SHARPEN, "Shift+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("&Effects"), ACT_EFFECTS, "Ctrl+E",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
 	externalToolsMenu = ui.menuImage->addMenu(tr("E&xternal tools"));
 	menuAddAction(externalToolsMenu, tr("Configure"), ACT_EXTERNAL_TOOL_CONFIG, NULL,  0);
 	menuAddSeparator(externalToolsMenu);
-	menuAddAction(externalToolsMenu, tr("External tool 1"), ACT_EXTERNAL_TOOL_1, "Alt+1",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(externalToolsMenu, tr("External tool 2"), ACT_EXTERNAL_TOOL_2, "Alt+2",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(externalToolsMenu, tr("External tool 3"), ACT_EXTERNAL_TOOL_3, "Alt+3",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(externalToolsMenu, tr("External tool 4"), ACT_EXTERNAL_TOOL_4, "Alt+4",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(externalToolsMenu, tr("External tool 5"), ACT_EXTERNAL_TOOL_5, "Alt+5",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(externalToolsMenu, tr("External tool 6"), ACT_EXTERNAL_TOOL_6, "Alt+6",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(externalToolsMenu, tr("External tool 7"), ACT_EXTERNAL_TOOL_7, "Alt+7",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(externalToolsMenu, tr("External tool 8"), ACT_EXTERNAL_TOOL_8, "Alt+8",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(externalToolsMenu, tr("External tool 9"), ACT_EXTERNAL_TOOL_9, "Alt+9",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(externalToolsMenu, tr("External tool 1"), ACT_EXTERNAL_TOOL_1, "Alt+1",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(externalToolsMenu, tr("External tool 2"), ACT_EXTERNAL_TOOL_2, "Alt+2",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(externalToolsMenu, tr("External tool 3"), ACT_EXTERNAL_TOOL_3, "Alt+3",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(externalToolsMenu, tr("External tool 4"), ACT_EXTERNAL_TOOL_4, "Alt+4",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(externalToolsMenu, tr("External tool 5"), ACT_EXTERNAL_TOOL_5, "Alt+5",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(externalToolsMenu, tr("External tool 6"), ACT_EXTERNAL_TOOL_6, "Alt+6",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(externalToolsMenu, tr("External tool 7"), ACT_EXTERNAL_TOOL_7, "Alt+7",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(externalToolsMenu, tr("External tool 8"), ACT_EXTERNAL_TOOL_8, "Alt+8",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(externalToolsMenu, tr("External tool 9"), ACT_EXTERNAL_TOOL_9, "Alt+9",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
 	macrosMenu = ui.menuImage->addMenu(tr("&Macros"));
 	menuAddAction(macrosMenu, tr("Configure"), ACT_MACRO_CONFIG, "Ctrl+Shift+M",  0);
 	menuAddSeparator(macrosMenu);
-	menuAddAction(macrosMenu, tr("Macro 1"), ACT_MACRO_1, "Ctrl+1",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(macrosMenu, tr("Macro 2"), ACT_MACRO_2, "Ctrl+2",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(macrosMenu, tr("Macro 3"), ACT_MACRO_3, "Ctrl+3",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(macrosMenu, tr("Macro 4"), ACT_MACRO_4, "Ctrl+4",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(macrosMenu, tr("Macro 5"), ACT_MACRO_5, "Ctrl+5",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(macrosMenu, tr("Macro 6"), ACT_MACRO_6, "Ctrl+6",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(macrosMenu, tr("Macro 7"), ACT_MACRO_7, "Ctrl+7",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(macrosMenu, tr("Macro 8"), ACT_MACRO_8, "Ctrl+8",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
-	menuAddAction(macrosMenu, tr("Macro 9"), ACT_MACRO_9, "Ctrl+9",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN);
+	menuAddAction(macrosMenu, tr("Macro 1"), ACT_MACRO_1, "Ctrl+1",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(macrosMenu, tr("Macro 2"), ACT_MACRO_2, "Ctrl+2",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(macrosMenu, tr("Macro 3"), ACT_MACRO_3, "Ctrl+3",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(macrosMenu, tr("Macro 4"), ACT_MACRO_4, "Ctrl+4",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(macrosMenu, tr("Macro 5"), ACT_MACRO_5, "Ctrl+5",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(macrosMenu, tr("Macro 6"), ACT_MACRO_6, "Ctrl+6",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(macrosMenu, tr("Macro 7"), ACT_MACRO_7, "Ctrl+7",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(macrosMenu, tr("Macro 8"), ACT_MACRO_8, "Ctrl+8",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(macrosMenu, tr("Macro 9"), ACT_MACRO_9, "Ctrl+9",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	connect(ui.menuImage, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	menuAddAction(ui.menuOptions, tr("&Properties"), ACT_SETTINGS, "P",  0);
@@ -494,6 +494,7 @@ void MainWindow::applyInternalState()
 		if ((element.flags & ACTDISABLE_FULLSCREEN) && (isFullscreen)) enabled = false;
 		if ((element.flags & ACTDISABLE_UNLOADED) && (internalState == UNLOADED)) enabled = false;
 		if ((element.flags & ACTDISABLE_CLIPBOARD) && (internalState == IMAGE_FROM_CLIPBOARD)) enabled = false;
+		if ((element.flags & ACTDISABLE_ANIMATION) && (internalState == ANIMATION_FROM_FILE)) enabled = false;
 		element.actionRef->setEnabled(enabled);
 	}
 }
@@ -1123,7 +1124,7 @@ void MainWindow::actionSlot(Action a)
 			clearClipboard(true);
 			break;
 		case ACT_INFO:
-			if (internalState == IMAGE_FROM_FILE)
+			if ((internalState == IMAGE_FROM_FILE) || (internalState == ANIMATION_FROM_FILE))
 			{
 				InfoDialog * d = new InfoDialog(currentDirPath + "/" + currentFilePath);
 				d->exec();
@@ -1292,12 +1293,15 @@ void MainWindow::actionSlot(Action a)
 		case ACT_HISTOGRAM:
 			if (histogramDialog == NULL)
 			{
-				QApplication::setOverrideCursor(Qt::WaitCursor);
-				histogramDialog = new HistogramDialog(this);
-				histogramDialog->show();
-				connect(histogramDialog, SIGNAL(finished(int)), this, SLOT(histogramDialogClosed(int)));
-				histogramDialog->processImage(display->getImage());
-				QApplication::restoreOverrideCursor();
+				if (internalState != ANIMATION_FROM_FILE)
+				{
+					QApplication::setOverrideCursor(Qt::WaitCursor);
+					histogramDialog = new HistogramDialog(this);
+					histogramDialog->show();
+					connect(histogramDialog, SIGNAL(finished(int)), this, SLOT(histogramDialogClosed(int)));
+					histogramDialog->processImage(display->getImage());
+					QApplication::restoreOverrideCursor();
+				}
 			}
 			else
 			{
@@ -1434,12 +1438,19 @@ void MainWindow::actionSlot(Action a)
 						}
 						if (aborted) break;
 					}
-					img = imageIO->loadFile(outputFilePath);
-					if (img.isNull())
+					XImage loadedImage = imageIO->loadFile(outputFilePath);
+					if (loadedImage.images.length() > 1)
+					{
+						QMessageBox::critical(this, tr("Error"), QString(tr("Cannot load animated script output file.")));
+						break;
+					}
+					
+					if (loadedImage.images.length() < 1)
 					{
 						QMessageBox::critical(this, tr("Error"), QString(tr("Failed to load the script output file.")));
 						break;
 					}
+					img = loadedImage.images[0];
 					
 					saveToUndoStack();
 					if (display->getSelection().isNull())
@@ -2271,17 +2282,42 @@ void MainWindow::reIndexCurrentDir(bool forced)
 void MainWindow::loadCurrentFile()
 {
 	if (slideshowDirection==0) QApplication::setOverrideCursor(Qt::WaitCursor);	// do not flicker cursor in slideshow
-	QImage i = imageIO->loadFile(currentDirPath + "/" + currentFilePath);
-	currentImageSize = i.size();
-	display->newImage(i);
-	if (histogramDialog) histogramDialog->processImage(i);
-	display->setZoom(1.0);
-	setImageAndWindowSize();
-	QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// sped up drawing
-	if (slideshowDirection==0) QApplication::restoreOverrideCursor();
-	if (i.isNull() && (slideshowDirection==0))	// don't show warning when in slideshow
+	XImage xImg = imageIO->loadFile(currentDirPath + "/" + currentFilePath);
+	if (xImg.images.length() > 1)
 	{
-		QMessageBox::critical(this, tr("Error"), QString(tr("Can not open %1")).arg(currentDirPath + "/" + currentFilePath));
+		currentImageSize = xImg.images[0].size();
+		display->newImageSequence(xImg.images, xImg.frameDurationMs);
+		if (histogramDialog) histogramDialog->processImage(QImage());
+		display->setZoom(1.0);
+		setImageAndWindowSize();
+		QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// sped up drawing
+		if (slideshowDirection==0) QApplication::restoreOverrideCursor();
+		setInternalState(ANIMATION_FROM_FILE);
+	}
+	else
+	if (xImg.images.length() == 1)
+	{
+		QImage i = xImg.images[0];
+		currentImageSize = i.size();
+		display->newImage(i);
+		if (histogramDialog) histogramDialog->processImage(i);
+		display->setZoom(1.0);
+		setImageAndWindowSize();
+		QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// sped up drawing
+		if (slideshowDirection==0) QApplication::restoreOverrideCursor();
+		setInternalState(IMAGE_FROM_FILE);
+	}
+	else
+	{
+		display->newImage(QImage());
+		if (histogramDialog) histogramDialog->processImage(QImage());
+		currentImageSize = QSize();
+		if (slideshowDirection==0)	// don't show warning when in slideshow
+		{
+			QApplication::restoreOverrideCursor();
+			QMessageBox::critical(this, tr("Error"), QString(tr("Can not open %1")).arg(currentDirPath + "/" + currentFilePath));
+		}
+		setInternalState(UNLOADED);
 	}
 	
 	int index = indexedFiles.indexOf(currentFilePath);
@@ -2291,7 +2327,6 @@ void MainWindow::loadCurrentFile()
 	}
 	showFileModificationTime(currentDirPath + "/" + currentFilePath);
 	setIndexDisplayNoSignals(index+1);
-	setInternalState(IMAGE_FROM_FILE);
 	updateDisplayOverlayIndicator();
 	currentImageName = currentFilePath;
 	clearUndoStack();

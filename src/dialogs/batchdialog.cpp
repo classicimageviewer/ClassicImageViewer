@@ -495,21 +495,28 @@ void BatchDialog::addEffect(bool b)
 		QMessageBox::critical(this, tr("Error"), tr("Empty input file list."));
 		return;
 	}
-	QImage img;
+	XImage xImg;
 	if (previewPath.isEmpty())
 	{
-		img = imageIO->loadFile(batchInput.at(0));
+		xImg = imageIO->loadFile(batchInput.at(0));
 	}
 	else
 	{
-		img = imageIO->loadFile(previewPath);
+		xImg = imageIO->loadFile(previewPath);
 	}
-	if (img.isNull())
+	if (xImg.images.length() > 1)
+	{
+		QApplication::restoreOverrideCursor();
+		QMessageBox::critical(this, tr("Error"), tr("Cannot load animation for preview."));
+		return;
+	}
+	if (xImg.images.length() < 1)
 	{
 		QApplication::restoreOverrideCursor();
 		QMessageBox::critical(this, tr("Error"), tr("Cannot load image for preview."));
 		return;
 	}
+	QImage img = xImg.images[0];
 	
 	EffectHub * effectHub = new EffectHub();
 	for (const BatchTypedefs::EffectEntry & effect : effectList)
@@ -1062,12 +1069,18 @@ void BatchWorker::run()
 		}
 		else	// full conversion
 		{
-			QImage img = imageIO->loadFile(inputPath);
-			if (img.isNull())
+			XImage xImg = imageIO->loadFile(inputPath);
+			if (xImg.images.length() > 1)
+			{
+				status = QString(tr("animations not supported"));
+				continue;
+			}
+			if (xImg.images.length() < 1)
 			{
 				status = QString(tr("cannot read"));
 				continue;
 			}
+			QImage img = xImg.images[0];
 			if (parameters->crop)
 			{
 				QRect cropRect = img.rect();

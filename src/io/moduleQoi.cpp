@@ -36,12 +36,13 @@ IOmoduleQoi::~IOmoduleQoi()
 {
 }
 
-QImage IOmoduleQoi::loadFile(QString path)
+XImage IOmoduleQoi::loadFile(QString path, bool thumbnail)
 {
-	QImage img = QImage();
+	Q_UNUSED(thumbnail);
+	XImage xImage;
 	
 	FILE *f = fopen(path.toUtf8().data(), "rb");
-	if (f == NULL) return img;
+	if (f == NULL) return xImage;
 	
 	size_t size, bytesRead;
 	void *pixels, *data;
@@ -51,7 +52,7 @@ QImage IOmoduleQoi::loadFile(QString path)
 	if ((size <= 14 /*QOI_HEADER_SIZE*/) || (fseek(f, 0, SEEK_SET) != 0))
 	{
 		fclose(f);
-		return img;
+		return xImage;
 	}
 	
 	// test magic
@@ -59,24 +60,24 @@ QImage IOmoduleQoi::loadFile(QString path)
 	if (fread(magic, 1, 4, f) != 4)
 	{
 		fclose(f);
-		return img;
+		return xImage;
 	}
 	if (memcmp(magic, "qoif", 4) != 0)
 	{
 		fclose(f);
-		return img;
+		return xImage;
 	}
 	if (fseek(f, 0, SEEK_SET) != 0)
 	{
 		fclose(f);
-		return img;
+		return xImage;
 	}
 
 	data = malloc(size);
 	if (!data)
 	{
 		fclose(f);
-		return img;
+		return xImage;
 	}
 
 	bytesRead = fread(data, 1, size, f);
@@ -85,10 +86,11 @@ QImage IOmoduleQoi::loadFile(QString path)
 	pixels = (bytesRead != size) ? NULL : qoi_decode(data, bytesRead, &desc, 0);
 	free(data);
 	
-	if (pixels == NULL) return img;
+	if (pixels == NULL) return xImage;
 	
 	if ((desc.width > 0) && (desc.height > 0))
 	{
+		QImage img;
 		if (desc.channels == 4)
 		{
 			img = QImage(desc.width, desc.height, QImage::Format_ARGB32);
@@ -115,11 +117,12 @@ QImage IOmoduleQoi::loadFile(QString path)
 #endif
 			}
 		}
+		xImage.images.append(img);
 	}
 	
 	free(pixels);
 	
-	return img;
+	return xImage;
 }
 
 QImage IOmoduleQoi::loadThumbnail(QString path, QSize thumbnailSize)

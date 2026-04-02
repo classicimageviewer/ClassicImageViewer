@@ -23,6 +23,13 @@
 #include <QList>
 #include <QStringList>
 
+class XImage
+{
+public:
+	QList<QImage> images;
+	QList<int> frameDurationMs;
+};
+
 class IObase
 {
 protected:
@@ -50,7 +57,7 @@ public:
 	virtual ~IObase() {};
 	
 	virtual QString moduleName(void) = 0;
-	virtual QImage loadFile(QString path) = 0;
+	virtual XImage loadFile(QString path, bool thumbnail = false) = 0;
 	virtual QImage loadThumbnail(QString path, QSize thumbnailSize) = 0;
 	
 	typedef struct {

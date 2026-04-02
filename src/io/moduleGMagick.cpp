@@ -84,8 +84,10 @@ IOmoduleGMagick::~IOmoduleGMagick()
 }
 
 
-QImage IOmoduleGMagick::loadFile(QString path)
+XImage IOmoduleGMagick::loadFile(QString path, bool thumbnail)
 {
+	Q_UNUSED(thumbnail);
+	XImage xImage;
 #if defined(HAS_GMAGICK)
 	Magick::Image * mImg = new Magick::Image();
 	try {
@@ -107,7 +109,8 @@ QImage IOmoduleGMagick::loadFile(QString path)
 		}
 		
 		delete mImg;
-		return i;
+		xImage.images.append(i);
+		return xImage;
 	}
 	catch(Magick::Error &e) {}
 	delete mImg;
@@ -116,7 +119,7 @@ QImage IOmoduleGMagick::loadFile(QString path)
 #endif
 	
 	// can't read
-	return QImage();
+	return xImage;
 }
 
 QImage IOmoduleGMagick::loadThumbnail(QString path, QSize thumbnailSize)

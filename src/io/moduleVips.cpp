@@ -90,8 +90,10 @@ IOmoduleVips::~IOmoduleVips()
 }
 
 
-QImage IOmoduleVips::loadFile(QString path)
+XImage IOmoduleVips::loadFile(QString path, bool thumbnail)
 {
+	Q_UNUSED(thumbnail);
+	XImage xImage;
 #if defined(HAS_VIPS)
 	VImage vImg;
 	bool vImgLoaded = true;
@@ -119,7 +121,7 @@ QImage IOmoduleVips::loadFile(QString path)
 	} while (0);
 	if (vImgLoaded && (vImg.width() > 0) && (vImg.height() > 0))
 	{
-		if (vImg.data() == NULL) return QImage();
+		if (vImg.data() == NULL) return xImage;
 		if (vImg.format() != VIPS_FORMAT_UCHAR)
 		{
 			vImg = vImg.cast(VIPS_FORMAT_UCHAR, VImage::option()->set("shift", true));
@@ -130,7 +132,8 @@ QImage IOmoduleVips::loadFile(QString path)
 		{
 			QImage i = QImage(vImg.width(), vImg.height(), QImage::Format_ARGB32);
 			memcpy(i.bits(), vImg.data(), vImg.width()*vImg.height()*4);
-			return i;
+			xImage.images.append(i);
+			return xImage;
 		}
 		else
 		if (vImg.bands() == 3)
@@ -143,7 +146,8 @@ QImage IOmoduleVips::loadFile(QString path)
 				uint8_t * QImageScanLine = reinterpret_cast<uint8_t*>(i.scanLine(y));
 				memcpy(QImageScanLine, reinterpret_cast<const uint8_t*>(vImg.data()) + y*vImgScanLineLength, vImgScanLineLength);
 			}
-			return i.convertToFormat(QImage::Format_RGB32);
+			xImage.images.append(i.convertToFormat(QImage::Format_RGB32));
+			return xImage;
 		}
 		else
 		{
@@ -155,7 +159,7 @@ QImage IOmoduleVips::loadFile(QString path)
 #endif
 	
 	// can't read
-	return QImage();
+	return xImage;
 }
 
 QImage IOmoduleVips::loadThumbnail(QString path, QSize thumbnailSize)

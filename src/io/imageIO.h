@@ -39,7 +39,7 @@ public:
 	~ImageIO();
 	QStringList getInputFormats();
 	QStringList getOutputFormats();
-	QImage loadFile(QString path);
+	XImage loadFile(QString path);
 	QImage loadThumbnail(QString path, QSize thumbnailSize);
 	QList<IObase::ParameterCluster> getListOfParameterClusters(QString format);
 	bool saveFile(QString path, QString format, QImage image, QList<IObase::ParameterCluster> parameters);

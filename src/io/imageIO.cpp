@@ -79,23 +79,36 @@ QString ImageIO::extensionOf(QString path)
 	return QString();
 }
 
-QImage ImageIO::loadFile(QString path)
+XImage ImageIO::loadFile(QString path)
 {
 	for (IObase* item : modules)
 	{
 		if (item->getInputFormats().contains(extensionOf(path)) || item->tryToOpenAll())
 		{
-			QImage i = item->loadFile(path);
-			if (!(i.isNull())) 
+			XImage xImg = item->loadFile(path);
+			if (xImg.images.length() > 0)
 			{
+				for (int i=0; i<xImg.images.length(); )
+				{
+					if (xImg.images[i].isNull())
+					{
+						xImg.images.removeAt(i);
+						if (xImg.frameDurationMs.length() > i)
+						{
+							xImg.frameDurationMs.removeAt(i);
+						}
+						continue;
+					}
+					i++;
+				}
 				//qDebug() << "Loader: " << item->moduleName();
-				return i;
+				return xImg;
 			}
 		}
 	}
 	
 	// can't read
-	return QImage();
+	return XImage();
 }
 
 QImage ImageIO::loadThumbnail(QString path, QSize thumbnailSize)
@@ -114,8 +127,12 @@ QImage ImageIO::loadThumbnail(QString path, QSize thumbnailSize)
 	{
 		if (item->getInputFormats().contains(extensionOf(path)) || item->tryToOpenAll())
 		{
-			QImage i = item->loadFile(path);
-			if (!(i.isNull())) return i.scaled(thumbnailSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			XImage xImg = item->loadFile(path, true);
+			if (xImg.images.length() > 0)
+			{
+				QImage i = xImg.images[0];
+				if (!(i.isNull())) return i.scaled(thumbnailSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+			}
 		}
 	}
 	

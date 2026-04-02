@@ -38,13 +38,29 @@ IOmoduleQt::~IOmoduleQt()
 {
 }
 
-QImage IOmoduleQt::loadFile(QString path)
+XImage IOmoduleQt::loadFile(QString path, bool thumbnail)
 {
+	XImage xImage;
 	QImageReader reader(path);
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 	reader.setAllocationLimit(0);
 #endif
-	return reader.read();
+	if (reader.supportsAnimation() && !thumbnail)
+	{
+		for (int i=0; i<reader.imageCount(); i++)
+		{
+			int delay = reader.nextImageDelay();
+			QImage img = reader.read();
+			if (img.isNull()) continue;
+			xImage.images.append(img);
+			xImage.frameDurationMs.append(delay);
+		}
+	}
+	else
+	{
+		xImage.images.append(reader.read());
+	}
+	return xImage;
 }
 
 QImage IOmoduleQt::loadThumbnail(QString path, QSize thumbnailSize)

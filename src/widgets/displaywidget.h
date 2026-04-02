@@ -150,6 +150,11 @@ private: // variables
 	DisplaySurface * surface;
 	double zoom;
 	QImage image;
+	QList<QImage> frames;
+	QList<int> frameDurationMs;
+	bool isAnimated;
+	int animationCounter;
+	QTimer animationTimer;
 	bool selectionEnabled;
 	QPointF mousePositionCorrection;
 private: // functions
@@ -160,11 +165,14 @@ private: // functions
 	void dragLeaveEvent(QDragLeaveEvent* event) override;
 	void dropEvent(QDropEvent* event) override;
 	void mouseMoveEvent(QMouseEvent *event) override;
+private slots:
+	void animationTimeout(void);
 public:
 	DisplayWidget(QWidget *parent = NULL);
 	~DisplayWidget();
 	
 	void setBackgroundShade(int shade);
+	void newImageSequence(const QList<QImage> frames, const QList<int> frameDurationMs);
 	void newImage(const QImage &image);
 	void updateImage(const QImage &image);
 	void insertIntoSelection(const QImage &image);

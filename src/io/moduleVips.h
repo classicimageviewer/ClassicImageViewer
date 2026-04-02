@@ -40,7 +40,7 @@ public:
 	~IOmoduleVips() override;
 	
 	QString moduleName(void) override {return "Vips";};
-	QImage loadFile(QString path) override;
+	XImage loadFile(QString path, bool thumbnail) override;
 	QImage loadThumbnail(QString path, QSize thumbnailSize) override;
 
 	QList<IObase::ParameterCluster> getListOfParameterClusters(QString format) override;
