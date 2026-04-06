@@ -39,6 +39,7 @@
 #include "effects/moduleKernels.h"
 #include "effects/moduleCustomKernel.h"
 #include "effects/moduleOilPaint.h"
+#include "effects/moduleNoise.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -67,6 +68,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleKernels());
 	list.append(new EffectModuleCustomKernel());
 	list.append(new EffectModuleOilPaint());
+	list.append(new EffectModuleNoise());
 	
 	
 	for (EffectBase* item : list)

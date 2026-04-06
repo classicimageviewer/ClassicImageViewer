@@ -865,6 +865,50 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleNoise</name>
+    <message>
+        <location filename="../src/effects/moduleNoise.cpp" line="38"/>
+        <source>Gaussian</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleNoise.cpp" line="39"/>
+        <source>Gaussian RGB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleNoise.cpp" line="40"/>
+        <source>Uniform</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleNoise.cpp" line="41"/>
+        <source>Uniform RGB</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleNoise.cpp" line="42"/>
+        <source>Poisson</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleNoise.cpp" line="43"/>
+        <source>Salt-and-pepper</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleNoise.cpp" line="44"/>
+        <location filename="../src/effects/moduleNoise.h" line="44"/>
+        <source>Noise</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleNoise.cpp" line="46"/>
+        <source>Amount</source>
+        <translation type="unfinished">Stärke</translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleNormalize</name>
     <message>
         <location filename="../src/effects/moduleNormalize.h" line="36"/>
