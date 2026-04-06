@@ -38,6 +38,7 @@
 #include "effects/moduleLocalColorCorrection.h"
 #include "effects/moduleKernels.h"
 #include "effects/moduleCustomKernel.h"
+#include "effects/moduleOilPaint.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -65,6 +66,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleLocalColorCorrection());
 	list.append(new EffectModuleKernels());
 	list.append(new EffectModuleCustomKernel());
+	list.append(new EffectModuleOilPaint());
 	
 	
 	for (EffectBase* item : list)

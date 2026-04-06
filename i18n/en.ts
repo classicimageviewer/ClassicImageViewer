@@ -872,6 +872,24 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleOilPaint</name>
+    <message>
+        <location filename="../src/effects/moduleOilPaint.cpp" line="36"/>
+        <source>Radius</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleOilPaint.cpp" line="37"/>
+        <source>Levels</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleOilPaint.h" line="35"/>
+        <source>Oil paint</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleReduceNoise</name>
     <message>
         <location filename="../src/effects/moduleReduceNoise.h" line="36"/>
