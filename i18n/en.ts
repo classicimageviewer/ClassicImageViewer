@@ -864,6 +864,49 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleMotionBlur</name>
+    <message>
+        <location filename="../src/effects/moduleMotionBlur.cpp" line="37"/>
+        <source>Linear</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleMotionBlur.cpp" line="38"/>
+        <source>Rotation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleMotionBlur.cpp" line="39"/>
+        <source>Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleMotionBlur.cpp" line="40"/>
+        <source>Method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleMotionBlur.cpp" line="42"/>
+        <source>Steps</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleMotionBlur.cpp" line="43"/>
+        <source>Displacement</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleMotionBlur.cpp" line="44"/>
+        <source>Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleMotionBlur.h" line="62"/>
+        <source>Motion blur</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleNoise</name>
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="38"/>
