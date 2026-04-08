@@ -120,30 +120,38 @@ for(tsfile, TRANSLATIONS) {
 # Install
 CONFIG += nostrip
 
-isEmpty(PREFIX) {
-	packaging {
-		PREFIX = /usr
-	} else {
-		PREFIX = ~/.local
+macx {
+	isEmpty(PREFIX) {
+		PREFIX = ~/Applications
 	}
+
+	target.path = $${PREFIX}/
+	INSTALLS += 	target
+} else {
+	isEmpty(PREFIX) {
+		packaging {
+			PREFIX = /usr
+		} else {
+			PREFIX = ~/.local
+		}
+	}
+
+	target.path = $${PREFIX}/bin/
+	icons.path = $${PREFIX}/share/icons/
+	icons.files = install/usr/share/icons/*
+	pixmaps.path = $${PREFIX}/share/pixmaps/
+	pixmaps.files = install/usr/share/icons/hicolor/128x128/apps/civ.png
+	qmfiles.path = $${PREFIX}/share/ClassicImageViewer/i18n/
+	qmfiles.files = $${TRANSLATIONS_FILES}
+	desktop.path = $${PREFIX}/share/applications
+	desktop.files = install/usr/share/applications/classicimageviewer.desktop
+	appstream.path = $${PREFIX}/share/metainfo/
+	appstream.files = install/usr/share/metainfo/io.github.classicimageviewer.ClassicImageViewer.appdata.xml
+	INSTALLS += 	target \
+			qmfiles \
+			icons \
+			pixmaps \
+			desktop \
+			appstream
+
 }
-
-target.path = $${PREFIX}/bin/
-icons.path = $${PREFIX}/share/icons/
-icons.files = install/usr/share/icons/*
-pixmaps.path = $${PREFIX}/share/pixmaps/
-pixmaps.files = install/usr/share/icons/hicolor/128x128/apps/civ.png
-qmfiles.path = $${PREFIX}/share/ClassicImageViewer/i18n/
-qmfiles.files = $${TRANSLATIONS_FILES}
-desktop.path = $${PREFIX}/share/applications
-desktop.files = install/usr/share/applications/classicimageviewer.desktop
-appstream.path = $${PREFIX}/share/metainfo/
-appstream.files = install/usr/share/metainfo/io.github.classicimageviewer.ClassicImageViewer.appdata.xml
-INSTALLS += 	target \
-		qmfiles \
-		icons \
-		pixmaps \
-		desktop \
-		appstream
-
-

@@ -123,10 +123,4 @@ export QT_QPA_PLATFORM=xcb
 civ
 ```
 
-On MacOS the target is civ.app, which "make install" copies to ~/.local/bin/.
-
-The user can optionally create a symlink to make it available via the MacOS Launchpad:
-
-```
-ln -s ~/.local/bin/civ.app ~/Applications/civ.app
-```
+On MacOS the target is civ.app, which "make install" copies to ~/Applications/.
