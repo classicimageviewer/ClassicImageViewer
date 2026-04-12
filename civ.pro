@@ -126,7 +126,10 @@ macx {
 	}
 
 	target.path = $${PREFIX}/
-	INSTALLS += 	target
+	qmfiles.path = $${PREFIX}/civ.app/Contents/Resources/i18n/
+	qmfiles.files = $${TRANSLATIONS_FILES}
+	INSTALLS += 	target \
+			qmfiles
 } else {
 	isEmpty(PREFIX) {
 		packaging {
