@@ -123,6 +123,10 @@ MainWindow::MainWindow() : QMainWindow()
 	connect(display, SIGNAL(needPrevImage()), this, SLOT(displayNeedPrevImage()));
 	connect(display, SIGNAL(needFirstImage()), this, SLOT(displayNeedFirstImage()));
 	connect(display, SIGNAL(needLastImage()), this, SLOT(displayNeedLastImage()));
+	connect(display, SIGNAL(needNextPage()), this, SLOT(displayNeedNextPage()));
+	connect(display, SIGNAL(needPrevPage()), this, SLOT(displayNeedPrevPage()));
+	connect(display, SIGNAL(needFirstPage()), this, SLOT(displayNeedFirstPage()));
+	connect(display, SIGNAL(needLastPage()), this, SLOT(displayNeedLastPage()));
 	connect(display, SIGNAL(zoomChanged()), this, SLOT(displayZoomChanged()));
 	connect(display, SIGNAL(selectionChanged()), this, SLOT(displaySelectionChanged()));
 	connect(display, SIGNAL(pixelInfo()), this, SLOT(displayPixelInfo()));
@@ -335,8 +339,8 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuFile, tr("&Copy file"), ACT_FILE_COPY, "F8",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddAction(ui.menuFile, tr("&Delete file"), ACT_FILE_DELETE, "Del",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddSeparator(ui.menuFile);
-	menuAddAction(ui.menuFile, tr("Sa&ve"), ACT_SAVE, "Ctrl+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
-	menuAddAction(ui.menuFile, tr("&Save as"), ACT_SAVE_AS, "S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuFile, tr("Sa&ve"), ACT_SAVE, "Ctrl+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION | ACTDISABLE_MULTIPAGE);
+	menuAddAction(ui.menuFile, tr("&Save as"), ACT_SAVE_AS, "S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION | ACTDISABLE_MULTIPAGE);
 	menuAddAction(ui.menuFile, tr("Save selection as"), ACT_SAVE_SELECTION_AS, "Ctrl+Shift+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuFile, tr("&Print"), ACT_PRINT, "Ctrl+P",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuFile);
@@ -352,7 +356,7 @@ void MainWindow::createMenu()
 	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("&Copy"), ACT_COPY, "Ctrl+C",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuEdit, tr("&Paste"), ACT_PASTE, "Ctrl+V",  0);
-	menuAddAction(ui.menuEdit, tr("Paste to side"), ACT_PASTE_TO_SIDE, "Ctrl+D",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuEdit, tr("Paste to side"), ACT_PASTE_TO_SIDE, "Ctrl+D",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION | ACTDISABLE_MULTIPAGE);
 	menuAddAction(ui.menuEdit, tr("Unloa&d"), ACT_UNLOAD, "D",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("C&lear clipboard"), ACT_CLEAR_CLIPBOARD, NULL,  0);
@@ -453,10 +457,17 @@ void MainWindow::createMenu()
 	menuAddAction(zoomLevelMenu, tr("200%"), ACT_ZOOM_200, NULL,  ACTDISABLE_UNLOADED);
 	menuAddAction(zoomLevelMenu, tr("300%"), ACT_ZOOM_300, NULL,  ACTDISABLE_UNLOADED);
 	menuAddAction(zoomLevelMenu, tr("400%"), ACT_ZOOM_400, NULL,  ACTDISABLE_UNLOADED);
-	connect(ui.menuView, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	menuAddSeparator(ui.menuView);
 	menuAddAction(ui.menuView, tr("Increase transparency"), ACT_INCR_TRANSPARENCY, "Alt+Shift+E",  0);
 	menuAddAction(ui.menuView, tr("Decrease transparency"), ACT_DECR_TRANSPARENCY, "Alt+Shift+D",  0);
+	menuAddSeparator(ui.menuView);
+	multipageMenu = ui.menuView->addMenu(tr("M&ultipage image"));
+	menuAddAction(multipageMenu, tr("Next page"), ACT_MULTIPAGE_NEXT, "Ctrl+PgDown",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION | ACTENABLE_MULTIPAGE);
+	menuAddAction(multipageMenu, tr("Previous page"), ACT_MULTIPAGE_PREV, "Ctrl+PgUp",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION | ACTENABLE_MULTIPAGE);
+	menuAddSeparator(multipageMenu);
+	menuAddAction(multipageMenu, tr("First page"), ACT_MULTIPAGE_FIRST, "Ctrl+Shift+Home",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION | ACTENABLE_MULTIPAGE);
+	menuAddAction(multipageMenu, tr("Last page"), ACT_MULTIPAGE_LAST, "Ctrl+Shift+End",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION | ACTENABLE_MULTIPAGE);
+	connect(ui.menuView, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	menuAddAction(ui.menuHelp, tr("&License"), ACT_LICENSE, NULL,  0);
 	menuAddAction(ui.menuHelp, tr("&Shortcuts"), ACT_SHORTCUTS, NULL,  0);
@@ -483,6 +494,10 @@ void MainWindow::createMenu()
 void MainWindow::setInternalState(InternalState newState)
 {
 	internalState = newState;
+	if (internalState != MULTIPAGE_FROM_FILE)
+	{
+		multipageImage.clear();
+	}
 	applyInternalState();
 }
 
@@ -495,6 +510,8 @@ void MainWindow::applyInternalState()
 		if ((element.flags & ACTDISABLE_UNLOADED) && (internalState == UNLOADED)) enabled = false;
 		if ((element.flags & ACTDISABLE_CLIPBOARD) && (internalState == IMAGE_FROM_CLIPBOARD)) enabled = false;
 		if ((element.flags & ACTDISABLE_ANIMATION) && (internalState == ANIMATION_FROM_FILE)) enabled = false;
+		if ((element.flags & ACTDISABLE_MULTIPAGE) && (internalState == MULTIPAGE_FROM_FILE)) enabled = false;
+		if ((element.flags & ACTENABLE_MULTIPAGE) && (internalState != MULTIPAGE_FROM_FILE)) enabled = false;
 		element.actionRef->setEnabled(enabled);
 	}
 }
@@ -901,13 +918,43 @@ void MainWindow::actionSlot(Action a)
 					QPainter painter;
 					if (painter.begin(&printer))
 					{
-						QPixmap pixmap = QPixmap::fromImage(display->getImage());
-						QRect rect = painter.viewport();
-						QSize size = pixmap.size();
-						size.scale(rect.size(), Qt::KeepAspectRatio);
-						painter.setViewport(rect.x(), rect.y(), size.width(), size.height());
-						painter.setWindow(pixmap.rect());
-						painter.drawPixmap(0, 0, pixmap);
+						if (internalState == MULTIPAGE_FROM_FILE)
+						{
+							bool firstPage = true;
+							for (int i=0; i<multipageImage.length(); i++)
+							{
+								if (d->printRange() == QAbstractPrintDialog::PageRange)
+								{
+									if ((i + 1) < d->fromPage()) continue;
+									if ((i + 1) > d->toPage()) continue;
+								}
+								if (firstPage)
+								{
+									firstPage = false;
+								}
+								else
+								{
+									printer.newPage();
+								}
+								QPixmap pixmap = QPixmap::fromImage(multipageImage[i]);
+								QRect rect = painter.viewport();
+								QSize size = pixmap.size();
+								size.scale(rect.size(), Qt::KeepAspectRatio);
+								painter.setViewport(rect.x(), rect.y(), size.width(), size.height());
+								painter.setWindow(pixmap.rect());
+								painter.drawPixmap(0, 0, pixmap);
+							}
+						}
+						else
+						{
+							QPixmap pixmap = QPixmap::fromImage(display->getImage());
+							QRect rect = painter.viewport();
+							QSize size = pixmap.size();
+							size.scale(rect.size(), Qt::KeepAspectRatio);
+							painter.setViewport(rect.x(), rect.y(), size.width(), size.height());
+							painter.setWindow(pixmap.rect());
+							painter.drawPixmap(0, 0, pixmap);
+						}
 						painter.end();
 					}
 					else
@@ -972,20 +1019,11 @@ void MainWindow::actionSlot(Action a)
 				addToClipboard(display->getFromSelection());
 				QImage insert = QImage(1, 1, QImage::Format_RGB32);
 				insert.fill(0);
-				saveToUndoStack();
-				display->insertIntoSelection(insert);
-				if (histogramDialog) histogramDialog->processImage(display->getImage());
+				updateDisplayedImage(insert, INSERT_INTO_SELECTION);
 			}
 			break;
 		case ACT_CROP_SELECTION:
-			{
-				QImage i = display->getFromSelection();
-				saveToUndoStack();
-				display->newImage(i);
-				if (histogramDialog) histogramDialog->processImage(i);
-				currentImageSize = i.size();
-				setImageAndWindowSize();
-			}
+			updateDisplayedImage(display->getFromSelection(), NEW_IMAGE);
 			break;
 		case ACT_COPY:
 			addToClipboard(display->getFromSelection());
@@ -1019,9 +1057,7 @@ void MainWindow::actionSlot(Action a)
 					}
 					else
 					{
-						saveToUndoStack();
-						display->insertIntoSelection(getFromClipboard());
-						if (histogramDialog) histogramDialog->processImage(display->getImage());
+						updateDisplayedImage(getFromClipboard(), INSERT_INTO_SELECTION);
 					}
 				}
 			}
@@ -1090,11 +1126,7 @@ void MainWindow::actionSlot(Action a)
 							default: break;
 						}
 						painter.end();
-						saveToUndoStack();
-						display->newImage(jointImage);
-						if (histogramDialog) histogramDialog->processImage(jointImage);
-						currentImageSize = jointImage.size();
-						setImageAndWindowSize();
+						updateDisplayedImage(jointImage, NEW_IMAGE);
 					}
 					delete d;
 				}
@@ -1124,7 +1156,7 @@ void MainWindow::actionSlot(Action a)
 			clearClipboard(true);
 			break;
 		case ACT_INFO:
-			if ((internalState == IMAGE_FROM_FILE) || (internalState == ANIMATION_FROM_FILE))
+			if ((internalState == IMAGE_FROM_FILE) || (internalState == ANIMATION_FROM_FILE) || (internalState == MULTIPAGE_FROM_FILE))
 			{
 				InfoDialog * d = new InfoDialog(currentDirPath + "/" + currentFilePath);
 				d->exec();
@@ -1143,13 +1175,8 @@ void MainWindow::actionSlot(Action a)
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
-					QImage i = d->rotateImage(display->getImage());
+					updateDisplayedImage(d->rotateImage(display->getImage()), NEW_IMAGE);
 					QApplication::restoreOverrideCursor();
-					saveToUndoStack();
-					display->newImage(i);
-					if (histogramDialog) histogramDialog->processImage(i);
-					currentImageSize = i.size();
-					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1167,13 +1194,8 @@ void MainWindow::actionSlot(Action a)
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
-					QImage i = d->shearImage(display->getImage());
+					updateDisplayedImage(d->shearImage(display->getImage()), NEW_IMAGE);
 					QApplication::restoreOverrideCursor();
-					saveToUndoStack();
-					display->newImage(i);
-					if (histogramDialog) histogramDialog->processImage(i);
-					currentImageSize = i.size();
-					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1185,13 +1207,8 @@ void MainWindow::actionSlot(Action a)
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
-					QImage i = Resizer::Resize(display->getImage(), d->getNewResolution(), d->getAlgorithm());
+					updateDisplayedImage(Resizer::Resize(display->getImage(), d->getNewResolution(), d->getAlgorithm()), NEW_IMAGE);
 					QApplication::restoreOverrideCursor();
-					saveToUndoStack();
-					display->newImage(i);
-					if (histogramDialog) histogramDialog->processImage(i);
-					currentImageSize = d->getNewResolution();//i.size();
-					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1203,13 +1220,8 @@ void MainWindow::actionSlot(Action a)
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
-					QImage i = d->addBorder(display->getImage());
+					updateDisplayedImage(d->addBorder(display->getImage()), NEW_IMAGE);
 					QApplication::restoreOverrideCursor();
-					saveToUndoStack();
-					display->newImage(i);
-					if (histogramDialog) histogramDialog->processImage(i);
-					currentImageSize = i.size();
-					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1221,13 +1233,8 @@ void MainWindow::actionSlot(Action a)
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
-					QImage i = d->padToSize(display->getImage());
+					updateDisplayedImage(d->padToSize(display->getImage()), NEW_IMAGE);
 					QApplication::restoreOverrideCursor();
-					saveToUndoStack();
-					display->newImage(i);
-					if (histogramDialog) histogramDialog->processImage(i);
-					currentImageSize = i.size();
-					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1236,7 +1243,6 @@ void MainWindow::actionSlot(Action a)
 		case ACT_COLOR_DEPTH_INC:
 			{
 				QApplication::setOverrideCursor(Qt::WaitCursor);
-				saveToUndoStack();
 				QImage i = display->getImage();
 				if (i.hasAlphaChannel())
 				{
@@ -1246,8 +1252,7 @@ void MainWindow::actionSlot(Action a)
 				{
 					i = i.convertToFormat(QImage::Format_RGB32).copy();
 				}
-				display->updateImage(i);
-				if (histogramDialog) histogramDialog->processImage(i);
+				updateDisplayedImage(i, UPDATE_IMAGE);
 				QApplication::restoreOverrideCursor();
 			}
 			break;
@@ -1257,10 +1262,7 @@ void MainWindow::actionSlot(Action a)
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
-					saveToUndoStack();
-					QImage i = d->applyEffects();
-					display->updateImage(i);
-					if (histogramDialog) histogramDialog->processImage(i);
+					updateDisplayedImage(d->applyEffects(), UPDATE_IMAGE);
 					QApplication::restoreOverrideCursor();
 				}
 				delete d;
@@ -1278,13 +1280,8 @@ void MainWindow::actionSlot(Action a)
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
-					QImage i = d->adjustColor(display->getImage());
+					updateDisplayedImage(d->adjustColor(display->getImage()), NEW_IMAGE);
 					QApplication::restoreOverrideCursor();
-					saveToUndoStack();
-					display->newImage(i);
-					if (histogramDialog) histogramDialog->processImage(i);
-					currentImageSize = i.size();
-					setImageAndWindowSize();
 					d->savePreferences();
 				}
 				delete d;
@@ -1322,21 +1319,13 @@ void MainWindow::actionSlot(Action a)
 					QApplication::setOverrideCursor(Qt::WaitCursor);
 					QImage i = d->applyEffects();
 					QApplication::restoreOverrideCursor();
-					saveToUndoStack();
 					if (display->getSelection().isNull())
 					{
-						display->updateImage(i);
-						if (histogramDialog) histogramDialog->processImage(i);
-						if (currentImageSize != i.size())
-						{
-							currentImageSize = i.size();
-							setImageAndWindowSize();
-						}
+						updateDisplayedImage(i, UPDATE_IMAGE);
 					}
 					else
 					{
-						display->insertIntoSelection(i);
-						if (histogramDialog) histogramDialog->processImage(display->getImage());
+						updateDisplayedImage(i, INSERT_INTO_SELECTION);
 					}
 				}
 				delete d;
@@ -1452,21 +1441,13 @@ void MainWindow::actionSlot(Action a)
 					}
 					img = loadedImage.images[0];
 					
-					saveToUndoStack();
 					if (display->getSelection().isNull())
 					{
-						display->updateImage(img);
-						if (histogramDialog) histogramDialog->processImage(img);
-						if (currentImageSize != img.size())
-						{
-							currentImageSize = img.size();
-							setImageAndWindowSize();
-						}
+						updateDisplayedImage(img, UPDATE_IMAGE);
 					}
 					else
 					{
-						display->insertIntoSelection(img);
-						if (histogramDialog) histogramDialog->processImage(display->getImage());
+						updateDisplayedImage(img, INSERT_INTO_SELECTION);
 					}
 				} while(0);
 				if (!inputFilePath.isEmpty())
@@ -1524,32 +1505,17 @@ void MainWindow::actionSlot(Action a)
 				
 				if (output == 0)	// Replace image
 				{
-					saveToUndoStack();
-					display->updateImage(outputImage);
-					if (histogramDialog) histogramDialog->processImage(outputImage);
-					if (currentImageSize != outputImage.size())
-					{
-						currentImageSize = outputImage.size();
-						setImageAndWindowSize();
-					}
+					updateDisplayedImage(outputImage, UPDATE_IMAGE);
 				} else
 				if (output == 1)	// Insert back into selection
 				{
-					saveToUndoStack();
 					if (display->getSelection().isNull())
 					{
-						display->updateImage(outputImage);
-						if (histogramDialog) histogramDialog->processImage(outputImage);
-						if (currentImageSize != outputImage.size())
-						{
-							currentImageSize = outputImage.size();
-							setImageAndWindowSize();
-						}
+						updateDisplayedImage(outputImage, UPDATE_IMAGE);
 					}
 					else
 					{
-						display->insertIntoSelection(outputImage);
-						if (histogramDialog) histogramDialog->processImage(display->getImage());
+						updateDisplayedImage(outputImage, INSERT_INTO_SELECTION);
 					}
 				}
 				else			// No change
@@ -1768,6 +1734,32 @@ void MainWindow::actionSlot(Action a)
 		case ACT_DECR_TRANSPARENCY:
 			setWindowOpacity(qBound(0.1, windowOpacity()/0.9, 1.0));
 			break;
+		case ACT_MULTIPAGE_NEXT:
+		case ACT_MULTIPAGE_PREV:
+		case ACT_MULTIPAGE_FIRST:
+		case ACT_MULTIPAGE_LAST:
+			if (internalState != MULTIPAGE_FROM_FILE) break;
+			switch (a)
+			{
+				default:
+					assert(0);
+					break;
+				case ACT_MULTIPAGE_NEXT:
+					multipageIndex = qBound(0, multipageIndex + 1, multipageImage.length() - 1);
+					break;
+				case ACT_MULTIPAGE_PREV:
+					multipageIndex = qBound(0, multipageIndex - 1, multipageImage.length() - 1);
+					break;
+				case ACT_MULTIPAGE_FIRST:
+					multipageIndex = 0;
+					break;
+				case ACT_MULTIPAGE_LAST:
+					multipageIndex = multipageImage.length() - 1;
+					break;
+			}
+			updateDisplayedImage(multipageImage[multipageIndex], NEW_IMAGE, false);
+			updateMultipageStatusbar();
+			break;
 		case ACT_LICENSE:
 			{
 				LicenseDialog * d = new LicenseDialog();
@@ -1901,6 +1893,26 @@ void MainWindow::displayNeedLastImage()
 	sendAction(ACT_LAST_FILE);
 }
 
+void MainWindow::displayNeedNextPage()
+{
+	sendAction(ACT_MULTIPAGE_NEXT);
+}
+
+void MainWindow::displayNeedPrevPage()
+{
+	sendAction(ACT_MULTIPAGE_PREV);
+}
+
+void MainWindow::displayNeedFirstPage()
+{
+	sendAction(ACT_MULTIPAGE_FIRST);
+}
+
+void MainWindow::displayNeedLastPage()
+{
+	sendAction(ACT_MULTIPAGE_LAST);
+}
+
 
 void MainWindow::displayZoomChanged()
 {
@@ -1910,6 +1922,7 @@ void MainWindow::displayZoomChanged()
 	{
 		statusBarResolution->setText(QString(tr("No file loaded")));
 		clearFileModificationTime();
+		updateMultipageStatusbar();
 		statusBarIndex->setText("-");
 		statusBarZoom->setText("");
 	}
@@ -2106,6 +2119,9 @@ void MainWindow::setupToolBar()
 	ui.toolBar->addWidget(indexDisplay);
 	ui.toolBar->addWidget(slash);
 	ui.toolBar->addWidget(dirCountDisplay);
+	
+	ADD_ACTION(ACT_MULTIPAGE_PREV, ":/icons/icons/pagebackward.png");
+	ADD_ACTION(ACT_MULTIPAGE_NEXT, ":/icons/icons/pageforward.png");
 
 	zoomDisplay->adjustSize();
 	indexDisplay->adjustSize();
@@ -2121,6 +2137,7 @@ void MainWindow::setupStatusBar()
 	statusBarIndex = new QLabel("");
 	statusBarZoom = new QLabel("");
 	statusBarLastModified = new QLabel("");
+	statusBarMultiPage = new QLabel("");
 	statusBarSelection = new QLabel("");
 	QFrame * separator;
 	#define ADD_STATUSBAR_SEPARATOR()		separator = new QFrame(); separator->setFrameStyle(QFrame::VLine | QFrame::Sunken); ui.statusBar->addWidget(separator);	// due to fusion style
@@ -2132,12 +2149,16 @@ void MainWindow::setupStatusBar()
 	ADD_STATUSBAR_SEPARATOR();
 	ui.statusBar->addWidget(statusBarLastModified);
 	ADD_STATUSBAR_SEPARATOR();
+	statusBarMultiPageSeparator = separator;
+	ui.statusBar->addWidget(statusBarMultiPage);
+	ADD_STATUSBAR_SEPARATOR();
 	ui.statusBar->addWidget(statusBarSelection);
 	#undef ADD_STATUSBAR_SEPARATOR
 	statusBarResolution->setMinimumWidth(1);	// make QLabel elastic
 	statusBarIndex->setMinimumWidth(1);
 	statusBarZoom->setMinimumWidth(1);
 	statusBarLastModified->setMinimumWidth(1);
+	statusBarMultiPage->setMinimumWidth(1);
 	statusBarSelection->setMinimumWidth(1);
 	
 	statusBarIndex->setText("-");
@@ -2282,17 +2303,38 @@ void MainWindow::reIndexCurrentDir(bool forced)
 void MainWindow::loadCurrentFile()
 {
 	if (slideshowDirection==0) QApplication::setOverrideCursor(Qt::WaitCursor);	// do not flicker cursor in slideshow
+	multipageImage.clear();
+	multipageIndex = -1;
 	XImage xImg = imageIO->loadFile(currentDirPath + "/" + currentFilePath);
 	if (xImg.images.length() > 1)
 	{
-		currentImageSize = xImg.images[0].size();
-		display->newImageSequence(xImg.images, xImg.frameDurationMs);
-		if (histogramDialog) histogramDialog->processImage(QImage());
-		display->setZoom(1.0);
-		setImageAndWindowSize();
-		QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// sped up drawing
-		if (slideshowDirection==0) QApplication::restoreOverrideCursor();
-		setInternalState(ANIMATION_FROM_FILE);
+		if (xImg.images.length() == xImg.frameDurationMs.length())
+		{
+			currentImageSize = xImg.images[0].size();
+			display->newImageSequence(xImg.images, xImg.frameDurationMs);
+			if (histogramDialog) histogramDialog->processImage(QImage());
+			display->setZoom(1.0);
+			setImageAndWindowSize();
+			QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// sped up drawing
+			if (slideshowDirection==0) QApplication::restoreOverrideCursor();
+			setInternalState(ANIMATION_FROM_FILE);
+		}
+		else
+		{
+			for (int i=0; i<xImg.images.length(); i++)
+			{
+				multipageImage.append(xImg.images[i]);
+			}
+			multipageIndex = 0;
+			currentImageSize = multipageImage[multipageIndex].size();
+			display->newImage(multipageImage[multipageIndex]);
+			if (histogramDialog) histogramDialog->processImage(multipageImage[multipageIndex]);
+			display->setZoom(1.0);
+			setImageAndWindowSize();
+			QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// sped up drawing
+			if (slideshowDirection==0) QApplication::restoreOverrideCursor();
+			setInternalState(MULTIPAGE_FROM_FILE);
+		}
 	}
 	else
 	if (xImg.images.length() == 1)
@@ -2326,6 +2368,7 @@ void MainWindow::loadCurrentFile()
 		thumbnailDialog->selectItem(index);
 	}
 	showFileModificationTime(currentDirPath + "/" + currentFilePath);
+	updateMultipageStatusbar();
 	setIndexDisplayNoSignals(index+1);
 	updateDisplayOverlayIndicator();
 	currentImageName = currentFilePath;
@@ -2426,14 +2469,7 @@ void MainWindow::doSimpleFilter(SimpleFilter f)
 	}
 	if (!dst.isNull())
 	{
-		saveToUndoStack();
-		display->updateImage(dst);
-		if (histogramDialog) histogramDialog->processImage(dst);
-		currentImageSize = dst.size();
-		if (src.size() != dst.size())
-		{
-			setImageAndWindowSize();
-		}
+		updateDisplayedImage(dst, UPDATE_IMAGE);
 	}
 }
 
@@ -2662,6 +2698,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::clearUndoStack()
 {
 	undoHistory = QList<QImage>();
+	undoHistoryPage = QList<int>();
 	undoStackPosition = 0;
 	undoIndex = 0;
 	undoAction->setEnabled(false);
@@ -2672,6 +2709,7 @@ void MainWindow::clearUndoStack()
 void MainWindow::clearPastedUndoStack()
 {
 	undoHistory = QList<QImage>();
+	undoHistoryPage = QList<int>();
 	undoStackPosition = 0;
 	undoIndex = 1;
 	undoAction->setEnabled(false);
@@ -2685,8 +2723,10 @@ void MainWindow::saveToUndoStack()
 	while (undoStackPosition < undoHistory.length())	// clear redo steps
 	{
 		undoHistory.removeLast();
+		undoHistoryPage.removeLast();
 	}
 	undoHistory.append(i);
+	undoHistoryPage.append(multipageIndex);
 	int minSteps = Globals::prefs->getUndoStackMinimumSteps();
 	long long int memLimit = Globals::prefs->getUndoStackMemoryLimit();
 	memLimit *= 1024*1024;
@@ -2700,6 +2740,7 @@ void MainWindow::saveToUndoStack()
 		}
 		if (storageSize < memLimit) break;
 		undoHistory.removeFirst();
+		undoHistoryPage.removeFirst();
 	}
 	undoIndex += 1;
 	undoStackPosition = undoHistory.length();
@@ -2714,15 +2755,34 @@ void MainWindow::undoFromUndoStack()
 	{
 		if (undoHistory.length() == undoStackPosition)	// first undo, save current image for redo
 		{
-			QImage i = display->getImage();
-			undoHistory.append(i);
+			if (internalState == MULTIPAGE_FROM_FILE)
+			{
+				int pageIndex = undoHistoryPage.last();
+				QImage i = multipageImage[pageIndex];
+				undoHistory.append(i);
+				undoHistoryPage.append(pageIndex);
+			}
+			else
+			{
+				QImage i = display->getImage();
+				undoHistory.append(i);
+				undoHistoryPage.append(-1);
+			}
 		}
 		undoStackPosition -= 1;
 		QImage i = undoHistory.at(undoStackPosition);
-		display->updateImage(i);
-		if (histogramDialog) histogramDialog->processImage(i);
-		currentImageSize = i.size();
-		setImageAndWindowSize();
+		int pageIndex = undoHistoryPage.at(undoStackPosition);
+		if ((internalState != MULTIPAGE_FROM_FILE) || (pageIndex == multipageIndex))
+		{
+			updateDisplayedImage(i, UPDATE_IMAGE, false);
+		}
+		else
+		{
+			if ((pageIndex >= 0) && (pageIndex < multipageImage.length()))
+			{
+				multipageImage[pageIndex] = i;
+			}
+		}
 		undoIndex -= 1;
 	}
 	undoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition > 0));
@@ -2736,10 +2796,18 @@ void MainWindow::redoFromUndoStack()
 	{
 		undoStackPosition += 1;
 		QImage i = undoHistory.at(undoStackPosition);
-		display->updateImage(i);
-		if (histogramDialog) histogramDialog->processImage(i);
-		currentImageSize = i.size();
-		setImageAndWindowSize();
+		int pageIndex = undoHistoryPage.at(undoStackPosition);
+		if ((internalState != MULTIPAGE_FROM_FILE) || (pageIndex == multipageIndex))
+		{
+			updateDisplayedImage(i, UPDATE_IMAGE, false);
+		}
+		else
+		{
+			if ((pageIndex >= 0) && (pageIndex < multipageImage.length()))
+			{
+				multipageImage[pageIndex] = i;
+			}
+		}
 		undoIndex += 1;
 	}
 	undoAction->setEnabled((undoHistory.length() > 0) && (undoStackPosition > 0));
@@ -2771,6 +2839,67 @@ void MainWindow::showFileModificationTime(QString fullPath)
 void MainWindow::clearFileModificationTime()
 {
 	statusBarLastModified->setText("");
+}
+
+void MainWindow::updateMultipageStatusbar()
+{
+	if ((internalState == MULTIPAGE_FROM_FILE) && (multipageImage.length() > 0))
+	{
+		QString text = QString("%1/%2").arg(multipageIndex + 1).arg(multipageImage.length());
+		statusBarMultiPage->setText(text);
+		statusBarMultiPage->setVisible(true);
+		statusBarMultiPageSeparator->setVisible(true);
+	}
+	else
+	{
+		statusBarMultiPage->setText("");
+		statusBarMultiPage->setVisible(false);
+		statusBarMultiPageSeparator->setVisible(false);
+	}
+}
+
+void MainWindow::updateDisplayedImage(QImage image, UpdateImageMethod method, bool undoStack)
+{
+	if (undoStack)
+	{
+		saveToUndoStack();
+	}
+	switch(method)
+	{
+		case NEW_IMAGE:
+			display->newImage(image);
+			break;
+		case UPDATE_IMAGE:
+			display->updateImage(image);
+			break;
+		case INSERT_INTO_SELECTION:
+			display->insertIntoSelection(image);
+			break;
+	}
+	if ((internalState == MULTIPAGE_FROM_FILE) && (multipageIndex >= 0) && (multipageIndex < multipageImage.length()))
+	{
+		multipageImage[multipageIndex] = image;
+	}
+	if (histogramDialog)
+	{
+		histogramDialog->processImage(image);
+	}
+	switch(method)
+	{
+		case NEW_IMAGE:
+			currentImageSize = image.size();
+			setImageAndWindowSize();
+			break;
+		case UPDATE_IMAGE:
+			if (currentImageSize != image.size())
+			{
+				currentImageSize = image.size();
+				setImageAndWindowSize();
+			}
+			break;
+		case INSERT_INTO_SELECTION:
+			break;
+	}
 }
 
 void MainWindow::addPathToRecentFiles(QString path)

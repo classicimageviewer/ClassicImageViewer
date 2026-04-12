@@ -45,15 +45,23 @@ XImage IOmoduleQt::loadFile(QString path, bool thumbnail)
 #if QT_VERSION >= QT_VERSION_CHECK(6,0,0)
 	reader.setAllocationLimit(0);
 #endif
-	if (reader.supportsAnimation() && !thumbnail)
+	if ((reader.imageCount() > 1) && !thumbnail)
 	{
 		for (int i=0; i<reader.imageCount(); i++)
 		{
-			int delay = reader.nextImageDelay();
+			reader.jumpToImage(i);
+			int delay = 0;
+			if (reader.supportsAnimation())
+			{
+				delay = reader.nextImageDelay();
+			}
 			QImage img = reader.read();
 			if (img.isNull()) continue;
 			xImage.images.append(img);
-			xImage.frameDurationMs.append(delay);
+			if (reader.supportsAnimation())
+			{
+				xImage.frameDurationMs.append(delay);
+			}
 		}
 	}
 	else

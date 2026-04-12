@@ -195,6 +195,10 @@ signals:
 	void needPrevImage();
 	void needFirstImage();
 	void needLastImage();
+	void needNextPage();
+	void needPrevPage();
+	void needFirstPage();
+	void needLastPage();
 	void zoomChanged();
 	void selectionChanged();
 	void pixelInfo();

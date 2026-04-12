@@ -279,6 +279,29 @@ bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 	QKeyEvent * keyEvent = (QKeyEvent*)event;
 	if (event->type() == QEvent::KeyPress)
 	{
+		// multipage shortcuts
+		{
+			if ((keyEvent->modifiers() == Qt::ControlModifier) && (keyEvent->key() == Qt::Key_PageDown))
+			{
+				emit needNextPage();
+				return true;
+			}
+			if ((keyEvent->modifiers() == Qt::ControlModifier) && (keyEvent->key() == Qt::Key_PageUp))
+			{
+				emit needPrevPage();
+				return true;
+			}
+			if ((keyEvent->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier)) && (keyEvent->key() == Qt::Key_Home))
+			{
+				emit needFirstPage();
+				return true;
+			}
+			if ((keyEvent->modifiers() == (Qt::ControlModifier | Qt::ShiftModifier)) && (keyEvent->key() == Qt::Key_End))
+			{
+				emit needLastPage();
+				return true;
+			}
+		}
 		//if (keyEvent->key() == Qt::Key_Return)
 		if (verticalScrollBar()->isVisible())
 		{
@@ -338,12 +361,12 @@ bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 				emit needPrevImage();
 				return true;
 			}
-			if (keyEvent->key() == Qt::Key_Home)
+			if ((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_Home))
 			{
 				emit needFirstImage();
 				return true;
 			}
-			if (keyEvent->key() == Qt::Key_End)
+			if ((keyEvent->modifiers() == Qt::NoModifier) && (keyEvent->key() == Qt::Key_End))
 			{
 				emit needLastImage();
 				return true;

@@ -12,6 +12,10 @@
 		<file>icons/info.png</file>
 		<file>icons/open@2x.png</file>
 		<file>icons/open.png</file>
+		<file>icons/pagebackward@2x.png</file>
+		<file>icons/pagebackward.png</file>
+		<file>icons/pageforward@2x.png</file>
+		<file>icons/pageforward.png</file>
 		<file>icons/paste@2x.png</file>
 		<file>icons/paste.png</file>
 		<file>icons/redo@2x.png</file>

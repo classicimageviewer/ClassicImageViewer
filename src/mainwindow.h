@@ -40,8 +40,9 @@ private: // typedefs
 		Action event;
 		int flags;
 	} ActionLookUp_t;
-	enum InternalState {UNLOADED=0, IMAGE_FROM_FILE, ANIMATION_FROM_FILE, IMAGE_FROM_CLIPBOARD};
+	enum InternalState {UNLOADED=0, IMAGE_FROM_FILE, ANIMATION_FROM_FILE, MULTIPAGE_FROM_FILE, IMAGE_FROM_CLIPBOARD};
 	enum SimpleFilter {NONE=0, ROT_R, ROT_L, MIRROR_V, MIRROR_H, GRAYS, NEGATIVE, COLORADJ, SHARPEN};
+	enum UpdateImageMethod {NEW_IMAGE = 0, UPDATE_IMAGE, INSERT_INTO_SELECTION};
 
 private: // variables
 	QString fileToBeOpenedOnStartup;
@@ -54,6 +55,9 @@ private: // variables
 	QMenu * macrosMenu;
 	QMenu * displayModeMenu;
 	QMenu * zoomLevelMenu;
+	QMenu * multipageMenu;
+	QList<QImage> multipageImage;
+	int multipageIndex;
 	int actionLock;
 	ImageIO * imageIO;
 	QSize currentImageSize;
@@ -72,6 +76,7 @@ private: // variables
 	QAction * undoAction;
 	QAction * redoAction;
 	QList<QImage> undoHistory;
+	QList<int> undoHistoryPage;
 	int undoStackPosition;
 	int undoIndex;
 #if QT_VERSION < QT_VERSION_CHECK(5,15,0)
@@ -84,6 +89,8 @@ private: // variables
 	QLabel * statusBarIndex;
 	QLabel * statusBarZoom;
 	QLabel * statusBarLastModified;
+	QLabel * statusBarMultiPage;
+	QFrame * statusBarMultiPageSeparator;
 	QLabel * statusBarSelection;
 	ThumbnailDialog * thumbnailDialog;
 	HistogramDialog * histogramDialog;
@@ -128,6 +135,8 @@ private: // functions
 	void deleteHistogramDialog();
 	void showFileModificationTime(QString fullPath);
 	void clearFileModificationTime();
+	void updateMultipageStatusbar();
+	void updateDisplayedImage(QImage image, UpdateImageMethod method, bool undoStack = true);
 	void addPathToRecentFiles(QString path);
 	void updateExternalEditorMenu();
 	void updateRecentFilesMenu();
@@ -142,6 +151,10 @@ private slots:
 	void displayNeedPrevImage();
 	void displayNeedFirstImage();
 	void displayNeedLastImage();
+	void displayNeedNextPage();
+	void displayNeedPrevPage();
+	void displayNeedFirstPage();
+	void displayNeedLastPage();
 	void displayZoomChanged();
 	void displaySelectionChanged();
 	void displayPixelInfo();
