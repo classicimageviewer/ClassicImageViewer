@@ -1538,6 +1538,7 @@ void MainWindow::actionSlot(Action a)
 				PreferencesDialog * d = new PreferencesDialog(imageIO);
 				if (d->exec() == QDialog::Accepted)
 				{
+					QString userLocale = Globals::prefs->getUserLocale();
 					d->savePreferences();
 					indexDisplay->setWrapping(Globals::prefs->getLoopDir());
 					display->setBackgroundShade(Globals::prefs->getDisplayBackground());
@@ -1553,6 +1554,10 @@ void MainWindow::actionSlot(Action a)
 					updateDisplayModeMenu();
 					updateExternalEditorMenu();
 					imageIO->reloadConfig();
+					if (userLocale != Globals::prefs->getUserLocale())
+					{
+						QMessageBox::information(this, QString(tr("Preferences")), QString(tr("Locale change requires application restart.")));
+					}
 				}
 				delete d;
 			}

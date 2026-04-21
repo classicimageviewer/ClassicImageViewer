@@ -2295,17 +2295,27 @@ Example sh script (copy the image unaltered):
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2264"/>
+        <location filename="../src/mainwindow.cpp" line="1559"/>
+        <source>Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="1559"/>
+        <source>Locale change requires application restart.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/mainwindow.cpp" line="2269"/>
         <source>Indexing the current directory...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2967"/>
+        <location filename="../src/mainwindow.cpp" line="2972"/>
         <source>Not configured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3050"/>
+        <location filename="../src/mainwindow.cpp" line="3055"/>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2388,7 +2398,7 @@ Example sh script (copy the image unaltered):
         <location filename="../src/mainwindow.cpp" line="1405"/>
         <location filename="../src/mainwindow.cpp" line="1433"/>
         <location filename="../src/mainwindow.cpp" line="1439"/>
-        <location filename="../src/mainwindow.cpp" line="2360"/>
+        <location filename="../src/mainwindow.cpp" line="2365"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2449,55 +2459,55 @@ Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation suppor
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1857"/>
-        <location filename="../src/mainwindow.cpp" line="1858"/>
+        <location filename="../src/mainwindow.cpp" line="1862"/>
+        <location filename="../src/mainwindow.cpp" line="1863"/>
         <source>Trying to hack the clipboard...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1923"/>
-        <location filename="../src/mainwindow.cpp" line="2165"/>
+        <location filename="../src/mainwindow.cpp" line="1928"/>
+        <location filename="../src/mainwindow.cpp" line="2170"/>
         <source>No file loaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1948"/>
-        <location filename="../src/mainwindow.cpp" line="2166"/>
+        <location filename="../src/mainwindow.cpp" line="1953"/>
+        <location filename="../src/mainwindow.cpp" line="2171"/>
         <source>No selection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1952"/>
+        <location filename="../src/mainwindow.cpp" line="1957"/>
         <source>Selection: %1x%2 at (%3,%4)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="1976"/>
+        <location filename="../src/mainwindow.cpp" line="1981"/>
         <source>Pixel: %1 at (%2,%3)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2360"/>
+        <location filename="../src/mainwindow.cpp" line="2365"/>
         <source>Can not open %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2935"/>
+        <location filename="../src/mainwindow.cpp" line="2940"/>
         <source>&amp;Clear recent files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2993"/>
+        <location filename="../src/mainwindow.cpp" line="2998"/>
         <source>All supported images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3006"/>
+        <location filename="../src/mainwindow.cpp" line="3011"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3009"/>
+        <location filename="../src/mainwindow.cpp" line="3014"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
