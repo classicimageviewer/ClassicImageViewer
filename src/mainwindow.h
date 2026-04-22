@@ -51,6 +51,7 @@ private: // variables
 	InternalState internalState;
 	QMenu * externalEditorMenu;
 	QMenu * recentFilesMenu;
+	QMenu * removeBandMenu;
 	QMenu * externalToolsMenu;
 	QMenu * macrosMenu;
 	QMenu * displayModeMenu;

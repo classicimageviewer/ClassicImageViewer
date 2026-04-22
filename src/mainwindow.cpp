@@ -355,6 +355,11 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuEdit, tr("Cut &selection"), ACT_CUT_SELECTION, "Ctrl+X",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuEdit, tr("C&rop selection"), ACT_CROP_SELECTION, "Ctrl+Y",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuEdit);
+	removeBandMenu = new QMenu(tr("Remove band"));
+	ui.menuEdit->addMenu(removeBandMenu);
+	menuAddAction(removeBandMenu, tr("Remove horizontal band / row of selection"), ACT_REMOVE_SELECTION_ROW, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(removeBandMenu, tr("Remove vertical band / column of selection"), ACT_REMOVE_SELECTION_COLUMN, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("&Copy"), ACT_COPY, "Ctrl+C",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuEdit, tr("&Paste"), ACT_PASTE, "Ctrl+V",  0);
 	menuAddAction(ui.menuEdit, tr("Paste to side"), ACT_PASTE_TO_SIDE, "Ctrl+D",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION | ACTDISABLE_MULTIPAGE);
@@ -518,6 +523,8 @@ void MainWindow::applyInternalState()
 		if ((element.event == ACT_RESTORE_LAST_SELECTION) && (lastSelection.isNull() || !display->getSelection().isNull())) enabled = false;
 		if ((element.event == ACT_CUT_SELECTION) && (display->getSelection().isNull())) enabled = false;
 		if ((element.event == ACT_CROP_SELECTION) && (display->getSelection().isNull())) enabled = false;
+		if ((element.event == ACT_REMOVE_SELECTION_ROW) && (display->getSelection().isNull())) enabled = false;
+		if ((element.event == ACT_REMOVE_SELECTION_COLUMN) && (display->getSelection().isNull())) enabled = false;
 		
 		element.actionRef->setEnabled(enabled);
 	}
@@ -1037,6 +1044,34 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_CROP_SELECTION:
 			updateDisplayedImage(display->getFromSelection(), NEW_IMAGE);
+			break;
+		case ACT_REMOVE_SELECTION_ROW:
+			if (!display->getSelection().isNull())
+			{
+				QRect selection = display->getSelection();
+				QImage displayedImg = display->getImage();
+				QImage newImage = QImage(currentImageSize.width(), currentImageSize.height() - selection.height(), displayedImg.format());
+				QPainter painter(&newImage);
+				painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+				painter.drawImage(QPoint(0, 0), displayedImg.copy(QRect(0, 0, currentImageSize.width(), selection.y())));
+				painter.drawImage(QPoint(0, selection.y()), displayedImg.copy(QRect(0, selection.y() + selection.height(), currentImageSize.width(), currentImageSize.height() - (selection.y() + selection.height()))));
+				painter.end();
+				updateDisplayedImage(newImage, NEW_IMAGE);
+			}
+			break;
+		case ACT_REMOVE_SELECTION_COLUMN:
+			if (!display->getSelection().isNull())
+			{
+				QRect selection = display->getSelection();
+				QImage displayedImg = display->getImage();
+				QImage newImage = QImage(currentImageSize.width() - selection.width(), currentImageSize.height(), displayedImg.format());
+				QPainter painter(&newImage);
+				painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+				painter.drawImage(QPoint(0, 0), displayedImg.copy(QRect(0, 0, selection.x(), currentImageSize.height())));
+				painter.drawImage(QPoint(selection.x(), 0), displayedImg.copy(QRect(selection.x() + selection.width(), 0, currentImageSize.width() - (selection.x() + selection.width()), currentImageSize.height())));
+				painter.end();
+				updateDisplayedImage(newImage, NEW_IMAGE);
+			}
 			break;
 		case ACT_COPY:
 			addToClipboard(display->getFromSelection());
