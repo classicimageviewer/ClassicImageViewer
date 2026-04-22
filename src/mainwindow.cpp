@@ -351,6 +351,7 @@ void MainWindow::createMenu()
 	redoAction = menuAddAction(ui.menuEdit, tr("R&edo"), ACT_REDO, "Ctrl+J",  0);
 	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("Cust&om selection"), ACT_CUSTOM_SELECTION, "Shift+C",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuEdit, tr("Restore last selection"), ACT_RESTORE_LAST_SELECTION, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuEdit, tr("Cut &selection"), ACT_CUT_SELECTION, "Ctrl+X",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuEdit, tr("C&rop selection"), ACT_CROP_SELECTION, "Ctrl+Y",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuEdit);
@@ -512,6 +513,12 @@ void MainWindow::applyInternalState()
 		if ((element.flags & ACTDISABLE_ANIMATION) && (internalState == ANIMATION_FROM_FILE)) enabled = false;
 		if ((element.flags & ACTDISABLE_MULTIPAGE) && (internalState == MULTIPAGE_FROM_FILE)) enabled = false;
 		if ((element.flags & ACTENABLE_MULTIPAGE) && (internalState != MULTIPAGE_FROM_FILE)) enabled = false;
+		
+		// event specific
+		if ((element.event == ACT_RESTORE_LAST_SELECTION) && (lastSelection.isNull() || !display->getSelection().isNull())) enabled = false;
+		if ((element.event == ACT_CUT_SELECTION) && (display->getSelection().isNull())) enabled = false;
+		if ((element.event == ACT_CROP_SELECTION) && (display->getSelection().isNull())) enabled = false;
+		
 		element.actionRef->setEnabled(enabled);
 	}
 }
@@ -1013,6 +1020,12 @@ void MainWindow::actionSlot(Action a)
 				delete d;
 			}
 			break;
+		case ACT_RESTORE_LAST_SELECTION:
+			if (display->getSelection().isNull() && !lastSelection.isNull())
+			{
+				display->setSelection(lastSelection);
+			}
+			break;
 		case ACT_CUT_SELECTION:
 			if (!display->getSelection().isNull())
 			{
@@ -1042,6 +1055,7 @@ void MainWindow::actionSlot(Action a)
 				{
 					if (display->getSelection().isNull())
 					{
+						lastSelection = QRect();
 						setInternalState(IMAGE_FROM_CLIPBOARD);
 						clipboardCounter += 1;
 						currentImageName = QString(tr("Clipboard %1")).arg(clipboardCounter);
@@ -1151,6 +1165,7 @@ void MainWindow::actionSlot(Action a)
 			indexDisplay->setMaximum(1);
 			dirCountDisplay->setText("");
 			clearUndoStack();
+			lastSelection = QRect();
 			break;
 		case ACT_CLEAR_CLIPBOARD:
 			clearClipboard(true);
@@ -1954,10 +1969,10 @@ void MainWindow::displaySelectionChanged()
 	}
 	else
 	{
+		lastSelection = selection;
 		statusBarSelection->setText(QString(tr("Selection: %1x%2 at (%3,%4)")).arg(selection.width()).arg(selection.height()).arg(selection.x()).arg(selection.y()));
 	}
-	
-	
+	applyInternalState();
 }
 
 void MainWindow::displayPixelInfo()
@@ -2308,6 +2323,7 @@ void MainWindow::reIndexCurrentDir(bool forced)
 void MainWindow::loadCurrentFile()
 {
 	if (slideshowDirection==0) QApplication::setOverrideCursor(Qt::WaitCursor);	// do not flicker cursor in slideshow
+	lastSelection = QRect();
 	multipageImage.clear();
 	multipageIndex = -1;
 	XImage xImg = imageIO->loadFile(currentDirPath + "/" + currentFilePath);
@@ -2894,17 +2910,20 @@ void MainWindow::updateDisplayedImage(QImage image, UpdateImageMethod method, bo
 		case NEW_IMAGE:
 			currentImageSize = image.size();
 			setImageAndWindowSize();
+			lastSelection = QRect();
 			break;
 		case UPDATE_IMAGE:
 			if (currentImageSize != image.size())
 			{
 				currentImageSize = image.size();
 				setImageAndWindowSize();
+				lastSelection = QRect();
 			}
 			break;
 		case INSERT_INTO_SELECTION:
 			break;
 	}
+	applyInternalState();
 }
 
 void MainWindow::addPathToRecentFiles(QString path)

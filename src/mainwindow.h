@@ -98,7 +98,7 @@ private: // variables
 	QStringList shortCutInfo;
 	bool blockSetImageSize;
 	bool temporaryDeleteConfirmSuppress;
-
+	QRect lastSelection;
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);
 	QAction * menuAddAction(QMenu * menu, QString text, Action event, const char *shortCut, int flags);
