@@ -67,6 +67,7 @@
 #include "dialogs/exttoolconfigdialog.h"
 #include "dialogs/sheardialog.h"
 #include "dialogs/macroconfigdialog.h"
+#include "dialogs/seamcarvingdialog.h"
 
 #include "lib/resizer.h"
 #include "lib/autocolor.h"
@@ -378,6 +379,7 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuImage, tr("Shear"), ACT_SHEAR, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
 	menuAddAction(ui.menuImage, tr("Re&size"), ACT_RESIZE, "Ctrl+R",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddAction(ui.menuImage, tr("Seam carving"), ACT_SEAM_CARVING, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuImage, tr("Add &border"), ACT_ADD_BORDER, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuImage, tr("&Pad to size"), ACT_PAD_TO_SIZE, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
@@ -1258,6 +1260,19 @@ void MainWindow::actionSlot(Action a)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);
 					updateDisplayedImage(Resizer::Resize(display->getImage(), d->getNewResolution(), d->getAlgorithm()), NEW_IMAGE);
+					QApplication::restoreOverrideCursor();
+					d->savePreferences();
+				}
+				delete d;
+			}
+			break;
+		case ACT_SEAM_CARVING:
+			{
+				SeamCarvingDialog * d = new SeamCarvingDialog(display->getImage());
+				if (d->exec() == QDialog::Accepted)
+				{
+					QApplication::setOverrideCursor(Qt::WaitCursor);
+					updateDisplayedImage(d->shrinkImage(display->getImage()), NEW_IMAGE);
 					QApplication::restoreOverrideCursor();
 					d->savePreferences();
 				}

@@ -266,3 +266,132 @@ QImage ImageOp::Negative(const QImage image)
 	return dst;
 }
 
+QImage ImageOp::SeamCarvingHorizontal(const QImage image, int reduction)
+{
+	bool hasAlpha = image.hasAlphaChannel();
+	QImage src;
+	
+	if (hasAlpha)
+	{
+		src = image.copy().convertToFormat(QImage::Format_ARGB32);
+	}
+	else
+	{
+		src = image.copy().convertToFormat(QImage::Format_RGB32);
+	}
+	
+	int * map = new int[image.width()*image.height()];
+	int * seam = new int[image.height()];
+	
+	omp_set_num_threads(Globals::getThreadCount());
+	
+	for (int r = 0; r < reduction; r++)
+	{
+		int width = src.width()-r;
+		int height = src.height();
+		
+		#pragma omp parallel for schedule(static, 1)
+		for (int y = 1; y < height-1; y++)
+		{
+			const QRgb * rows[3];
+			rows[0] = reinterpret_cast<const QRgb *>(src.constScanLine(y-1));
+			rows[1] = reinterpret_cast<const QRgb *>(src.constScanLine(y));
+			rows[2] = reinterpret_cast<const QRgb *>(src.constScanLine(y+1));
+			int * mapLine = &map[y*width];
+			for (int x = 1; x < width-1; x++)
+			{
+				int energy = 0;
+				QRgb pixel00 = rows[1][x];
+				int r = qRed(pixel00);
+				int g = qGreen(pixel00);
+				int b = qBlue(pixel00);
+				
+				for (int yy = 0; yy < 3; yy++)
+				{
+					const QRgb * row = rows[yy];
+					for (int xx = x-1; xx <= x+1; xx++)
+					{
+						energy += abs(qRed(row[xx]) - r);
+						energy += abs(qGreen(row[xx]) - g);
+						energy += abs(qBlue(row[xx]) - b);
+					}
+				}
+				
+				if (hasAlpha)
+				{
+					energy *= qAlpha(pixel00);
+				}
+				mapLine[x] = energy;
+			}
+			mapLine[0] = mapLine[1];
+			mapLine[width-1] = mapLine[width-2];
+		}
+		memcpy(&map[0*width], &map[1*width], sizeof(int)*width);
+		memcpy(&map[(height-1)*width], &map[(height-2)*width], sizeof(int)*width);
+		
+		//#pragma omp parallel for schedule(static, 1)
+		for (int y = 1; y < height; y++)
+		{
+			int yp = y - 1;
+			int * rowp = &map[yp * width];
+			int * row  = &map[y  * width];
+			
+			row[0] += qMin(rowp[0], rowp[1]);
+			for (int x = 1; x < width-1; x++)
+			{
+				row[x] += qMin(qMin(rowp[x-1], rowp[x+1]), rowp[x]);
+			}
+			row[width-1] += qMin(rowp[width-1], rowp[width-2]);
+		}
+		
+		int * lastLine = &map[width * (height - 1)];
+		int minEnergy = lastLine[0];
+		int minEnergyIndex = 0;
+		for (int x = 0; x < width; x++)
+		{
+			if (lastLine[x] < minEnergy)
+			{
+				minEnergy = lastLine[x];
+				minEnergyIndex = x;
+			}
+		}
+		seam[height - 1] = minEnergyIndex;
+		for (int y = height - 1; y > 0; y--)
+		{
+			int x = seam[y];
+			int xp = x - 1;
+			if (xp < 0) xp = 0;
+			int xn = x + 1;
+			if (xn >= width) xn = width - 1;
+			int ep = map[width * (y - 1) + xp];
+			int e  = map[width * (y - 1) + x];
+			int en = map[width * (y - 1) + xn];
+			if (ep < e)
+			{
+				seam[y-1] = (ep < en) ? xp : xn;
+			}
+			else
+			{
+				seam[y-1] = (en < e) ? xn : x;
+			}
+		}
+		
+		#pragma omp parallel for schedule(static, 1)
+		for (int y = 0; y < height; y++)
+		{
+			QRgb * srcRow  = reinterpret_cast<QRgb *>(src.scanLine(y));
+			memmove(srcRow + seam[y], srcRow + seam[y] + 1, sizeof(QRgb) * (width - 1 - seam[y]));
+		}
+	}
+	
+	delete [] map;
+	delete [] seam;
+	
+	return src.copy(src.rect().adjusted(0,0,-reduction,0)).convertToFormat(image.format());
+}
+
+QImage ImageOp::SeamCarvingVertical(const QImage image, int reduction)
+{
+	return RotateLeft(SeamCarvingHorizontal(RotateRight(image), reduction));
+}
+

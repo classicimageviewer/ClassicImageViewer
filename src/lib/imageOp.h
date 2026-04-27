@@ -48,6 +48,9 @@ public:
 	static QImage MirrorHorizontal(const QImage image);
 	static QImage Grayscale(const QImage image);
 	static QImage Negative(const QImage image);
+	
+	static QImage SeamCarvingHorizontal(const QImage image, int reduction);
+	static QImage SeamCarvingVertical(const QImage image, int reduction);
 };
 
 #endif //IMAGEOP_H
