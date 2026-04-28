@@ -1268,7 +1268,7 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_SEAM_CARVING:
 			{
-				SeamCarvingDialog * d = new SeamCarvingDialog(display->getImage());
+				SeamCarvingDialog * d = new SeamCarvingDialog(display->getImage(), display->getSelection());
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);

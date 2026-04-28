@@ -19,7 +19,7 @@
 #include <QDebug>
 #include "lib/imageOp.h"
 
-SeamCarvingDialog::SeamCarvingDialog(QImage image, QWidget * parent) : QDialog(parent)
+SeamCarvingDialog::SeamCarvingDialog(QImage image, QRect exclusionRegion, QWidget * parent) : QDialog(parent)
 {
 	ui.setupUi(this);
 	setFixedSize(size());
@@ -31,6 +31,8 @@ SeamCarvingDialog::SeamCarvingDialog(QImage image, QWidget * parent) : QDialog(p
 	srcImg = ImageOp::Sharpen(image, 0.05).scaled(320*Globals::scalingFactor, 320*Globals::scalingFactor, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 	ui.labelDst->setAlignment(Qt::AlignCenter);
 	previewScale = (double)srcImg.width() / (double)image.width();
+	
+	this->exclusionRegion = exclusionRegion;
 	
 	ui.comboBoxDirection->setCurrentIndex(direction);
 	ui.spinBoxReduction->setValue(reduction);
@@ -84,13 +86,24 @@ void SeamCarvingDialog::displayPreview()
 QImage SeamCarvingDialog::shrinkImage(QImage i, double scale)
 {
 	int reduction = this->reduction * scale;
+	int exclusionStart = -1, exclusionStop = -1;
 	if (direction == 1)
 	{
-		return ImageOp::SeamCarvingVertical(i, reduction);
+		if (!exclusionRegion.isNull())
+		{
+			exclusionStart = exclusionRegion.y() * scale;
+			exclusionStop = (exclusionRegion.y() + exclusionRegion.height()) * scale;
+		}
+		return ImageOp::SeamCarvingVertical(i, reduction, exclusionStart, exclusionStop);
 	}
 	else
 	{
-		return ImageOp::SeamCarvingHorizontal(i, reduction);
+		if (!exclusionRegion.isNull())
+		{
+			exclusionStart = exclusionRegion.x() * scale;
+			exclusionStop = (exclusionRegion.x() + exclusionRegion.width()) * scale;
+		}
+		return ImageOp::SeamCarvingHorizontal(i, reduction, exclusionStart, exclusionStop);
 	}
 }
 

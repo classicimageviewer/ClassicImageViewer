@@ -3237,12 +3237,17 @@ The application will exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/seamcarvingdialog.ui" line="75"/>
+        <location filename="../src/dialogs/seamcarvingdialog.ui" line="74"/>
+        <source>Hint: selection is exclusion region.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/seamcarvingdialog.ui" line="99"/>
         <source>Horizontal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/seamcarvingdialog.ui" line="80"/>
+        <location filename="../src/dialogs/seamcarvingdialog.ui" line="104"/>
         <source>Vertical</source>
         <translation type="unfinished"></translation>
     </message>

@@ -30,12 +30,13 @@ private:
 	int direction, reduction;
 	double previewScale;
 	void displayPreview();
+	QRect exclusionRegion;
 private slots:
 	void changeDirection(int v);
 	void spinBoxChanged(int value);
 	void sliderChanged(int value);
 public:
-	SeamCarvingDialog(QImage image, QWidget * parent = NULL);
+	SeamCarvingDialog(QImage image, QRect exclusionRegion, QWidget * parent = NULL);
 	~SeamCarvingDialog();
 	void savePreferences();
 	QImage shrinkImage(QImage i, double scale = 1.0);

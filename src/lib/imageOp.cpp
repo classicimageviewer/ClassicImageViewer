@@ -266,7 +266,7 @@ QImage ImageOp::Negative(const QImage image)
 	return dst;
 }
 
-QImage ImageOp::SeamCarvingHorizontal(const QImage image, int reduction)
+QImage ImageOp::SeamCarvingHorizontal(const QImage image, int reduction, int exclusionStart, int exclusionStop)
 {
 	bool hasAlpha = image.hasAlphaChannel();
 	QImage src;
@@ -289,6 +289,7 @@ QImage ImageOp::SeamCarvingHorizontal(const QImage image, int reduction)
 	{
 		int width = src.width()-r;
 		int height = src.height();
+		if (width == 0) break;
 		
 		#pragma omp parallel for schedule(static, 1)
 		for (int y = 1; y < height-1; y++)
@@ -325,6 +326,14 @@ QImage ImageOp::SeamCarvingHorizontal(const QImage image, int reduction)
 			}
 			mapLine[0] = mapLine[1];
 			mapLine[width-1] = mapLine[width-2];
+			
+			for (int x = 0; x < width; x++)
+			{
+				if ((x >= exclusionStart) && (x <= exclusionStop))
+				{
+					mapLine[x] *= 999;
+				}
+			}
 		}
 		memcpy(&map[0*width], &map[1*width], sizeof(int)*width);
 		memcpy(&map[(height-1)*width], &map[(height-2)*width], sizeof(int)*width);
@@ -356,6 +365,7 @@ QImage ImageOp::SeamCarvingHorizontal(const QImage image, int reduction)
 			}
 		}
 		seam[height - 1] = minEnergyIndex;
+		int averageSeam = 0;
 		for (int y = height - 1; y > 0; y--)
 		{
 			int x = seam[y];
@@ -374,6 +384,22 @@ QImage ImageOp::SeamCarvingHorizontal(const QImage image, int reduction)
 			{
 				seam[y-1] = (en < e) ? xn : x;
 			}
+			averageSeam += x;
+		}
+		averageSeam += seam[0];
+		averageSeam /= height;
+		if ((exclusionStart >= 0) && (exclusionStop >= 0))
+		{
+			if (averageSeam <= exclusionStart)
+			{
+				exclusionStart -= 1;
+				exclusionStop -= 1;
+			}
+			else
+			if (averageSeam <= exclusionStop)
+			{
+				exclusionStop -= 1;
+			}
 		}
 		
 		#pragma omp parallel for schedule(static, 1)
@@ -390,8 +416,8 @@ QImage ImageOp::SeamCarvingHorizontal(const QImage image, int reduction)
 	return src.copy(src.rect().adjusted(0,0,-reduction,0)).convertToFormat(image.format());
 }
 
-QImage ImageOp::SeamCarvingVertical(const QImage image, int reduction)
+QImage ImageOp::SeamCarvingVertical(const QImage image, int reduction, int exclusionStart, int exclusionStop)
 {
-	return RotateLeft(SeamCarvingHorizontal(RotateRight(image), reduction));
+	return RotateRight(SeamCarvingHorizontal(RotateLeft(image), reduction, exclusionStart, exclusionStop));
 }
 
