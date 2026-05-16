@@ -1,6 +1,6 @@
 # ClassicImageViewer
 
-ClassicImageViewer is a simple and fast image viewer for Linux, BSDs and MacOS with some editing features.
+ClassicImageViewer is a simple and fast image viewer and editor for Linux, BSDs and MacOS.
 
 ![ClassicImageViewer](./misc/screenshot.png?raw=true "ClassicImageViewer") 
 
@@ -13,6 +13,7 @@ ClassicImageViewer is a simple and fast image viewer for Linux, BSDs and MacOS w
 - Slideshow
 - Batch conversion / renaming
 - Macros
+- Paint mode (Shapes, Clone stamp, Text, ...)
 
 # Download
 
