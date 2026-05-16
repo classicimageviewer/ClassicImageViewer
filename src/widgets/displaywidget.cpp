@@ -16,6 +16,7 @@
 
 #include "displaywidget.h"
 #include "globals.h"
+#include "drawdevices.h"
 #include <cmath>
 #include <QDebug>
 #include <QPainter>
@@ -43,6 +44,7 @@ DisplayWidget::DisplayWidget(QWidget *parent) : QGraphicsView(parent)
 	setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 	this->parent = (MainWindow*)parent;
 	this->installEventFilter(this);
+	drawDevice = NULL;
 }
 
 DisplayWidget::~DisplayWidget()
@@ -50,8 +52,16 @@ DisplayWidget::~DisplayWidget()
 	isAnimated = false;
 	animationTimer.stop();
 	setScene(NULL);
+	if (drawDevice)
+	{
+		uninstallDrawDevice();
+	}
 	if (surface)
 	{
+		if (drawDevice)
+		{
+			drawDevice->disconnectSurface();
+		}
 		disconnect(surface, SIGNAL(zoomChanged()), NULL, NULL);
 		disconnect(surface, SIGNAL(selectionChanged()), NULL, NULL);
 		delete surface;
@@ -84,6 +94,10 @@ void DisplayWidget::newImageSequence(const QList<QImage> frames, const QList<int
 	if (surface)
 	{
 		setScene(NULL);
+		if (drawDevice)
+		{
+			drawDevice->disconnectSurface();
+		}
 		disconnect(surface, SIGNAL(zoomChanged()), NULL, NULL);
 		disconnect(surface, SIGNAL(selectionChanged()), NULL, NULL);
 		disconnect(surface, SIGNAL(pixelInfo()), NULL, NULL);
@@ -109,6 +123,10 @@ void DisplayWidget::newImageSequence(const QList<QImage> frames, const QList<int
 	this->frames = frames;
 	this->frameDurationMs = frameDurationMs;
 	surface = new DisplaySurface(this);
+	if (drawDevice)
+	{
+		installDrawDevice(drawDevice);
+	}
 	connect(surface, SIGNAL(zoomChanged()), this, SIGNAL(zoomChanged())); // redirect signals
 	connect(surface, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
 	connect(surface, SIGNAL(pixelInfo()), this, SIGNAL(pixelInfo()));
@@ -134,6 +152,10 @@ void DisplayWidget::newImage(const QImage &image)
 	if (surface)
 	{
 		setScene(NULL);
+		if (drawDevice)
+		{
+			drawDevice->disconnectSurface();
+		}
 		disconnect(surface, SIGNAL(zoomChanged()), NULL, NULL);
 		disconnect(surface, SIGNAL(selectionChanged()), NULL, NULL);
 		disconnect(surface, SIGNAL(pixelInfo()), NULL, NULL);
@@ -152,10 +174,14 @@ void DisplayWidget::newImage(const QImage &image)
 	connect(surface, SIGNAL(zoomChanged()), this, SIGNAL(zoomChanged())); // redirect signals
 	connect(surface, SIGNAL(selectionChanged()), this, SIGNAL(selectionChanged()));
 	connect(surface, SIGNAL(pixelInfo()), this, SIGNAL(pixelInfo()));
-	surface->enableSelection(selectionEnabled);
+	surface->enableSelection(selectionEnabled && !drawDevice);
 	setScene(surface);
 	surface->setImage(this->image);
 	surface->setZoom(zoom);
+	if (drawDevice)
+	{
+		installDrawDevice(drawDevice);
+	}
 	emit selectionChanged();
 }
 
@@ -230,7 +256,14 @@ void DisplayWidget::enableSelection(bool enable)
 	selectionEnabled = enable && !isAnimated;
 	if (surface)
 	{
-		surface->enableSelection(selectionEnabled);
+		surface->enableSelection(selectionEnabled && !drawDevice);
+	}
+	if (drawDevice)
+	{
+		if (!enable)
+		{
+			drawDevice->abortDraw();
+		}
 	}
 }
 
@@ -273,6 +306,48 @@ QPointF DisplayWidget::getMousePositionCorrection()
 {
 	return mousePositionCorrection;
 }
+
+void DisplayWidget::installDrawDevice(DrawDevice * drawDevice)
+{
+	this->drawDevice = drawDevice;
+	if (surface)
+	{
+		drawDevice->registerSurface(surface);
+		surface->installDrawDevice(drawDevice);
+		surface->enableSelection(false);
+	}
+	setCursor(Qt::CrossCursor);
+}
+
+void DisplayWidget::uninstallDrawDevice(void)
+{
+	if (drawDevice)
+	{
+		drawDevice->disconnectSurface();
+	}
+	if (surface)
+	{
+		surface->uninstallDrawDevice();
+		surface->enableSelection(selectionEnabled);
+	}
+	unsetCursor();
+	drawDevice = NULL;
+}
+
+QImage & DisplayWidget::getImageRef()
+{
+	return image;
+}
+
+void DisplayWidget::updateInternalImage(void)
+{
+	if (surface)
+	{
+		surface->setImage(this->image);
+		surface->redraw(true);
+	}
+}
+
 
 bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 {
@@ -646,6 +721,7 @@ DisplaySurface::DisplaySurface(DisplayWidget * parent) : QGraphicsScene(parent)
 	scrollTimer.start(33);
 	if (objCntr) qDebug() << "DisplaySurface::objCntr != 0";
 	objCntr++;
+	drawDevice = NULL;
 }
 
 DisplaySurface::~DisplaySurface()
@@ -681,6 +757,11 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
 	mouseInteraction = NONE;
 	mouseOffset = QPoint();
+	if (drawDevice)
+	{
+		drawDevice->mousePressEvent(event->scenePos()*Globals::scalingFactor, event->button(), event->modifiers());
+		return;
+	}
 	if(event->button() == Qt::LeftButton)
 	{
 		if (selectionEnabled)
@@ -789,6 +870,11 @@ void DisplaySurface::mousePressEvent(QGraphicsSceneMouseEvent *event)
 
 void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 {
+	if (drawDevice)
+	{
+		drawDevice->mouseMoveEvent(event->scenePos()*Globals::scalingFactor, event->button(), event->modifiers());
+		return;
+	}
 	if((event->buttons() & Qt::LeftButton) || (event->buttons() & Qt::RightButton))
 	{
 		QPoint pos = mousePositionInImage(event);
@@ -933,6 +1019,11 @@ void DisplaySurface::mouseMoveEvent(QGraphicsSceneMouseEvent *event)
 
 void DisplaySurface::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 {
+	if (drawDevice)
+	{
+		drawDevice->mouseReleaseEvent(event->scenePos()*Globals::scalingFactor, event->button(), event->modifiers());
+		return;
+	}
 	if (mouseInteraction == SELECT)
 	{
 		QRect finalSelection = QRect(mouseStartPoint, mouseEndPoint).normalized();
@@ -1140,15 +1231,15 @@ void DisplaySurface::setImage(const QImage &image)
 			canvas->setCanvasPixmap(QPixmap::fromImage(this->image));
 		}
 	}
-	drawnWithoutSelection = false;
-	redraw();
+	setSceneRect(QRectF(QPointF(), QPointF(image.rect().bottomRight()) / Globals::scalingFactor));
+	redraw(true);
 }
 
-void DisplaySurface::redraw()
+void DisplaySurface::redraw(bool forced)
 {
 	if (!(selectionVisible && selectionEnabled)) // only draw when necessary
 	{
-		if (drawnWithoutSelection) return;
+		if (!forced && drawnWithoutSelection) return;
 		drawnWithoutSelection = true;
 	}
 	else
@@ -1165,7 +1256,9 @@ void DisplaySurface::redraw()
 	{
 		width = 1.0/Globals::scalingFactor;
 	}
-	
+	if ((zoom >= 1.0) && drawDevice)
+		canvas->setTransformationMode(Qt::FastTransformation);
+	else
 	if ((zoom < 1.0) || !selectionVisible || !selectionEnabled)
 		canvas->setTransformationMode(Qt::SmoothTransformation);
 	else
@@ -1292,6 +1385,23 @@ void DisplaySurface::adjustSelection(int vTL, int hTL, int vBR, int hBR)
 			changeSelection(newSelection);
 		}
 	}
+}
+
+void DisplaySurface::installDrawDevice(DrawDevice * drawDevice)
+{
+	this->drawDevice = drawDevice;
+	drawDevice->registerSurface(this);
+	redraw(true);
+}
+
+void DisplaySurface::uninstallDrawDevice(void)
+{
+	if (drawDevice)
+	{
+		drawDevice->disconnectSurface();
+	}
+	drawDevice = NULL;
+	redraw(true);
 }
 
 

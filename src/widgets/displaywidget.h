@@ -30,8 +30,7 @@ class DisplayCanvas;
 class DisplaySurface;
 class DisplayWidget;
 class MainWindow;
-
-// MOC does not support nested classes >(
+class DrawDevice;
 
 
 class DisplayCanvas : public QObject, public QGraphicsPixmapItem
@@ -105,6 +104,7 @@ private: // variables
 	int selectScrollX, selectScrollY;
 	bool drawnWithoutSelection;
 	QPoint pixelInfoPos;
+	DrawDevice * drawDevice;
 private: // functions
 	void mousePressEvent(QGraphicsSceneMouseEvent *event) override;
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) override;
@@ -120,7 +120,7 @@ public:
 	void hoverAction(QPoint pos);
 	void hoverLeaveAction(QPoint pos);
 	void setImage(const QImage &image);
-	void redraw();
+	void redraw(bool forced = false);
 	QRect getSelection();
 	void setSelection(QRect newSelection);
 	void setZoom(double zoom);
@@ -130,6 +130,8 @@ public:
 	QPointF getMousePositionCorrection();
 	void toggleSelectionAll();
 	void adjustSelection(int vTL, int hTL, int vBR, int hBR);
+	void installDrawDevice(DrawDevice * drawDevice);
+	void uninstallDrawDevice(void);
 signals:
 	void zoomChanged();
 	void selectionChanged();
@@ -157,6 +159,7 @@ private: // variables
 	QTimer animationTimer;
 	bool selectionEnabled;
 	QPointF mousePositionCorrection;
+	DrawDevice * drawDevice;
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);
 	void wheelEvent(QWheelEvent *event) override;
@@ -190,6 +193,10 @@ public:
 	bool getPixelInfoHasAlpha();
 	QPoint getPixelInfoPos();
 	QPointF getMousePositionCorrection();
+	void installDrawDevice(DrawDevice * drawDevice);
+	void uninstallDrawDevice(void);
+	QImage & getImageRef();
+	void updateInternalImage(void);
 signals:
 	void needNextImage();
 	void needPrevImage();

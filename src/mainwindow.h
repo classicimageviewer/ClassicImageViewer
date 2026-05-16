@@ -25,6 +25,7 @@
 #include "ui_mainwindow.h"
 #include "actions.h"
 #include "widgets/displaywidget.h"
+#include "widgets/drawdevices.h"
 #include "widgets/savefiledialog.h"
 #include "io/imageIO.h"
 #include "dialogs/thumbnaildialog.h"
@@ -100,6 +101,10 @@ private: // variables
 	bool blockSetImageSize;
 	bool temporaryDeleteConfirmSuppress;
 	QRect lastSelection;
+	DrawDevice * drawDevice;
+	bool drawDockWidgetVisible;
+	QList<QToolButton *> drawDockWidgetButtons;
+	DrawDeviceParameters drawDeviceParameters;
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);
 	QAction * menuAddAction(QMenu * menu, QString text, Action event, const char *shortCut, int flags);
@@ -109,6 +114,8 @@ private: // functions
 	void removeAction(Action a);
 	void setupToolBar();
 	void setupStatusBar();
+	void setupDrawDockWidget();
+	void setDrawDockWidgetActiveButton(QToolButton * btn);
 	void setInternalState(InternalState newState);
 	void applyInternalState();
 	void addToClipboard(QImage image);
@@ -128,7 +135,6 @@ private: // functions
 	void updateDisplayOverlayIndicator();
 	void clearUndoStack();
 	void clearPastedUndoStack();
-	void saveToUndoStack();
 	void undoFromUndoStack();
 	void redoFromUndoStack();
 	void updateWindowTitle();
@@ -182,7 +188,9 @@ public:
 	QStringList fileDialogOpen(const QString directoryPathOverride, bool multipleFiles = false);
 	SaveFileDialog::ReturnCluster fileDialogSave(const QString directoryPathOverride, const QString defaultFileName, bool saveSelectedExtension = false);
 	
-	
+	void saveToUndoStack();
+	void setDrawForegroundColor(QColor color);
+	void setDrawBackgroundColor(QColor color);
 public slots:
 
 };

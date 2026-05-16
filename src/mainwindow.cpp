@@ -46,6 +46,7 @@
 #include <QProcess>
 #include <QCollator>
 #include <QElapsedTimer>
+#include <QColorDialog>
 
 #include "dialogs/preferencesdialog.h"
 #include "dialogs/resizedialog.h"
@@ -102,16 +103,20 @@ MainWindow::MainWindow() : QMainWindow()
 	shortCutInfo = QStringList();
 	blockSetImageSize = false;
 	temporaryDeleteConfirmSuppress = false;
+	drawDevice = NULL;
+	drawDockWidgetVisible = false;
 
 	imageIO = new ImageIO();
 	
 	createMenu();
 	setupToolBar();
 	setupStatusBar();
+	setupDrawDockWidget();
 	ui.menuBar->setVisible(Globals::prefs->getMenubarVisible());
 	ui.toolBar->setVisible(Globals::prefs->getToolbarVisible());
 	ui.statusBar->setVisible(Globals::prefs->getStatusbarVisible());
 	ui.toolBar->setSizePolicy((Globals::prefs->getEnableToolbarShrinking() ? (QSizePolicy::Expanding) : (QSizePolicy::MinimumExpanding)), QSizePolicy::Minimum);
+	ui.dockWidgetDraw->setVisible(false);
 	
 	connect(&startupTimer, SIGNAL(timeout()), this, SLOT(startup()));
 	startupTimer.setSingleShot(true);
@@ -281,6 +286,33 @@ bool MainWindow::eventFilter(QObject* watched, QEvent* event)
 		if (keyEvent->key() == Qt::Key_Return) sendAction(ACT_TOGGLE_FULLSCREEN);
 		if (keyEvent->key() == Qt::Key_Escape) sendAction(ACT_EXIT);
 	}*/
+	if ((watched == ui.labelForegroundColor) && (event->type() == QEvent::MouseButtonPress))
+	{
+		QColorDialog * d = new QColorDialog(drawDeviceParameters.foregroundColor);
+		d->setOption(QColorDialog::ShowAlphaChannel);
+		if (d->exec() == QDialog::Accepted)
+		{
+			setDrawForegroundColor(d->selectedColor());
+		}
+		delete d;
+		return true;
+	}
+	if ((watched == ui.labelBackgroundColor) && (event->type() == QEvent::MouseButtonPress))
+	{
+		QColorDialog * d = new QColorDialog(drawDeviceParameters.backgroundColor);
+		d->setOption(QColorDialog::ShowAlphaChannel);
+		if (d->exec() == QDialog::Accepted)
+		{
+			setDrawBackgroundColor(d->selectedColor());
+		}
+		delete d;
+		return true;
+	}
+	if ((watched == ui.dockWidgetDraw) && (event->type() == QEvent::Close))
+	{
+		drawDockWidgetVisible = true;
+		sendAction(ACT_TOGGLE_DRAW_TOOLBAR);
+	}
 	return QObject::eventFilter(watched, event);
 }
 
@@ -350,6 +382,8 @@ void MainWindow::createMenu()
 
 	undoAction = menuAddAction(ui.menuEdit, tr("&Undo"), ACT_UNDO, "Ctrl+Z",  0);
 	redoAction = menuAddAction(ui.menuEdit, tr("R&edo"), ACT_REDO, "Ctrl+J",  0);
+	menuAddSeparator(ui.menuEdit);
+	menuAddAction(ui.menuEdit, tr("Toggle p&aint toolbar"), ACT_TOGGLE_DRAW_TOOLBAR, "F12",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("Cust&om selection"), ACT_CUSTOM_SELECTION, "Shift+C",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuEdit, tr("Restore last selection"), ACT_RESTORE_LAST_SELECTION, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
@@ -1016,6 +1050,25 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_REDO:
 			redoFromUndoStack();
+			break;
+		case ACT_TOGGLE_DRAW_TOOLBAR:
+			if (drawDockWidgetVisible)
+			{
+				ui.dockWidgetDraw->setVisible(false);
+				display->uninstallDrawDevice();
+				if (drawDevice)
+				{
+					delete drawDevice;
+					drawDevice = NULL;
+				}
+				setDrawDockWidgetActiveButton(ui.toolButtonDrawSelection);
+			}
+			else
+			{
+				ui.dockWidgetDraw->setVisible(true);
+				resizeDocks({ui.dockWidgetDraw}, {1}, Qt::Horizontal);
+			}
+			drawDockWidgetVisible = !drawDockWidgetVisible;
 			break;
 		case ACT_CUSTOM_SELECTION:
 			{
@@ -2236,6 +2289,244 @@ void MainWindow::setupStatusBar()
 	statusBarSelection->setText(QString(tr("No selection")));
 }
 
+void MainWindow::setupDrawDockWidget()
+{
+	#define INSTALL_NEW_DRAW_DEVICE(DD, SP)
+	#define ADD_BUTTON(BTN, DD, SP, TT)	drawDockWidgetButtons.append(BTN); \
+						BTN->setToolTip(TT); \
+						connect(BTN, &QToolButton::clicked, this, [this](bool b) { \
+							Q_UNUSED(b); \
+							auto * btn = qobject_cast<QToolButton*>(sender()); \
+							assert(btn); \
+							setDrawDockWidgetActiveButton(btn); \
+							display->uninstallDrawDevice(); \
+							if (drawDevice) \
+							{ \
+								delete drawDevice; \
+								drawDevice = NULL; \
+							} \
+							INSTALL_NEW_DRAW_DEVICE(DD, SP); \
+						}) \
+						//
+	ADD_BUTTON(ui.toolButtonDrawSelection, NULL, 0, tr("Selection tool\nFor normal use"));
+	#undef INSTALL_NEW_DRAW_DEVICE
+	#define INSTALL_NEW_DRAW_DEVICE(DD, SP) 	drawDevice = new DD(this, &drawDeviceParameters, SP); display->installDrawDevice(drawDevice);
+	ADD_BUTTON(ui.toolButtonDrawPen, DrawDevicePencil, 0, tr("Pencil\nPixel manipulation"));
+	ADD_BUTTON(ui.toolButtonDrawBrush, DrawDeviceBrush, 0, tr("Brush\nFree hand drawing"));
+	ADD_BUTTON(ui.toolButtonDrawSmudge, DrawDeviceSmudge, 0, tr("Smudge / warp tool\nCtrl: warp\nShift: warp + blur"));
+	ADD_BUTTON(ui.toolButtonDrawClone, DrawDeviceClone, 0, tr("Clone tool\nCtrl+Click: select source area"));
+	ADD_BUTTON(ui.toolButtonDrawLine, DrawDeviceLine, 0, tr("Line\nCtrl: drag while drawing\nShift: limits angle to multiples of 15 deg"));
+	ADD_BUTTON(ui.toolButtonDrawRectangle, DrawDeviceShapes, DrawDeviceShapes::Specialization::Rectangle, tr("Rectangle\nCtrl: drag while drawing\nShift: draw square"));
+	ADD_BUTTON(ui.toolButtonDrawRoundedRectangle, DrawDeviceShapes, DrawDeviceShapes::Specialization::RoundedRectangle, tr("Rounded rectangle\nCtrl: drag while drawing\nShift: draw square"));
+	ADD_BUTTON(ui.toolButtonDrawEllipse, DrawDeviceShapes, DrawDeviceShapes::Specialization::Ellipse, tr("Ellipse\nCtrl: drag while drawing\nShift: draw circle"));
+	ADD_BUTTON(ui.toolButtonDrawText, DrawDeviceText, 0, tr("Text"));
+	ADD_BUTTON(ui.toolButtonDrawFill, DrawDeviceFill, 0, tr("Fill"));
+	ADD_BUTTON(ui.toolButtonDrawColorPicker, DrawDeviceColorPicker, 0, tr("Color picker"));
+	
+	#undef ADD_BUTTON
+	#undef INSTALL_NEW_DRAW_DEVICE
+	
+	 ui.comboBoxLine->setItemData(0, tr("Solid line"), Qt::ToolTipRole);
+	 ui.comboBoxLine->setItemData(1, tr("Dash line"), Qt::ToolTipRole);
+	 ui.comboBoxLine->setItemData(2, tr("Dot line"), Qt::ToolTipRole);
+	 ui.comboBoxLine->setItemData(3, tr("DashDot line"), Qt::ToolTipRole);
+	 ui.comboBoxLineEnd->setItemData(0, tr("Round cap"), Qt::ToolTipRole);
+	 ui.comboBoxLineEnd->setItemData(1, tr("Flat cap"), Qt::ToolTipRole);
+	 ui.comboBoxLineEnd->setItemData(2, tr("Square cap"), Qt::ToolTipRole);
+	 ui.comboBoxLineJoin->setItemData(0, tr("Round join"), Qt::ToolTipRole);
+	 ui.comboBoxLineJoin->setItemData(1, tr("Bevel join"), Qt::ToolTipRole);
+	 ui.comboBoxLineJoin->setItemData(2, tr("Miter join"), Qt::ToolTipRole);
+	
+	drawDeviceParameters.display = display;
+	drawDeviceParameters.foregroundColor = QColor(255, 255, 255);
+	drawDeviceParameters.backgroundColor = QColor(0, 0, 0);
+	ui.labelForegroundColor->installEventFilter(this);
+	ui.labelBackgroundColor->installEventFilter(this);
+	ui.dockWidgetDraw->installEventFilter(this);
+	
+	
+	connect(ui.toolButtonSwitchDrawColors, &QToolButton::clicked, this, [this](bool b) {
+		Q_UNUSED(b);
+		QColor tmp = drawDeviceParameters.backgroundColor;
+		drawDeviceParameters.backgroundColor = drawDeviceParameters.foregroundColor;
+		drawDeviceParameters.foregroundColor = tmp;
+		QString tmpStyle = ui.labelForegroundColor->styleSheet();
+		ui.labelForegroundColor->setStyleSheet(ui.labelBackgroundColor->styleSheet());
+		ui.labelBackgroundColor->setStyleSheet(tmpStyle);
+	});
+	
+	ui.checkBoxAntiAliasing->setChecked(true);
+	connect(ui.checkBoxAntiAliasing, &QCheckBox::clicked, this, [this](bool b) {
+		drawDeviceParameters.antialiasing = b;
+	});
+	
+	
+	connect(ui.spinBoxSize, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int i) {
+		drawDeviceParameters.size = i;
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "size", i);
+	});
+	connect(ui.spinBoxWidth, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int i) {
+		drawDeviceParameters.width = i;
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "width", i);
+	});
+	
+	connect(ui.comboBoxLine, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int i) {
+		switch(i)
+		{
+			default:
+			case 0:
+				drawDeviceParameters.lineStyle = Qt::SolidLine;
+				break;
+			case 1:
+				drawDeviceParameters.lineStyle = Qt::DashLine;
+				break;
+			case 2:
+				drawDeviceParameters.lineStyle = Qt::DotLine;
+				break;
+			case 3:
+				drawDeviceParameters.lineStyle = Qt::DashDotLine;
+				break;
+		}
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "line", i);
+	});
+	
+	connect(ui.comboBoxLineEnd, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int i) {
+		switch(i)
+		{
+			default:
+			case 0:
+				drawDeviceParameters.lineEnd = Qt::RoundCap;
+				break;
+			case 1:
+				drawDeviceParameters.lineEnd = Qt::FlatCap;
+				break;
+			case 2:
+				drawDeviceParameters.lineEnd = Qt::SquareCap;
+				break;
+		}
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "lineEnd", i);
+	});
+	
+	connect(ui.comboBoxLineJoin, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int i) {
+		switch(i)
+		{
+			default:
+			case 0:
+				drawDeviceParameters.lineJoin = Qt::RoundJoin;
+				break;
+			case 1:
+				drawDeviceParameters.lineJoin = Qt::BevelJoin;
+				break;
+			case 2:
+				drawDeviceParameters.lineJoin = Qt::MiterJoin;
+				break;
+		}
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "lineJoin", i);
+	});
+	
+	connect(ui.spinBoxTolerance, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int i) {
+		drawDeviceParameters.tolerance = i;
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "tolerance", i);
+	});
+	connect(ui.spinBoxRadius, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int i) {
+		drawDeviceParameters.radius = i;
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "radius", i);
+	});
+	
+	connect(ui.comboBoxPolygon, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int i) {
+		drawDeviceParameters.polygonFillOutline = i;
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "polygon", i);
+	});
+	
+	QPlainTextEdit * textEdit = ui.plainDrawTextEdit;
+	connect(ui.plainDrawTextEdit, &QPlainTextEdit::textChanged, this, [this, textEdit](void) {
+		drawDeviceParameters.text = textEdit->toPlainText();
+	});
+	connect(ui.fontComboBoxDrawText, &QFontComboBox::currentFontChanged, this, [this](QFont font) {
+		drawDeviceParameters.font = font;
+	});
+	connect(ui.spinBoxDrawTextSize, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int i) {
+		drawDeviceParameters.fontSize = i;
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "textSize", i);
+	});
+	connect(ui.toolButtonDrawTextBold, &QToolButton::clicked, this, [this](bool b) {
+		drawDeviceParameters.boldFont = b;
+	});
+	connect(ui.toolButtonDrawTextItalic, &QToolButton::clicked, this, [this](bool b) {
+		drawDeviceParameters.italicFont = b;
+	});
+	
+	
+	ui.checkBoxAntiAliasing->setChecked(true);
+	ui.checkBoxAntiAliasing->clicked(true);
+	int size = Globals::prefs->fetchSpecificParameter("DrawToolbar", "size", 16).toInt();
+	ui.spinBoxSize->setValue(size);
+	ui.spinBoxSize->valueChanged(size);
+	int width = Globals::prefs->fetchSpecificParameter("DrawToolbar", "width", 1).toInt();
+	ui.spinBoxWidth->setValue(width);
+	ui.spinBoxWidth->valueChanged(width);
+	int line = Globals::prefs->fetchSpecificParameter("DrawToolbar", "line", 0).toInt();
+	ui.comboBoxLine->setCurrentIndex(line);
+	ui.comboBoxLine->currentIndexChanged(line);
+	int lineEnd = Globals::prefs->fetchSpecificParameter("DrawToolbar", "lineEnd", 0).toInt();
+	ui.comboBoxLineEnd->setCurrentIndex(lineEnd);
+	ui.comboBoxLineEnd->currentIndexChanged(lineEnd);
+	int lineJoin = Globals::prefs->fetchSpecificParameter("DrawToolbar", "lineJoin", 0).toInt();
+	ui.comboBoxLineJoin->setCurrentIndex(lineJoin);
+	ui.comboBoxLineJoin->currentIndexChanged(lineJoin);
+	int polygon = Globals::prefs->fetchSpecificParameter("DrawToolbar", "polygon", 0).toInt();
+	ui.comboBoxPolygon->setCurrentIndex(polygon);
+	ui.comboBoxPolygon->currentIndexChanged(polygon);
+	int tolerance = Globals::prefs->fetchSpecificParameter("DrawToolbar", "tolerance", 0).toInt();
+	ui.spinBoxTolerance->setValue(tolerance);
+	ui.spinBoxTolerance->valueChanged(tolerance);
+	int radius = Globals::prefs->fetchSpecificParameter("DrawToolbar", "radius", 10).toInt();
+	ui.spinBoxRadius->setValue(radius);
+	ui.spinBoxRadius->valueChanged(radius);
+	
+	int textSize = Globals::prefs->fetchSpecificParameter("DrawToolbar", "textSize", 24).toInt();
+	ui.spinBoxDrawTextSize->setValue(textSize);
+	ui.spinBoxDrawTextSize->valueChanged(textSize);
+	ui.toolButtonDrawTextBold->setChecked(false);
+	ui.toolButtonDrawTextBold->clicked(false);
+	ui.toolButtonDrawTextItalic->setChecked(false);
+	ui.toolButtonDrawTextItalic->clicked(false);
+	ui.fontComboBoxDrawText->currentFontChanged(ui.fontComboBoxDrawText->currentFont());
+	
+	setDrawDockWidgetActiveButton(ui.toolButtonDrawSelection);
+}
+
+void MainWindow::setDrawDockWidgetActiveButton(QToolButton * btn)
+{
+	for (auto b : drawDockWidgetButtons)
+	{
+		b->setChecked(btn == b);
+	}
+	
+	ui.stackedWidgetSizeWidth->setCurrentIndex(((btn == ui.toolButtonDrawClone) || (btn == ui.toolButtonDrawSmudge)) ? 0 : 1);
+	ui.stackedWidgetToleranceRadius->setCurrentIndex((btn == ui.toolButtonDrawFill) ? 0 : 1);
+	ui.checkBoxAntiAliasing->setEnabled(!(btn == ui.toolButtonDrawSelection));
+	ui.spinBoxWidth->setEnabled(!((btn == ui.toolButtonDrawSelection) || (btn == ui.toolButtonDrawPen) || (btn == ui.toolButtonDrawText) || (btn == ui.toolButtonDrawFill) || (btn == ui.toolButtonDrawColorPicker)));
+	ui.comboBoxLine->setEnabled((btn == ui.toolButtonDrawBrush) || (btn == ui.toolButtonDrawLine) || (btn == ui.toolButtonDrawRectangle) || (btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawEllipse));
+	ui.comboBoxLineEnd->setEnabled((btn == ui.toolButtonDrawBrush) || (btn == ui.toolButtonDrawLine) || (btn == ui.toolButtonDrawRectangle) || (btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawEllipse));
+	ui.comboBoxLineJoin->setEnabled((btn == ui.toolButtonDrawBrush) || (btn == ui.toolButtonDrawLine) || (btn == ui.toolButtonDrawRectangle) || (btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawEllipse));
+	ui.comboBoxPolygon->setEnabled((btn == ui.toolButtonDrawRectangle) || (btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawEllipse));
+	ui.spinBoxRadius->setEnabled((btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawSmudge));
+	
+	bool drawTextVisible = ui.stackedWidgetDrawText->isVisible();
+	ui.stackedWidgetDrawText->setVisible(btn == ui.toolButtonDrawText);
+	if (drawTextVisible)	// workaround...
+	{
+		ui.frameDrawText->resize(0,0);
+		ui.dockWidgetDraw->setFixedSize(1,1);
+		ui.dockWidgetDraw->updateGeometry();
+		ui.dockWidgetDraw->setFixedSize(QWIDGETSIZE_MAX, QWIDGETSIZE_MAX);
+		ui.dockWidgetDraw->updateGeometry();
+		ui.dockWidgetDraw->repaint();
+		resizeDocks({ui.dockWidgetDraw}, {1}, Qt::Horizontal);
+	}
+}
+
 QStringList MainWindow::fastIndexer(QString dirPath, QStringList extensions, int ordering)
 {
 	std::string dirPathS = dirPath.toUtf8().constData();
@@ -2592,6 +2883,11 @@ void MainWindow::setFullscreen(bool fs)
 		{
 			QApplication::setOverrideCursor(Qt::BlankCursor);
 		}
+		ui.dockWidgetDraw->setVisible(false);
+		if (drawDevice)
+		{
+			display->uninstallDrawDevice();
+		}
 	}
 	else
 	{
@@ -2604,6 +2900,14 @@ void MainWindow::setFullscreen(bool fs)
 		while (QApplication::overrideCursor())
 		{
 			QApplication::restoreOverrideCursor();
+		}
+		if (drawDockWidgetVisible)
+		{
+			ui.dockWidgetDraw->setVisible(true);
+		}
+		if (drawDevice)
+		{
+			display->installDrawDevice(drawDevice);
 		}
 	}
 	applyInternalState();
@@ -3135,4 +3439,25 @@ SaveFileDialog::ReturnCluster MainWindow::fileDialogSave(const QString directory
 	
 	return ret;
 }
+
+void MainWindow::setDrawForegroundColor(QColor color)
+{
+	drawDeviceParameters.foregroundColor = color;
+	int r = drawDeviceParameters.foregroundColor.red();
+	int g = drawDeviceParameters.foregroundColor.green();
+	int b = drawDeviceParameters.foregroundColor.blue();
+	QString style = QString("background-color: #%1%2%3;").arg(r, 2, 16 , QChar('0')).arg(g, 2, 16 , QChar('0')).arg(b, 2, 16 , QChar('0'));
+	ui.labelForegroundColor->setStyleSheet(style);
+}
+
+void MainWindow::setDrawBackgroundColor(QColor color)
+{
+	drawDeviceParameters.backgroundColor = color;
+	int r = drawDeviceParameters.backgroundColor.red();
+	int g = drawDeviceParameters.backgroundColor.green();
+	int b = drawDeviceParameters.backgroundColor.blue();
+	QString style = QString("background-color: #%1%2%3;").arg(r, 2, 16 , QChar('0')).arg(g, 2, 16 , QChar('0')).arg(b, 2, 16 , QChar('0'));
+	ui.labelBackgroundColor->setStyleSheet(style);
+}
+
 

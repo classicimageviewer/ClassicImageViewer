@@ -45,4 +45,58 @@
 		<file>pixmaps/batch_success@2x.png</file>
 		<file>pixmaps/batch_success.png</file>
 	</qresource>
+	<qresource prefix="/draw">
+		<file>icons/draw/arrow@2x.png</file>
+		<file>icons/draw/arrow.png</file>
+		<file>icons/draw/brush@2x.png</file>
+		<file>icons/draw/brush.png</file>
+		<file>icons/draw/bucket@2x.png</file>
+		<file>icons/draw/bucket.png</file>
+		<file>icons/draw/circle@2x.png</file>
+		<file>icons/draw/circle.png</file>
+		<file>icons/draw/clear@2x.png</file>
+		<file>icons/draw/clear.png</file>
+		<file>icons/draw/line@2x.png</file>
+		<file>icons/draw/line.png</file>
+		<file>icons/draw/lineDash@2x.png</file>
+		<file>icons/draw/lineDashDot@2x.png</file>
+		<file>icons/draw/lineDashDot.png</file>
+		<file>icons/draw/lineDash.png</file>
+		<file>icons/draw/lineDot@2x.png</file>
+		<file>icons/draw/lineDot.png</file>
+		<file>icons/draw/lineEndFlat@2x.png</file>
+		<file>icons/draw/lineEndFlat.png</file>
+		<file>icons/draw/lineEndRound@2x.png</file>
+		<file>icons/draw/lineEndRound.png</file>
+		<file>icons/draw/lineEndSquare@2x.png</file>
+		<file>icons/draw/lineEndSquare.png</file>
+		<file>icons/draw/lineJoinBevel@2x.png</file>
+		<file>icons/draw/lineJoinBevel.png</file>
+		<file>icons/draw/lineJoinMiter@2x.png</file>
+		<file>icons/draw/lineJoinMiter.png</file>
+		<file>icons/draw/lineJoinRound@2x.png</file>
+		<file>icons/draw/lineJoinRound.png</file>
+		<file>icons/draw/lineSolid@2x.png</file>
+		<file>icons/draw/lineSolid.png</file>
+		<file>icons/draw/pencil@2x.png</file>
+		<file>icons/draw/pencil.png</file>
+		<file>icons/draw/pipette@2x.png</file>
+		<file>icons/draw/pipette.png</file>
+		<file>icons/draw/polygonFill@2x.png</file>
+		<file>icons/draw/polygonFill.png</file>
+		<file>icons/draw/polygonNoFill@2x.png</file>
+		<file>icons/draw/polygonNoFill.png</file>
+		<file>icons/draw/polygonNoOutline@2x.png</file>
+		<file>icons/draw/polygonNoOutline.png</file>
+		<file>icons/draw/rectangle@2x.png</file>
+		<file>icons/draw/rectangle.png</file>
+		<file>icons/draw/roundedrectangle@2x.png</file>
+		<file>icons/draw/roundedrectangle.png</file>
+		<file>icons/draw/smudge@2x.png</file>
+		<file>icons/draw/smudge.png</file>
+		<file>icons/draw/stamp@2x.png</file>
+		<file>icons/draw/stamp.png</file>
+		<file>icons/draw/text@2x.png</file>
+		<file>icons/draw/text.png</file>
+	</qresource>
 </RCC>
