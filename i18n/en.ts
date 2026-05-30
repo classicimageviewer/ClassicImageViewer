@@ -3243,45 +3243,45 @@ The application will exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="274"/>
         <source>Extension</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="274"/>
         <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="274"/>
         <source>Thumbnail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="274"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="283"/>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="284"/>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="285"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="289"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="290"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="291"/>
         <source>Toggle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="319"/>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="320"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="325"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="326"/>
         <source>additional extensions, use semicolon as separator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="322"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="328"/>
         <source>Try to open:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="328"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="334"/>
         <source>Try to open unlisted formats</source>
         <translation type="unfinished"></translation>
     </message>

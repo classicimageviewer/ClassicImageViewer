@@ -16,23 +16,65 @@
 
 #include "prefs.h"
 #include <QDebug>
+#include <QDir>
+#include <QFile>
 
-Prefs::Prefs(QSettings * settings, QObject *parent) : QObject(parent)
+Prefs::Prefs(QString dirPath, QObject *parent) : QObject(parent)
 {
-	this->settings = settings;
+	settings = NULL;
 	setDefault();
-	if (settings)
+	if (!dirPath.isEmpty())
 	{
-		if (settings->value("prefsMagicWord").toString() == QString("CIV1"))
+		settingsDirPath = dirPath;
+		QDir configDir = QDir(dirPath);
+		settings = new QSettings(dirPath + "/settings.cfg", QSettings::IniFormat);
+		if (settings)
 		{
-			#define X(xCVT,xType,xName,xDefault) valueOf ## xName = settings->value(#xName, xDefault).xCVT();
-				PREFS_ENTRIES
-			#undef X
-		}
-		else
-		{
-			settings->setValue("prefsMagicWord",  QString("CIV1"));
-			writePrefs();
+			// migrating settings v1 to v2
+			if (settings->value("prefsMagicWord").toString() == QString("CIV1"))
+			{
+				QFile settingsFile(configDir.absolutePath() + "/settings.cfg");
+				QString backupPath = dirPath + "/backup";
+				if (configDir.mkpath(backupPath))
+				{
+					settingsFile.copy(backupPath + "/settings.cfg");
+				}
+				
+				for (QString group : settings->childGroups())
+				{
+					QSettings * groupSettings = new QSettings(settingsDirPath + "/settings_" + group + ".cfg", QSettings::IniFormat);
+					settings->beginGroup(group);
+					groupSettings->beginGroup(group);
+					for (QString key : settings->allKeys())
+					{
+						groupSettings->setValue(key, settings->value(key));
+					}
+					groupSettings->endGroup();
+					settings->endGroup();
+					groupSettings->sync();
+					delete groupSettings;
+				}
+				
+				#define X(xCVT,xType,xName,xDefault) valueOf ## xName = settings->value(#xName, xDefault).xCVT();
+					PREFS_ENTRIES
+				#undef X
+				settings->clear();
+				writePrefs();
+				settings->setValue("prefsMagicWord", "CIV2");
+				settings->clear();
+			}
+			
+			if (settings->value("prefsMagicWord").toString() == QString("CIV2"))
+			{
+				#define X(xCVT,xType,xName,xDefault) valueOf ## xName = settings->value(#xName, xDefault).xCVT();
+					PREFS_ENTRIES
+				#undef X
+			}
+			else
+			{
+				settings->setValue("prefsMagicWord",  QString("CIV2"));
+				writePrefs();
+			}
 		}
 	}
 }
@@ -43,6 +85,11 @@ Prefs::~Prefs()
 	if (settings)
 	{
 		delete settings;
+	}
+	for (QSettings * unitSettings : unitSettingsStorage)
+	{
+		unitSettings->sync();
+		delete unitSettings;
 	}
 }
 
@@ -74,18 +121,43 @@ void Prefs::writePrefs()
 	}
 }
 
+QSettings * Prefs::getUnitSettings(QString unitName)
+{
+	assert(!unitName.contains(u'/'));
+	if (unitSettingsStorage.contains(unitName))
+	{
+		return unitSettingsStorage[unitName];
+	}
+	if (settingsDirPath.isEmpty()) return NULL;
+	QSettings * unitSettings = new QSettings(settingsDirPath + "/settings_" + unitName + ".cfg", QSettings::IniFormat);
+	unitSettings->beginGroup(unitName);
+	unitSettingsStorage[unitName] = unitSettings;
+	return unitSettings;
+}
+
 void Prefs::storeSpecificParameter(QString unitName, QString parameterName, QVariant value)
 {
 	if (unitName.isEmpty()) return;
 	if (parameterName.isEmpty()) return;
-	if (settings)
+	QSettings * unitSettings = getUnitSettings(unitName);
+	if (unitSettings)
 	{
-		settings->beginGroup(unitName);
 		QList<QVariant> list;	// store type too
 		list.append(value);
-		settings->setValue(parameterName, list);
-		settings->endGroup();
-		settings->sync();
+		do {
+			if (!unitSettings->contains(parameterName)) break;
+			QVariant entry = unitSettings->value(parameterName);
+		#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+			if (entry.type() != QVariant::List) break;
+		#else
+			if (entry.metaType().id() != QMetaType::QVariantList) break;
+		#endif
+			QList<QVariant> list = entry.toList();
+			if (list.length() != 1) break;
+			if (value == list.first()) return;	// unchanged value
+		} while(0);
+		unitSettings->setValue(parameterName, list);
+		unitSettings->sync();
 	}
 }
 
@@ -94,10 +166,10 @@ QVariant Prefs::fetchSpecificParameter(QString unitName, QString parameterName, 
 	if (unitName.isEmpty()) return defaultValue;
 	if (parameterName.isEmpty()) return defaultValue;
 	QVariant value = defaultValue;
-	if (settings)
+	QSettings * unitSettings = getUnitSettings(unitName);
+	if (unitSettings)
 	{
-		settings->beginGroup(unitName);
-		QList<QVariant> list = settings->value(parameterName).toList();
+		QList<QVariant> list = unitSettings->value(parameterName).toList();
 		if (list.length() == 1)
 		{
 			value = list.first();
@@ -106,7 +178,6 @@ QVariant Prefs::fetchSpecificParameter(QString unitName, QString parameterName, 
 				value = defaultValue;
 			}
 		}
-		settings->endGroup();
 	}
 	return value;
 }
@@ -115,12 +186,22 @@ void Prefs::removeSpecificParameter(QString unitName, QString parameterName)
 {
 	if (unitName.isEmpty()) return;
 	if (parameterName.isEmpty()) return;
-	if (settings)
+	QSettings * unitSettings = getUnitSettings(unitName);
+	if (unitSettings)
 	{
-		settings->beginGroup(unitName);
-		settings->remove(parameterName);
-		settings->endGroup();
-		settings->sync();
+		unitSettings->remove(parameterName);
+		unitSettings->sync();
+	}
+}
+
+void Prefs::clearUnitSettings(QString unitName)
+{
+	if (unitName.isEmpty()) return;
+	QSettings * unitSettings = getUnitSettings(unitName);
+	if (unitSettings)
+	{
+		unitSettings->clear();
+		unitSettings->sync();
 	}
 }
 

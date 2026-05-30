@@ -210,7 +210,7 @@ QList<IObase::ParameterCluster> IOmoduleVips::getListOfParameterClusters(QString
 		elem.displayName = QString(tr("Quality"));
 		elem.controlType = QString("spinbox");
 		elem.parameterName = QString("Quality");
-		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips/"+format, "Quality", QVariant(100));
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips", format + "/Quality", QVariant(100));
 		elem.parameterMinValue = QVariant(0);
 		elem.parameterMaxValue = QVariant(100);
 		cluster.append(elem);
@@ -221,7 +221,7 @@ QList<IObase::ParameterCluster> IOmoduleVips::getListOfParameterClusters(QString
 		elem.displayName = QString(tr("Lossless"));
 		elem.controlType = QString("checkbox");
 		elem.parameterName = QString("Lossless");
-		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips/"+format, "Lossless", QVariant(false));
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips", format + "/Lossless", QVariant(false));
 		cluster.append(elem);
 	}
 	if (formatsOfHeif.contains(format))
@@ -230,7 +230,7 @@ QList<IObase::ParameterCluster> IOmoduleVips::getListOfParameterClusters(QString
 		elem.displayName = QString(tr("Compression"));
 		elem.controlType = QString("combobox");
 		elem.parameterName = QString("HeifCompression");
-		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips/"+format, "HeifCompression", QVariant(0));
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips", format + "/HeifCompression", QVariant(0));
 		QStringList list = QStringList();
 		list.append(QString(tr("Auto")));
 		list.append(QString(tr("AOM")));
@@ -246,7 +246,7 @@ QList<IObase::ParameterCluster> IOmoduleVips::getListOfParameterClusters(QString
 		elem.displayName = QString(tr("Dithering"));
 		elem.controlType = QString("doublespinbox");
 		elem.parameterName = QString("GifDithering");
-		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips/"+format, "GifDithering", QVariant(1.0));
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips", format + "/GifDithering", QVariant(1.0));
 		elem.parameterMinValue = QVariant(0.0);
 		elem.parameterMaxValue = QVariant(1.0);
 		cluster.append(elem);
@@ -254,7 +254,7 @@ QList<IObase::ParameterCluster> IOmoduleVips::getListOfParameterClusters(QString
 		elem.displayName = QString(tr("Quantisation effort"));
 		elem.controlType = QString("spinbox");
 		elem.parameterName = QString("GifEffort");
-		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips/"+format, "GifEffort", QVariant(7));
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleVips", format + "/GifEffort", QVariant(7));
 		elem.parameterMinValue = QVariant(1);
 		elem.parameterMaxValue = QVariant(10);
 		cluster.append(elem);
@@ -305,7 +305,7 @@ bool IOmoduleVips::saveFile(QString path, QString format, QImage image, QList<IO
 		}
 		if (saveParameters)
 		{
-			Globals::prefs->storeSpecificParameter("IOmoduleVips/"+format, elem.parameterName, elem.parameterValue);
+			Globals::prefs->storeSpecificParameter("IOmoduleVips", format + "/" + elem.parameterName, elem.parameterValue);
 		}
 		
 		if (elem.parameterName == "Quality")

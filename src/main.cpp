@@ -77,19 +77,18 @@ int main(int argc, char *argv[])
 	app.setApplicationVersion(CIV_VERSION);
 	
 	// Prefs
-	QSettings * settings = NULL;
+	QString configDirAbsolutePath;
 	QString configPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
 	if (!configPath.isEmpty())
 	{
 		QDir configDir = QDir(configPath + "/ClassicImageViewer");
 		if (configDir.mkpath(configDir.absolutePath()))
 		{
-			qDebug() << "QSettings configDir: " << configDir.absolutePath();
-			settings = new QSettings(configDir.absolutePath() + "/settings.cfg", QSettings::IniFormat);
+			configDirAbsolutePath = configDir.absolutePath();
 		}
 	}
-	Globals::prefs = new Prefs(settings);
-
+	Globals::prefs = new Prefs(configDirAbsolutePath);
+	
 	// Locale
 	QString defaultLocale = QLocale::system().name(); // e.g. "de_DE"
 	defaultLocale.truncate(defaultLocale.lastIndexOf('_')); // e.g. "de"

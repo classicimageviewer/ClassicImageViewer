@@ -101,7 +101,7 @@ QList<IObase::ParameterCluster> IOmoduleQt::getListOfParameterClusters(QString f
 			elem.displayName = QString(tr("Compression"));
 			elem.controlType = QString("combobox");
 			elem.parameterName = QString("TiffCompression");
-			elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt/"+format, "TiffCompression", QVariant(0));
+			elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt", format + "/TiffCompression", QVariant(0));
 			QStringList list = QStringList();
 			list.append(QString(tr("no compression")));
 			list.append(QString(tr("LZW compression")));
@@ -112,7 +112,7 @@ QList<IObase::ParameterCluster> IOmoduleQt::getListOfParameterClusters(QString f
 			elem.displayName = QString(tr("Compression ratio"));
 			elem.controlType = QString("spinbox");
 			elem.parameterName = QString("CompressionRatio");
-			elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt/"+format, "CompressionRatio", QVariant(100));
+			elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt", format + "/CompressionRatio", QVariant(100));
 			elem.parameterMinValue = QVariant(0);
 			elem.parameterMaxValue = QVariant(100);
 		}
@@ -126,7 +126,7 @@ QList<IObase::ParameterCluster> IOmoduleQt::getListOfParameterClusters(QString f
 			elem.displayName = QString(tr("Compression level"));
 			elem.controlType = QString("spinbox");
 			elem.parameterName = QString("PngCompressionLevel");
-			elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt/"+format, "PngCompressionLevel", QVariant(4));
+			elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt", format + "/PngCompressionLevel", QVariant(4));
 			elem.parameterMinValue = QVariant(0);
 			elem.parameterMaxValue = QVariant(9);
 		}
@@ -135,7 +135,7 @@ QList<IObase::ParameterCluster> IOmoduleQt::getListOfParameterClusters(QString f
 			elem.displayName = QString(tr("Quality"));
 			elem.controlType = QString("spinbox");
 			elem.parameterName = QString("Quality");
-			elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt/"+format, "Quality", QVariant(100));
+			elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt", format + "/Quality", QVariant(100));
 			elem.parameterMinValue = QVariant(0);
 			elem.parameterMaxValue = QVariant(100);
 		}
@@ -147,7 +147,7 @@ QList<IObase::ParameterCluster> IOmoduleQt::getListOfParameterClusters(QString f
 		elem.displayName = QString(tr("Optimized write"));
 		elem.controlType = QString("checkbox");
 		elem.parameterName = QString("OptimizedWrite");
-		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt/"+format, "OptimizedWrite", QVariant(false));
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt", format + "/OptimizedWrite", QVariant(false));
 		cluster.append(elem);
 	}
 	if (writer.supportsOption(QImageIOHandler::ProgressiveScanWrite))
@@ -156,7 +156,7 @@ QList<IObase::ParameterCluster> IOmoduleQt::getListOfParameterClusters(QString f
 		elem.displayName = QString(tr("Progressive scan"));
 		elem.controlType = QString("checkbox");
 		elem.parameterName = QString("ProgressiveScanWrite");
-		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt/"+format, "ProgressiveScanWrite", QVariant(false));
+		elem.parameterValue = Globals::prefs->fetchSpecificParameter("IOmoduleQt", format + "/ProgressiveScanWrite", QVariant(false));
 		cluster.append(elem);
 	}
 	return cluster;
@@ -175,7 +175,7 @@ bool IOmoduleQt::saveFile(QString path, QString format, QImage image, QList<IOba
 		}
 		if (saveParameters)
 		{
-			Globals::prefs->storeSpecificParameter("IOmoduleQt/"+format, elem.parameterName, elem.parameterValue);
+			Globals::prefs->storeSpecificParameter("IOmoduleQt", format + "/" + elem.parameterName, elem.parameterValue);
 		}
 		
 		if (elem.parameterName == "CompressionRatio")

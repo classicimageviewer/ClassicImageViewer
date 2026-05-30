@@ -3258,45 +3258,45 @@ Dies betrifft auch &quot;zuletzt göffnete Dateien, Effekt-Einstellungen und meh
 Das Programm wird dann beendet.</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="274"/>
         <source>Extension</source>
         <translation>Erweiterung</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="274"/>
         <source>Open</source>
         <translation>Öffnen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="274"/>
         <source>Thumbnail</source>
         <translation>Vorschaubild</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="268"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="274"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="283"/>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="284"/>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="285"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="289"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="290"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="291"/>
         <source>Toggle</source>
         <translation>De-/Aktivieren</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="319"/>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="320"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="325"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="326"/>
         <source>additional extensions, use semicolon as separator</source>
         <translation>zusätzliche Erweiterungen, zum Trennen &quot;;&quot; verwenden</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="322"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="328"/>
         <source>Try to open:</source>
         <translation>Versuche zu öffnen:</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/preferencesdialog.cpp" line="328"/>
+        <location filename="../src/dialogs/preferencesdialog.cpp" line="334"/>
         <source>Try to open unlisted formats</source>
         <translation>Versuche nicht aufgeführte Formate zu öffnen</translation>
     </message>

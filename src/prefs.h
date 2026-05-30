@@ -22,6 +22,7 @@
 #include <QString>
 #include <QStringList>
 #include <QPoint>
+#include <QHash>
 
 // important/global preferences
 #define PREFS_ENTRIES \
@@ -71,16 +72,19 @@ class Prefs : public QObject
 {
 	Q_OBJECT
 private:
+	QString settingsDirPath;
 	QSettings * settings;
+	QHash<QString, QSettings *> unitSettingsStorage;
 	void setDefault();
 	void writePrefs();
+	QSettings * getUnitSettings(QString unitName);
 	
 	// local prefs storage
 	#define X(xCVT,xType,xName,xDefault) xType valueOf ## xName;
 		PREFS_ENTRIES
 	#undef X
 public:
-	Prefs(QSettings * settings, QObject *parent = NULL);
+	Prefs(QString dirPath, QObject *parent = NULL);
 	~Prefs();
 	void restoreDefaults();
 
@@ -96,6 +100,7 @@ public:
 	void storeSpecificParameter(QString unitName, QString parameterName, QVariant value);
 	QVariant fetchSpecificParameter(QString unitName, QString parameterName, QVariant defaultValue = QVariant());
 	void removeSpecificParameter(QString unitName, QString parameterName);
+	void clearUnitSettings(QString unitName);
 };
 
 #endif //PREFS_H

@@ -73,12 +73,12 @@ void IObase::addInputFormatAlternatives(QString format, QStringList alternativeL
 
 void IObase::reloadConfig()
 {
-	QString moduleName = "IOmodule" + this->moduleName() + "/extensions";
-	blockedOpenList = Globals::prefs->fetchSpecificParameter(moduleName, "blockedOpen", QVariant(QStringList())).toStringList();
-	blockedThumbnailList = Globals::prefs->fetchSpecificParameter(moduleName, "blockedThumbnail", QVariant(QStringList())).toStringList();
-	blockedSaveList = Globals::prefs->fetchSpecificParameter(moduleName, "blockedSave", QVariant(QStringList())).toStringList();
-	extraOpenList = Globals::prefs->fetchSpecificParameter(moduleName, "extraOpen", QVariant(QStringList())).toStringList();
-	unlistedOpen = Globals::prefs->fetchSpecificParameter(moduleName, "unlistedOpen", QVariant(false)).toBool();
+	QString moduleName = "IOmodule" + this->moduleName();
+	blockedOpenList = Globals::prefs->fetchSpecificParameter(moduleName, "extensions/blockedOpen", QVariant(QStringList())).toStringList();
+	blockedThumbnailList = Globals::prefs->fetchSpecificParameter(moduleName, "extensions/blockedThumbnail", QVariant(QStringList())).toStringList();
+	blockedSaveList = Globals::prefs->fetchSpecificParameter(moduleName, "extensions/blockedSave", QVariant(QStringList())).toStringList();
+	extraOpenList = Globals::prefs->fetchSpecificParameter(moduleName, "extensions/extraOpen", QVariant(QStringList())).toStringList();
+	unlistedOpen = Globals::prefs->fetchSpecificParameter(moduleName, "extensions/unlistedOpen", QVariant(false)).toBool();
 	
 	
 	enabledInputFormats.clear();
