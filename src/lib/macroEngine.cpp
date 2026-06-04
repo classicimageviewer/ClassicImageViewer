@@ -250,6 +250,95 @@ QImage MacroEngine::runMacro(QImage image, QList<QMap<QString, QVariant>> macro)
 				break;
 			//case MacroEngine::Op::ExternalTools:
 			//	break;
+			case MacroEngine::Op::AddText:
+				{
+					if (!step.contains("opConfig")) return QImage();
+					QMap<QString, QVariant> opConfig = step["opConfig"].toMap();
+					
+					int positionMode = opConfig["positionMode"].toInt();
+					QRect rect;
+					QFont font = opConfig["font"].value<QFont>();
+					font.setBold(opConfig["fontBold"].toBool());
+					font.setItalic(opConfig["fontItalic"].toBool());
+					font.setPixelSize(opConfig["fontSize"].toInt());
+					QColor fontColor = opConfig["fontColor"].value<QColor>();
+					int alignment = Qt::AlignLeft;
+					
+					if (positionMode == 1)
+					{
+						int relativePosition = opConfig["relativePosition"].toInt();
+						switch (relativePosition)
+						{
+							default:
+							case 0:
+								alignment = Qt::AlignLeft | Qt::AlignTop;
+								break;
+							case 1:
+								alignment = Qt::AlignHCenter | Qt::AlignTop;
+								break;
+							case 2:
+								alignment = Qt::AlignRight | Qt::AlignTop;
+								break;
+							case 3:
+								alignment = Qt::AlignLeft | Qt::AlignVCenter;
+								break;
+							case 4:
+								alignment = Qt::AlignHCenter | Qt::AlignVCenter;
+								break;
+							case 5:
+								alignment = Qt::AlignRight | Qt::AlignVCenter;
+								break;
+							case 6:
+								alignment = Qt::AlignLeft | Qt::AlignBottom;
+								break;
+							case 7:
+								alignment = Qt::AlignHCenter | Qt::AlignBottom;
+								break;
+							case 8:
+								alignment = Qt::AlignRight | Qt::AlignBottom;
+								break;
+						}
+						rect = image.rect();
+					} else
+					if (positionMode == 2)
+					{
+						switch (opConfig["alignmentH"].toInt())
+						{
+							default:
+							case 0:
+								alignment = Qt::AlignLeft;
+								break;
+							case 1:
+								alignment = Qt::AlignHCenter;
+								break;
+							case 2:
+								alignment = Qt::AlignRight;
+								break;
+						}
+						switch (opConfig["alignmentV"].toInt())
+						{
+							default:
+							case 0:
+								alignment |= Qt::AlignTop;
+								break;
+							case 1:
+								alignment |= Qt::AlignVCenter;
+								break;
+							case 2:
+								alignment |= Qt::AlignBottom;
+								break;
+						}
+						rect = QRect(qMax(0, opConfig["absolutePositionX"].toInt()), qMax(0, opConfig["absolutePositionY"].toInt()), qMax(0, opConfig["absolutePositionWidth"].toInt()), qMax(0, opConfig["absolutePositionHeight"].toInt()));
+					}
+					else
+					{
+						return QImage();
+					}
+					
+					image = ImageOp::AddText(image, rect, opConfig["text"].toString(), alignment, font, fontColor);
+				}
+				break;
+
 		}
 	}
 	return image;

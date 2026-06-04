@@ -69,6 +69,7 @@
 #include "dialogs/sheardialog.h"
 #include "dialogs/macroconfigdialog.h"
 #include "dialogs/seamcarvingdialog.h"
+#include "dialogs/addtextdialog.h"
 
 #include "lib/resizer.h"
 #include "lib/autocolor.h"
@@ -394,6 +395,8 @@ void MainWindow::createMenu()
 	ui.menuEdit->addMenu(removeBandMenu);
 	menuAddAction(removeBandMenu, tr("Remove horizontal band / row of selection"), ACT_REMOVE_SELECTION_ROW, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(removeBandMenu, tr("Remove vertical band / column of selection"), ACT_REMOVE_SELECTION_COLUMN, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	menuAddSeparator(ui.menuEdit);
+	menuAddAction(ui.menuEdit, tr("Add &text"), ACT_ADD_TEXT, "Ctrl+T",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuEdit);
 	menuAddAction(ui.menuEdit, tr("&Copy"), ACT_COPY, "Ctrl+C",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuEdit, tr("&Paste"), ACT_PASTE, "Ctrl+V",  0);
@@ -1126,6 +1129,19 @@ void MainWindow::actionSlot(Action a)
 				painter.drawImage(QPoint(selection.x(), 0), displayedImg.copy(QRect(selection.x() + selection.width(), 0, currentImageSize.width() - (selection.x() + selection.width()), currentImageSize.height())));
 				painter.end();
 				updateDisplayedImage(newImage, NEW_IMAGE);
+			}
+			break;
+		case ACT_ADD_TEXT:
+			{
+				AddTextDialog * d = new AddTextDialog(display->getSelection());
+				if (d->exec() == QDialog::Accepted)
+				{
+					QApplication::setOverrideCursor(Qt::WaitCursor);
+					updateDisplayedImage(d->addTextToImage(display->getImage()), UPDATE_IMAGE);
+					QApplication::restoreOverrideCursor();
+					d->savePreferences();
+				}
+				delete d;
 			}
 			break;
 		case ACT_COPY:

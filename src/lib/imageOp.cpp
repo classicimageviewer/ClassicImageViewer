@@ -421,3 +421,19 @@ QImage ImageOp::SeamCarvingVertical(const QImage image, int reduction, int exclu
 	return RotateRight(SeamCarvingHorizontal(RotateLeft(image), reduction, exclusionStart, exclusionStop));
 }
 
+QImage ImageOp::AddText(const QImage image, QRect rect, QString text, int alignment, QFont font, QColor fontColor)
+{
+	QImage img = image;
+	
+	QPainter painter(&(img));
+	painter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+	painter.setFont(font);
+	painter.setPen(QPen(fontColor));
+	painter.setRenderHint(QPainter::Antialiasing);
+	rect = img.rect().intersected(rect);
+	painter.drawText(rect, alignment, text);
+	painter.end();
+	
+	return img;
+}
+

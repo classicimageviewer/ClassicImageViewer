@@ -14,47 +14,32 @@
 // If not, see <https://www.gnu.org/licenses/>.
 
 
-#ifndef MACROENGINE_H
-#define MACROENGINE_H
+#ifndef ADDTEXTDIALOG_H
+#define ADDTEXTDIALOG_H
 
-#include <QObject>
+#include <QDialog>
 #include <QImage>
-#include "effects/effectBase.h"
-#include "effects/effectHub.h"
+#include "ui_addtextdialog.h"
 
-class MacroEngine : public QObject
+class AddTextDialog : public QDialog
 {
 	Q_OBJECT
 private:
-	EffectHub * effectHub;
+	Ui_AddTextDialog ui;
+	QRect selection;
+	int positionMode;
+	int relativePosition;
+	QColor fontColor;
+	void setPositionMode(int mode);
+	void addUserText(bool newLine, QString userText);
+private slots:
+	void changeFontColor(bool b);
 public:
-	using QObject::QObject;
-	
-	enum class Op : int {
-		RotateLeft,
-		RotateRight,
-		RotateCustom,
-		FlipVertical,
-		FlipHorizontal,
-		Shear,
-		Resize,
-		AddBorder,
-		PaddToSize,
-		ColorDepthIncrease,
-		ColorDepthDecrease,
-		Grayscale,
-		Negative,
-		AdjustColors,
-		AutoColorAdjust,
-		Sharpen,
-		Effects,
-		ExternalTools,
-		AddText
-	};
-	
-	MacroEngine();
-	~MacroEngine();
-	QImage runMacro(QImage image, QList<QMap<QString, QVariant>> macro);
+	AddTextDialog(QRect selection, QMap<QString, QVariant> intialConfig = QMap<QString, QVariant>(), QWidget * parent = NULL);
+	~AddTextDialog();
+	QImage addTextToImage(QImage img);
+	void savePreferences();
+	QMap<QString, QVariant> getConfig();
 };
 
-#endif //MACROENGINE_H
+#endif //ADDTEXTDIALOG_H

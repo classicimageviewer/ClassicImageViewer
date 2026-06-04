@@ -27,6 +27,7 @@
 #include "addborderdialog.h"
 #include "padtosizedialog.h"
 #include "effectsdialog.h"
+#include "addtextdialog.h"
 #include "lib/resizer.h"
 
 MacroConfigResizeDialog::MacroConfigResizeDialog(QMap<QString, QVariant> intialConfig, QWidget * parent) : QDialog(parent)
@@ -235,6 +236,7 @@ MacroConfigDialog::MacroConfigDialog(QImage inputImage, QWidget * parent) : QDia
 		populateOpList(model, tr("Sharpen"), 			MacroEngine::Op::Sharpen);
 		populateOpList(model, tr("Effects"), 			MacroEngine::Op::Effects);
 		populateOpList(model, tr("External tools"), 		MacroEngine::Op::ExternalTools);
+		populateOpList(model, tr("Add text"), 			MacroEngine::Op::AddText);
 
 		
 		opList[i]->setModel(model);
@@ -555,6 +557,18 @@ QMap<QString, QVariant> MacroConfigDialog::configureOp(MacroEngine::Op op, QList
 			{
 				QImage preprocessedImage = macroEngine->runMacro(inputImage, precedingMacro);
 				EffectsDialog * d = new EffectsDialog(preprocessedImage, QString(), initialOpConfig);
+				if (d->exec() != QDialog::Accepted)
+				{
+					delete d;
+					return emptyConfig;
+				}
+				opConfig["opConfig"] = d->getConfig();
+				delete d;
+			}
+			break;
+		case MacroEngine::Op::AddText:
+			{
+				AddTextDialog * d = new AddTextDialog(QRect(), initialOpConfig);
 				if (d->exec() != QDialog::Accepted)
 				{
 					delete d;

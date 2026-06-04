@@ -51,6 +51,8 @@ public:
 	
 	static QImage SeamCarvingHorizontal(const QImage image, int reduction, int exclusionStart, int exclusionStop);
 	static QImage SeamCarvingVertical(const QImage image, int reduction, int exclusionStart, int exclusionStop);
+	
+	static QImage AddText(const QImage image, QRect rect, QString text, int alignment, QFont font, QColor fontColor);
 };
 
 #endif //IMAGEOP_H
