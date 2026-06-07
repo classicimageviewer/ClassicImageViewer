@@ -1065,6 +1065,8 @@ void MainWindow::actionSlot(Action a)
 					drawDevice = NULL;
 				}
 				setDrawDockWidgetActiveButton(ui.toolButtonDrawSelection);
+				QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
+				setImageAndWindowSize();
 			}
 			else
 			{
