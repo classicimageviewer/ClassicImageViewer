@@ -2683,12 +2683,12 @@ Shift: draw circle</source>
         <translation>Aktuelles Verzeichnis indexieren...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3363"/>
+        <location filename="../src/mainwindow.cpp" line="3371"/>
         <source>Not configured</source>
         <translation>Nicht konfiguriert</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3446"/>
+        <location filename="../src/mainwindow.cpp" line="3454"/>
         <source>Save...</source>
         <translation>Speichern...</translation>
     </message>
@@ -2867,22 +2867,22 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
         <translation>%1 kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3331"/>
+        <location filename="../src/mainwindow.cpp" line="3339"/>
         <source>&amp;Clear recent files</source>
         <translation>Liste der zuletzt &amp;geöffneten Dateien löschen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3389"/>
+        <location filename="../src/mainwindow.cpp" line="3397"/>
         <source>All supported images</source>
         <translation>Alle unterstützten Bilder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3402"/>
+        <location filename="../src/mainwindow.cpp" line="3410"/>
         <source>All files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3405"/>
+        <location filename="../src/mainwindow.cpp" line="3413"/>
         <source>Open File</source>
         <translation>Datei öffnen</translation>
     </message>

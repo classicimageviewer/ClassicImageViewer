@@ -2961,22 +2961,30 @@ void MainWindow::setWindowSize()
 		
 		if (Globals::prefs->getDisplayMode() == 0) //fit window to image
 		{
-			display->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-			display->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-			
-			QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// attempt to fix occasional window sizing issue
-			if (display->horizontalScrollBar()->isVisible() || display->verticalScrollBar()->isVisible())
+			for (int i=0; i<2; i++)
 			{
-				if (display->horizontalScrollBar()->isVisible())
+				display->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+				display->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+				
+				if (display->horizontalScrollBar()->isVisible() || display->verticalScrollBar()->isVisible())
 				{
-					newSize.setWidth(newSize.width() + display->horizontalScrollBar()->height());
+					if (display->horizontalScrollBar()->isVisible())
+					{
+						newSize.setWidth(newSize.width() + display->horizontalScrollBar()->height());
+					}
+					if (display->verticalScrollBar()->isVisible())
+					{
+						newSize.setHeight(newSize.height() + display->verticalScrollBar()->width());
+					}
+					newSize = newSize.boundedTo(availableSize);
+					this->resize(newSize);
+					if (!(display->horizontalScrollBar()->isVisible() || display->verticalScrollBar()->isVisible())) break;
 				}
-				if (display->verticalScrollBar()->isVisible())
+				else
 				{
-					newSize.setHeight(newSize.height() + display->verticalScrollBar()->width());
+					break;
 				}
-				newSize = newSize.boundedTo(availableSize);
-				this->resize(newSize);
+				QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents);	// attempt to fix occasional window sizing issue
 			}
 		}
 	} else
