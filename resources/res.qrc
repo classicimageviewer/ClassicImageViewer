@@ -2,14 +2,24 @@
 	<qresource prefix="/icons">
 		<file>icons/backward@2x.png</file>
 		<file>icons/backward.png</file>
+		<file>icons/color-adjust@2x.png</file>
+		<file>icons/color-adjust.png</file>
 		<file>icons/copy@2x.png</file>
 		<file>icons/copy.png</file>
+		<file>icons/crop@2x.png</file>
+		<file>icons/crop.png</file>
 		<file>icons/cut@2x.png</file>
 		<file>icons/cut.png</file>
 		<file>icons/forward@2x.png</file>
 		<file>icons/forward.png</file>
+		<file>icons/grayscale@2x.png</file>
+		<file>icons/grayscale.png</file>
 		<file>icons/info@2x.png</file>
 		<file>icons/info.png</file>
+		<file>icons/mirror-horizontal@2x.png</file>
+		<file>icons/mirror-horizontal.png</file>
+		<file>icons/mirror-vertical@2x.png</file>
+		<file>icons/mirror-vertical.png</file>
 		<file>icons/open@2x.png</file>
 		<file>icons/open.png</file>
 		<file>icons/pagebackward@2x.png</file>
@@ -20,8 +30,22 @@
 		<file>icons/paste.png</file>
 		<file>icons/redo@2x.png</file>
 		<file>icons/redo.png</file>
+		<file>icons/resize@2x.png</file>
+		<file>icons/resize.png</file>
+		<file>icons/rotate-left@2x.png</file>
+		<file>icons/rotate-left.png</file>
+		<file>icons/rotate-right@2x.png</file>
+		<file>icons/rotate-right.png</file>
 		<file>icons/save@2x.png</file>
 		<file>icons/save.png</file>
+		<file>icons/save-as@2x.png</file>
+		<file>icons/save-as.png</file>
+		<file>icons/sharpen@2x.png</file>
+		<file>icons/sharpen.png</file>
+		<file>icons/side-panel@2x.png</file>
+		<file>icons/side-panel.png</file>
+		<file>icons/side-panel-off@2x.png</file>
+		<file>icons/side-panel-off.png</file>
 		<file>icons/undo@2x.png</file>
 		<file>icons/undo.png</file>
 		<file>icons/zoom-1@2x.png</file>
