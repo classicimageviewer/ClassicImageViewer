@@ -103,6 +103,7 @@ private: // variables
 	QRect lastSelection;
 	DrawDevice * drawDevice;
 	bool drawDockWidgetVisible;
+	bool quickDockWidgetVisible;
 	QList<QToolButton *> drawDockWidgetButtons;
 	DrawDeviceParameters drawDeviceParameters;
 private: // functions
@@ -113,6 +114,7 @@ private: // functions
 	QAction * searchQAction(Action a);
 	void removeAction(Action a);
 	void setupToolBar();
+	void setupSidePanel();
 	void setupStatusBar();
 	void setupDrawDockWidget();
 	void setDrawDockWidgetActiveButton(QToolButton * btn);

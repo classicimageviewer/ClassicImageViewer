@@ -106,11 +106,13 @@ MainWindow::MainWindow() : QMainWindow()
 	temporaryDeleteConfirmSuppress = false;
 	drawDevice = NULL;
 	drawDockWidgetVisible = false;
+	quickDockWidgetVisible = false;
 
 	imageIO = new ImageIO();
 	
 	createMenu();
 	setupToolBar();
+	setupSidePanel();
 	setupStatusBar();
 	setupDrawDockWidget();
 	ui.menuBar->setVisible(Globals::prefs->getMenubarVisible());
@@ -118,6 +120,7 @@ MainWindow::MainWindow() : QMainWindow()
 	ui.statusBar->setVisible(Globals::prefs->getStatusbarVisible());
 	ui.toolBar->setSizePolicy((Globals::prefs->getEnableToolbarShrinking() ? (QSizePolicy::Expanding) : (QSizePolicy::MinimumExpanding)), QSizePolicy::Minimum);
 	ui.dockWidgetDraw->setVisible(false);
+	ui.dockWidgetQuick->setVisible(false);
 	
 	connect(&startupTimer, SIGNAL(timeout()), this, SLOT(startup()));
 	startupTimer.setSingleShot(true);
@@ -354,6 +357,7 @@ void MainWindow::menuAddSeparator(QMenu * menu)
 
 void MainWindow::createMenu()
 {
+	QAction * act;
 	menuAddAction(ui.menuFile, tr("&Open"), ACT_OPEN, "O",  ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuFile, tr("&Reload"), ACT_REOPEN, "Shift+R",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddAction(ui.menuFile, tr("Reopen in new app"), ACT_OPEN_IN_NEW_APP, "Ctrl+N",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
@@ -374,7 +378,8 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuFile, tr("&Delete file"), ACT_FILE_DELETE, "Del",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddSeparator(ui.menuFile);
 	menuAddAction(ui.menuFile, tr("Sa&ve"), ACT_SAVE, "Ctrl+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION | ACTDISABLE_MULTIPAGE);
-	menuAddAction(ui.menuFile, tr("&Save as"), ACT_SAVE_AS, "S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION | ACTDISABLE_MULTIPAGE);
+	act = menuAddAction(ui.menuFile, tr("&Save as"), ACT_SAVE_AS, "S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION | ACTDISABLE_MULTIPAGE);
+	act->setIcon(QIcon(":/icons/icons/save-as.png"));
 	menuAddAction(ui.menuFile, tr("Save selection as"), ACT_SAVE_SELECTION_AS, "Ctrl+Shift+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuFile, tr("&Print"), ACT_PRINT, "Ctrl+P",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuFile);
@@ -389,7 +394,8 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuEdit, tr("Cust&om selection"), ACT_CUSTOM_SELECTION, "Shift+C",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuEdit, tr("Restore last selection"), ACT_RESTORE_LAST_SELECTION, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuEdit, tr("Cut &selection"), ACT_CUT_SELECTION, "Ctrl+X",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
-	menuAddAction(ui.menuEdit, tr("C&rop selection"), ACT_CROP_SELECTION, "Ctrl+Y",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act = menuAddAction(ui.menuEdit, tr("C&rop selection"), ACT_CROP_SELECTION, "Ctrl+Y",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/crop.png"));
 	menuAddSeparator(ui.menuEdit);
 	removeBandMenu = new QMenu(tr("Remove band"));
 	ui.menuEdit->addMenu(removeBandMenu);
@@ -408,14 +414,19 @@ void MainWindow::createMenu()
 	
 	menuAddAction(ui.menuImage, tr("&Information"), ACT_INFO, "I",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("Rotate &left"), ACT_ROTATE_L, "L",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
-	menuAddAction(ui.menuImage, tr("Rotate &right"), ACT_ROTATE_R, "R",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act = menuAddAction(ui.menuImage, tr("Rotate &left"), ACT_ROTATE_L, "L",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/rotate-left.png"));
+	act = menuAddAction(ui.menuImage, tr("Rotate &right"), ACT_ROTATE_R, "R",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/rotate-right.png"));
 	menuAddAction(ui.menuImage, tr("C&ustom rotation"), ACT_ROTATE_C, "Ctrl+U",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
-	menuAddAction(ui.menuImage, tr("&Vertical flip"), ACT_FLIP_V, "V",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
-	menuAddAction(ui.menuImage, tr("&Horizontal flip"), ACT_FLIP_H, "H",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act = menuAddAction(ui.menuImage, tr("&Vertical flip"), ACT_FLIP_V, "V",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/mirror-vertical.png"));
+	act = menuAddAction(ui.menuImage, tr("&Horizontal flip"), ACT_FLIP_H, "H",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/mirror-horizontal.png"));
 	menuAddAction(ui.menuImage, tr("Shear"), ACT_SHEAR, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("Re&size"), ACT_RESIZE, "Ctrl+R",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	act = menuAddAction(ui.menuImage, tr("Re&size"), ACT_RESIZE, "Ctrl+R",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/resize.png"));
 	menuAddAction(ui.menuImage, tr("Seam carving"), ACT_SEAM_CARVING, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuImage, tr("Add &border"), ACT_ADD_BORDER, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuImage, tr("&Pad to size"), ACT_PAD_TO_SIZE, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
@@ -423,13 +434,16 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuImage, tr("I&ncrease color depth"), ACT_COLOR_DEPTH_INC, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddAction(ui.menuImage, tr("&Decrease color depth"), ACT_COLOR_DEPTH_DEC, NULL,  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
-	menuAddAction(ui.menuImage, tr("&Grayscale"), ACT_GRAYSCALE, "Ctrl+G",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act = menuAddAction(ui.menuImage, tr("&Grayscale"), ACT_GRAYSCALE, "Ctrl+G",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/grayscale.png"));
 	menuAddAction(ui.menuImage, tr("Nega&tive"), ACT_NEGATIVE, "Ctrl+Shift+N",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
-	menuAddAction(ui.menuImage, tr("Adjust &colors"), ACT_COLOR_ADJUST, "Shift+G",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	act = menuAddAction(ui.menuImage, tr("Adjust &colors"), ACT_COLOR_ADJUST, "Shift+G",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/color-adjust.png"));
 	menuAddAction(ui.menuImage, tr("Histogram"), ACT_HISTOGRAM, "Shift+H",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuImage);
 	menuAddAction(ui.menuImage, tr("Auto c&olor adjust"), ACT_AUTO_COLOR, "Shift+U",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
-	menuAddAction(ui.menuImage, tr("Sh&arpen"), ACT_SHARPEN, "Shift+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act = menuAddAction(ui.menuImage, tr("Sh&arpen"), ACT_SHARPEN, "Shift+S",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
+	act->setIcon(QIcon(":/icons/icons/sharpen.png"));
 	menuAddAction(ui.menuImage, tr("&Effects"), ACT_EFFECTS, "Ctrl+E",  ACTDISABLE_UNLOADED | ACTDISABLE_FULLSCREEN | ACTDISABLE_ANIMATION);
 	menuAddSeparator(ui.menuImage);
 	externalToolsMenu = ui.menuImage->addMenu(tr("E&xternal tools"));
@@ -466,6 +480,7 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuView, tr("Toggle &status bar"), ACT_TOGGLE_STATUSBAR, "Alt+Shift+S",  ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuView, tr("Toggle &toolbar"), ACT_TOGGLE_TOOLBAR, "Alt+Shift+T",  ACTDISABLE_FULLSCREEN);
 	menuAddAction(ui.menuView, tr("Toggle &menu bar"), ACT_TOGGLE_MENUBAR, "Alt+Shift+M",  ACTDISABLE_FULLSCREEN);
+	menuAddAction(ui.menuView, tr("Toggle quick panel"), ACT_TOGGLE_SIDEPANEL, "Alt+Shift+P",  ACTDISABLE_FULLSCREEN);
 	menuAddSeparator(ui.menuView);
 	displayModeMenu = ui.menuView->addMenu(tr("&Display mode"));
 	menuAddAction(displayModeMenu, tr("Fit window to images"), ACT_DISPLAY_MODE_0, "Shift+O", ACTDISABLE_FULLSCREEN);
@@ -1713,6 +1728,19 @@ void MainWindow::actionSlot(Action a)
 			ui.menuBar->setVisible(! ui.menuBar->isVisible());
 			Globals::prefs->setMenubarVisible(ui.menuBar->isVisible());
 			break;
+		case ACT_TOGGLE_SIDEPANEL:
+			if (quickDockWidgetVisible)
+			{
+				ui.dockWidgetQuick->setVisible(false);
+				searchQAction(ACT_TOGGLE_SIDEPANEL)->setIcon(QIcon(":/icons/icons/side-panel.png"));
+			}
+			else
+			{
+				ui.dockWidgetQuick->setVisible(true);
+				searchQAction(ACT_TOGGLE_SIDEPANEL)->setIcon(QIcon(":/icons/icons/side-panel-off.png"));
+			}
+			quickDockWidgetVisible = !quickDockWidgetVisible;
+			break;
 		case ACT_TOGGLE_FULLSCREEN:
 			slideshowDirection = 0;
 			slideshowTimer.stop();
@@ -2263,6 +2291,12 @@ void MainWindow::setupToolBar()
 	
 	ADD_ACTION(ACT_MULTIPAGE_PREV, ":/icons/icons/pagebackward.png");
 	ADD_ACTION(ACT_MULTIPAGE_NEXT, ":/icons/icons/pageforward.png");
+	
+	QWidget* spacer = new QWidget();
+	spacer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+	ui.toolBar->addWidget(spacer);
+	
+	ADD_ACTION(ACT_TOGGLE_SIDEPANEL, ":/icons/icons/side-panel.png");
 
 	zoomDisplay->adjustSize();
 	indexDisplay->adjustSize();
@@ -2270,6 +2304,23 @@ void MainWindow::setupToolBar()
 	indexDisplay->installEventFilter(this);
 	connect(indexDisplay, SIGNAL(valueChanged(int)), this, SLOT(indexDisplayChanged(int)));
 	#undef ADD_ACTION
+}
+
+void MainWindow::setupSidePanel()
+{
+	ui.toolButtonQuickSave->setDefaultAction(searchQAction(ACT_SAVE));
+	ui.toolButtonQuickSaveAs->setDefaultAction(searchQAction(ACT_SAVE_AS));
+	ui.toolButtonQuickUndo->setDefaultAction(searchQAction(ACT_UNDO));
+	ui.toolButtonQuickRedo->setDefaultAction(searchQAction(ACT_REDO));
+	ui.toolButtonQuickRotateLeft->setDefaultAction(searchQAction(ACT_ROTATE_L));
+	ui.toolButtonQuickRotateRight->setDefaultAction(searchQAction(ACT_ROTATE_R));
+	ui.toolButtonQuickMirrorHorizontal->setDefaultAction(searchQAction(ACT_FLIP_H));
+	ui.toolButtonQuickMirrorVertical->setDefaultAction(searchQAction(ACT_FLIP_V));
+	ui.toolButtonQuickColorAdjust->setDefaultAction(searchQAction(ACT_COLOR_ADJUST));
+	ui.toolButtonQuickSharpen->setDefaultAction(searchQAction(ACT_SHARPEN));
+	ui.toolButtonQuickGrayscale->setDefaultAction(searchQAction(ACT_GRAYSCALE));
+	ui.toolButtonQuickResize->setDefaultAction(searchQAction(ACT_RESIZE));
+	ui.toolButtonQuickCrop->setDefaultAction(searchQAction(ACT_CROP_SELECTION));
 }
 
 void MainWindow::setupStatusBar()
@@ -2902,6 +2953,7 @@ void MainWindow::setFullscreen(bool fs)
 			QApplication::setOverrideCursor(Qt::BlankCursor);
 		}
 		ui.dockWidgetDraw->setVisible(false);
+		ui.dockWidgetQuick->setVisible(false);
 		if (drawDevice)
 		{
 			display->uninstallDrawDevice();
@@ -2922,6 +2974,10 @@ void MainWindow::setFullscreen(bool fs)
 		if (drawDockWidgetVisible)
 		{
 			ui.dockWidgetDraw->setVisible(true);
+		}
+		if (quickDockWidgetVisible)
+		{
+			ui.dockWidgetQuick->setVisible(true);
 		}
 		if (drawDevice)
 		{
