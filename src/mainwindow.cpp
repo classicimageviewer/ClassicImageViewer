@@ -565,6 +565,7 @@ void MainWindow::applyInternalState()
 {
 	for (const ActionLookUp_t & element : ActionLookUpTable)
 	{
+		if (element.flags == 0) continue;
 		bool enabled = true;
 		if ((element.flags & ACTDISABLE_FULLSCREEN) && (isFullscreen)) enabled = false;
 		if ((element.flags & ACTDISABLE_UNLOADED) && (internalState == UNLOADED)) enabled = false;
