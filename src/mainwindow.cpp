@@ -2992,6 +2992,14 @@ void MainWindow::setWindowSize()
 {
 	if (isFullscreen) return;
 	if (windowState() & Qt::WindowMaximized) return;
+	if (Globals::prefs->getEnableToolbarShrinking() || !ui.toolBar->isVisible())
+	{
+		setMinimumWidth(64);
+	}
+	else
+	{
+		setMinimumWidth(ui.toolBar->sizeHint().width());
+	}
 	if ((Globals::prefs->getDisplayMode() == 0) || (Globals::prefs->getDisplayMode() == 5))	//fit window to image & fit large images to desktop
 	{
 		QRect desktopRect = QApplication::primaryScreen()->availableGeometry();

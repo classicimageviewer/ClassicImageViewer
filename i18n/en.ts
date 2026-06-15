@@ -2677,12 +2677,12 @@ Shift: draw circle</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3428"/>
+        <location filename="../src/mainwindow.cpp" line="3436"/>
         <source>Not configured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3511"/>
+        <location filename="../src/mainwindow.cpp" line="3519"/>
         <source>Save...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2859,22 +2859,22 @@ Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation suppor
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3396"/>
+        <location filename="../src/mainwindow.cpp" line="3404"/>
         <source>&amp;Clear recent files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3454"/>
+        <location filename="../src/mainwindow.cpp" line="3462"/>
         <source>All supported images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3467"/>
+        <location filename="../src/mainwindow.cpp" line="3475"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3470"/>
+        <location filename="../src/mainwindow.cpp" line="3478"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
