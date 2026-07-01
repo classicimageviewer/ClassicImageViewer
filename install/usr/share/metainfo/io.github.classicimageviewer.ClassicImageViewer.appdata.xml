@@ -37,6 +37,29 @@
     <binary>civ</binary>
   </provides>
   <releases>
+    <release version="2.0.0" date="2026-07-01">
+        <description>
+          <ul>
+            <li>macros</li>
+            <li>paint mode</li>
+            <li>quick side panel</li>
+            <li>animated images viewing support</li>
+            <li>multipage images viewing support</li>
+            <li>histogram</li>
+            <li>add text tool</li>
+            <li>shear tool</li>
+            <li>remove band tool</li>
+            <li>seam carving tool</li>
+            <li>presets for effects</li>
+            <li>kernels effect</li>
+            <li>oil paint effect</li>
+            <li>noise effect</li>
+            <li>motion blur effect</li>
+            <li>other improvements</li>
+            <li>bugfixes</li>
+          </ul>
+        </description>
+    </release>
     <release version="1.5.0" date="2026-02-23">
         <description>
           <ul>
