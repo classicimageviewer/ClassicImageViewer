@@ -39,52 +39,52 @@
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="23"/>
         <source>Add text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="47"/>
         <source>Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Position</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="80"/>
         <source>X:</source>
-        <translation type="unfinished"></translation>
+        <translation>X:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="103"/>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Höhe:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="120"/>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Breite:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="133"/>
         <source>Y:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="167"/>
         <source>Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahl</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="176"/>
         <source>Relative</source>
-        <translation type="unfinished"></translation>
+        <translation>Relative</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="303"/>
         <source>Absolute</source>
-        <translation type="unfinished"></translation>
+        <translation>Absolut</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="348"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="360"/>
@@ -92,7 +92,7 @@
         <location filename="../src/dialogs/addtextdialog.ui" line="449"/>
         <location filename="../src/dialogs/addtextdialog.ui" line="472"/>
         <source>+</source>
-        <translation type="unfinished"></translation>
+        <translation>+</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="367"/>
@@ -100,7 +100,7 @@
         <location filename="../src/dialogs/addtextdialog.ui" line="433"/>
         <location filename="../src/dialogs/addtextdialog.ui" line="479"/>
         <source>Custom user text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Benutzerdefinierter Text</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="377"/>
@@ -108,63 +108,63 @@
         <location filename="../src/dialogs/addtextdialog.ui" line="407"/>
         <location filename="../src/dialogs/addtextdialog.ui" line="456"/>
         <source>New line</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Zeile</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="508"/>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftart</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="520"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="555"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Fett</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="579"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Kursiv</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="595"/>
         <source>Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausrichtung</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="605"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Links</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="610"/>
         <location filename="../src/dialogs/addtextdialog.ui" line="629"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>MItte</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="615"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="624"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Oben</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.ui" line="634"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Unten</translation>
     </message>
     <message>
         <location filename="../src/dialogs/addtextdialog.cpp" line="38"/>
         <source>X: %1, Y: %2, W: %3, H: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>X: %1, Y: %2, B: %3, H: %4</translation>
     </message>
 </context>
 <context>
@@ -503,7 +503,7 @@
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="510"/>
         <source>Cannot load animation for preview.</source>
-        <translation type="unfinished"></translation>
+        <translation>Animation kann nicht für Vorschau geladen werden.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="516"/>
@@ -542,7 +542,7 @@
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="1075"/>
         <source>animations not supported</source>
-        <translation type="unfinished"></translation>
+        <translation>Animationen nicht unterstützt</translation>
     </message>
     <message>
         <location filename="../src/dialogs/batchdialog.cpp" line="1080"/>
@@ -816,42 +816,42 @@
     <message>
         <location filename="../src/effects/moduleCustomKernel.cpp" line="34"/>
         <source># comma or space separated integer values</source>
-        <translation type="unfinished"></translation>
+        <translation># Durch Komma oder Leerzeichen getrennte, ganzzahlige Werte</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleCustomKernel.cpp" line="45"/>
         <source>Kernel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kernel</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleCustomKernel.cpp" line="46"/>
         <source>Divisor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Divisor</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleCustomKernel.cpp" line="47"/>
         <source>Offset</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Versatz</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleCustomKernel.cpp" line="50"/>
         <source>Mirror</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Spiegel</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleCustomKernel.cpp" line="51"/>
         <source>Extend</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Erweitern</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleCustomKernel.cpp" line="52"/>
         <source>Edge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rand</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleCustomKernel.h" line="37"/>
         <source>Custom kernel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Benmutzerdefinierter Kernel</translation>
     </message>
 </context>
 <context>
@@ -903,67 +903,67 @@
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="37"/>
         <source>Emboss</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prägen (emboss)</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="38"/>
         <source>Emboss 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prägen (emboss)  2</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="39"/>
         <source>Outline</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kontur</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="40"/>
         <source>Edge</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kante</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="41"/>
         <source>Relief</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Relief</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="42"/>
         <source>Relief 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Relief 2</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="43"/>
         <source>Smooth</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Glätten</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="44"/>
         <source>Detail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Detail</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="45"/>
         <source>Focus</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fokus</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="46"/>
         <source>Edge enhance</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Randverstärkung</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="47"/>
         <source>Highpass</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hochpass</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.cpp" line="48"/>
         <source>Kernel</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kernel</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleKernels.h" line="35"/>
         <source>Kernels</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kernels</translation>
     </message>
 </context>
 <context>
@@ -1002,17 +1002,17 @@
     <message>
         <location filename="../src/effects/moduleMotionBlur.cpp" line="37"/>
         <source>Linear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Linear</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleMotionBlur.cpp" line="38"/>
         <source>Rotation</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Drehen</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleMotionBlur.cpp" line="39"/>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vergrößern</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleMotionBlur.cpp" line="40"/>
@@ -1022,22 +1022,22 @@
     <message>
         <location filename="../src/effects/moduleMotionBlur.cpp" line="42"/>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schritte</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleMotionBlur.cpp" line="43"/>
         <source>Displacement</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verschiebung</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleMotionBlur.cpp" line="44"/>
         <source>Direction</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Richtung</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleMotionBlur.h" line="62"/>
         <source>Motion blur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Bewegungsunschärfe</translation>
     </message>
 </context>
 <context>
@@ -1045,38 +1045,38 @@
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="38"/>
         <source>Gaussian</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Normalverteilung (Gauß)</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="39"/>
         <source>Gaussian RGB</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Normalverteiltes RGB (Gauß)</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="40"/>
         <source>Uniform</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Einförmig</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="41"/>
         <source>Uniform RGB</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Einförmiges RGB</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="42"/>
         <source>Poisson</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Poisson-Verteilung</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="43"/>
         <source>Salt-and-pepper</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impulsrauschen</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="44"/>
         <location filename="../src/effects/moduleNoise.h" line="44"/>
         <source>Noise</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Rauschen</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleNoise.cpp" line="46"/>
@@ -1102,12 +1102,12 @@
     <message>
         <location filename="../src/effects/moduleOilPaint.cpp" line="37"/>
         <source>Levels</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Stufen</translation>
     </message>
     <message>
         <location filename="../src/effects/moduleOilPaint.h" line="35"/>
         <source>Oil paint</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Öl-Zeichnung</translation>
     </message>
 </context>
 <context>
@@ -1239,22 +1239,22 @@
     <message>
         <location filename="../src/dialogs/effectsdialog.cpp" line="644"/>
         <source>Preset name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name der Voreinstellung</translation>
     </message>
     <message>
         <location filename="../src/dialogs/effectsdialog.cpp" line="650"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../src/dialogs/effectsdialog.cpp" line="650"/>
         <source>Cannot create nameless preset.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voreinstellung ohne Name kann nicht erstellt werden.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/effectsdialog.cpp" line="738"/>
         <source>Presets</source>
-        <translation type="unfinished"></translation>
+        <translation>Voreinstellungen</translation>
     </message>
 </context>
 <context>
@@ -1359,52 +1359,52 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/dialogs/histogramdialog.ui" line="23"/>
         <source>Histogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Histogramm</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.ui" line="136"/>
         <source>Green</source>
-        <translation type="unfinished">Grün</translation>
+        <translation>Grün</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.ui" line="225"/>
         <source>Red</source>
-        <translation type="unfinished">Rot</translation>
+        <translation>Rot</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.ui" line="255"/>
         <source>Gray</source>
-        <translation type="unfinished">Grau</translation>
+        <translation>Grau</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.ui" line="318"/>
         <source>Blue</source>
-        <translation type="unfinished">Blau</translation>
+        <translation>Blau</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.ui" line="416"/>
         <source>☰</source>
-        <translation type="unfinished"></translation>
+        <translation>☰</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.cpp" line="49"/>
         <source>Lock opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Deckkraft sperren</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.cpp" line="54"/>
         <source>Draw lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Linien zeichnen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.cpp" line="95"/>
         <source>Pixel count:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixelanzahl:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/histogramdialog.cpp" line="96"/>
         <source>Index:</source>
-        <translation type="unfinished"></translation>
+        <translation>Index:</translation>
     </message>
 </context>
 <context>
@@ -1554,82 +1554,82 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/dialogs/macroconfigdialog.ui" line="23"/>
         <source>Macro config</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Makroeinstellung</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="130"/>
         <source>Macro</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Makro</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="134"/>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="135"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Entleeren</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="142"/>
         <source>user notes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Benutzernotizen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="151"/>
         <source>Input</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eingabe</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="155"/>
         <source>Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahl</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="156"/>
         <source>Entire image</source>
-        <translation type="unfinished"></translation>
+        <translation>Gesamtes Bild</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="162"/>
         <source>Operations</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Operationen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="169"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Löschen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="176"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="186"/>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausgabe</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="191"/>
         <source>Replace image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bild ersetzen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="192"/>
         <source>Insert back into selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">In Auswahl wieder einfügen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="193"/>
         <source>No change</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Änderung</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="196"/>
         <source>Copy to clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>In Zwischenablage kopieren</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="221"/>
@@ -1659,7 +1659,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="226"/>
         <source>Shear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Scherung</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="227"/>
@@ -1689,42 +1689,42 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="232"/>
         <source>Grayscale</source>
-        <translation type="unfinished">Graustufen</translation>
+        <translation>Graustufen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="233"/>
         <source>Negative</source>
-        <translation type="unfinished">Negativ</translation>
+        <translation>Negativ</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="234"/>
         <source>Adjust colors</source>
-        <translation type="unfinished">Farben anpassen</translation>
+        <translation>Farben anpassen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="235"/>
         <source>Auto color adjust</source>
-        <translation type="unfinished">Farbe automatisch anpassen</translation>
+        <translation>Farbe automatisch anpassen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="236"/>
         <source>Sharpen</source>
-        <translation type="unfinished">Schärfen</translation>
+        <translation>Schärfen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="237"/>
         <source>Effects</source>
-        <translation type="unfinished">Effekte</translation>
+        <translation>Effekte</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="238"/>
         <source>External tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe Werkzeuge</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="239"/>
         <source>Add text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="529"/>
@@ -1742,58 +1742,58 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="17"/>
         <source>Resize</source>
-        <translation type="unfinished">Größe ändern</translation>
+        <translation>Größe ändern</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="28"/>
         <source>New width</source>
-        <translation type="unfinished">Neue Breite</translation>
+        <translation>Neue Breite</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="33"/>
         <source>New height</source>
-        <translation type="unfinished">Neue Höhe</translation>
+        <translation>Neue Höhe</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="38"/>
         <source>Long side</source>
-        <translation type="unfinished">Lange Seite</translation>
+        <translation>Lange Seite</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="43"/>
         <source>Short side</source>
-        <translation type="unfinished">Kurze Seite</translation>
+        <translation>Kurze Seite</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="48"/>
         <source>Scale to</source>
-        <translation type="unfinished">Skalieren</translation>
+        <translation>Skalieren</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="53"/>
         <source>New size</source>
-        <translation type="unfinished">Neue Größe</translation>
+        <translation>Neue Größe</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="93"/>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="85"/>
         <source>x</source>
-        <translation type="unfinished">x</translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigresizedialog.ui" line="127"/>
         <source>Method:</source>
-        <translation type="unfinished">Methode:</translation>
+        <translation>Methode:</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="83"/>
         <source>pixels</source>
-        <translation type="unfinished">Pixel</translation>
+        <translation>Pixel</translation>
     </message>
     <message>
         <location filename="../src/dialogs/macroconfigdialog.cpp" line="84"/>
         <source>%</source>
-        <translation type="unfinished">%</translation>
+        <translation>%</translation>
     </message>
 </context>
 <context>
@@ -1836,67 +1836,67 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.ui" line="323"/>
         <source>⇄</source>
-        <translation type="unfinished"></translation>
+        <translation>⇄</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="469"/>
         <source>Antialiasing</source>
-        <translation type="unfinished"></translation>
+        <translation>Kantenglättung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="472"/>
         <source>AA</source>
-        <translation type="unfinished"></translation>
+        <translation>AA</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="501"/>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="533"/>
         <source>Width</source>
-        <translation type="unfinished">Breite</translation>
+        <translation>Breite</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="562"/>
         <source>Line style</source>
-        <translation type="unfinished"></translation>
+        <translation>Linienstil</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="626"/>
         <source>Line end</source>
-        <translation type="unfinished"></translation>
+        <translation>Linienende</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="681"/>
         <source>Line join</source>
-        <translation type="unfinished"></translation>
+        <translation>Linienverbindung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="736"/>
         <source>Polygon fill / outline</source>
-        <translation type="unfinished"></translation>
+        <translation>Vieleck-Füllung / -Umriss</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="801"/>
         <source>Tolerance</source>
-        <translation type="unfinished"></translation>
+        <translation>Toleranz</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="830"/>
         <source>Radius</source>
-        <translation type="unfinished">Radius</translation>
+        <translation>Radius</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="1021"/>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Fett</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.ui" line="1036"/>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Kursiv</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="361"/>
@@ -2001,7 +2001,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="392"/>
         <source>Toggle p&amp;aint toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeichenwerkzeugleiste ein-/&amp;ausblenden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="394"/>
@@ -2011,7 +2011,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="395"/>
         <source>Restore last selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorherige Auswahl wiederherstellen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="396"/>
@@ -2026,22 +2026,22 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="400"/>
         <source>Remove band</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Band entfernen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="402"/>
         <source>Remove horizontal band / row of selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Horizontales Band / ausgewählte Zeile entfernen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="403"/>
         <source>Remove vertical band / column of selection</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vertikales Band / ausgewählte Spalte entfernen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="405"/>
         <source>Add &amp;text</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Text hinzufügen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="407"/>
@@ -2101,7 +2101,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="426"/>
         <source>Shear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Scherung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="428"/>
@@ -2111,7 +2111,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="430"/>
         <source>Seam carving</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inhaltsabhängige Bildverzerrung (Seam carving)</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="431"/>
@@ -2146,7 +2146,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="442"/>
         <source>Histogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Histogram</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="444"/>
@@ -2212,52 +2212,52 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="462"/>
         <source>&amp;Macros</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Makros</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="465"/>
         <source>Macro 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 1</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="466"/>
         <source>Macro 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 2</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="467"/>
         <source>Macro 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 3</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="468"/>
         <source>Macro 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 4</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="469"/>
         <source>Macro 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 5</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="470"/>
         <source>Macro 6</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 6</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="471"/>
         <source>Macro 7</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 7</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="472"/>
         <source>Macro 8</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 8</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="473"/>
         <source>Macro 9</source>
-        <translation type="unfinished"></translation>
+        <translation>Makro 9</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="476"/>
@@ -2282,7 +2282,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="483"/>
         <source>Toggle quick panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnellmenü ein-/ausblenden</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="485"/>
@@ -2422,27 +2422,27 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="524"/>
         <source>M&amp;ultipage image</source>
-        <translation type="unfinished"></translation>
+        <translation>M&amp;ehrseitiges Bild</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="525"/>
         <source>Next page</source>
-        <translation type="unfinished"></translation>
+        <translation>Nächste Seite</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="526"/>
         <source>Previous page</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorherige Seite</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="528"/>
         <source>First page</source>
-        <translation type="unfinished"></translation>
+        <translation>Erste Seite</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="529"/>
         <source>Last page</source>
-        <translation type="unfinished"></translation>
+        <translation>Letzte Seite</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="538"/>
@@ -2501,12 +2501,12 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="852"/>
         <source>Delete the current file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuelle Datei löschen?</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="856"/>
         <source>Do not show for the rest of the session.</source>
-        <translation type="unfinished"></translation>
+        <translation>Für den Rest der Sitzung nicht wieder anzeigen.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1413"/>
@@ -2541,7 +2541,7 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="1585"/>
         <source>Cannot load animated script output file.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ausgabedatei von annimiertem Skript kann nicht geladen werden.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1591"/>
@@ -2551,136 +2551,150 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
     <message>
         <location filename="../src/mainwindow.cpp" line="1711"/>
         <source>Preferences</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="1711"/>
         <source>Locale change requires application restart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Änderung der Spracheinstellung erfordert einen Programm-Neustart.</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2381"/>
         <source>Selection tool
 For normal use</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahlwerkzeug
+für normale Nutzung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2384"/>
         <source>Pencil
 Pixel manipulation</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleistift
+Pixelbearbeitung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2385"/>
         <source>Brush
 Free hand drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Pinsel
+Freihandzeichnung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2386"/>
         <source>Smudge / warp tool
 Ctrl: warp
 Shift: warp + blur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Verschmieren- / Warp-Werkzeug
+Strg: warp
+Umschalt: verzerren (warp) + verschwommen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2387"/>
         <source>Clone tool
 Ctrl+Click: select source area</source>
-        <translation type="unfinished"></translation>
+        <translation>Klon-Werkzeug
+Strg+Klick: Quell-Bereich auswählen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2388"/>
         <source>Line
 Ctrl: drag while drawing
 Shift: limits angle to multiples of 15 deg</source>
-        <translation type="unfinished"></translation>
+        <translation>Linie
+Strg: Beim Zeichnen ziehen
+Umschalt: Limitiert Winkel auf Vielfaches von 15 Grad</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2389"/>
         <source>Rectangle
 Ctrl: drag while drawing
 Shift: draw square</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechteck
+Strg: Beim Zeichnen ziehen
+Umschalt: Quadrat zeichnen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2390"/>
         <source>Rounded rectangle
 Ctrl: drag while drawing
 Shift: draw square</source>
-        <translation type="unfinished"></translation>
+        <translation>Abgerundetes Rechteck
+Strg: Beim Zeichnen ziehen
+Umschalt: Quadrat zeichnen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2391"/>
         <source>Ellipse
 Ctrl: drag while drawing
 Shift: draw circle</source>
-        <translation type="unfinished"></translation>
+        <translation>Ellipse
+Strg: Beim Zeichnen ziehen
+Umschalt: Kreis zeichnen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2392"/>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Test</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2393"/>
         <source>Fill</source>
-        <translation type="unfinished"></translation>
+        <translation>Füllen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2394"/>
         <source>Color picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbauswahl</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2399"/>
         <source>Solid line</source>
-        <translation type="unfinished"></translation>
+        <translation>Durchgezogene Linie</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2400"/>
         <source>Dash line</source>
-        <translation type="unfinished"></translation>
+        <translation>Gestrichelte Linie</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2401"/>
         <source>Dot line</source>
-        <translation type="unfinished"></translation>
+        <translation>Punktierte Linie</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2402"/>
         <source>DashDot line</source>
-        <translation type="unfinished"></translation>
+        <translation>Punktiert-gestrichelte Linie</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2403"/>
         <source>Round cap</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Runde Kappe</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2404"/>
         <source>Flat cap</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Flache Kappe</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2405"/>
         <source>Square cap</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Quadratische Kappe</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2406"/>
         <source>Round join</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Runde Verbindung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2407"/>
         <source>Bevel join</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Schräge Verbindung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2408"/>
         <source>Miter join</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gehrungsverbindung</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2695"/>
@@ -3140,7 +3154,7 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="239"/>
         <source>Ask before deleting files</source>
-        <translation type="unfinished"></translation>
+        <translation>Vor Löschen von Dateien nachfragen</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="263"/>
@@ -3555,17 +3569,17 @@ Das Programm wird dann beendet.</translation>
     <message>
         <location filename="../src/dialogs/rotatedialog.ui" line="109"/>
         <source>Extend edges with blur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ränder mit Verwischen erweitern</translation>
     </message>
     <message>
         <location filename="../src/dialogs/rotatedialog.ui" line="114"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <location filename="../src/dialogs/rotatedialog.ui" line="119"/>
         <source>Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparent</translation>
     </message>
     <message>
         <location filename="../src/dialogs/rotatedialog.ui" line="143"/>
@@ -3586,27 +3600,27 @@ Das Programm wird dann beendet.</translation>
     <message>
         <location filename="../src/dialogs/seamcarvingdialog.ui" line="17"/>
         <source>Seam carving (content-aware resizing)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Inhaltsabhängige Bildverzerrung (Seam carving)</translation>
     </message>
     <message>
         <location filename="../src/dialogs/seamcarvingdialog.ui" line="50"/>
         <source>Warning: preview is an approximation.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Warnung: Voransicht ist eine Annäherung.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/seamcarvingdialog.ui" line="74"/>
         <source>Hint: selection is exclusion region.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Hinweis: Auswahl ist Auschlußbereich.</translation>
     </message>
     <message>
         <location filename="../src/dialogs/seamcarvingdialog.ui" line="99"/>
         <source>Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Horizontal</translation>
     </message>
     <message>
         <location filename="../src/dialogs/seamcarvingdialog.ui" line="104"/>
         <source>Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vertikal</translation>
     </message>
 </context>
 <context>
@@ -3614,37 +3628,37 @@ Das Programm wird dann beendet.</translation>
     <message>
         <location filename="../src/dialogs/sheardialog.ui" line="17"/>
         <source>Shear</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Scherung</translation>
     </message>
     <message>
         <location filename="../src/dialogs/sheardialog.ui" line="70"/>
         <source>Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>Horizontal</translation>
     </message>
     <message>
         <location filename="../src/dialogs/sheardialog.ui" line="75"/>
         <source>Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertikal</translation>
     </message>
     <message>
         <location filename="../src/dialogs/sheardialog.ui" line="123"/>
         <source>Extend edges with blur</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ränder mit Verwischen erweitern</translation>
     </message>
     <message>
         <location filename="../src/dialogs/sheardialog.ui" line="128"/>
         <source>Color</source>
-        <translation type="unfinished">Farbe</translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <location filename="../src/dialogs/sheardialog.ui" line="133"/>
         <source>Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparent</translation>
     </message>
     <message>
         <location filename="../src/dialogs/sheardialog.ui" line="157"/>
         <source>Fill color</source>
-        <translation type="unfinished">Füllfarbe</translation>
+        <translation>Füllfarbe</translation>
     </message>
 </context>
 <context>
@@ -3716,7 +3730,7 @@ Das Programm wird dann beendet.</translation>
     <message>
         <location filename="../src/dialogs/textinputdialog.ui" line="23"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
 </context>
 <context>
