@@ -75,6 +75,7 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	app.setApplicationName("ClassicImageViewer");
 	app.setApplicationVersion(CIV_VERSION);
+	app.setDesktopFileName("io.github.classicimageviewer.ClassicImageViewer");
 	
 	// Prefs
 	QString configDirAbsolutePath;
