@@ -70,6 +70,7 @@
 #include "dialogs/macroconfigdialog.h"
 #include "dialogs/seamcarvingdialog.h"
 #include "dialogs/addtextdialog.h"
+#include "dialogs/newimagedialog.h"
 
 #include "lib/resizer.h"
 #include "lib/autocolor.h"
@@ -413,6 +414,8 @@ void MainWindow::createMenu()
 	connect(ui.menuEdit, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	menuAddAction(ui.menuImage, tr("&Information"), ACT_INFO, "I",  ACTDISABLE_UNLOADED | ACTDISABLE_CLIPBOARD);
+	menuAddSeparator(ui.menuImage);
+	menuAddAction(ui.menuImage, tr("New& image"), ACT_NEW_IMAGE, "Shift+N",  ACTDISABLE_FULLSCREEN);
 	menuAddSeparator(ui.menuImage);
 	act = menuAddAction(ui.menuImage, tr("Rotate &left"), ACT_ROTATE_L, "L",  ACTDISABLE_UNLOADED | ACTDISABLE_ANIMATION);
 	act->setIcon(QIcon(":/icons/icons/rotate-left.png"));
@@ -1298,6 +1301,30 @@ void MainWindow::actionSlot(Action a)
 			{
 				InfoDialog * d = new InfoDialog(currentDirPath + "/" + currentFilePath);
 				d->exec();
+				delete d;
+			}
+			break;
+		case ACT_NEW_IMAGE:
+			{
+				NewImageDialog * d = new NewImageDialog();
+				if (d->exec() == QDialog::Accepted)
+				{
+					QImage i = d->newImage();
+					lastSelection = QRect();
+					setInternalState(IMAGE_FROM_CLIPBOARD);
+					clipboardCounter += 1;
+					currentImageName = QString(tr("Clipboard %1")).arg(clipboardCounter);
+					clearPastedUndoStack();
+					display->newImage(i);
+					if (histogramDialog) histogramDialog->processImage(i);
+					currentImageSize = i.size();
+					if (Globals::prefs->getDisplayMode() == 0)
+					{
+						display->setZoom(1.0);
+					}
+					setImageAndWindowSize();
+					d->savePreferences();
+				}
 				delete d;
 			}
 			break;
