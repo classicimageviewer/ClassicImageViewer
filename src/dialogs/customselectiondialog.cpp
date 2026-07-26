@@ -60,6 +60,9 @@ CustomSelectionDialog::CustomSelectionDialog(QSize imageSize, QRect oldSelection
 	ignoreButton->setVisible(false);
 	connect(ignoreButton, SIGNAL(clicked(bool)), this, SLOT(ignored(bool)));
 	
+	saveButton = ui.buttonBox->addButton(QDialogButtonBox::Save);
+	connect(saveButton, SIGNAL(clicked(bool)), this, SLOT(savePreferences(bool)));
+	
 	connect(ui.comboBoxAR, SIGNAL(activated(int)), this, SLOT(selectARfromList(int)));
 	connect(ui.checkBoxAR, SIGNAL(clicked(bool)), this, SLOT(selectAR(bool)));
 	
@@ -183,6 +186,22 @@ void CustomSelectionDialog::ignored(bool b)
 	ui.buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
 }
 
+void CustomSelectionDialog::savePreferences(bool b)
+{
+	Q_UNUSED(b);
+	
+	Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "x", ui.spinBoxX->value());
+	Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "y", ui.spinBoxY->value());
+	Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "width", ui.spinBoxWidth->value());
+	Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "height", ui.spinBoxHeight->value());
+	if (ui.checkBoxAR->isChecked())
+	{
+		Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "widthRatio", ui.doubleSpinBoxWidthRatio->value());
+		Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "heightRatio", ui.doubleSpinBoxHeightRatio->value());
+	}
+	Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "lockAR", ui.checkBoxAR->isChecked());
+}
+
 void CustomSelectionDialog::selectARfromList(int i)
 {
 	if (i > 0)
@@ -273,22 +292,5 @@ QRect CustomSelectionDialog::getSelection()
 	QRect imageRect = QRect(QPoint(), imageSize);
 	QRect selection = QRect(ui.spinBoxX->value(), ui.spinBoxY->value(), ui.spinBoxWidth->value(), ui.spinBoxHeight->value());
 	return imageRect.intersected(selection);
-}
-
-void CustomSelectionDialog::savePreferences()
-{
-	if (inputSelection.isNull())
-	{
-		Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "x", ui.spinBoxX->value());
-		Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "y", ui.spinBoxY->value());
-		Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "width", ui.spinBoxWidth->value());
-		Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "height", ui.spinBoxHeight->value());
-		if (ui.checkBoxAR->isChecked())
-		{
-			Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "widthRatio", ui.doubleSpinBoxWidthRatio->value());
-			Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "heightRatio", ui.doubleSpinBoxHeightRatio->value());
-		}
-		Globals::prefs->storeSpecificParameter("CustomSelectionDialog", "lockAR", ui.checkBoxAR->isChecked());
-	}
 }
 

@@ -30,6 +30,7 @@ private:
 	QSize imageSize;
 	QRect inputSelection;
 	QPushButton * ignoreButton;
+	QPushButton * saveButton;
 private slots:
 	void checkSelection();
 	void selectAR(bool b);
@@ -40,11 +41,11 @@ private slots:
 	void hChanged(int h);
 	void arChanged(double d);
 	void ignored(bool b);
+	void savePreferences(bool b);
 public:
 	CustomSelectionDialog(QSize imageSize, QRect oldSelection, QWidget * parent = NULL);
 	~CustomSelectionDialog();
 	QRect getSelection();
-	void savePreferences();
 };
 
 #endif //CUSTOMSELECTIONDIALOG_H

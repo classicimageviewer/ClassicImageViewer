@@ -1096,7 +1096,6 @@ void MainWindow::actionSlot(Action a)
 				CustomSelectionDialog * d = new CustomSelectionDialog(display->getImageSize(), display->getSelection());
 				if (d->exec() == QDialog::Accepted)
 				{
-					d->savePreferences();
 					QRect newSelection = d->getSelection();
 					display->setSelection(newSelection);
 				}
