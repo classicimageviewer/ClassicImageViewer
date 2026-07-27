@@ -41,6 +41,7 @@
 #include "effects/moduleOilPaint.h"
 #include "effects/moduleNoise.h"
 #include "effects/moduleMotionBlur.h"
+#include "effects/moduleDistortion.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -71,6 +72,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleOilPaint());
 	list.append(new EffectModuleNoise());
 	list.append(new EffectModuleMotionBlur());
+	list.append(new EffectModuleDistortion());
 	
 	
 	for (EffectBase* item : list)

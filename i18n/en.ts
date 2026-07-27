@@ -862,6 +862,24 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleDistortion</name>
+    <message>
+        <location filename="../src/effects/moduleDistortion.cpp" line="36"/>
+        <source>Main coefficient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleDistortion.cpp" line="37"/>
+        <source>Auxiliary coefficient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleDistortion.h" line="36"/>
+        <source>Distortion</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleHalftone</name>
     <message>
         <location filename="../src/effects/moduleHalftone.cpp" line="44"/>
