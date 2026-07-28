@@ -33,6 +33,12 @@ QList<EffectBase::ParameterCluster> EffectModuleDistortion::getListOfParameterCl
 {
 	QList<EffectBase::ParameterCluster> cluster;
 	
+	QStringList list = QStringList();
+	list.append(QString(tr("Radial")));
+	list.append(QString(tr("Horizontal")));
+	list.append(QString(tr("Vertical")));
+	cluster += uiParamCombobox(tr("Direction"), "Direction", 0, list);
+
 	cluster += uiParamSlider100(tr("Main coefficient"), "MainCoefficient", 0.0, -1.0, 1.0);
 	cluster += uiParamSlider100(tr("Auxiliary coefficient"), "AuxCoefficient", 0.0, -1.0, 1.0);
 	
@@ -85,6 +91,7 @@ QRgb EffectModuleDistortion::interpolatedPixel(const QRgb ** rows, int w, int h,
 
 QImage EffectModuleDistortion::applyEffect(QImage image, QList<EffectBase::ParameterCluster> parameters)
 {
+	int direction = getParamIntValue(parameters, "Direction", 0);
 	float c1 = getParamDoubleValue(parameters, "MainCoefficient", 0.0) / 10.0;
 	float c2 = getParamDoubleValue(parameters, "AuxCoefficient", 0.0) / 10.0;
 	
@@ -124,7 +131,20 @@ QImage EffectModuleDistortion::applyEffect(QImage image, QList<EffectBase::Param
 			float px, py;
 			px = x - centerX;
 			py = y - centerY;
-			float r2 = px*px + py*py;
+			float r2;
+			switch(direction)
+			{
+				default:
+				case 0:
+					r2 = px*px + py*py;
+					break;
+				case 1:
+					r2 = px*px;
+					break;
+				case 2:
+					r2 = py*py;
+					break;
+			}
 			r2 *= rNorm2Inv;
 			float scale = 1.0f / (1.0f + c1*r2 + c2*r2*r2);
 			px = centerX + px * scale;

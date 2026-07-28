@@ -864,12 +864,32 @@
 <context>
     <name>EffectModuleDistortion</name>
     <message>
-        <location filename="../src/effects/moduleDistortion.cpp" line="36"/>
+        <location filename="../src/effects/moduleDistortion.cpp" line="37"/>
+        <source>Radial</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleDistortion.cpp" line="38"/>
+        <source>Horizontal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleDistortion.cpp" line="39"/>
+        <source>Vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleDistortion.cpp" line="40"/>
+        <source>Direction</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleDistortion.cpp" line="42"/>
         <source>Main coefficient</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/effects/moduleDistortion.cpp" line="37"/>
+        <location filename="../src/effects/moduleDistortion.cpp" line="43"/>
         <source>Auxiliary coefficient</source>
         <translation type="unfinished"></translation>
     </message>
