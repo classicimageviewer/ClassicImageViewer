@@ -703,6 +703,44 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleChromaticAberration</name>
+    <message>
+        <location filename="../src/effects/moduleChromaticAberration.cpp" line="37"/>
+        <source>Radial</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleChromaticAberration.cpp" line="38"/>
+        <source>Horizontal</source>
+        <translation type="unfinished">Horizontal</translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleChromaticAberration.cpp" line="39"/>
+        <source>Vertical</source>
+        <translation type="unfinished">Vertikal</translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleChromaticAberration.cpp" line="40"/>
+        <source>Direction</source>
+        <translation type="unfinished">Richtung</translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleChromaticAberration.cpp" line="42"/>
+        <source>Red</source>
+        <translation type="unfinished">Rot</translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleChromaticAberration.cpp" line="43"/>
+        <source>Blue</source>
+        <translation type="unfinished">Blau</translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleChromaticAberration.h" line="37"/>
+        <source>Chromatic aberration</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleColorAdjust</name>
     <message>
         <location filename="../src/effects/moduleColorAdjust.cpp" line="37"/>

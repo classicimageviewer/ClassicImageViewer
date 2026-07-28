@@ -42,6 +42,7 @@
 #include "effects/moduleNoise.h"
 #include "effects/moduleMotionBlur.h"
 #include "effects/moduleDistortion.h"
+#include "effects/moduleChromaticAberration.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -73,6 +74,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleNoise());
 	list.append(new EffectModuleMotionBlur());
 	list.append(new EffectModuleDistortion());
+	list.append(new EffectModuleChromaticAberration());
 	
 	
 	for (EffectBase* item : list)
