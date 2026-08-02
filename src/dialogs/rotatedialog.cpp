@@ -18,9 +18,10 @@
 #include "globals.h"
 #include <QDebug>
 #include <QColorDialog>
+#include <cmath>
 #include "lib/imageOp.h"
 
-RotateDialog::RotateDialog(QImage image, QWidget * parent) : QDialog(parent)
+RotateDialog::RotateDialog(QImage image, QRect selection, QWidget * parent) : QDialog(parent)
 {
 	ui.setupUi(this);
 	setFixedSize(size());
@@ -56,12 +57,23 @@ RotateDialog::RotateDialog(QImage image, QWidget * parent) : QDialog(parent)
 	}
 	ui.pushButtonColor->setVisible(fillMethod == 1);
 	
+	this->selection = selection;
+	ui.labelAngleFromSelection->setEnabled(!selection.isNull());
+	ui.toolButtonAngleFromSelectionBLTRH->setEnabled(!selection.isNull());
+	ui.toolButtonAngleFromSelectionTLBRH->setEnabled(!selection.isNull());
+	ui.toolButtonAngleFromSelectionBLTRV->setEnabled(!selection.isNull());
+	ui.toolButtonAngleFromSelectionTLBRV->setEnabled(!selection.isNull());
+	
 	connect(ui.doubleSpinBoxAngle, SIGNAL(valueChanged(double)), this, SLOT(spinBoxChanged(double)));
 	connect(ui.horizontalSliderAngle, SIGNAL(valueChanged(int)), this, SLOT(sliderChanged(int)));
 	connect(ui.doubleSpinBoxBlur, SIGNAL(valueChanged(double)), this, SLOT(spinBoxChanged(double)));
 	connect(ui.horizontalSliderBlur, SIGNAL(valueChanged(int)), this, SLOT(sliderChanged(int)));
 	connect(ui.comboBoxFill, SIGNAL(activated(int)), this, SLOT(changeFillMethod(int)));
 	connect(ui.pushButtonColor, SIGNAL(clicked(bool)), this, SLOT(changeBackgroundColor(bool)));
+	connect(ui.toolButtonAngleFromSelectionBLTRH, SIGNAL(clicked(bool)), this, SLOT(angleFromSelectionBLTRH(bool)));
+	connect(ui.toolButtonAngleFromSelectionTLBRH, SIGNAL(clicked(bool)), this, SLOT(angleFromSelectionTLBRH(bool)));
+	connect(ui.toolButtonAngleFromSelectionBLTRV, SIGNAL(clicked(bool)), this, SLOT(angleFromSelectionBLTRV(bool)));
+	connect(ui.toolButtonAngleFromSelectionTLBRV, SIGNAL(clicked(bool)), this, SLOT(angleFromSelectionTLBRV(bool)));
 
 	displayRotated();
 }
@@ -127,6 +139,30 @@ void RotateDialog::changeBackgroundColor(bool b)
 	}
 	delete d;
 	displayRotated();
+}
+
+void RotateDialog::angleFromSelectionBLTRH(bool b)
+{
+	Q_UNUSED(b);
+	ui.doubleSpinBoxAngle->setValue(std::atan2(selection.height(), selection.width()) * (180.0 / M_PI));
+}
+
+void RotateDialog::angleFromSelectionTLBRH(bool b)
+{
+	Q_UNUSED(b);
+	ui.doubleSpinBoxAngle->setValue(std::atan2(selection.height(), selection.width()) * (-180.0 / M_PI));
+}
+
+void RotateDialog::angleFromSelectionBLTRV(bool b)
+{
+	Q_UNUSED(b);
+	ui.doubleSpinBoxAngle->setValue(std::atan2(selection.width(), selection.height()) * (-180.0 / M_PI));
+}
+
+void RotateDialog::angleFromSelectionTLBRV(bool b)
+{
+	Q_UNUSED(b);
+	ui.doubleSpinBoxAngle->setValue(std::atan2(selection.width(), selection.height()) * (180.0 / M_PI));
 }
 
 void RotateDialog::displayRotated()

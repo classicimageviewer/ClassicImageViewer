@@ -3687,22 +3687,47 @@ Das Programm wird dann beendet.</translation>
         <translation>Drehen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/rotatedialog.ui" line="109"/>
+        <location filename="../src/dialogs/rotatedialog.ui" line="69"/>
+        <source>Set rotation angle from selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/rotatedialog.ui" line="76"/>
+        <source>Bottom left to top right diagonal to horizotnal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/rotatedialog.ui" line="86"/>
+        <source>Top left to bottom right diagonal to horizotnal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/rotatedialog.ui" line="96"/>
+        <source>Bottom left to top right diagonal to vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/rotatedialog.ui" line="106"/>
+        <source>Top left to bottom right diagonal to vertical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/rotatedialog.ui" line="173"/>
         <source>Extend edges with blur</source>
         <translation type="unfinished">Ränder mit Verwischen erweitern</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/rotatedialog.ui" line="114"/>
+        <location filename="../src/dialogs/rotatedialog.ui" line="178"/>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/rotatedialog.ui" line="119"/>
+        <location filename="../src/dialogs/rotatedialog.ui" line="183"/>
         <source>Transparent</source>
         <translation>Transparent</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/rotatedialog.ui" line="143"/>
+        <location filename="../src/dialogs/rotatedialog.ui" line="207"/>
         <source>Fill color</source>
         <translation>Füllfarbe</translation>
     </message>

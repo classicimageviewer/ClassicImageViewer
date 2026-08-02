@@ -1336,7 +1336,7 @@ void MainWindow::actionSlot(Action a)
 			break;
 		case ACT_ROTATE_C:
 			{
-				RotateDialog * d = new RotateDialog(display->getImage());
+				RotateDialog * d = new RotateDialog(display->getImage(), display->getSelection());
 				if (d->exec() == QDialog::Accepted)
 				{
 					QApplication::setOverrideCursor(Qt::WaitCursor);

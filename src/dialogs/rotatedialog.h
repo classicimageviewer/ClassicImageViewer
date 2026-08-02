@@ -30,14 +30,19 @@ private:
 	int fillMethod;
 	double angle, blur;
 	QColor backgroundColor;
+	QRect selection;
 	void displayRotated();
 private slots:
 	void spinBoxChanged(double value);
 	void sliderChanged(int value);
 	void changeFillMethod(int v);
 	void changeBackgroundColor(bool b);
+	void angleFromSelectionBLTRH(bool b);
+	void angleFromSelectionTLBRH(bool b);
+	void angleFromSelectionBLTRV(bool b);
+	void angleFromSelectionTLBRV(bool b);
 public:
-	RotateDialog(QImage image, QWidget * parent = NULL);
+	RotateDialog(QImage image, QRect selection = QRect(), QWidget * parent = NULL);
 	~RotateDialog();
 	void savePreferences();
 	QImage rotateImage(QImage i);

@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>668</width>
-    <height>438</height>
+    <height>470</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -58,6 +58,70 @@
           <string/>
          </property>
         </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="labelAngleFromSelection">
+         <property name="text">
+          <string>Set rotation angle from selection</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButtonAngleFromSelectionBLTRH">
+         <property name="toolTip">
+          <string>Bottom left to top right diagonal to horizotnal</string>
+         </property>
+         <property name="text">
+          <string notr="true">◩➟⬒</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButtonAngleFromSelectionTLBRH">
+         <property name="toolTip">
+          <string>Top left to bottom right diagonal to horizotnal</string>
+         </property>
+         <property name="text">
+          <string notr="true">⬔➟⬒</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButtonAngleFromSelectionBLTRV">
+         <property name="toolTip">
+          <string>Bottom left to top right diagonal to vertical</string>
+         </property>
+         <property name="text">
+          <string notr="true">◩➟◧</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolButtonAngleFromSelectionTLBRV">
+         <property name="toolTip">
+          <string>Top left to bottom right diagonal to vertical</string>
+         </property>
+         <property name="text">
+          <string notr="true">⬔➟◨</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>
