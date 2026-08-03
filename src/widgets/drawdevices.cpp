@@ -749,6 +749,8 @@ void DrawDeviceClone::mouseReleaseEvent(const QPointF & position, const Qt::Mous
 DrawDeviceLine::DrawDeviceLine(MainWindow * mainWindow, DrawDeviceParameters * parameters, int specialization) : DrawDevice(mainWindow, parameters, specialization)
 {
 	lineItem = NULL;
+	tailItem = NULL;
+	headItem = NULL;
 	button = 0;
 }
 
@@ -761,14 +763,30 @@ void DrawDeviceLine::abortDraw(void)
 		delete lineItem;
 		lineItem = NULL;
 	}
+	if (tailItem)
+	{
+		surface->removeItem(tailItem);
+		delete tailItem;
+		tailItem = NULL;
+	}
+	if (headItem)
+	{
+		surface->removeItem(headItem);
+		delete headItem;
+		headItem = NULL;
+	}
 }
-#include <QGraphicsBlurEffect>
+
 void DrawDeviceLine::mousePressEvent(const QPointF & position, const Qt::MouseButtons  buttons, const Qt::KeyboardModifiers modifiers)
 {
 	Q_UNUSED(modifiers);
 	if ((!button) && ((buttons & Qt::LeftButton) || (buttons & Qt::RightButton)))
 	{
 		line = QLineF(position / Globals::scalingFactor, position / Globals::scalingFactor);
+		tail.clear();
+		tail << (position / Globals::scalingFactor);
+		head.clear();
+		head << (position / Globals::scalingFactor);
 		if ((buttons & Qt::LeftButton))
 		{
 			button = Qt::LeftButton;
@@ -780,7 +798,17 @@ void DrawDeviceLine::mousePressEvent(const QPointF & position, const Qt::MouseBu
 			color = parameters->backgroundColor;
 		}
 		lineItem = surface->addLine(line, QPen(QBrush(color, Qt::SolidPattern), parameters->width / Globals::scalingFactor, parameters->lineStyle, parameters->lineEnd, parameters->lineJoin));
-		lineItem->setZValue(999);
+		lineItem->setZValue(997);
+		if (parameters->lineCap >= 2)
+		{
+			tailItem = surface->addPolygon(tail, QPen(QBrush(color, Qt::SolidPattern), parameters->width / Globals::scalingFactor, Qt::SolidLine, parameters->lineEnd, parameters->lineJoin), QBrush(color));
+			tailItem->setZValue(998);
+		}
+		if (parameters->lineCap > 0)
+		{
+			headItem = surface->addPolygon(head, QPen(QBrush(color, Qt::SolidPattern), parameters->width / Globals::scalingFactor, Qt::SolidLine, parameters->lineEnd, parameters->lineJoin), QBrush(color));
+			headItem->setZValue(999);
+		}
 	}
 }
 
@@ -807,6 +835,49 @@ void DrawDeviceLine::mouseMoveEvent(const QPointF & position, const Qt::MouseBut
 			line.setAngle(a);
 		}
 		lineItem->setLine(line);
+		
+		if (tailItem)
+		{
+			double angle = std::atan2(-line.dy(), line.dx());
+			double size = parameters->capSize * parameters->width / Globals::scalingFactor;
+			tail.clear();
+			if (parameters->lineCap == 2)
+			{
+				size *= 2;
+				QPointF arrowP1 = line.p1() + QPointF(std::sin(angle + M_PI / 3.0), std::cos(angle + M_PI / 3.0)) * size;
+				QPointF arrowP2 = line.p1() + QPointF(std::sin(angle + M_PI - M_PI / 3.0), std::cos(angle + M_PI - M_PI / 3.0)) * size;
+				tail << line.p1() << arrowP1 << arrowP2;
+			}
+			else
+			{
+				size *= 1;
+				QPointF flatP1 = line.p1() + QPointF(std::sin(angle), std::cos(angle)) * size;
+				QPointF flatP2 = line.p1() + QPointF(std::sin(angle + M_PI), std::cos(angle + M_PI)) * size;
+				tail << flatP1 << line.p1() << flatP2;
+			}
+			tailItem->setPolygon(tail);
+		}
+		if (headItem)
+		{
+			double angle = std::atan2(-line.dy(), line.dx());
+			double size = parameters->capSize * parameters->width / Globals::scalingFactor;
+			head.clear();
+			if (parameters->lineCap < 4)
+			{
+				size *= 2;
+				QPointF arrowP1 = line.p2() + QPointF(std::sin(angle + M_PI + M_PI / 3.0), std::cos(angle + M_PI + M_PI / 3.0)) * size;
+				QPointF arrowP2 = line.p2() + QPointF(std::sin(angle - M_PI / 3.0), std::cos(angle - M_PI / 3.0)) * size;
+				head << line.p2() << arrowP1 << arrowP2;
+			}
+			else
+			{
+				size *= 1;
+				QPointF flatP1 = line.p2() + QPointF(std::sin(angle), std::cos(angle)) * size;
+				QPointF flatP2 = line.p2() + QPointF(std::sin(angle + M_PI), std::cos(angle + M_PI)) * size;
+				head << flatP1 << line.p2() << flatP2;
+			}
+			headItem->setPolygon(head);
+		}
 	}
 }
 
@@ -841,6 +912,36 @@ void DrawDeviceLine::mouseReleaseEvent(const QPointF & position, const Qt::Mouse
 		painter.setPen(QPen(QBrush(color, Qt::SolidPattern), parameters->width, parameters->lineStyle, parameters->lineEnd, parameters->lineJoin));
 		painter.setRenderHint(QPainter::Antialiasing, parameters->antialiasing);
 		painter.drawLine(QLineF(line.p1() * Globals::scalingFactor, line.p2() * Globals::scalingFactor));
+		
+		if (tailItem || headItem)
+		{
+			painter.setPen(QPen(QBrush(color, Qt::SolidPattern), parameters->width, Qt::SolidLine, parameters->lineEnd, parameters->lineJoin));
+			painter.setBrush(QBrush(color));
+		}
+		if (tailItem)
+		{
+			surface->removeItem(tailItem);
+			delete tailItem;
+			tailItem = NULL;
+			QPolygonF tailScaled;
+			for (const QPointF point : tail)
+			{
+				tailScaled += point * Globals::scalingFactor;
+			}
+			painter.drawPolygon(tailScaled);
+		}
+		if (headItem)
+		{
+			surface->removeItem(headItem);
+			delete headItem;
+			headItem = NULL;
+			QPolygonF headScaled;
+			for (const QPointF point : head)
+			{
+				headScaled += point * Globals::scalingFactor;
+			}
+			painter.drawPolygon(headScaled);
+		}
 		painter.end();
 		parameters->display->updateInternalImage();
 		button = 0;

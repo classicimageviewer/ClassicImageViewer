@@ -2520,6 +2520,11 @@ void MainWindow::setupDrawDockWidget()
 		Globals::prefs->storeSpecificParameter("DrawToolbar", "lineJoin", i);
 	});
 	
+	connect(ui.comboBoxLineCap, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int i) {
+		drawDeviceParameters.lineCap = i;
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "lineCap", i);
+	});
+	
 	connect(ui.spinBoxTolerance, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int i) {
 		drawDeviceParameters.tolerance = i;
 		Globals::prefs->storeSpecificParameter("DrawToolbar", "tolerance", i);
@@ -2527,6 +2532,10 @@ void MainWindow::setupDrawDockWidget()
 	connect(ui.spinBoxRadius, QOverload<int>::of(&QSpinBox::valueChanged), this, [this](int i) {
 		drawDeviceParameters.radius = i;
 		Globals::prefs->storeSpecificParameter("DrawToolbar", "radius", i);
+	});
+	connect(ui.doubleSpinBoxCapSize, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [this](double d) {
+		drawDeviceParameters.capSize = d;
+		Globals::prefs->storeSpecificParameter("DrawToolbar", "capSize", d);
 	});
 	
 	connect(ui.comboBoxPolygon, QOverload<int>::of(&QComboBox::currentIndexChanged), this, [this](int i) {
@@ -2570,6 +2579,9 @@ void MainWindow::setupDrawDockWidget()
 	int lineJoin = Globals::prefs->fetchSpecificParameter("DrawToolbar", "lineJoin", 0).toInt();
 	ui.comboBoxLineJoin->setCurrentIndex(lineJoin);
 	ui.comboBoxLineJoin->currentIndexChanged(lineJoin);
+	int lineCap = Globals::prefs->fetchSpecificParameter("DrawToolbar", "lineCap", 0).toInt();
+	ui.comboBoxLineCap->setCurrentIndex(lineCap);
+	ui.comboBoxLineCap->currentIndexChanged(lineCap);
 	int polygon = Globals::prefs->fetchSpecificParameter("DrawToolbar", "polygon", 0).toInt();
 	ui.comboBoxPolygon->setCurrentIndex(polygon);
 	ui.comboBoxPolygon->currentIndexChanged(polygon);
@@ -2579,6 +2591,9 @@ void MainWindow::setupDrawDockWidget()
 	int radius = Globals::prefs->fetchSpecificParameter("DrawToolbar", "radius", 10).toInt();
 	ui.spinBoxRadius->setValue(radius);
 	ui.spinBoxRadius->valueChanged(radius);
+	double capSize = Globals::prefs->fetchSpecificParameter("DrawToolbar", "capSize", 1.0).toDouble();
+	ui.doubleSpinBoxCapSize->setValue(capSize);
+	ui.doubleSpinBoxCapSize->valueChanged(capSize);
 	
 	int textSize = Globals::prefs->fetchSpecificParameter("DrawToolbar", "textSize", 24).toInt();
 	ui.spinBoxDrawTextSize->setValue(textSize);
@@ -2600,13 +2615,16 @@ void MainWindow::setDrawDockWidgetActiveButton(QToolButton * btn)
 	}
 	
 	ui.stackedWidgetSizeWidth->setCurrentIndex(((btn == ui.toolButtonDrawClone) || (btn == ui.toolButtonDrawSmudge)) ? 0 : 1);
-	ui.stackedWidgetToleranceRadius->setCurrentIndex((btn == ui.toolButtonDrawFill) ? 0 : 1);
+	ui.stackedWidgetToleranceRadius->setCurrentIndex((btn == ui.toolButtonDrawFill) ? 0 : ((btn == ui.toolButtonDrawLine) ? 2 : 1));
 	ui.checkBoxAntiAliasing->setEnabled(!(btn == ui.toolButtonDrawSelection));
 	ui.spinBoxWidth->setEnabled(!((btn == ui.toolButtonDrawSelection) || (btn == ui.toolButtonDrawPen) || (btn == ui.toolButtonDrawText) || (btn == ui.toolButtonDrawFill) || (btn == ui.toolButtonDrawColorPicker)));
 	ui.comboBoxLine->setEnabled((btn == ui.toolButtonDrawBrush) || (btn == ui.toolButtonDrawLine) || (btn == ui.toolButtonDrawRectangle) || (btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawEllipse));
 	ui.comboBoxLineEnd->setEnabled((btn == ui.toolButtonDrawBrush) || (btn == ui.toolButtonDrawLine) || (btn == ui.toolButtonDrawRectangle) || (btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawEllipse));
 	ui.comboBoxLineJoin->setEnabled((btn == ui.toolButtonDrawBrush) || (btn == ui.toolButtonDrawLine) || (btn == ui.toolButtonDrawRectangle) || (btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawEllipse));
+	ui.comboBoxLineCap->setEnabled(btn == ui.toolButtonDrawLine);
 	ui.comboBoxPolygon->setEnabled((btn == ui.toolButtonDrawRectangle) || (btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawEllipse));
+	ui.comboBoxLineCap->setVisible(btn == ui.toolButtonDrawLine);
+	ui.comboBoxPolygon->setVisible(btn != ui.toolButtonDrawLine);
 	ui.spinBoxRadius->setEnabled((btn == ui.toolButtonDrawRoundedRectangle) || (btn == ui.toolButtonDrawSmudge));
 	
 	bool drawTextVisible = ui.stackedWidgetDrawText->isVisible();

@@ -82,6 +82,16 @@
 		<file>icons/draw/clear.png</file>
 		<file>icons/draw/line@2x.png</file>
 		<file>icons/draw/line.png</file>
+		<file>icons/draw/lineCapAA@2x.png</file>
+		<file>icons/draw/lineCapAA.png</file>
+		<file>icons/draw/lineCapFA@2x.png</file>
+		<file>icons/draw/lineCapFA.png</file>
+		<file>icons/draw/lineCapFF@2x.png</file>
+		<file>icons/draw/lineCapFF.png</file>
+		<file>icons/draw/lineCapNA@2x.png</file>
+		<file>icons/draw/lineCapNA.png</file>
+		<file>icons/draw/lineCapNN@2x.png</file>
+		<file>icons/draw/lineCapNN.png</file>
 		<file>icons/draw/lineDash@2x.png</file>
 		<file>icons/draw/lineDashDot@2x.png</file>
 		<file>icons/draw/lineDashDot.png</file>

@@ -32,8 +32,10 @@ public:
 	Qt::PenCapStyle lineEnd;
 	Qt::PenJoinStyle lineJoin;
 	int polygonFillOutline;
+	int lineCap;
 	int tolerance;
 	int radius;
+	double capSize;
 	QString text;
 	QFont font;
 	int fontSize;
@@ -141,7 +143,11 @@ class DrawDeviceLine : public DrawDevice
 {
 private:
 	QGraphicsLineItem * lineItem;
+	QGraphicsPolygonItem * tailItem;
+	QGraphicsPolygonItem * headItem;
 	QLineF line;
+	QPolygonF tail;
+	QPolygonF head;
 	QColor color;
 	uint32_t button;
 public:

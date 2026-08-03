@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>789</width>
-    <height>610</height>
+    <height>642</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -207,135 +207,14 @@
          <property name="spacing">
           <number>6</number>
          </property>
-         <item row="6" column="0" rowspan="2" colspan="2">
-          <widget class="QFrame" name="frame">
-           <property name="minimumSize">
-            <size>
-             <width>64</width>
-             <height>64</height>
-            </size>
-           </property>
-           <property name="frameShape">
-            <enum>QFrame::NoFrame</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
-           </property>
-           <widget class="QLabel" name="labelForegroundColor">
-            <property name="geometry">
-             <rect>
-              <x>7</x>
-              <y>7</y>
-              <width>32</width>
-              <height>32</height>
-             </rect>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: #FFFFFF</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <property name="text">
-             <string notr="true"/>
-            </property>
-           </widget>
-           <widget class="QLabel" name="labelBackgroundColor">
-            <property name="geometry">
-             <rect>
-              <x>26</x>
-              <y>25</y>
-              <width>32</width>
-              <height>32</height>
-             </rect>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>32</width>
-              <height>32</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: #000000</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::Box</enum>
-            </property>
-            <property name="text">
-             <string notr="true"/>
-            </property>
-           </widget>
-           <widget class="QToolButton" name="toolButtonSwitchDrawColors">
-            <property name="geometry">
-             <rect>
-              <x>49</x>
-              <y>0</y>
-              <width>18</width>
-              <height>18</height>
-             </rect>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>18</width>
-              <height>18</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>18</width>
-              <height>18</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>⇄</string>
-            </property>
-           </widget>
-           <zorder>labelBackgroundColor</zorder>
-           <zorder>labelForegroundColor</zorder>
-           <zorder>toolButtonSwitchDrawColors</zorder>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QToolButton" name="toolButtonDrawFill">
+         <item row="4" column="0">
+          <widget class="QToolButton" name="toolButtonDrawEllipse">
            <property name="text">
             <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/bucket.png</normaloff>:/draw/icons/draw/bucket.png</iconset>
+             <normaloff>:/draw/icons/draw/circle.png</normaloff>:/draw/icons/draw/circle.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -388,34 +267,14 @@
            </property>
           </widget>
          </item>
-         <item row="5" column="1">
-          <widget class="QToolButton" name="toolButtonDrawColorPicker">
+         <item row="2" column="1">
+          <widget class="QToolButton" name="toolButtonDrawLine">
            <property name="text">
             <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/pipette.png</normaloff>:/draw/icons/draw/pipette.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QToolButton" name="toolButtonDrawText">
-           <property name="text">
-            <string notr="true"/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/text.png</normaloff>:/draw/icons/draw/text.png</iconset>
+             <normaloff>:/draw/icons/draw/line.png</normaloff>:/draw/icons/draw/line.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -448,7 +307,127 @@
            </property>
           </widget>
          </item>
-         <item row="9" column="0" colspan="2">
+         <item row="1" column="0">
+          <widget class="QToolButton" name="toolButtonDrawBrush">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/res.qrc">
+             <normaloff>:/draw/icons/draw/brush.png</normaloff>:/draw/icons/draw/brush.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QToolButton" name="toolButtonDrawSmudge">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/res.qrc">
+             <normaloff>:/draw/icons/draw/smudge.png</normaloff>:/draw/icons/draw/smudge.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QToolButton" name="toolButtonDrawClone">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/res.qrc">
+             <normaloff>:/draw/icons/draw/stamp.png</normaloff>:/draw/icons/draw/stamp.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QToolButton" name="toolButtonDrawFill">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/res.qrc">
+             <normaloff>:/draw/icons/draw/bucket.png</normaloff>:/draw/icons/draw/bucket.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QToolButton" name="toolButtonDrawColorPicker">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/res.qrc">
+             <normaloff>:/draw/icons/draw/pipette.png</normaloff>:/draw/icons/draw/pipette.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QToolButton" name="toolButtonDrawPen">
+           <property name="text">
+            <string notr="true"/>
+           </property>
+           <property name="icon">
+            <iconset resource="../resources/res.qrc">
+             <normaloff>:/draw/icons/draw/pencil.png</normaloff>:/draw/icons/draw/pencil.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>24</width>
+             <height>24</height>
+            </size>
+           </property>
+           <property name="checkable">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0" colspan="2">
           <widget class="QFrame" name="frame_2">
            <property name="minimumSize">
             <size>
@@ -475,8 +454,14 @@
             </item>
             <item>
              <widget class="QStackedWidget" name="stackedWidgetSizeWidth">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="pageSWSW0">
                <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -774,9 +759,88 @@
              </widget>
             </item>
             <item>
+             <widget class="QComboBox" name="comboBoxLineCap">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>50</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>Line caps</string>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>24</width>
+                <height>16</height>
+               </size>
+              </property>
+              <property name="frame">
+               <bool>false</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../resources/res.qrc">
+                 <normaloff>:/draw/icons/draw/lineCapNN.png</normaloff>:/draw/icons/draw/lineCapNN.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../resources/res.qrc">
+                 <normaloff>:/draw/icons/draw/lineCapNA.png</normaloff>:/draw/icons/draw/lineCapNA.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../resources/res.qrc">
+                 <normaloff>:/draw/icons/draw/lineCapAA.png</normaloff>:/draw/icons/draw/lineCapAA.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../resources/res.qrc">
+                 <normaloff>:/draw/icons/draw/lineCapFA.png</normaloff>:/draw/icons/draw/lineCapFA.png</iconset>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string notr="true"/>
+               </property>
+               <property name="icon">
+                <iconset resource="../resources/res.qrc">
+                 <normaloff>:/draw/icons/draw/lineCapFF.png</normaloff>:/draw/icons/draw/lineCapFF.png</iconset>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
              <widget class="QStackedWidget" name="stackedWidgetToleranceRadius">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="pageSWTR0">
                <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -836,19 +900,57 @@
                 </item>
                </layout>
               </widget>
+              <widget class="QWidget" name="pageSWTR2">
+               <layout class="QVBoxLayout" name="verticalLayout_9">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QDoubleSpinBox" name="doubleSpinBoxCapSize">
+                  <property name="toolTip">
+                   <string>Line cap size multiplier</string>
+                  </property>
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>0.500000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>5.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
              </widget>
             </item>
            </layout>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QToolButton" name="toolButtonDrawEllipse">
+         <item row="4" column="1">
+          <widget class="QToolButton" name="toolButtonDrawText">
            <property name="text">
             <string notr="true"/>
            </property>
            <property name="icon">
             <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/circle.png</normaloff>:/draw/icons/draw/circle.png</iconset>
+             <normaloff>:/draw/icons/draw/text.png</normaloff>:/draw/icons/draw/text.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -861,105 +963,139 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="1">
-          <widget class="QToolButton" name="toolButtonDrawPen">
-           <property name="text">
-            <string notr="true"/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/pencil.png</normaloff>:/draw/icons/draw/pencil.png</iconset>
-           </property>
-           <property name="iconSize">
+         <item row="6" column="0" rowspan="2" colspan="2">
+          <widget class="QFrame" name="frame">
+           <property name="minimumSize">
             <size>
-             <width>24</width>
-             <height>24</height>
+             <width>64</width>
+             <height>64</height>
             </size>
            </property>
-           <property name="checkable">
-            <bool>true</bool>
+           <property name="frameShape">
+            <enum>QFrame::NoFrame</enum>
            </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <widget class="QLabel" name="labelForegroundColor">
+            <property name="geometry">
+             <rect>
+              <x>7</x>
+              <y>7</y>
+              <width>32</width>
+              <height>32</height>
+             </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #FFFFFF</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+           </widget>
+           <widget class="QLabel" name="labelBackgroundColor">
+            <property name="geometry">
+             <rect>
+              <x>26</x>
+              <y>25</y>
+              <width>32</width>
+              <height>32</height>
+             </rect>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: #000000</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="text">
+             <string notr="true"/>
+            </property>
+           </widget>
+           <widget class="QToolButton" name="toolButtonSwitchDrawColors">
+            <property name="geometry">
+             <rect>
+              <x>49</x>
+              <y>0</y>
+              <width>18</width>
+              <height>18</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>18</width>
+              <height>18</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>18</width>
+              <height>18</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>⇄</string>
+            </property>
+           </widget>
+           <zorder>labelBackgroundColor</zorder>
+           <zorder>labelForegroundColor</zorder>
+           <zorder>toolButtonSwitchDrawColors</zorder>
           </widget>
          </item>
-         <item row="1" column="0">
-          <widget class="QToolButton" name="toolButtonDrawBrush">
-           <property name="text">
-            <string notr="true"/>
+         <item row="9" column="0">
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
            </property>
-           <property name="icon">
-            <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/brush.png</normaloff>:/draw/icons/draw/brush.png</iconset>
-           </property>
-           <property name="iconSize">
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>24</width>
-             <height>24</height>
+             <width>20</width>
+             <height>40</height>
             </size>
            </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QToolButton" name="toolButtonDrawLine">
-           <property name="text">
-            <string notr="true"/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/line.png</normaloff>:/draw/icons/draw/line.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QToolButton" name="toolButtonDrawClone">
-           <property name="text">
-            <string notr="true"/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/stamp.png</normaloff>:/draw/icons/draw/stamp.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QToolButton" name="toolButtonDrawSmudge">
-           <property name="text">
-            <string notr="true"/>
-           </property>
-           <property name="icon">
-            <iconset resource="../resources/res.qrc">
-             <normaloff>:/draw/icons/draw/smudge.png</normaloff>:/draw/icons/draw/smudge.png</iconset>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>24</width>
-             <height>24</height>
-            </size>
-           </property>
-           <property name="checkable">
-            <bool>true</bool>
-           </property>
-          </widget>
+          </spacer>
          </item>
         </layout>
        </item>
