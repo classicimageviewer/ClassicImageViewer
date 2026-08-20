@@ -21,6 +21,7 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QSpinBox>
+#include <QDockWidget>
 #include <vector>
 #include "ui_mainwindow.h"
 #include "actions.h"
@@ -30,6 +31,8 @@
 #include "io/imageIO.h"
 #include "dialogs/thumbnaildialog.h"
 #include "dialogs/histogramdialog.h"
+#include "ui_draw.h"
+#include "ui_sidePanel.h"
 
 class MainWindow : public QMainWindow
 {
@@ -46,6 +49,10 @@ private: // typedefs
 	enum UpdateImageMethod {NEW_IMAGE = 0, UPDATE_IMAGE, INSERT_INTO_SELECTION};
 
 private: // variables
+	QDockWidget * dockWidgetDraw;
+	Ui_DockWidgetDraw uiDockWidgetDraw;
+	QDockWidget * dockWidgetQuick;
+	Ui_DockWidgetQuick uiDockWidgetQuick;
 	QString fileToBeOpenedOnStartup;
 	QTimer startupTimer;
 	std::vector<ActionLookUp_t> ActionLookUpTable;
@@ -106,6 +113,7 @@ private: // variables
 	bool quickDockWidgetVisible;
 	QList<QToolButton *> drawDockWidgetButtons;
 	DrawDeviceParameters drawDeviceParameters;
+	int quickPanelDisplayModeRestore;
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);
 	QAction * menuAddAction(QMenu * menu, QString text, Action event, const char *shortCut, int flags);

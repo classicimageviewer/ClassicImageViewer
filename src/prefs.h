@@ -65,6 +65,7 @@
 	X(toInt, int, ThumbnailsScrollSpeed, 32) \
 	X(toInt, int, InternalThreads, 0) \
 	X(toBool, bool, ConfirmDelete, true) \
+	X(toBool, bool, ShowQuickPanel, false) \
 	// end_of_list
 
 
