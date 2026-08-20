@@ -29,6 +29,7 @@
 #include <QTranslator>
 #include <QDebug>
 #include <QLibraryInfo>
+#include <QElapsedTimer>
 #include <unistd.h>
 #include "mainwindow.h"
 #include "globals.h"
@@ -52,8 +53,48 @@ void handler(int sig) {
 }
 #endif
 
+QElapsedTimer messageTime;
+
+void messageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+{
+	Q_UNUSED(context);
+	if (!isatty(STDERR_FILENO) && (type == QtDebugMsg)) return;
+
+	qint64 ms = messageTime.elapsed();
+	qint64 hh, mm, ss;
+	hh = ms / 3600000;
+	mm = (ms / 60000) % 60;
+	ss = (ms / 1000) % 60;
+	ms = ms % 1000;
+	QString timestamp = QString("%1:%2:%3.%4").arg(hh, 2, 10, (QChar)'0').arg(mm, 2, 10, (QChar)'0').arg(ss, 2, 10, (QChar)'0').arg(ms, 3, 10, (QChar)'0');
+	const char * typeStr = "?";
+
+	switch (type)
+	{
+		case QtDebugMsg:
+			typeStr = "D";
+			break;
+		case QtInfoMsg:
+			typeStr = "I";
+			break;
+		case QtWarningMsg:
+			typeStr = "W";
+			break;
+		case QtCriticalMsg:
+			typeStr = "C";
+			break;
+		case QtFatalMsg:
+			typeStr = "F";
+			break;
+	}
+	fprintf(stderr, "[%s|%s] %s\n", typeStr, timestamp.toLocal8Bit().constData(), msg.toLocal8Bit().constData());
+}
+
 int main(int argc, char *argv[])
 {
+	messageTime.start();
+	qInstallMessageHandler(messageHandler);
+
 #if defined(DEBUG_BUILD)
 	signal(SIGSEGV, handler);
 #endif
