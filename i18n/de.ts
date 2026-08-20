@@ -686,42 +686,42 @@
     <message>
         <location filename="../src/draw.ui" line="311"/>
         <source>Antialiasing</source>
-        <translation type="unfinished">Kantenglättung</translation>
+        <translation>Kantenglättung</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="314"/>
         <source>AA</source>
-        <translation type="unfinished">AA</translation>
+        <translation>AA</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="349"/>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="381"/>
         <source>Width</source>
-        <translation type="unfinished">Breite</translation>
+        <translation>Breite</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="410"/>
         <source>Line style</source>
-        <translation type="unfinished">Linienstil</translation>
+        <translation>Linienstil</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="474"/>
         <source>Line end</source>
-        <translation type="unfinished">Linienende</translation>
+        <translation>Linienende</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="529"/>
         <source>Line join</source>
-        <translation type="unfinished">Linienverbindung</translation>
+        <translation>Linienverbindung</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="584"/>
         <source>Polygon fill / outline</source>
-        <translation type="unfinished">Vieleck-Füllung / -Umriss</translation>
+        <translation>Vieleck-Füllung / -Umriss</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="639"/>
@@ -731,12 +731,12 @@
     <message>
         <location filename="../src/draw.ui" line="728"/>
         <source>Tolerance</source>
-        <translation type="unfinished">Toleranz</translation>
+        <translation>Toleranz</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="757"/>
         <source>Radius</source>
-        <translation type="unfinished">Radius</translation>
+        <translation>Radius</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="786"/>
@@ -746,17 +746,17 @@
     <message>
         <location filename="../src/draw.ui" line="942"/>
         <source>⇄</source>
-        <translation type="unfinished">⇄</translation>
+        <translation>⇄</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="1020"/>
         <source>Bold</source>
-        <translation type="unfinished">Fett</translation>
+        <translation>Fett</translation>
     </message>
     <message>
         <location filename="../src/draw.ui" line="1035"/>
         <source>Italic</source>
-        <translation type="unfinished">Kursiv</translation>
+        <translation>Kursiv</translation>
     </message>
 </context>
 <context>
@@ -1988,58 +1988,6 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <source>⇄</source>
-        <translation type="vanished">⇄</translation>
-    </message>
-    <message>
-        <source>Antialiasing</source>
-        <translation type="vanished">Kantenglättung</translation>
-    </message>
-    <message>
-        <source>AA</source>
-        <translation type="vanished">AA</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="vanished">Größe</translation>
-    </message>
-    <message>
-        <source>Width</source>
-        <translation type="vanished">Breite</translation>
-    </message>
-    <message>
-        <source>Line style</source>
-        <translation type="vanished">Linienstil</translation>
-    </message>
-    <message>
-        <source>Line end</source>
-        <translation type="vanished">Linienende</translation>
-    </message>
-    <message>
-        <source>Line join</source>
-        <translation type="vanished">Linienverbindung</translation>
-    </message>
-    <message>
-        <source>Polygon fill / outline</source>
-        <translation type="vanished">Vieleck-Füllung / -Umriss</translation>
-    </message>
-    <message>
-        <source>Tolerance</source>
-        <translation type="vanished">Toleranz</translation>
-    </message>
-    <message>
-        <source>Radius</source>
-        <translation type="vanished">Radius</translation>
-    </message>
-    <message>
-        <source>Bold</source>
-        <translation type="vanished">Fett</translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="vanished">Kursiv</translation>
-    </message>
-    <message>
         <location filename="../src/mainwindow.cpp" line="373"/>
         <source>&amp;Open</source>
         <translation>&amp;Öffnen</translation>
@@ -2780,7 +2728,7 @@ Umschalt: Kreis zeichnen</translation>
     <message>
         <location filename="../src/mainwindow.cpp" line="2451"/>
         <source>Text</source>
-        <translation>Test</translation>
+        <translation>Text</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2452"/>
