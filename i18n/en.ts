@@ -3179,7 +3179,7 @@ Currently only &apos;gio&apos; and &apos;kioclient5&apos; based operation suppor
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="194"/>
-        <source>Highlight (fast)</source>
+        <source>Highlight</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

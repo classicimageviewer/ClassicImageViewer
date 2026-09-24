@@ -25,7 +25,8 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsPathItem>
 
-class FastSelector;
+class XorSelector;
+class HighlightSelector;
 class DisplayCanvas;
 class DisplaySurface;
 class DisplayWidget;
@@ -59,15 +60,28 @@ public:
 
 
 
-class FastSelector : public QObject
+class XorSelector : public QGraphicsRectItem
+{
+private:
+	double width;
+public:
+	XorSelector(QGraphicsItem * parent = NULL);
+	void drawSelection(QRect imageRect, QRect selection, double width);
+	void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget) override;
+};
+
+
+
+
+class HighlightSelector : public QObject
 {
 	Q_OBJECT
 private: // variables
 	QGraphicsPathItem * mask;
 	QGraphicsRectItem * frameBase, * frameDecor;
 public:
-	FastSelector(DisplaySurface * surface);
-	~FastSelector();
+	HighlightSelector(DisplaySurface * surface);
+	~HighlightSelector();
 	void setVisible(bool visible);
 	void drawSelection(QRect imageRect, QRect selection, double width);
 };
@@ -89,8 +103,9 @@ private: // variables
 	QImage image;
 	QRect imageRect;
 	DisplayCanvas * canvas;
-	bool useFastSelector;
-	FastSelector * fastSelector;
+	bool useHighlightSelector;
+	XorSelector * xorSelector;
+	HighlightSelector * highlightSelector;
 	double zoom;
 	bool selectionEnabled;
 	bool selectionVisible;

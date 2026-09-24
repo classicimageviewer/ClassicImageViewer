@@ -643,7 +643,33 @@ void DisplayWidget::mouseMoveEvent(QMouseEvent *event)
 
 
 
-FastSelector::FastSelector(DisplaySurface * surface)
+
+XorSelector::XorSelector(QGraphicsItem * parent) : QGraphicsRectItem(parent)
+{
+	;
+}
+
+void XorSelector::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+	Q_UNUSED(option);
+	Q_UNUSED(widget);
+	painter->setCompositionMode(QPainter::CompositionMode_Difference);
+	painter->setPen(QPen(QBrush(Qt::white, Qt::SolidPattern), width, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin));
+	painter->setBrush(Qt::NoBrush);
+	painter->drawRect(rect());
+}
+
+void XorSelector::drawSelection(QRect imageRect, QRect selection, double width)
+{
+	Q_UNUSED(imageRect);
+	QRectF adjustedRect = QRectF((QPointF(selection.topLeft()) + QPointF(0.5, 0.5)) / Globals::scalingFactor, (QPointF(selection.bottomRight()) + QPointF(0.5, 0.5)) / Globals::scalingFactor);
+	setRect(adjustedRect.normalized());
+	this->width = width;
+	update();
+}
+
+
+HighlightSelector::HighlightSelector(DisplaySurface * surface)
 {
 	mask = new QGraphicsPathItem();
 	frameBase = new QGraphicsRectItem();
@@ -656,19 +682,19 @@ FastSelector::FastSelector(DisplaySurface * surface)
 	surface->addItem(frameDecor);
 }
 
-FastSelector::~FastSelector()
+HighlightSelector::~HighlightSelector()
 {
 	// items are deleted by the surface
 }
 
-void FastSelector::setVisible(bool visible)
+void HighlightSelector::setVisible(bool visible)
 {
 	mask->setVisible(visible);
 	frameBase->setVisible(visible);
 	frameDecor->setVisible(visible);
 }
 
-void FastSelector::drawSelection(QRect imageRect, QRect selection, double width)
+void HighlightSelector::drawSelection(QRect imageRect, QRect selection, double width)
 {
 	QPainterPath path, path2;
 	path.addRect(QRectF(QPointF(0, 0), (imageRect.size() / Globals::scalingFactor)));
@@ -707,8 +733,9 @@ DisplaySurface::DisplaySurface(DisplayWidget * parent) : QGraphicsScene(parent)
 	imageRect = QRect();
 	image = QImage();
 	canvas = NULL;
-	useFastSelector = Globals::prefs->getUseFastSelector();
-	fastSelector = NULL;
+	useHighlightSelector = Globals::prefs->getUseFastSelector();
+	xorSelector = NULL;
+	highlightSelector = NULL;
 	selectionEnabled = false;
 	selectionVisible = false;
 	selectionAgain = false;
@@ -729,7 +756,7 @@ DisplaySurface::~DisplaySurface()
 	parent->unsetCursor();
 	scrollTimer.stop();
 	delete canvas;
-	delete fastSelector;
+	delete highlightSelector;
 	objCntr--;
 }
 
@@ -1219,14 +1246,19 @@ void DisplaySurface::setImage(const QImage &image)
 		canvas = new DisplayCanvas(QPixmap::fromImage(this->image), this);
 		canvas->setZoom(zoom);
 		addItem(canvas);
-		if (useFastSelector)
+		if (useHighlightSelector)
 		{
-			fastSelector = new FastSelector(this);
+			highlightSelector = new HighlightSelector(this);
+		}
+		else
+		{
+			xorSelector = new XorSelector();
+			addItem(xorSelector);
 		}
 	}
 	else
 	{
-		if (useFastSelector)
+		if (useHighlightSelector)
 		{
 			canvas->setCanvasPixmap(QPixmap::fromImage(this->image));
 		}
@@ -1264,16 +1296,25 @@ void DisplaySurface::redraw(bool forced)
 	else
 		canvas->setTransformationMode(Qt::FastTransformation);
 	
-	if (useFastSelector && fastSelector)
+	if (useHighlightSelector && highlightSelector)
 	{
-		fastSelector->setVisible(selectionVisible && selectionEnabled);
+		highlightSelector->setVisible(selectionVisible && selectionEnabled);
 		if (selectionVisible && selectionEnabled)
 		{
-			fastSelector->drawSelection(image.rect(), selection, width);
+			highlightSelector->drawSelection(image.rect(), selection, width);
+		}
+	}
+	else if (xorSelector)
+	{
+		xorSelector->setVisible(selectionVisible && selectionEnabled);
+		if (selectionVisible && selectionEnabled)
+		{
+			xorSelector->drawSelection(image.rect(), selection, width);
 		}
 	}
 	else
 	{
+		//slow XOR frame
 		QImage canvasImage = image;	// let Qt handle data sharing / copy
 		if (selectionVisible && selectionEnabled)
 		{

@@ -3211,8 +3211,8 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="194"/>
-        <source>Highlight (fast)</source>
-        <translation>Hervorheben (schnell)</translation>
+        <source>Highlight</source>
+        <translation>Hervorheben</translation>
     </message>
     <message>
         <location filename="../src/dialogs/preferencesdialog.ui" line="209"/>
