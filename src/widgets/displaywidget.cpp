@@ -1258,10 +1258,7 @@ void DisplaySurface::setImage(const QImage &image)
 	}
 	else
 	{
-		if (useHighlightSelector)
-		{
-			canvas->setCanvasPixmap(QPixmap::fromImage(this->image));
-		}
+		canvas->setCanvasPixmap(QPixmap::fromImage(this->image));
 	}
 	setSceneRect(QRectF(QPointF(), QPointF(image.rect().bottomRight()) / Globals::scalingFactor));
 	redraw(true);
