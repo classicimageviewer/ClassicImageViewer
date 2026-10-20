@@ -165,6 +165,19 @@ EffectBase::ParameterCluster EffectBase::uiParamTextEdit(QString displayName, QS
 	return elem;
 }
 
+EffectBase::ParameterCluster EffectBase::uiParamFilePath(QString displayName, QString paramName, QString defaultValue, QString filter)
+{
+	ParameterCluster elem;
+	elem.displayName = displayName;
+	elem.controlType = QString("filepath");
+	elem.parameterName = paramName;
+	elem.parameterDefaultValue = QVariant(defaultValue);
+	elem.parameterValue = Globals::prefs->fetchSpecificParameter(moduleName, paramName, elem.parameterDefaultValue);
+	elem.parameterMinValue = QVariant(filter);	// filter passed through here
+	return elem;
+}
+
+
 int EffectBase::getParamIntValue(QList<EffectBase::ParameterCluster> parameters, QString paramName, int defaultValue)
 {
 	for (const EffectBase::ParameterCluster & elem : parameters)

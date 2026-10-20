@@ -24,6 +24,7 @@
 #include <QPushButton>
 #include <QTextEdit>
 #include <QMessageBox>
+#include <QFileDialog>
 #include <cmath>
 #include "dialogs/textinputdialog.h"
 
@@ -388,6 +389,21 @@ void EffectsDialog::effectChanged(int row)
 			te->setLineWrapMode(QTextEdit::NoWrap);
 			ui.guestLayout->addWidget(te, currentRow, 1);
 			connect(te, SIGNAL(textChanged()), this, SLOT(textValueChanged()));
+		} else
+		if (elem.controlType == "filepath")
+		{
+			ui.guestLayout->addWidget(new QLabel(elem.displayName), currentRow, 0);
+			QPushButton * browseBtn = new QPushButton(tr("Browse..."));
+			browseBtn->setObjectName(elem.parameterName + "Browse");
+			ui.guestLayout->addWidget(browseBtn, currentRow, 1);
+			QLineEdit * pathEdit = new QLineEdit();
+			pathEdit->setObjectName(elem.parameterName);
+			pathEdit->setText(elem.parameterValue.toString());
+			pathEdit->setReadOnly(true);
+			ui.guestLayout->addWidget(pathEdit, currentRow, 2);
+			QString paramName = elem.parameterName;
+			connect(browseBtn, &QPushButton::clicked, [this, paramName, browseBtn]() { filePathBrowseClicked(paramName); browseBtn->clearFocus();});
+			connect(pathEdit, SIGNAL(textChanged(QString)), this, SLOT(textValueChanged(QString)));
 		}
 		//TODO more
 		
@@ -467,6 +483,43 @@ void EffectsDialog::textValueChanged(void)
 	redrawDst();
 }
 
+void EffectsDialog::textValueChanged(QString s)
+{
+	Q_UNUSED(s);
+	redrawDst();
+}
+
+void EffectsDialog::filePathBrowseClicked(QString paramName)
+{
+	QList<EffectBase::ParameterCluster> parameterList = effectHub->getListOfParameterClusters(effectId);
+	QString filter = tr("All files (*.*)");
+	for (EffectBase::ParameterCluster elem : parameterList)
+	{
+		if (elem.parameterName == paramName && elem.controlType == "filepath")
+		{
+			QString storedFilter = elem.parameterMinValue.toString();
+			if (!storedFilter.isEmpty())
+			{
+				filter = storedFilter;
+			}
+			break;
+		}
+	}
+
+	QString path = QFileDialog::getOpenFileName(this, tr("Select file"), "", filter);
+	if (path.isEmpty()) return;
+
+	QList<QLineEdit*> edits = findChildren<QLineEdit*>();
+	for (QLineEdit *edit : edits)
+	{
+		if (edit->objectName() == paramName)
+		{
+			edit->setText(path);
+			break;
+		}
+	}
+}
+
 void EffectsDialog::restoreDefaults(bool b)
 {
 	Q_UNUSED(b);
@@ -504,6 +557,10 @@ void EffectsDialog::restoreDefaults(bool b)
 						{
 							((QTextEdit*)widget)->setText(elem.parameterDefaultValue.toString());
 						} else
+						if (elem.controlType == "filepath")
+						{
+							((QLineEdit*)widget)->setText(elem.parameterDefaultValue.toString());
+						}
 						//TODO more
 						{
 							break;
@@ -577,6 +634,10 @@ void EffectsDialog::presetChanged(int v)
 						{
 							((QTextEdit*)widget)->setText(presetValue.toString());
 						} else
+						if (elem.controlType == "filepath")
+						{
+							((QLineEdit*)widget)->setText(presetValue.toString());
+						}
 						//TODO more
 						{
 							break;
@@ -623,6 +684,10 @@ void EffectsDialog::applyParameterList(QList<EffectBase::ParameterCluster> & par
 						{
 							((QTextEdit*)widget)->setText(elem.parameterValue.toString());
 						} else
+						if (elem.controlType == "filepath")
+						{
+							((QLineEdit*)widget)->setText(elem.parameterValue.toString());
+						}
 						//TODO more
 						{
 							break;
@@ -691,6 +756,10 @@ void EffectsDialog::presetAdd(bool b)
 								if (elem.controlType == "textedit")
 								{
 									parameter.append(QVariant(((QTextEdit*)widget)->toPlainText()));
+								} else
+								if (elem.controlType == "filepath")
+								{
+									parameter.append(QVariant(((QLineEdit*)widget)->text()));
 								} else
 								//TODO more
 								{
@@ -795,6 +864,10 @@ void EffectsDialog::getSelectedEffect(QString & name, int & effectId, QList<Effe
 						if (elem.controlType == "textedit")
 						{
 							cluster.parameterValue = QVariant(((QTextEdit*)widget)->toPlainText());
+						} else
+						if (elem.controlType == "filepath")
+						{
+							cluster.parameterValue = QVariant(((QLineEdit*)widget)->text());
 						} else
 						//TODO more
 						{

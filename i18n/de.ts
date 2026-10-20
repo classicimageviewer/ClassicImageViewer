@@ -1391,22 +1391,37 @@
         <translation>Effekte</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="644"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="396"/>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="495"/>
+        <source>All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="509"/>
+        <source>Select file</source>
+        <translation type="unfinished">Datei auswählen</translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="709"/>
         <source>Preset name</source>
         <translation>Name der Voreinstellung</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="650"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="715"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="650"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="715"/>
         <source>Cannot create nameless preset.</source>
         <translation>Voreinstellung ohne Name kann nicht erstellt werden.</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="738"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="807"/>
         <source>Presets</source>
         <translation>Voreinstellungen</translation>
     </message>

@@ -64,6 +64,8 @@ private slots:
 	void integerValueChanged(int v);
 	void doubleValueChanged(double v);
 	void textValueChanged(void);
+	void textValueChanged(QString s);
+	void filePathBrowseClicked(QString paramName);
 	void restoreDefaults(bool b);
 	void presetChanged(int v);
 	void presetAdd(bool b);
