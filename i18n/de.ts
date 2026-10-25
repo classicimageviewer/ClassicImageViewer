@@ -1401,27 +1401,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="509"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="522"/>
         <source>Select file</source>
         <translation type="unfinished">Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="709"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="714"/>
         <source>Preset name</source>
         <translation>Name der Voreinstellung</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="715"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="720"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="715"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="720"/>
         <source>Cannot create nameless preset.</source>
         <translation>Voreinstellung ohne Name kann nicht erstellt werden.</translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="807"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="812"/>
         <source>Presets</source>
         <translation>Voreinstellungen</translation>
     </message>

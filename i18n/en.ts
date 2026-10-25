@@ -1400,27 +1400,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="509"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="522"/>
         <source>Select file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="709"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="714"/>
         <source>Preset name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="715"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="720"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="715"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="720"/>
         <source>Cannot create nameless preset.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/effectsdialog.cpp" line="807"/>
+        <location filename="../src/dialogs/effectsdialog.cpp" line="812"/>
         <source>Presets</source>
         <translation type="unfinished"></translation>
     </message>

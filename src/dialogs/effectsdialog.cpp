@@ -506,18 +506,23 @@ void EffectsDialog::filePathBrowseClicked(QString paramName)
 		}
 	}
 
-	QString path = QFileDialog::getOpenFileName(this, tr("Select file"), "", filter);
-	if (path.isEmpty()) return;
-
+	QLineEdit * pathEdit = NULL;
 	QList<QLineEdit*> edits = findChildren<QLineEdit*>();
 	for (QLineEdit *edit : edits)
 	{
 		if (edit->objectName() == paramName)
 		{
-			edit->setText(path);
+			pathEdit = edit;
 			break;
 		}
 	}
+
+	if (pathEdit == NULL) return;
+
+	QString path = QFileDialog::getOpenFileName(this, tr("Select file"), pathEdit->text(), filter);
+	if (path.isEmpty()) return;
+
+	pathEdit->setText(path);
 }
 
 void EffectsDialog::restoreDefaults(bool b)
