@@ -36,8 +36,21 @@ SlideshowDialog::~SlideshowDialog()
 int SlideshowDialog::getIntervalMs()
 {
 	int interval = ui.doubleSpinBoxInterval->value() * 1000.0;
-	if (ui.comboBoxDirection->currentIndex() > 0) interval *= -1;
 	return interval;
+}
+
+int SlideshowDialog::getDirection()
+{
+	switch(ui.comboBoxDirection->currentIndex())
+	{
+		default:
+		case 0:
+			return 1;
+		case 1:
+			return -1;
+		case 2:
+			return 0;
+	}
 }
 
 void SlideshowDialog::savePreferences()

@@ -29,6 +29,7 @@ public:
 	SlideshowDialog(QWidget * parent = NULL);
 	~SlideshowDialog();
 	int getIntervalMs();
+	int getDirection();
 	void savePreferences();
 };
 

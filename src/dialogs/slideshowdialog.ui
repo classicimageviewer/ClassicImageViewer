@@ -82,6 +82,11 @@
            <string>Backward</string>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>Random</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item>

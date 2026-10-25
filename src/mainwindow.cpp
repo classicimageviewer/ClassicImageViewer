@@ -47,6 +47,7 @@
 #include <QCollator>
 #include <QElapsedTimer>
 #include <QColorDialog>
+#include <QRandomGenerator>
 
 #include "dialogs/preferencesdialog.h"
 #include "dialogs/resizedialog.h"
@@ -511,6 +512,7 @@ void MainWindow::createMenu()
 	menuAddAction(ui.menuView, tr("&Previous file in directory"), ACT_PREV_FILE, "Backspace",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuView, tr("Fi&rst file in directory"), ACT_FIRST_FILE, "Ctrl+Home",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuView, tr("&Last file in directory"), ACT_LAST_FILE, "Ctrl+End",  ACTDISABLE_UNLOADED);
+	menuAddAction(ui.menuView, tr("Random file in directory"), ACT_RANDOM_FILE, "Alt+R",  ACTDISABLE_UNLOADED);
 	menuAddSeparator(ui.menuView);
 	menuAddAction(ui.menuView, tr("Zoom &in"), ACT_ZOOM_IN, "+",  ACTDISABLE_UNLOADED);
 	menuAddAction(ui.menuView, tr("Zoom &out"), ACT_ZOOM_OUT, "-",  ACTDISABLE_UNLOADED);
@@ -745,8 +747,11 @@ void MainWindow::actionSlot(Action a)
 				{
 					setFullscreen(true);
 					int interval = d->getIntervalMs();
-					slideshowDirection = ((interval < 0) ? -1:1);
-					if (interval < 0) interval *= -1;
+					slideshowDirection = d->getDirection();
+					if (slideshowDirection == 0)	// random
+					{
+						slideshowDirection = 2;
+					}
 					if (interval < 10) interval = 10;
 					slideshowTimer.start(interval);
 					d->savePreferences();
@@ -1889,6 +1894,21 @@ void MainWindow::actionSlot(Action a)
 				}
 			}
 			break;
+		case ACT_RANDOM_FILE:
+			{
+				if (indexedFiles.length() > 1)
+				{
+					int index = indexedFiles.indexOf(currentFilePath);
+					int newIndex = 0;
+					do
+					{
+						newIndex = QRandomGenerator::global()->bounded(indexedFiles.length());
+					} while(newIndex == index);
+					currentFilePath = indexedFiles.at(newIndex);
+					loadCurrentFile();
+				}
+			}
+			break;
 		case ACT_ZOOM_IN:
 			{
 				double z = display->getZoom();
@@ -2232,13 +2252,17 @@ void MainWindow::setIndexDisplayNoSignals(int value, int maximum)
 
 void MainWindow::slideshowTimeout()
 {
-	if (slideshowDirection < 0)
+	if (slideshowDirection == -1)
 	{
 		sendAction(ACT_PREV_FILE);
 	} else
-	if (slideshowDirection > 0)
+	if (slideshowDirection == 1)
 	{
 		sendAction(ACT_NEXT_FILE);
+	} else
+	if (slideshowDirection == 2)
+	{
+		sendAction(ACT_RANDOM_FILE);
 	}
 }
 
