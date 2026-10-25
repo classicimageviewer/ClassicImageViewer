@@ -43,6 +43,7 @@
 #include "effects/moduleMotionBlur.h"
 #include "effects/moduleDistortion.h"
 #include "effects/moduleChromaticAberration.h"
+#include "effects/moduleLookupTable.h"
 
 EffectHub::EffectHub(QObject * parent) : QObject(parent)
 {
@@ -75,6 +76,7 @@ EffectHub::EffectHub(QObject * parent) : QObject(parent)
 	list.append(new EffectModuleMotionBlur());
 	list.append(new EffectModuleDistortion());
 	list.append(new EffectModuleChromaticAberration());
+	list.append(new EffectModuleLookupTable());
 	
 	
 	for (EffectBase* item : list)

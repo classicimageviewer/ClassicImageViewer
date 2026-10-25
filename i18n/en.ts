@@ -1138,6 +1138,19 @@
     </message>
 </context>
 <context>
+    <name>EffectModuleLookupTable</name>
+    <message>
+        <location filename="../src/effects/moduleLookupTable.cpp" line="38"/>
+        <source>Cube files (*.cube *.png);;All files (*.*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/effects/moduleLookupTable.h" line="56"/>
+        <source>Lookup Table</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>EffectModuleMedian</name>
     <message>
         <location filename="../src/effects/moduleMedian.cpp" line="47"/>
