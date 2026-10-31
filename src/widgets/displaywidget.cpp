@@ -45,6 +45,10 @@ DisplayWidget::DisplayWidget(QWidget *parent) : QGraphicsView(parent)
 	this->parent = (MainWindow*)parent;
 	this->installEventFilter(this);
 	drawDevice = NULL;
+	magnifierActive = false;
+	magnifierLastPosition = QPoint();
+	magnifierViewportPosition = QPoint();
+	magnifierImagePosition = QPoint();
 }
 
 DisplayWidget::~DisplayWidget()
@@ -91,6 +95,8 @@ void DisplayWidget::animationTimeout(void)
 void DisplayWidget::newImageSequence(const QList<QImage> frames, const QList<int> frameDurationMs)
 {
 	isAnimated = true;
+	hideMagnifier();
+	magnifierFactor = 2.0;
 	if (surface)
 	{
 		setScene(NULL);
@@ -148,6 +154,8 @@ void DisplayWidget::newImageSequence(const QList<QImage> frames, const QList<int
 void DisplayWidget::newImage(const QImage &image)
 {
 	isAnimated = false;
+	hideMagnifier();
+	magnifierFactor = 2.0;
 	animationTimer.stop();
 	if (surface)
 	{
@@ -192,6 +200,10 @@ void DisplayWidget::updateImage(const QImage &image)
 	
 	this->image = image.copy();
 	surface->setImage(this->image);
+	if (magnifierActive)
+	{
+		viewport()->update();
+	}
 	emit zoomChanged();
 }
 
@@ -277,6 +289,10 @@ void DisplayWidget::setZoom(double zoom)
 	resetTransform();
 	scale(zoom, zoom);
 	surface->setZoom(zoom);
+	if (magnifierActive)
+	{
+		viewport()->update();
+	}
 }
 
 double DisplayWidget::getZoom()
@@ -310,6 +326,7 @@ QPointF DisplayWidget::getMousePositionCorrection()
 void DisplayWidget::installDrawDevice(DrawDevice * drawDevice)
 {
 	this->drawDevice = drawDevice;
+	hideMagnifier();
 	if (surface)
 	{
 		drawDevice->registerSurface(surface);
@@ -352,6 +369,13 @@ void DisplayWidget::updateInternalImage(void)
 bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 {
 	QKeyEvent * keyEvent = (QKeyEvent*)event;
+	if (event->type() == QEvent::KeyRelease)
+	{
+		if (keyEvent->key() == Qt::Key_Shift)
+		{
+			hideMagnifier();
+		}
+	}
 	if (event->type() == QEvent::KeyPress)
 	{
 		// multipage shortcuts
@@ -559,6 +583,26 @@ void DisplayWidget::wheelEvent(QWheelEvent *event)
 		direction *= -1;
 	}
 	
+	if (magnifierActive)
+	{
+		double zoomDelta = Globals::prefs->getZoomDelta();
+		zoomDelta = (zoomDelta/100.0) + 1.0;
+
+		if (direction > 0)
+		{
+			magnifierFactor *= zoomDelta;
+		}
+		else
+		{
+			magnifierFactor /= zoomDelta;
+		}
+
+		magnifierFactor = qBound(2.0, magnifierFactor, 32.0);
+		viewport()->update();
+		event->accept();
+		return;
+	}
+	
 	if (event->modifiers() == Qt::ControlModifier)
 	{
 		double zoomDelta = Globals::prefs->getZoomDelta();
@@ -638,9 +682,159 @@ void DisplayWidget::mouseMoveEvent(QMouseEvent *event)
 #else
 	mousePositionCorrection = QPointF(std::modf(event->scenePosition().x(), &tmp), std::modf(event->scenePosition().y(), &tmp)) * -1.0;
 #endif
+	updateMagnifier(event);
 	QGraphicsView::mouseMoveEvent(event);
 }
 
+bool DisplayWidget::viewportEvent(QEvent *event)
+{
+	bool ret = QGraphicsView::viewportEvent(event);
+
+	if (event->type() == QEvent::Wheel)
+	{
+		wheelEvent(static_cast<QWheelEvent *>(event));
+		ret = true;
+	}
+
+	if ((event->type() == QEvent::Paint) && magnifierActive)
+	{
+		QPainter painter(viewport());
+		paintMagnifier(painter);
+	}
+
+	return ret;
+}
+
+void DisplayWidget::updateMagnifier(QMouseEvent *event)
+{
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+	QPoint viewPos = event->pos();
+#else
+	QPoint viewPos = event->position().toPoint();
+#endif
+
+	if ((event->modifiers() != Qt::ShiftModifier) || (event->buttons() != Qt::NoButton) || !surface || image.isNull() || drawDevice)
+	{
+		hideMagnifier();
+		return;
+	}
+
+	QPoint viewportPos = viewport()->mapFrom(this, viewPos);
+	if (!viewport()->rect().contains(viewportPos))
+	{
+		hideMagnifier();
+		return;
+	}
+
+	if (magnifierLastPosition == viewPos)
+	{
+		return;
+	}
+
+	magnifierLastPosition = viewPos;
+	magnifierViewportPosition = viewportPos;
+
+	QPointF scenePos = mapToScene(viewPos);
+	int x = scenePos.x()*Globals::scalingFactor+0.4999999+mousePositionCorrection.x();
+	int y = scenePos.y()*Globals::scalingFactor+0.4999999+mousePositionCorrection.y();
+
+	QRect imageRect = image.rect();
+	x = qBound(imageRect.left(), x, imageRect.right());
+	y = qBound(imageRect.top(), y, imageRect.bottom());
+
+	magnifierImagePosition = QPoint(x, y);
+
+	magnifierActive = true;
+	viewport()->update();
+}
+
+void DisplayWidget::hideMagnifier(void)
+{
+	if (magnifierActive)
+	{
+		magnifierActive = false;
+		viewport()->update();
+	}
+	magnifierLastPosition = QPoint();
+}
+
+void DisplayWidget::paintMagnifier(QPainter &painter)
+{
+	if (!surface || image.isNull()) return;
+
+	int lens = qMax(64, qMin(viewport()->width()/2, viewport()->height()/2));
+	lens = qMin(lens, qMin(viewport()->width(), viewport()->height()));
+	if (lens <= 0) return;
+
+	QRect targetRect(magnifierViewportPosition.x() - lens/2, magnifierViewportPosition.y() - lens/2, lens, lens);
+	QRectF sceneImageRect(0.0, 0.0, (double)image.width() / Globals::scalingFactor, (double)image.height() / Globals::scalingFactor);
+
+	QPointF imageTopLeft = mapFromScene(sceneImageRect.topLeft());
+	QPointF imageBottomRight = mapFromScene(sceneImageRect.bottomRight());
+	QRect imageViewportRect = QRectF(imageTopLeft, imageBottomRight).toRect();
+
+	QRect visibleRect = targetRect.intersected(imageViewportRect).intersected(viewport()->rect());
+	if (visibleRect.isNull())
+	{
+		return;
+	}
+
+	double magnification = qBound(2.0, getZoom() * magnifierFactor, 32.0) / Globals::scalingFactor;
+	qreal sourceW = (qreal)lens / magnification;
+	qreal sourceH = sourceW;
+	QRectF sourceRect(magnifierImagePosition.x() - sourceW/2.0, magnifierImagePosition.y() - sourceH/2.0, sourceW, sourceH);
+
+	QRectF imagePixelRect(image.rect());
+	QRectF visibleSource = sourceRect.intersected(imagePixelRect);
+	if (visibleSource.isNull())
+	{
+		return;
+	}
+
+	QSize pixSize(lens, lens);
+	if (magnifierPixmap.size() != pixSize)
+	{
+		magnifierPixmap = QPixmap(pixSize);
+	}
+	magnifierPixmap.fill(Qt::transparent);
+
+	QPainter pixmapPainter(&magnifierPixmap);
+	pixmapPainter.setRenderHint(QPainter::SmoothPixmapTransform);
+
+	QRectF visibleDest((visibleSource.left() - sourceRect.left()) * magnification, (visibleSource.top() - sourceRect.top()) * magnification, visibleSource.width() * magnification, visibleSource.height() * magnification);
+
+	pixmapPainter.drawImage(visibleDest, image, visibleSource);
+
+	int feather = qBound(4, lens/8, 16);
+
+	pixmapPainter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+
+	QColor transparent(255, 255, 255, 0);
+	QColor opaque(255, 255, 255, 255);
+
+	QLineF edge[4];
+	edge[0] = QLineF(0.0, 0.0, 0.0, feather);
+	edge[1] = QLineF(0.0, lens, 0.0, lens - feather);
+	edge[2] = QLineF(0.0, 0.0, feather, 0.0);
+	edge[3] = QLineF(lens, 0.0, lens - feather, 0.0);
+
+	for (int i = 0; i < 4; ++i)
+	{
+		QLinearGradient gradient(edge[i].p1(), edge[i].p2());
+		gradient.setColorAt(0.0, transparent);
+		gradient.setColorAt(1.0, opaque);
+		pixmapPainter.fillRect(0, 0, lens, lens, gradient);
+	}
+
+	pixmapPainter.setCompositionMode(QPainter::CompositionMode_SourceOver);
+	pixmapPainter.end();
+
+	painter.setRenderHint(QPainter::SmoothPixmapTransform);
+
+	painter.setClipRect(visibleRect);
+	painter.drawPixmap(targetRect, magnifierPixmap);
+	painter.setClipRect(QRect());
+}
 
 
 

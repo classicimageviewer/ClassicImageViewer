@@ -565,6 +565,7 @@ void MainWindow::createMenu()
 	shortCutInfo.append(QKeySequence("Alt+Left,Alt+Right").toString(QKeySequence::NativeText) + "&" + tr("Adjust right side of the selection"));
 	shortCutInfo.append(QKeySequence("Alt+Up,Alt+Down").toString(QKeySequence::NativeText) + "&" + tr("Adjust bottom side of the selection"));
 	shortCutInfo.append(QKeySequence("Shift+Left,Shift+Right,Shift+Up,Shift+Down").toString(QKeySequence::NativeText) + "&" + tr("Move selection"));
+	shortCutInfo.append(tr("Shift+Mouse move") + "&" + tr("Show magnifier"));
 }
 
 void MainWindow::setInternalState(InternalState newState)

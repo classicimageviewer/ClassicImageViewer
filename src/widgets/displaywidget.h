@@ -175,6 +175,12 @@ private: // variables
 	bool selectionEnabled;
 	QPointF mousePositionCorrection;
 	DrawDevice * drawDevice;
+	bool magnifierActive;
+	QPoint magnifierLastPosition;
+	QPoint magnifierViewportPosition;
+	QPoint magnifierImagePosition;
+	QPixmap magnifierPixmap;
+	double magnifierFactor;
 private: // functions
 	bool eventFilter(QObject* watched, QEvent* event);
 	void wheelEvent(QWheelEvent *event) override;
@@ -183,6 +189,11 @@ private: // functions
 	void dragLeaveEvent(QDragLeaveEvent* event) override;
 	void dropEvent(QDropEvent* event) override;
 	void mouseMoveEvent(QMouseEvent *event) override;
+	void updateMagnifier(QMouseEvent *event);
+	void hideMagnifier(void);
+	void paintMagnifier(QPainter &painter);
+protected:
+	bool viewportEvent(QEvent *event) override;
 private slots:
 	void animationTimeout(void);
 public:
