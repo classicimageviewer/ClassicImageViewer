@@ -17,6 +17,10 @@
 #include "shortcutsdialog.h"
 #include <QDebug>
 #include <QStandardItemModel>
+#include <QHeaderView>
+#include <QKeyEvent>
+#include <QLineEdit>
+#include <QShowEvent>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,34 +28,95 @@ ShortcutsDialog::ShortcutsDialog(QStringList shortCutInfo, QWidget * parent) : Q
 {
 	ui.setupUi(this);
 	
-	shortCutInfo.sort();
+	this->shortCutInfo = shortCutInfo;
+	this->shortCutInfo.sort();
 	
 	QStandardItemModel * model = new QStandardItemModel(ui.tableView);
 	ui.tableView->setModel(model);
 	model->setHorizontalHeaderItem(0, new QStandardItem(tr("Shortcut")));
 	model->setHorizontalHeaderItem(1, new QStandardItem(tr("Action")));
 	
-	for (int i = 0; i < shortCutInfo.size(); i++)
-	{
-		QStringList rowList = shortCutInfo.at(i).split('&');
-		QList<QStandardItem*> rowData;
-		if (rowList.size() == 2)
-		{
-			rowData.clear();
-			rowData.append(new QStandardItem(rowList.at(0)));
-			rowData.append(new QStandardItem(rowList.at(1)));
-			model->appendRow(rowData);
-		}
-	}
+	populateModel();
+	
 	ui.tableView->horizontalHeader()->setSectionResizeMode(0, QHeaderView::ResizeToContents);
 	ui.tableView->horizontalHeader()->setSectionResizeMode(1, QHeaderView::Stretch);
 	ui.tableView->verticalHeader()->setVisible(false);
 
+	ui.lineEdit->setPlaceholderText(tr("Search shortcuts or actions..."));
+	ui.lineEdit->setClearButtonEnabled(true);
+	connect(ui.lineEdit, &QLineEdit::textChanged, this, &ShortcutsDialog::onSearchTextChanged);
 
+	ui.lineEdit->installEventFilter(this);
+	ui.lineEdit->setFocus();
 }
 
 ShortcutsDialog::~ShortcutsDialog()
 {
 	
+}
+
+void ShortcutsDialog::showEvent(QShowEvent *event)
+{
+	QDialog::showEvent(event);
+	ui.lineEdit->setFocus();
+}
+
+bool ShortcutsDialog::eventFilter(QObject *watched, QEvent *event)
+{
+	if (watched == ui.lineEdit && event->type() == QEvent::KeyPress)
+	{
+		QKeyEvent *keyEvent = static_cast<QKeyEvent *>(event);
+		if (keyEvent->key() == Qt::Key_Escape)
+		{
+			reject();
+			return true;
+		}
+	}
+	return QDialog::eventFilter(watched, event);
+}
+
+void ShortcutsDialog::onSearchTextChanged(const QString &text)
+{
+	const QString filter = text.trimmed();
+	populateModel(filter);
+}
+
+void ShortcutsDialog::populateModel(const QString &filter)
+{
+	QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui.tableView->model());
+	if (!model)
+	{
+		return;
+	}
+
+	model->removeRows(0, model->rowCount());
+
+	for (const QString &entry : shortCutInfo)
+	{
+		QStringList rowList = entry.split('&');
+
+		if (rowList.size() != 2) continue;
+
+		const QString shortcut = rowList.at(0);
+		const QString action = rowList.at(1);
+
+		if (!matchesFilter(shortcut, action, filter)) continue;
+
+		QList<QStandardItem *> rowData;
+		rowData.append(new QStandardItem(shortcut));
+		rowData.append(new QStandardItem(action));
+
+		model->appendRow(rowData);
+	}
+}
+
+bool ShortcutsDialog::matchesFilter(const QString &shortcut, const QString &action, const QString &filter)
+{
+	if (filter.isEmpty())
+	{
+		return true;
+	}
+
+	return shortcut.contains(filter, Qt::CaseInsensitive) || action.contains(filter, Qt::CaseInsensitive);
 }
 

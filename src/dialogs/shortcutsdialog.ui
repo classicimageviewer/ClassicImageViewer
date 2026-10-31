@@ -29,8 +29,11 @@
    </item>
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QTableView" name="tableView"/>
+     </item>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="lineEdit"/>
      </item>
     </layout>
    </item>

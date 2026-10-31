@@ -25,8 +25,15 @@ class ShortcutsDialog : public QDialog
 	Q_OBJECT
 private:
 	Ui_ShortcutsDialog ui;
+	QStringList shortCutInfo;
 private slots:
-
+	void onSearchTextChanged(const QString &text);
+protected:
+	void showEvent(QShowEvent *event) override;
+	bool eventFilter(QObject *watched, QEvent *event) override;
+private:
+	void populateModel(const QString &filter = QString());
+	bool matchesFilter(const QString &shortcut, const QString &action, const QString &filter);
 public:
 	ShortcutsDialog(QStringList shortCutInfo, QWidget * parent = NULL);
 	~ShortcutsDialog();

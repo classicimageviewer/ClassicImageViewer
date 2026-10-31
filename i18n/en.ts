@@ -3831,13 +3831,18 @@ The application will exit.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/shortcutsdialog.cpp" line="31"/>
+        <location filename="../src/dialogs/shortcutsdialog.cpp" line="36"/>
         <source>Shortcut</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/dialogs/shortcutsdialog.cpp" line="32"/>
+        <location filename="../src/dialogs/shortcutsdialog.cpp" line="37"/>
         <source>Action</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/dialogs/shortcutsdialog.cpp" line="45"/>
+        <source>Search shortcuts or actions...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -546,7 +546,7 @@ void MainWindow::createMenu()
 	connect(ui.menuView, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
 	menuAddAction(ui.menuHelp, tr("&License"), ACT_LICENSE, NULL,  0);
-	menuAddAction(ui.menuHelp, tr("&Shortcuts"), ACT_SHORTCUTS, NULL,  0);
+	menuAddAction(ui.menuHelp, tr("&Shortcuts"), ACT_SHORTCUTS, "F1",  0);
 	menuAddAction(ui.menuHelp, tr("&About"), ACT_ABOUT, NULL,  0);
 	connect(ui.menuHelp, SIGNAL(triggered(QAction*)), this, SLOT(searchAction(QAction*)));
 	
