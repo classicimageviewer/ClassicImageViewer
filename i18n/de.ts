@@ -2696,28 +2696,28 @@ Beispiel-sh-Skript (das Bild unverändert kopieren):
         <translation>Änderung der Spracheinstellung erfordert einen Programm-Neustart.</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2465"/>
+        <location filename="../src/mainwindow.cpp" line="2467"/>
         <source>Selection tool
 For normal use</source>
         <translation>Auswahlwerkzeug
 für normale Nutzung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2468"/>
+        <location filename="../src/mainwindow.cpp" line="2470"/>
         <source>Pencil
 Pixel manipulation</source>
         <translation>Bleistift
 Pixelbearbeitung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2469"/>
+        <location filename="../src/mainwindow.cpp" line="2471"/>
         <source>Brush
 Free hand drawing</source>
         <translation>Pinsel
 Freihandzeichnung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2470"/>
+        <location filename="../src/mainwindow.cpp" line="2472"/>
         <source>Smudge / warp tool
 Ctrl: warp
 Shift: warp + blur</source>
@@ -2726,14 +2726,14 @@ Strg: warp
 Umschalt: verzerren (warp) + verschwommen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2471"/>
+        <location filename="../src/mainwindow.cpp" line="2473"/>
         <source>Clone tool
 Ctrl+Click: select source area</source>
         <translation>Klon-Werkzeug
 Strg+Klick: Quell-Bereich auswählen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2472"/>
+        <location filename="../src/mainwindow.cpp" line="2474"/>
         <source>Line
 Ctrl: drag while drawing
 Shift: limits angle to multiples of 15 deg</source>
@@ -2742,7 +2742,7 @@ Strg: Beim Zeichnen ziehen
 Umschalt: Limitiert Winkel auf Vielfaches von 15 Grad</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2473"/>
+        <location filename="../src/mainwindow.cpp" line="2475"/>
         <source>Rectangle
 Ctrl: drag while drawing
 Shift: draw square</source>
@@ -2751,7 +2751,7 @@ Strg: Beim Zeichnen ziehen
 Umschalt: Quadrat zeichnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2474"/>
+        <location filename="../src/mainwindow.cpp" line="2476"/>
         <source>Rounded rectangle
 Ctrl: drag while drawing
 Shift: draw square</source>
@@ -2760,7 +2760,7 @@ Strg: Beim Zeichnen ziehen
 Umschalt: Quadrat zeichnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2475"/>
+        <location filename="../src/mainwindow.cpp" line="2477"/>
         <source>Ellipse
 Ctrl: drag while drawing
 Shift: draw circle</source>
@@ -2769,82 +2769,82 @@ Strg: Beim Zeichnen ziehen
 Umschalt: Kreis zeichnen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2476"/>
+        <location filename="../src/mainwindow.cpp" line="2478"/>
         <source>Text</source>
         <translation>Text</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2477"/>
+        <location filename="../src/mainwindow.cpp" line="2479"/>
         <source>Fill</source>
         <translation>Füllen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2478"/>
+        <location filename="../src/mainwindow.cpp" line="2480"/>
         <source>Color picker</source>
         <translation>Farbauswahl</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2483"/>
+        <location filename="../src/mainwindow.cpp" line="2485"/>
         <source>Solid line</source>
         <translation>Durchgezogene Linie</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2484"/>
+        <location filename="../src/mainwindow.cpp" line="2486"/>
         <source>Dash line</source>
         <translation>Gestrichelte Linie</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2485"/>
+        <location filename="../src/mainwindow.cpp" line="2487"/>
         <source>Dot line</source>
         <translation>Punktierte Linie</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2486"/>
+        <location filename="../src/mainwindow.cpp" line="2488"/>
         <source>DashDot line</source>
         <translation>Punktiert-gestrichelte Linie</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2487"/>
+        <location filename="../src/mainwindow.cpp" line="2489"/>
         <source>Round cap</source>
         <translation type="unfinished">Runde Kappe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2488"/>
+        <location filename="../src/mainwindow.cpp" line="2490"/>
         <source>Flat cap</source>
         <translation type="unfinished">Flache Kappe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2489"/>
+        <location filename="../src/mainwindow.cpp" line="2491"/>
         <source>Square cap</source>
         <translation type="unfinished">Quadratische Kappe</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2490"/>
+        <location filename="../src/mainwindow.cpp" line="2492"/>
         <source>Round join</source>
         <translation type="unfinished">Runde Verbindung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2491"/>
+        <location filename="../src/mainwindow.cpp" line="2493"/>
         <source>Bevel join</source>
         <translation type="unfinished">Schräge Verbindung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2492"/>
+        <location filename="../src/mainwindow.cpp" line="2494"/>
         <source>Miter join</source>
         <translation type="unfinished">Gehrungsverbindung</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2797"/>
+        <location filename="../src/mainwindow.cpp" line="2799"/>
         <source>Indexing the current directory...</source>
         <translation>Aktuelles Verzeichnis indexieren...</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3544"/>
+        <location filename="../src/mainwindow.cpp" line="3546"/>
         <source>Not configured</source>
         <translation>Nicht konfiguriert</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3627"/>
+        <location filename="../src/mainwindow.cpp" line="3629"/>
         <source>Save...</source>
         <translation>Speichern...</translation>
     </message>
@@ -2927,7 +2927,7 @@ Umschalt: Kreis zeichnen</translation>
         <location filename="../src/mainwindow.cpp" line="1607"/>
         <location filename="../src/mainwindow.cpp" line="1635"/>
         <location filename="../src/mainwindow.cpp" line="1641"/>
-        <location filename="../src/mainwindow.cpp" line="2894"/>
+        <location filename="../src/mainwindow.cpp" line="2896"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
@@ -2998,48 +2998,48 @@ Derzeit werden nur &apos;gio&apos;- und &apos;kioclient5&apos;-basierte Operatio
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2173"/>
-        <location filename="../src/mainwindow.cpp" line="2442"/>
+        <location filename="../src/mainwindow.cpp" line="2444"/>
         <source>No file loaded</source>
         <translation>Keine Datei geladen</translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="2198"/>
-        <location filename="../src/mainwindow.cpp" line="2443"/>
+        <location filename="../src/mainwindow.cpp" line="2445"/>
         <source>No selection</source>
         <translation>Keine Auswahl</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2203"/>
-        <source>Selection: %1x%2 at (%3,%4)</source>
-        <translation>Auswahl: %1x%2 at (%3,%4)</translation>
+        <location filename="../src/mainwindow.cpp" line="2205"/>
+        <source>Selection: %1x%2 at (%3,%4); %5</source>
+        <translation>Auswahl: %1x%2 at (%3,%4); %5</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2226"/>
+        <location filename="../src/mainwindow.cpp" line="2228"/>
         <source>Pixel: %1 at (%2,%3)</source>
         <translation>Pixel: %1 at (%2,%3)</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="2894"/>
+        <location filename="../src/mainwindow.cpp" line="2896"/>
         <source>Can not open %1</source>
         <translation>%1 kann nicht geöffnet werden</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3512"/>
+        <location filename="../src/mainwindow.cpp" line="3514"/>
         <source>&amp;Clear recent files</source>
         <translation>Liste der zuletzt &amp;geöffneten Dateien löschen</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3570"/>
+        <location filename="../src/mainwindow.cpp" line="3572"/>
         <source>All supported images</source>
         <translation>Alle unterstützten Bilder</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3583"/>
+        <location filename="../src/mainwindow.cpp" line="3585"/>
         <source>All files</source>
         <translation>Alle Dateien</translation>
     </message>
     <message>
-        <location filename="../src/mainwindow.cpp" line="3586"/>
+        <location filename="../src/mainwindow.cpp" line="3588"/>
         <source>Open File</source>
         <translation>Datei öffnen</translation>
     </message>

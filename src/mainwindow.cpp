@@ -2200,7 +2200,9 @@ void MainWindow::displaySelectionChanged()
 	else
 	{
 		lastSelection = selection;
-		statusBarSelection->setText(QString(tr("Selection: %1x%2 at (%3,%4)")).arg(selection.width()).arg(selection.height()).arg(selection.x()).arg(selection.y()));
+		double aspectRatio = selection.width();
+		aspectRatio /= selection.height();
+		statusBarSelection->setText(QString(tr("Selection: %1x%2 at (%3,%4); %5")).arg(selection.width()).arg(selection.height()).arg(selection.x()).arg(selection.y()).arg(aspectRatio, 0, 'g', 3));
 	}
 	applyInternalState();
 }
