@@ -2616,12 +2616,12 @@ Example sh script (copy the image unaltered):
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="568"/>
-        <source>Shift+Mouse move</source>
+        <source>Show magnifier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/mainwindow.cpp" line="568"/>
-        <source>Show magnifier</source>
+        <source>Ctrl+Shift+Mouse move</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

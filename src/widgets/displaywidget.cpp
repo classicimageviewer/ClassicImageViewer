@@ -371,7 +371,7 @@ bool DisplayWidget::eventFilter(QObject* watched, QEvent* event)
 	QKeyEvent * keyEvent = (QKeyEvent*)event;
 	if (event->type() == QEvent::KeyRelease)
 	{
-		if (keyEvent->key() == Qt::Key_Shift)
+		if (keyEvent->key() == Qt::Key_Shift || keyEvent->key() == Qt::Key_Control)
 		{
 			hideMagnifier();
 		}
@@ -707,17 +707,17 @@ bool DisplayWidget::viewportEvent(QEvent *event)
 
 void DisplayWidget::updateMagnifier(QMouseEvent *event)
 {
+	if ((event->modifiers() != (Qt::ControlModifier | Qt::ShiftModifier)) || !surface || image.isNull() || drawDevice)
+	{
+		hideMagnifier();
+		return;
+	}
+
 #if QT_VERSION < QT_VERSION_CHECK(6,0,0)
 	QPoint viewPos = event->pos();
 #else
 	QPoint viewPos = event->position().toPoint();
 #endif
-
-	if ((event->modifiers() != Qt::ShiftModifier) || (event->buttons() != Qt::NoButton) || !surface || image.isNull() || drawDevice)
-	{
-		hideMagnifier();
-		return;
-	}
 
 	QPoint viewportPos = viewport()->mapFrom(this, viewPos);
 	if (!viewport()->rect().contains(viewportPos))
@@ -798,12 +798,77 @@ void DisplayWidget::paintMagnifier(QPainter &painter)
 	}
 	magnifierPixmap.fill(Qt::transparent);
 
+	QRect selection = surface->getSelection();
+	bool pixelatedMagnifier = !selection.isNull() && magnification >= 1.0;
+
 	QPainter pixmapPainter(&magnifierPixmap);
-	pixmapPainter.setRenderHint(QPainter::SmoothPixmapTransform);
+	pixmapPainter.setRenderHint(QPainter::SmoothPixmapTransform, !pixelatedMagnifier);
 
 	QRectF visibleDest((visibleSource.left() - sourceRect.left()) * magnification, (visibleSource.top() - sourceRect.top()) * magnification, visibleSource.width() * magnification, visibleSource.height() * magnification);
 
 	pixmapPainter.drawImage(visibleDest, image, visibleSource);
+
+	if (!selection.isNull())
+	{
+		QRectF selectionSource(selection);
+		QRectF selectionDest(
+			(selectionSource.left() - sourceRect.left() + 0.5) * magnification,
+			(selectionSource.top() - sourceRect.top() + 0.5) * magnification,
+			(selectionSource.width() - 1) * magnification,
+			(selectionSource.height() - 1) * magnification
+		);
+		selectionDest = selectionDest.normalized();
+
+		QRectF lensRect(0, 0, lens, lens);
+		QRectF overlayClip = visibleDest.intersected(lensRect);
+
+		if (!overlayClip.isNull())
+		{
+			const qreal selectorWidth = qMax(1.0, magnification);
+			
+			pixmapPainter.save();
+			pixmapPainter.setClipRect(overlayClip);
+			pixmapPainter.setBrush(Qt::NoBrush);
+
+			if (Globals::prefs->getUseFastSelector())
+			{
+				QPainterPath outsidePath;
+				outsidePath.addRect(visibleDest);
+				QPainterPath selectionPath;
+				selectionPath.addRect(selectionDest);
+				
+				outsidePath = outsidePath.subtracted(selectionPath);
+				pixmapPainter.fillPath(outsidePath, QColor(128, 128, 128, 128));
+
+				pixmapPainter.setBrush(Qt::NoBrush);
+
+				QPen basePen(QColor(0, 0, 0, 128), selectorWidth, Qt::SolidLine);
+				pixmapPainter.setPen(basePen);
+				pixmapPainter.drawRect(selectionDest);
+
+				QPen decorPen(Qt::white, 2.0, Qt::CustomDashLine);
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+				QVector<qreal> dashes;
+#else
+				QList<qreal> dashes;
+#endif
+				dashes << (5.0 * magnification) << (6.0 * magnification);
+				decorPen.setDashPattern(dashes);
+				pixmapPainter.setPen(decorPen);
+				pixmapPainter.drawRect(selectionDest);
+			}
+			else
+			{
+				pixmapPainter.setCompositionMode(QPainter::CompositionMode_Difference);
+
+				QPen xorPen(QBrush(Qt::white, Qt::SolidPattern), selectorWidth, Qt::SolidLine, Qt::SquareCap, Qt::MiterJoin);
+				pixmapPainter.setPen(xorPen);
+				pixmapPainter.drawRect(selectionDest);
+			}
+
+			pixmapPainter.restore();
+		}
+	}
 
 	int feather = qBound(4, lens/8, 16);
 
@@ -829,7 +894,7 @@ void DisplayWidget::paintMagnifier(QPainter &painter)
 	pixmapPainter.setCompositionMode(QPainter::CompositionMode_SourceOver);
 	pixmapPainter.end();
 
-	painter.setRenderHint(QPainter::SmoothPixmapTransform);
+	painter.setRenderHint(QPainter::SmoothPixmapTransform, !pixelatedMagnifier);
 
 	painter.setClipRect(visibleRect);
 	painter.drawPixmap(targetRect, magnifierPixmap);
